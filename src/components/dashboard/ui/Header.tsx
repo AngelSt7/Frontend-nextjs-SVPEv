@@ -1,0 +1,17 @@
+import Link from 'next/link';
+import { FaRegUser } from "react-icons/fa";
+import { IoMdExit } from "react-icons/io";
+
+export default function Header() {
+    return (
+        <header className=' bg-white py-4 border-b-1 border-[#c7c7c7]'>
+            <div className='w-[90%] max-w-[1600px] mx-auto flex justify-between'>
+                <Link href={'/dashboard/resumen'} className="uppercase font-bold cursor-pointer">Neon</Link>
+                <div className=' flex gap-4'>
+                    <FaRegUser className='text-2xl hover:scale-125 transition-transform' />
+                    <IoMdExit className='text-2xl hover:scale-125 transition-transform' />
+                </div>
+            </div>
+        </header>
+    )
+}
