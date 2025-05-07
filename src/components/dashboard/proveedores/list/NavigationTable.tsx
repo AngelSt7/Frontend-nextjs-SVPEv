@@ -6,6 +6,8 @@ import { usePathname, useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 import { FaSearch } from "react-icons/fa";
 import ModalBase from "@/src/components/ui/ModalBase";
+import SelectFilter from "../../ui/SelectFilter";
+import { Active, Category } from "@/src/utils/provisionalData";
 
 type InputSearch = {
     handleSearch: (e: ChangeEvent<HTMLInputElement>) => void
@@ -17,8 +19,6 @@ export const registers = [ { key: "5", label: "5 registros" }, { key: "10", labe
 export default function NavigationTable({ handleSearch, openModalCreate }: InputSearch) {
     const take = useAppStore(state => state.take)
     const searchParams = useSearchParams();
-
-    console.log(searchParams)
 
     const pathname = usePathname();
     const router = useRouter();
@@ -57,6 +57,11 @@ export default function NavigationTable({ handleSearch, openModalCreate }: Input
                 </Button>
  
                 
+            </div>
+
+            <div>
+                <SelectFilter label="Activo" data={Active} filter="active" />
+                <SelectFilter label="Categoria" data={Category} filter="category" />
             </div>
             {/* <div>
                 <div className="flex w-full max-w-xs flex-col gap-2">

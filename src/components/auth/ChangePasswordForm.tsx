@@ -2,7 +2,7 @@
 
 import Input from '@/src/components/ui/Input';
 import { useAuthMutation } from '@/src/hooks/auth/useAuthMutation';
-import { AuthChangePasswordService } from '@/src/services/auth/AuthChangePasswordService';
+import { authChangePasswordService } from '@/src/services/auth/AuthChangePasswordService';
 import { AuthChangePassword } from '@/src/types/AuthTypes';
 import Link from 'next/link';
 import { useForm } from 'react-hook-form';
@@ -12,7 +12,7 @@ export default function ChangePasswordForm() {
     const { register, handleSubmit, formState: { errors }, reset, watch } = useForm<AuthChangePassword>();
     const { mutate } = useAuthMutation({
         onSuccessCallback: () => reset(),
-        serviceFunction: AuthChangePasswordService,
+        serviceFunction: authChangePasswordService,
         redirection: '/auth/iniciar-sesion'
     })
     const onSubmit = (data: AuthChangePassword) => mutate(data)

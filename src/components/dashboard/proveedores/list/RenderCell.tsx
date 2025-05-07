@@ -13,29 +13,25 @@ const RenderCell = memo(({ supplier, columnKey }: RenderCellProps) => {
     const theme = supplier.activo ? "success" : "danger";
 
     switch (columnKey) {
-        case "location":
+        case "id":
             return (
                 <div className="min-w-36">
-                    <p>Probando</p>
+                    <p>{supplier.id}</p>
                 </div>
             );
-        case "availability":
+        case "proveedor":
             return (
-                <Chip className="capitalize" color={theme} size="sm" variant="flat">
-                    {supplier.activo}
-                </Chip>
-            );
-        case "type":
-            return <p className="text-bold text-sm capitalize">{supplier.apellido}</p>;
-        case "price":
-            return <div className=" min-w-24">
-                <p className={`${supplier.celular === 'venta' ? 'hidden' : ''} text-bold text-xs capitalize text-default-400`}>Por mes</p>
-                <p className="text-bold text-sm capitalize ">
-                    {/* {formatCurrency(property.price, property.currency.currency)} */}
-                    holaaa
+                <p className="capitalize" color={theme} >
+                    {supplier.nombre + " " + supplier.apellido}
                 </p>
+            );
+        case "correo":
+            return <p className="text-bold text-sm capitalize">{supplier.correo}</p>;
+        case "celular":
+            return <div className=" min-w-24">
+                <p className={`${supplier.celular} text-bold text-xs capitalize text-default-400`}>{supplier.celular}</p>
             </div>
-        case "actions":
+        case "acciones":
             return (
                 // <ButtonsActions id={property.id} />
                 <>

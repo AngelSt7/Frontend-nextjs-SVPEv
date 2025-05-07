@@ -6,5 +6,5 @@ export const columns = [
   { name: "CELULAR", uid: "celular", sortable: true },
   { name: "AREA", uid: "area" },
   { name: "DISPONIBILIDAD", uid: "disponibilidad", sortable: true },
-  { name: "ACTIONS", uid: "actions" },
+  { name: "ACCIONES", uid: "acciones" },
 ];

@@ -2,7 +2,7 @@
 
 import Input from '@/src/components/ui/Input';
 import { useAuthMutation } from '@/src/hooks/auth/useAuthMutation';
-import { AuthForgotPasswordService } from '@/src/services/auth/AuthForgotPasswordService';
+import { authForgotPasswordService } from '@/src/services/auth/AuthForgotPasswordService';
 import { AuthForgotPassword } from '@/src/types/AuthTypes';
 import Link from 'next/link';
 import { useForm } from 'react-hook-form';
@@ -12,7 +12,7 @@ export default function ForgotPasswordForm() {
     const { register, handleSubmit, formState: { errors }, reset } = useForm<AuthForgotPassword>();
     const { mutate } = useAuthMutation({
         onSuccessCallback: () => reset(),
-        serviceFunction: AuthForgotPasswordService,
+        serviceFunction: authForgotPasswordService,
         redirection: '/auth/iniciar-sesion'
     })
     const onSubmit = (data: AuthForgotPassword) => mutate(data)
