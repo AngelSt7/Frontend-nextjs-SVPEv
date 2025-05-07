@@ -4,7 +4,7 @@ import { Select, SelectItem } from "@heroui/react";
 import { useState } from "react";
 import { FieldErrors, UseFormRegister, UseFormSetValue, useFormContext } from "react-hook-form";
 
-export const animals = [
+export const Category = [
   { key: "1", label: "Teclados" },
   { key: "2", label: "Monitores" },
   { key: "3", label: "Tarjetas madres" },
@@ -36,14 +36,14 @@ export default function SelectCategory({ errors, register, setValueCategory }: S
       <div className={` border border-[#afaeae] rounded-md ${errors.id_categoria ? 'ring-1 ring-[#d10b30] ' : ''}`}>
       <Select
         className="w-full "
-        items={animals}
+        items={Category}
         size="lg"
         radius="sm"
         placeholder="Selecciona una categoría"
         selectedKeys={[value]}
         onChange={handleSelectionChange}
         >
-        {(animal) => <SelectItem>{animal.label}</SelectItem>}
+        {(category) => <SelectItem>{category.label}</SelectItem>}
       </Select>
       </div>
 

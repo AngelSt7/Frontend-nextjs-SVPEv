@@ -7,14 +7,14 @@ import { RiLockPasswordFill } from "react-icons/ri";
 import Input from '../ui/Input';
 import Link from 'next/link';
 import { useAuthMutation } from '@/src/hooks/auth/useAuthMutation';
-import { AuthLoginService } from '@/src/services/auth/AuthLoginService';
+import { authLoginService } from '@/src/services/auth/AuthLoginService';
 
 export default function LoginForm() {
     const { register, handleSubmit, formState: { errors }, reset } = useForm<AuthLogin>();
 
     const { mutate } = useAuthMutation({
         onSuccessCallback: () => reset(),
-        serviceFunction: AuthLoginService,
+        serviceFunction: authLoginService,
         redirection: '/dashboard/proveedores'
     })
     const onSubmit = (data: AuthLogin) => mutate(data)

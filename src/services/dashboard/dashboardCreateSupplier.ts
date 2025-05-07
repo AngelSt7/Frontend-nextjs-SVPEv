@@ -1,10 +1,11 @@
 import api from "@/src/axios/axios";
-import { AuthChangePassword } from "@/src/types/AuthTypes";
+import { CreateSupplier } from "@/src/types/DashboardTypes";
 import { isAxiosError } from "axios";
 
-export async function authChangePasswordService(formData: AuthChangePassword) {
+export async function dashboardCreateSupplier(formData: CreateSupplier) {
     try {
-        const url = '/auth/change-password'
+        const url = 'http://localhost:4000/api/supplier/create'
+        console.log(formData)
         const { data } = await api.post(url, formData)
         return data
     } catch (error) {

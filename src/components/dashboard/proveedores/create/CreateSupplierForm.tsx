@@ -5,6 +5,9 @@ import { useForm } from 'react-hook-form';
 import { FaRegIdCard } from 'react-icons/fa';
 import { MdOutlineMail, MdPermIdentity, MdPerson, MdPersonOutline, MdPhoneIphone } from 'react-icons/md';
 import SelectCategory from './SelectCategory';
+import { useMutation } from '@tanstack/react-query';
+import toast from 'react-hot-toast';
+import { dashboardCreateSupplier } from '@/src/services/dashboard/DashboardCreateSupplier';
 
 type CreateSupplierFormProps = {
   closeModalCreate: () => void
@@ -12,8 +15,16 @@ type CreateSupplierFormProps = {
 
 export default function CreateSupplierForm({ closeModalCreate } : CreateSupplierFormProps) {
   const { register, handleSubmit, formState: { errors }, reset, setValue : setValueCategory } = useForm<CreateSupplier>();
+
+  const { mutate } = useMutation({
+    mutationFn: dashboardCreateSupplier,
+    onError: (error) => toast.error(error.message || 'Error inesperado'),
+    onSuccess: (data) => toast.success(data),
+  })
+
+
   const onSubmit = (data: CreateSupplier) => {
-    console.log(data)
+    mutate(data)
     closeModalCreate()
   };
 

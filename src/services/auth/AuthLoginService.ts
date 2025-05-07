@@ -2,7 +2,7 @@ import api from "@/src/axios/axios";
 import { AuthLogin as AuthLoginData } from "@/src/types/AuthTypes";
 import { isAxiosError } from "axios";
 
-export async function AuthLoginService(formData: AuthLoginData) {
+export async function authLoginService(formData: AuthLoginData) {
     try {
         const url = '/auth/login'
         const { data } = await api.post(url, formData)

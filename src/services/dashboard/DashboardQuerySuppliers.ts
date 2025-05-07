@@ -1,29 +1,31 @@
-import api from "@/src/axios/axios";
 import { DashboardSuppliersSchema } from "@/src/schemas/dashboard/Suppliers";
-import { DashboardPaginationType } from "@/src/types/DashboardTypes";
-import { isAxiosError } from "axios";
+import { supplierQueryParams } from "@/src/utils/format/formatFilters";
+import axios, { isAxiosError } from "axios";
 
 type DashboardQuerySuppliersType = {
-    take: DashboardPaginationType['take']
-    page: DashboardPaginationType['page']
-    search: string
+    page: number;
+    take: number;
+    search?: string | undefined;
+    active?: string | undefined;
+    category?: string | undefined;
 }
 
-export async function DashboardQuerySuppliers(formData: DashboardQuerySuppliersType) {
+export async function dashboardQuerySuppliers(formData : DashboardQuerySuppliersType ) {
     try {
-        const skip = ( formData.page - 1 ) * formData.take
+      const { page, take, ...optionalFilters } = formData;
+      const skip = (page - 1) * take;
+      const params = supplierQueryParams(skip, take, optionalFilters);
+  
+      const url = `http://localhost:4000/api/supplier/list?${params.toString()}`;
 
-        const url = '/proveedores/'
-        const { data } = await api.get(url)
-        const response = DashboardSuppliersSchema.safeParse(data)
-        if (response.success) {
-            return response.data
-        } else {
-            console.log(response.error.format())
-        }
+      const { data } = await axios.get(url);
+      const response = DashboardSuppliersSchema.safeParse(data);
+      if (response.success) {
+        return response.data;
+      } 
     } catch (error) {
-        if (isAxiosError(error) && error.response) {
-            throw new Error(error.response.data.error);
-        }
+      if (isAxiosError(error) && error.response) {
+        throw new Error(error.response.data.error);
+      }
     }
-}
+  }
