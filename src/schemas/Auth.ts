@@ -1,8 +1,8 @@
 import { z } from 'zod';
 
 export const AuthLoginSchema = z.object({
-    email: z.string().email(),
-    password: z.string()
+    correo: z.string().email(),
+    clave: z.string()
 })
 
 export const AuthForgotPasswordSchema = z.object({

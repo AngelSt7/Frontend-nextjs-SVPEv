@@ -7,18 +7,20 @@ import { UseFormReset } from 'react-hook-form'
 type AuthMutation<T> = {
   onSuccessCallback: UseFormReset<AuthLogin> | UseFormReset<AuthForgotPassword> | UseFormReset<AuthChangePassword>,
   serviceFunction: (data: T) => Promise<any>,
-  redirection: string
+  redirection: string,
+  extraCallback?: (data : string) => void
 }
 
-export function useAuthMutation<T>({ onSuccessCallback, serviceFunction, redirection }: AuthMutation<T>) {
+export function useAuthMutation<T>({ onSuccessCallback, serviceFunction, redirection, extraCallback }: AuthMutation<T>) {
   const router = useRouter()
   const mutation = useMutation({
     mutationFn: serviceFunction,
     onError: (error) => toast.error(error.message || 'Error inesperado'),
     onSuccess: (data) => {
-      toast.success(data || 'Operación exitosa')
-      router.replace(redirection)
+      {extraCallback && extraCallback(data.token)}
+      toast.success('Inicio de sesión exitoso')
       onSuccessCallback()
+      router.replace(redirection)
     },
   })
   return mutation

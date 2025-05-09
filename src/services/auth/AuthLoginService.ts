@@ -4,8 +4,9 @@ import { isAxiosError } from "axios";
 
 export async function authLoginService(formData: AuthLoginData) {
     try {
-        const url = '/auth/login'
+        const url = '/autenticacion/login'
         const { data } = await api.post(url, formData)
+        console.log(data)
         return data
     } catch (error) {
         if (isAxiosError(error) && error.response) {
