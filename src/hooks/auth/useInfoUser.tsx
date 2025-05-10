@@ -1,16 +1,17 @@
 import api from "@/src/axios/axios"
-import { cookies } from "next/headers"
-import { notFound, redirect } from "next/navigation"
+import { AuthUserInfoSchema } from "@/src/schemas/Auth"
+import { isAxiosError } from "axios"
 
 export default async function useInfoUser() {
-    const cookieStore = cookies()
-    const token = (await cookieStore).get('AUTH_TOKEN')
-
-    const { data: user } = await api.get('/user/me', {
-        headers: { Authorization: `Bearer ${token}` }
-    })
-
-    if (user) { redirect(notFound()) }
-    if (user.clave_cambiada === false) { redirect('/auth/cambiar-contrasena') }
-    return { user }
+    try {
+        const { data } = await api('/usuario/info')
+        const response = AuthUserInfoSchema.safeParse(data)
+        if (response.success) {
+            return response.data
+        }
+    } catch (error) {
+        if (isAxiosError(error) && error.response) {
+            throw new Error(error.response.data.error);
+        }
+    }
 }

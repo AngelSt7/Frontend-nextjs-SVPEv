@@ -4,14 +4,12 @@ import Pagination from "./Pagination";
 import NavigationTable from "./NavigationTable";
 import { useSuppliersQuery } from "@/src/hooks/dashboard/useSuppliersQuery";
 import { useModalUtils } from "@/src/hooks/modal/useModalUtils";
-import ModalBase from "@/src/components/ui/ModalBase";
 import { TableContent } from "./TableContent";
+import ModalBase from "../../ui/ModalBase";
 
 export default function ContentSuppliers() {
   const { handleSearch, dataTableSuppliers, isFetching, dataTableSuppliersPages } = useSuppliersQuery();
   const { closeModalCreate, openModalCreate } = useModalUtils()
-
-  console.log(dataTableSuppliers)
 
   return (
     <>

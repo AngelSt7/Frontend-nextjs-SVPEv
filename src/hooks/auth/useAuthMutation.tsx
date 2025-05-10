@@ -8,7 +8,7 @@ type AuthMutation<T> = {
   onSuccessCallback: UseFormReset<AuthLogin> | UseFormReset<AuthForgotPassword> | UseFormReset<AuthChangePassword>,
   serviceFunction: (data: T) => Promise<any>,
   redirection: string,
-  extraCallback?: (data : string) => void
+  extraCallback?: () => void
 }
 
 export function useAuthMutation<T>({ onSuccessCallback, serviceFunction, redirection, extraCallback }: AuthMutation<T>) {
@@ -17,8 +17,8 @@ export function useAuthMutation<T>({ onSuccessCallback, serviceFunction, redirec
     mutationFn: serviceFunction,
     onError: (error) => toast.error(error.message || 'Error inesperado'),
     onSuccess: (data) => {
-      {extraCallback && extraCallback(data.token)}
-      toast.success('Inicio de sesión exitoso')
+      {extraCallback && extraCallback()}
+      toast.success(data)
       onSuccessCallback()
       router.replace(redirection)
     },

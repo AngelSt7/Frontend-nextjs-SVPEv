@@ -3,7 +3,7 @@ import { ChangeEvent, useMemo, useState } from "react";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { useAppStore } from "@/src/store/useAppStore";
 import { useGetFilters } from "./useGetFilters";
-import { dashboardQuerySuppliers } from "@/src/services/dashboard/DashboardQuerySuppliers";
+import { dashboardQuerySuppliers } from "@/src/services/dashboard/dashboardQuerySuppliers";
 
 export const useSuppliersQuery = () => {
   const segment = "suppliers";
@@ -40,15 +40,9 @@ export const useSuppliersQuery = () => {
   });
 
   return {
-    handleSearch,
-    search,
-    setSearch,
-    searching: !!filters.search,
-    page: filters.page,
-    router,
-    dataTableSuppliers: data?.empleados ?? [],
-    dataTableSuppliersPages: data?.pages ?? 1,
-    isFetching,
+    handleSearch, search, setSearch, 
+    searching: !!filters.search, page: filters.page, router, 
+    dataTableSuppliers: data?.empleados ?? [], dataTableSuppliersPages: data?.pages ?? 1, isFetching,
     filters,
   };
 };

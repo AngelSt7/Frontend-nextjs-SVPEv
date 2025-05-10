@@ -1,4 +1,4 @@
-import ChangePasswordForm from '@/src/components/auth/ChangePasswordForm'
+import ChangePasswordForm from '@/src/components/auth/change-password/ChangePasswordForm'
 import ContentAuth from '@/src/components/auth/ui/ContentAuth'
 import React from 'react'
 

@@ -5,7 +5,6 @@ import { useAppStore } from "@/src/store/useAppStore";
 import { usePathname, useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 import { FaSearch } from "react-icons/fa";
-import ModalBase from "@/src/components/ui/ModalBase";
 import SelectFilter from "../../ui/SelectFilter";
 import { Active, Category } from "@/src/utils/provisionalData";
 

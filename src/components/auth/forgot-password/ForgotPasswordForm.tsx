@@ -2,7 +2,7 @@
 
 import Input from '@/src/components/ui/Input';
 import { useAuthMutation } from '@/src/hooks/auth/useAuthMutation';
-import { authForgotPasswordService } from '@/src/services/auth/AuthForgotPasswordService';
+import { authForgotPasswordService } from '@/src/services/auth/authForgotPasswordService';
 import { AuthForgotPassword } from '@/src/types/AuthTypes';
 import Link from 'next/link';
 import { useForm } from 'react-hook-form';

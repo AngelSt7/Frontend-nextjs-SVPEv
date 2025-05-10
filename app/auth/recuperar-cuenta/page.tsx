@@ -1,7 +1,7 @@
 'use client'
 
 import ContentAuth  from '@/src/components/auth/ui/ContentAuth'
-import ForgotPasswordForm from '@/src/components/auth/ForgotPasswordForm'
+import ForgotPasswordForm from '@/src/components/auth/forgot-password/ForgotPasswordForm'
 
 export default function page() {
     return (
