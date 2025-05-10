@@ -7,8 +7,8 @@ import { RiLockPasswordFill } from "react-icons/ri";
 import Input from '../ui/Input';
 import Link from 'next/link';
 import { useAuthMutation } from '@/src/hooks/auth/useAuthMutation';
-import { authLoginService } from '@/src/services/auth/authLoginService';
 import { setJWT } from '@/src/utils/token';
+import { authLoginService } from '@/src/services/auth/AuthLoginService';
 
 export default function LoginForm() {
     const { register, handleSubmit, formState: { errors }, reset } = useForm<AuthLogin>();
