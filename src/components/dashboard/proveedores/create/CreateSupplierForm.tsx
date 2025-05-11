@@ -7,7 +7,7 @@ import { MdOutlineMail, MdPermIdentity, MdPerson, MdPersonOutline, MdPhoneIphone
 import SelectCategory from './SelectCategory';
 import { useMutation } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
-import { dashboardCreateSupplier } from '@/src/services/dashboard/DashboardCreateSupplier';
+import { dashboardCreateSupplier } from '@/src/services/dashboard/dashboardCreateSupplier';
 
 type CreateSupplierFormProps = {
   closeModalCreate: () => void
@@ -21,7 +21,6 @@ export default function CreateSupplierForm({ closeModalCreate } : CreateSupplier
     onError: (error) => toast.error(error.message || 'Error inesperado'),
     onSuccess: (data) => toast.success(data),
   })
-
 
   const onSubmit = (data: CreateSupplier) => {
     mutate(data)

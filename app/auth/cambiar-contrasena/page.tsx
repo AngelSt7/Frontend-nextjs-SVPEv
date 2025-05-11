@@ -1,6 +1,6 @@
+import ChangePasswordForm from '@/src/components/auth/change-password/ChangePasswordForm'
+import ContentAuth from '@/src/components/auth/ui/ContentAuth'
 import React from 'react'
-import ContentAuth from '@/src/components/Auth/ui/ContentAuth'
-import ChangePasswordForm from '@/src/components/Auth/ChangePasswordForm'
 
 export default function page() {
     return (

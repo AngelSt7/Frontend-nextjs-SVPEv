@@ -1,6 +1,6 @@
 import { Modal, ModalContent, ModalHeader, ModalBody } from "@heroui/react";
 import { usePathname, useSearchParams } from "next/navigation";
-import CreateSupplierForm from "../dashboard/proveedores/create/CreateSupplierForm";
+import CreateSupplierForm from "../proveedores/create/CreateSupplierForm";
 
 type ModalBaseProps = {
   tittle: string,
