@@ -1,19 +1,21 @@
 import { Button } from '@heroui/react';
 import { useForm } from 'react-hook-form';
-import { dashboardCreateSupplierService } from '@/src/services/dashboard/Supplier/dashboardCreateSupplierService';
 import SupplierForm from '../form/SupplierForm';
-import { SupplierFormData } from '@/src/types/DashboardTypes';
+import { SupplierById, SupplierFormData } from '@/src/types/DashboardTypes';
+import { dashboardUpdateSupplierService } from '@/src/services/dashboard/Supplier/dashboardUpdateSupplierService';
 import useSubmitMutation from '@/src/hooks/dashboard/useSubmitMutation';
 
-type CreateSupplierFormProps = {
+type EditSupplierFormProps = {
   closeModal: () => void;
+  defaultValues: SupplierById
 };
 
-export default function CreateSupplierForm({ closeModal }: CreateSupplierFormProps) {
-  const { register, handleSubmit, formState: { errors } } = useForm<SupplierFormData>();
-  
+export default function EditSupplierForm({ closeModal, defaultValues }: EditSupplierFormProps) {
+
+  const { register, handleSubmit, formState: { errors } } = useForm<SupplierFormData>({defaultValues: defaultValues});
+
   const { mutate } = useSubmitMutation({
-    serviceFunction: dashboardCreateSupplierService,
+    serviceFunction: dashboardUpdateSupplierService,
     invalidateQuery: 'suppliers',
     onSuccessCallback: closeModal
   })
@@ -26,10 +28,9 @@ export default function CreateSupplierForm({ closeModal }: CreateSupplierFormPro
       onSubmit={handleSubmit(onSubmit)}
     >
       <SupplierForm register={register} errors={errors} />
-
       <div className="w-full flex gap-4 justify-end mt-3">
-        <Button color='danger' variant='flat' onPress={closeModal}>Cancelar</Button>
-        <Button color='success' type='submit'>Registrar Proveedor</Button>
+        <Button color='danger' variant='flat' onPress={() => closeModal()}>Cancelar</Button>
+        <Button color='success' type='submit'>Actualziar Proveedor</Button>
       </div>
     </form>
   );

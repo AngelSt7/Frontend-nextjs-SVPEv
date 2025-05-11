@@ -1,11 +1,10 @@
 import api from "@/src/axios/axios";
-import { CreateSupplier } from "@/src/types/DashboardTypes";
+import { SupplierFormData } from "@/src/types/DashboardTypes";
 import { isAxiosError } from "axios";
 
-export async function dashboardCreateSupplier(formData: CreateSupplier) {
+export async function dashboardCreateSupplierService(formData: SupplierFormData) {
     try {
-        const url = 'http://localhost:4000/api/supplier/create'
-        console.log(formData)
+        const url = '/proveedores/registrar'
         const { data } = await api.post(url, formData)
         return data
     } catch (error) {

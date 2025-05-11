@@ -1,45 +1,66 @@
-import { Key, memo } from "react";
-import { User as ImageProperty, Chip } from "@heroui/react";
+import React from "react";
+import { Chip, User, Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, Button, ChipProps } from "@heroui/react";
+import { VerticalDotsIcon } from "../../ui/icons/VerticalDotsIcon";
 import { DashboardSupplier } from "@/src/types/DashboardTypes";
 
-// import ButtonsActions from "./ButtonsActions";
+const statusColorMap: Record<string, ChipProps["color"]> = {
+  activo: "success",
+  inactivo: "danger",
+};
 
-type RenderCellProps = {
-    supplier: DashboardSupplier
-    columnKey: Key
-}
+// Cada caso del switch es una columna que declaraste en tu archivo de columnas (por defecto tiene estilos, no es necesario personalizar todos )
+export const renderCell = (item: DashboardSupplier, columnKey: React.Key, openModalEdit: (id: number) => void) => {
+  const cellValue = item[columnKey as keyof typeof item];
 
-const RenderCell = memo(({ supplier, columnKey }: RenderCellProps) => {
-    const theme = supplier.activo ? "success" : "danger";
+  switch (columnKey) {
+    case "razon_social":
+      return (
+        <User
+          avatarProps={{
+            radius: "lg",
+            src: "https://www.pokemon.com/static-assets/content-assets/cms2/img/pokedex/full/025.png",
+          }}
+          description={item.correo}
+          name={cellValue}
+        >
+          {item.correo}
+        </User>
+      );
+    case "activo":
+      const statusText = item.activo === 1 ? "activo" : "inactivo";
+      return (
+        <Chip
+          className="capitalize cursor-pointer select-none"
+          color={statusColorMap[statusText]}
+          size="sm"
+          variant="flat"
+          onDoubleClick={() => console.log('double click')}
+          role="button"
+          tabIndex={0}
+        >
+          {statusText}
+        </Chip>
 
-    switch (columnKey) {
-        case "id":
-            return (
-                <div className="min-w-36">
-                    <p>{supplier.id}</p>
-                </div>
-            );
-        case "proveedor":
-            return (
-                <p className="capitalize" color={theme} >
-                    {supplier.nombre + " " + supplier.apellido}
-                </p>
-            );
-        case "correo":
-            return <p className="text-bold text-sm capitalize">{supplier.correo}</p>;
-        case "celular":
-            return <div className=" min-w-24">
-                <p className={`${supplier.celular} text-bold text-xs capitalize text-default-400`}>{supplier.celular}</p>
-            </div>
-        case "acciones":
-            return (
-                // <ButtonsActions id={property.id} />
-                <>
-                </>
-            );
-    }
-
-    return null;
-});
-
-export default RenderCell;
+      );
+    case "actions":
+      return (
+        <div className="relative flex justify-end items-center gap-2">
+          <Dropdown>
+            <DropdownTrigger>
+              <Button isIconOnly size="sm" variant="light">
+                <VerticalDotsIcon className="text-default-300" />
+              </Button>
+            </DropdownTrigger>
+            <DropdownMenu>
+              <DropdownItem key="edit" onPress={() => openModalEdit(item.id)}>Editar</DropdownItem>
+              <DropdownItem key="delete" className="text-danger" color="danger">
+                Eliminar
+              </DropdownItem>
+            </DropdownMenu>
+          </Dropdown>
+        </div>
+      );
+    default:
+      return cellValue;
+  }
+};
