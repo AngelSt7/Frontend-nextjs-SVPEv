@@ -32,10 +32,4 @@ export const DashboardProductSchema = z.object({
 
 export const SupplierByIdSchema = DashboardSupplierSchema.extend({})
 
-export const DashboardSuppliersSchema = z.object({
-    content: z.array(DashboardSupplierSchema)
-})
-
-export const DashboardProductsSchema = z.object({
-    content: z.array(DashboardProductSchema)
-})
+export const DashboardSuppliersSchema = z.array(DashboardSupplierSchema);

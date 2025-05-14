@@ -10,6 +10,7 @@ export const AuthForgotPasswordSchema = z.object({
 })
 
 export const AuthUserInfoSchema = z.object({
+  id: z.number(),
   nombre: z.string(),
   apellido: z.string(),
   correo: z.string().email(),

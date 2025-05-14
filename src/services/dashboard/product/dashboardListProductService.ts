@@ -7,6 +7,7 @@ export async function dashboardListProductService() {
         const url = '/producto/listar'
         const { data } = await api(url)
         const response = DashboardProductsSchema.safeParse(data)
+        console.log(response)
         if(response.success){
             return response.data
         }

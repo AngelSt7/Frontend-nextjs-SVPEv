@@ -14,10 +14,10 @@ type TableComponentProps<T> = {
   openModalEdit: (id: number) => void;
   columns: ColumnsType;
   queryKey: string;
-  functionService: () => Promise<{ content: T[] } | undefined>;
+  functionService: () => Promise<T[] | undefined>;
   defaultVisibleColumns: (keyof T | string)[];
   searchableField?: keyof T;
-  mutate: mutateProps
+  mutate: mutateProps;
 };
 
 export const TableComponent = <T extends { id: number; activo: number }>({
@@ -30,7 +30,7 @@ export const TableComponent = <T extends { id: number; activo: number }>({
   searchableField,
   mutate
 }: TableComponentProps<T>) => {
-  const { data = { content: [] }, isLoading } = useQuery({
+  const { data = [], isLoading } = useQuery({
     queryKey: [queryKey],
     queryFn: functionService,
     refetchOnWindowFocus: false,
@@ -38,23 +38,26 @@ export const TableComponent = <T extends { id: number; activo: number }>({
     placeholderData: keepPreviousData,
   });
 
-  const dataToRender: T[] = data.content || [];
+  const dataToRender: T[] = data;
 
-  const { filterValue, setFilterValue, selectedKeys, setSelectedKeys, visibleColumns,
+  const {
+    filterValue, setFilterValue, selectedKeys, setSelectedKeys, visibleColumns,
     setVisibleColumns, statusFilter, setStatusFilter, setRowsPerPage, sortDescriptor,
     setSortDescriptor, page, setPage, headerColumns, filteredItems, sortedItems, pages
   } = useTableLogic({
     data: dataToRender,
-    defaultVisibleColumns: defaultVisibleColumns,
-    columns: columns,
-    searchableField: searchableField,
+    defaultVisibleColumns,
+    columns,
+    searchableField,
     statusField: "activo",
   });
 
-  const { onSearchChange, onClear, onRowsPerPageChange, onNextPage, onPreviousPage, onSortChange } = useTableHandlers({
+  const {
+    onSearchChange, onClear, onRowsPerPageChange, onNextPage, onPreviousPage, onSortChange
+  } = useTableHandlers({
     setFilterValue, setPage, setRowsPerPage, setStatusFilter, setSortDescriptor,
     page, pages, sortDescriptor,
-    validSortColumns: columns.map((column) => column.uid) as Extract<keyof T, string | number>[]
+    validSortColumns: columns.map((column) => column.uid) as Extract<keyof T, string | number>[],
   });
 
   return (
@@ -63,12 +66,19 @@ export const TableComponent = <T extends { id: number; activo: number }>({
       aria-label="Custom table using hook logic"
       bottomContent={
         <BottomContent
-          page={page} pages={pages} onPreviousPage={onPreviousPage}
-          onNextPage={onNextPage} onRowsPerPageChange={onRowsPerPageChange} onSetPage={setPage}
+          page={page}
+          pages={pages}
+          onPreviousPage={onPreviousPage}
+          onNextPage={onNextPage}
+          onRowsPerPageChange={onRowsPerPageChange}
+          onSetPage={setPage}
         />
       }
-      bottomContentPlacement="outside" classNames={{ wrapper: "min-h-[222px]" }}
-      selectedKeys={selectedKeys} sortDescriptor={sortDescriptor} onSortChange={onSortChange}
+      bottomContentPlacement="outside"
+      classNames={{ wrapper: "min-h-[222px]" }}
+      selectedKeys={selectedKeys}
+      sortDescriptor={sortDescriptor}
+      onSortChange={onSortChange}
       onSelectionChange={(keys) => {
         const newKeys =
           typeof keys === "string"
@@ -78,14 +88,21 @@ export const TableComponent = <T extends { id: number; activo: number }>({
       }}
       topContent={
         <TopContent
-          filterValue={filterValue} setFilterValue={setFilterValue} onSearchChange={onSearchChange}
-          onClear={onClear} statusFilter={statusFilter} setStatusFilter={setStatusFilter}
-          visibleColumns={visibleColumns} setVisibleColumns={setVisibleColumns} onRowsPerPageChange={onRowsPerPageChange}
-          total={filteredItems.length} openModalCreate={openModalCreate}
+          filterValue={filterValue}
+          setFilterValue={setFilterValue}
+          onSearchChange={onSearchChange}
+          onClear={onClear}
+          statusFilter={statusFilter}
+          setStatusFilter={setStatusFilter}
+          visibleColumns={visibleColumns}
+          setVisibleColumns={setVisibleColumns}
+          onRowsPerPageChange={onRowsPerPageChange}
+          total={filteredItems.length}
+          openModalCreate={openModalCreate}
           statusOptions={[
             { name: "Todos", uid: "all" },
             { name: "Activo", uid: "activo" },
-            { name: "Inactivo", uid: "inactivo" }
+            { name: "Inactivo", uid: "inactivo" },
           ]}
           columns={columns}
           messageButton={queryKey === "suppliers" ? "Proveedor" : "Producto"}
@@ -114,7 +131,7 @@ export const TableComponent = <T extends { id: number; activo: number }>({
           <TableRow className="hover:bg-[#f3f4f6]" key={item.id}>
             {(columnKey) => (
               <TableCell>
-                {queryKey === "suppliers" 
+                {queryKey === "suppliers"
                   ? isDashboardSupplier(item) && RenderCellSupplier(mutate, item, columnKey, openModalEdit)
                   : isDashboardProduct(item) && RenderCellProduct(mutate, item, columnKey, openModalEdit)
                 }
@@ -122,8 +139,7 @@ export const TableComponent = <T extends { id: number; activo: number }>({
             )}
           </TableRow>
         )}
-
       </TableBody>
-    </Table >
+    </Table>
   );
 };
