@@ -13,6 +13,8 @@ export const ProductFormDataSchema = z.object({
   id_subcategoria: z.number(),
   id_marca: z.number(),
   activo: z.number(),
+  modelo: z.string().nullish(),
+  color: z.string().nullish()
 });
 
 // Un elemento del dashboard
@@ -36,6 +38,4 @@ export const DashboardProductByIdSchema = ProductFormDataSchema.extend({
   id: z.number()
 }).omit({ id_usuario: true });
 // El conjunto de elementos del dashboard
-export const DashboardProductsSchema = z.object({
-  content: z.array(DashboardProductSchema),
-});
+export const DashboardProductsSchema = z.array(DashboardProductSchema)
