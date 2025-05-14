@@ -1,6 +1,6 @@
 'use client'
 
-import { Tittles } from "@/src/utils/resolveTittle"
+import { Tittles } from "@/src/utils/resolves/resolveTittle"
 import { usePathname } from "next/navigation"
 
 export default function ShowTittle() {

@@ -1,11 +1,10 @@
-// app/providers.tsx
 
-import {HeroUIProvider} from '@heroui/react'
+import { HeroUIProvider } from "@heroui/react"; // IMPORT CORRECTO
 
-export function NextUIProvider({children}: { children: React.ReactNode }) {
+export function NextUIProvider({ children }: { children: React.ReactNode }) {
   return (
     <HeroUIProvider>
       {children}
     </HeroUIProvider>
-  )
+  );
 }

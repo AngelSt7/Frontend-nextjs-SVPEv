@@ -1,3 +1,4 @@
+import { ToastProvider } from '@heroui/react'
 import Image from 'next/image'
 import React from 'react'
 
@@ -6,10 +7,10 @@ export default async function layout({ children }: { children: React.ReactNode }
     <main className='h-screen flex relative bg-[#fafafa]'>
       <div className='absolute inset-0 z-0'>
         <Image
-          src='/images/fondo-1.jpg' 
+          src='/images/fondo-1.jpg'
           alt='Imagen Fondo'
           className='object-contain'
-          fill 
+          fill
           priority={true}
         />
       </div>

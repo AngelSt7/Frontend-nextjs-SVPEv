@@ -2,22 +2,27 @@ import { Button } from '@heroui/react';
 import { useForm } from 'react-hook-form';
 import SupplierForm from '../form/SupplierForm';
 import { SupplierById, SupplierFormData } from '@/src/types/DashboardTypes';
-import { dashboardUpdateSupplierService } from '@/src/services/dashboard/Supplier/dashboardUpdateSupplierService';
+import { dashboardUpdateSupplierService } from '@/src/services/dashboard/supplier/dashboardUpdateSupplierService';
 import useSubmitMutation from '@/src/hooks/dashboard/useSubmitMutation';
 
 type EditSupplierFormProps = {
+  id: string | undefined;
   closeModal: () => void;
   defaultValues: SupplierById
 };
 
-export default function EditSupplierForm({ closeModal, defaultValues }: EditSupplierFormProps) {
+export default function EditSupplierForm({ id, closeModal, defaultValues }: EditSupplierFormProps) {
 
   const { register, handleSubmit, formState: { errors } } = useForm<SupplierFormData>({defaultValues: defaultValues});
 
   const { mutate } = useSubmitMutation({
     serviceFunction: dashboardUpdateSupplierService,
-    invalidateQuery: 'suppliers',
-    onSuccessCallback: closeModal
+    invalidateQuery: [
+      ["supplier", id],,
+      ['suppliers']
+    ],
+    onSuccessCallback: closeModal,
+    message: 'Proveedor actualizado exitosamente'
   })
 
   const onSubmit = (data: SupplierFormData) => mutate({ ...data, activo: 1 });

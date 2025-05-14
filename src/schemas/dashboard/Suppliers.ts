@@ -21,8 +21,21 @@ export const SupplierFormDataSchema = z.object({
     activo: z.number()
 })
 
+export const DashboardProductSchema = z.object({
+    id: z.number(),
+    nombre: z.string(),
+    stock: z.string(),
+    precio: z.string(),
+    activo: z.number()
+});
+
+
 export const SupplierByIdSchema = DashboardSupplierSchema.extend({})
 
 export const DashboardSuppliersSchema = z.object({
     content: z.array(DashboardSupplierSchema)
+})
+
+export const DashboardProductsSchema = z.object({
+    content: z.array(DashboardProductSchema)
 })

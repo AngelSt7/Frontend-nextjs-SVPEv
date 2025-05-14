@@ -1,29 +1,26 @@
-import React from "react";
 import { Chip, User, Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, Button, ChipProps } from "@heroui/react";
 import { VerticalDotsIcon } from "../../ui/icons/VerticalDotsIcon";
-import { DashboardSupplier } from "@/src/types/DashboardTypes";
+import { DashboardProduct } from "@/src/types/ProductTypes";
+import { formatDate } from "@/src/utils/format/formatDate";
+import { ToastDelete } from "../../ui/ToastDelete";
+import { mutateProps } from "@/src/types/commonTypes/commonTypes";
+import { statusColorMap } from "@/src/utils/constants/constans";
 
-const statusColorMap: Record<string, ChipProps["color"]> = {
-  activo: "success",
-  inactivo: "danger",
-};
-
-// Cada caso del switch es una columna que declaraste en tu archivo de columnas (por defecto tiene estilos, no es necesario personalizar todos )
-export const renderCell = (item: DashboardSupplier, columnKey: React.Key, openModalEdit: (id: number) => void) => {
+export const RenderCellProduct = (mutate: mutateProps, item: DashboardProduct, columnKey: React.Key, openModalEdit: (id: number) => void) => {
   const cellValue = item[columnKey as keyof typeof item];
 
   switch (columnKey) {
-    case "razon_social":
+    case "nombre":
       return (
         <User
           avatarProps={{
             radius: "lg",
             src: "https://www.pokemon.com/static-assets/content-assets/cms2/img/pokedex/full/025.png",
           }}
-          description={item.correo}
+          description={formatDate(item.fecha_creacion)}
           name={cellValue}
         >
-          {item.correo}
+          {item.fecha_creacion}
         </User>
       );
     case "activo":
@@ -34,7 +31,7 @@ export const renderCell = (item: DashboardSupplier, columnKey: React.Key, openMo
           color={statusColorMap[statusText]}
           size="sm"
           variant="flat"
-          onDoubleClick={() => console.log('double click')}
+          onDoubleClick={() => mutate({ id: item.id, activo: item.activo })}
           role="button"
           tabIndex={0}
         >
@@ -51,9 +48,16 @@ export const renderCell = (item: DashboardSupplier, columnKey: React.Key, openMo
                 <VerticalDotsIcon className="text-default-300" />
               </Button>
             </DropdownTrigger>
-            <DropdownMenu>
+            <DropdownMenu disabledKeys={item.activo === 0 ? ["edit", "delete"] : []}>
               <DropdownItem key="edit" onPress={() => openModalEdit(item.id)}>Editar</DropdownItem>
-              <DropdownItem key="delete" className="text-danger" color="danger">
+              <DropdownItem key="delete" className="text-danger" color="danger"
+                onPress={() => {
+                  ToastDelete({
+                    name: item.nombre,
+                    onConfirm: () => mutate({ id: item.id, activo: 1 }),
+                  })
+                }}
+              >
                 Eliminar
               </DropdownItem>
             </DropdownMenu>
