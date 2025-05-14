@@ -36,6 +36,7 @@ export const DashboardProductSchema = z.object({
 
 export const DashboardProductByIdSchema = ProductFormDataSchema.extend({
   id: z.number()
-}).omit({ id_usuario: true });
+}).omit({ id_usuario: true })
+
 // El conjunto de elementos del dashboard
 export const DashboardProductsSchema = z.array(DashboardProductSchema)

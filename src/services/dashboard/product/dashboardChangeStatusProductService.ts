@@ -13,7 +13,7 @@ export async function dashboardChangeStatusProductService(formdata: ChangeStatus
         const selected = actions[formdata.activo];
         const url = `/producto/${selected.action}/${formdata.id}`;
         const { data } = await api.put(url);
-        return data
+        return data.mensaje
     } catch (error) {
         if (isAxiosError(error) && error.response) {
             throw new Error(error.response.data.error);

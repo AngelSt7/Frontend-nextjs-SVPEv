@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { FaRegUser } from "react-icons/fa";
 import { IoMdExit } from "react-icons/io";
+import CloseSession from './CloseSession';
 
 export default function Header() {
     const styles = 'text-2xl hover:scale-125 transition-transform'
@@ -10,7 +11,7 @@ export default function Header() {
                 <Link href={'/dashboard/resumen'} className="uppercase font-bold cursor-pointer">Neon</Link>
                 <div className=' flex gap-4'>
                     <FaRegUser className={`${styles}`} />
-                    <IoMdExit className={`${styles}`} />
+                   <CloseSession styles={`${styles}`} />
                 </div>
             </div>
         </header>

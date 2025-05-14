@@ -1,13 +1,15 @@
 import { Button } from '@heroui/react';
 import { useForm } from 'react-hook-form';
-import ProductForm from '../form/ProductForm'; // Asegúrate de que esta sea la ruta correcta
+import ProductForm from '../form/ProductForm';
 import { ProductFormData } from '@/src/types/ProductTypes';
 import useSubmitMutation from '@/src/hooks/dashboard/useSubmitMutation';
 import { dashboardProductCreateProductService } from '@/src/services/dashboard/product/dashboardProductCreateProductService';
+import { AuthUserInfo } from '@/src/types/AuthTypes';
 
-type CreateProductFormProps = { closeModal: () => void; };
+type CreateProductFormProps = { closeModal: () => void, user?: AuthUserInfo };
 
-export default function CreateProductForm({ closeModal }: CreateProductFormProps) {
+export default function CreateProductForm({ closeModal, user }: CreateProductFormProps) {
+  
   const { register, handleSubmit, formState: { errors }, watch, setValue } = useForm<ProductFormData>();
   
   const { mutate } = useSubmitMutation({
@@ -17,7 +19,7 @@ export default function CreateProductForm({ closeModal }: CreateProductFormProps
     message: 'Producto registrado exitosamente'
   });
 
-  const onSubmit = (data: ProductFormData) => mutate({...data, activo: 1, id_usuario: 1});
+  const onSubmit = (data: ProductFormData) => mutate({...data, activo: 1, id_usuario: user?.id!});
 
   return (
     <form

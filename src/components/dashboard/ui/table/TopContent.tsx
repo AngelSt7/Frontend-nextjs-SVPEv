@@ -30,7 +30,7 @@ export const TopContent: React.FC<TopContentProps> = ({ filterValue, onSearchCha
         <Input
           isClearable
           className="w-full sm:max-w-[44%]"
-          placeholder="Buscar por razón social..."
+          placeholder="Buscar..."
           startContent={<SearchIcon />}
           value={filterValue}
           onClear={onClear}

@@ -1,5 +1,4 @@
 
-// import LoginForm from '@/src/components/Auth/LoginForm'
 import LoginForm from '@/src/components/auth/login/LoginForm'
 import ContentAuth from '@/src/components/auth/ui/ContentAuth'
 

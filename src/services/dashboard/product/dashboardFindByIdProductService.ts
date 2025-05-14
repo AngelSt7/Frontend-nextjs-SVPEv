@@ -7,11 +7,12 @@ export async function dashboardFindByIdProductService(id : number) {
         const url = `/producto/buscar/${id}`
         const { data } = await api.get(url)
         const response = DashboardProductByIdSchema.safeParse(data)
-        console.log(data)
+
         console.log(response)
-        // if(response.success){
-        //     return response.data
-        // }
+        console.log(data)
+        if(response.success){
+            return response.data
+        }
     } catch (error) {
         if (isAxiosError(error) && error.response) {
             throw new Error(error.response.data.error);
