@@ -3,6 +3,8 @@ import { SearchIcon } from "../icons/SearchIcon";
 import { ChevronDownIcon } from "../icons/ChevronDownIcon";
 import { PlusIcon } from "../icons/PlusIcon";
 import { capitalize } from "@/src/utils/format/formatText";
+import { ColumnsType } from "@/src/types/commonTypes/commonTypes";
+import { ChangeEvent, Dispatch, SetStateAction } from "react";
 
 interface TopContentProps {
   openModalCreate: () => void
@@ -11,20 +13,17 @@ interface TopContentProps {
   onSearchChange: (value?: string) => void;
   onClear: () => void;
   statusFilter: string;
-  setStatusFilter: React.Dispatch<React.SetStateAction<string>>;
+  setStatusFilter: Dispatch<SetStateAction<string>>;
   visibleColumns: "all" | Set<string>;
-  setVisibleColumns: React.Dispatch<React.SetStateAction<"all" | Set<string>>>;
-  onRowsPerPageChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  setVisibleColumns: Dispatch<SetStateAction<"all" | Set<string>>>;
+  onRowsPerPageChange: (e: ChangeEvent<HTMLSelectElement>) => void;
   total: number;
-  statusOptions: {
-    name: string;
-    uid: string;
-  }[],
-  columns: ({ name: string; uid: string; sortable: boolean; } | 
-    { name: string; uid: string; sortable?: undefined; })[]
+  statusOptions: { name: string; uid: string;}[],
+  columns: ColumnsType,
+  messageButton: string
 }
 
-export const TopContent: React.FC<TopContentProps> = ({ filterValue, onSearchChange, onClear, statusFilter, setStatusFilter, visibleColumns, setVisibleColumns, onRowsPerPageChange, total, openModalCreate, statusOptions, columns }) => {
+export const TopContent: React.FC<TopContentProps> = ({ filterValue, onSearchChange, onClear, statusFilter, setStatusFilter, visibleColumns, setVisibleColumns, onRowsPerPageChange, total, openModalCreate, statusOptions, columns, messageButton }) => {
   return (
     <div className="flex flex-col gap-4 p-4">
       <div className="flex justify-between gap-3 items-end">
@@ -92,7 +91,7 @@ export const TopContent: React.FC<TopContentProps> = ({ filterValue, onSearchCha
             </DropdownMenu>
           </Dropdown>
           <Button className="bg-[#2c2c2c] text-white shadow-lg" endContent={<PlusIcon />} onPress={openModalCreate}>
-            Agregar Proveedor
+            {`Agregar ${messageButton}`}
           </Button>
         </div>
       </div>

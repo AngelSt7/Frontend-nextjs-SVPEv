@@ -1,26 +1,21 @@
 import { Modal, ModalContent, ModalHeader, ModalBody } from "@heroui/react";
 import { usePathname, useSearchParams } from "next/navigation";
-import CreateSupplierForm from "../proveedores/create/CreateSupplierForm";
-import EditSupplierForm from "../proveedores/edit/EditSupplierForm";
-
-type Entity = 'proveedor' | 'producto' | 'usuario';
+import CreateSupplierForm from "../suppliers/create/CreateSupplierForm";
+import EditSupplierForm from "../suppliers/edit/EditSupplierForm";
+import CreateProductForm from "../products/create/CreateProductForm";
+import { pluralToSingular } from "@/src/utils/resolves/resolveTittle";
 
 type GenericModalProps = {
+  id?: string;
   closeModal: () => void;
   defaultValues?: any;
 };
 
-export default function GenericModal({ closeModal, defaultValues }: GenericModalProps) {
+export default function GenericModal({ id, closeModal, defaultValues }: GenericModalProps) {
   const path = usePathname();
   const searchParams = useSearchParams();
   const action = searchParams.get("action");
   const rawEntity = path.split("/")[2]; 
-
-  const pluralToSingular: Record<string, Entity> = {
-    proveedores: "proveedor",
-    productos: "producto",
-    usuarios: "usuario",
-  };
 
   const entity = pluralToSingular[rawEntity];
 
@@ -40,19 +35,18 @@ export default function GenericModal({ closeModal, defaultValues }: GenericModal
     if (isCreate) {
       switch (entity) {
         case "proveedor": return <CreateSupplierForm closeModal={closeModal} />;
-        // case "producto": return <CreateProductForm closeModalCreate={closeModal} />;
+        case "producto": return <CreateProductForm closeModal={closeModal} />;
         // case "usuario": return <CreateUserForm closeModalCreate={closeModal} />;
       }
     }
 
     if (isEdit) {
       switch (entity) {
-        case "proveedor": return <EditSupplierForm closeModal={closeModal} defaultValues={defaultValues} />;
+        case "proveedor": return <EditSupplierForm id={id} closeModal={closeModal} defaultValues={defaultValues} />;
         // case "producto": return <EditProductForm closeModalEdit={closeModal} defaultValues={defaultValues} />;
         // case "usuario": return <EditUserForm closeModalEdit={closeModal} defaultValues={defaultValues} />;
       }
     }
-
     return null;
   };
 

@@ -1,7 +1,7 @@
 import { authLoginService } from '@/src/services/auth/authLoginService'
 import { useAppStore } from '@/src/store/useAppStore'
 import { AuthLogin } from '@/src/types/AuthTypes'
-import { setJWT } from '@/src/utils/token'
+import { setJWT } from '@/src/utils/resolves/token'
 import { useMutation } from '@tanstack/react-query'
 import { useRouter } from 'next/navigation'
 import { UseFormReset } from 'react-hook-form'

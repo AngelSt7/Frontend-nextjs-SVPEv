@@ -4,8 +4,7 @@ import { memo } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { authInfoUserService } from "@/src/services/auth/authInfoUserService";
 import { useAppStore } from "@/src/store/useAppStore";
-
-type ModalCreateBaseProps = { showModal: boolean }
+import { ModalCreateBaseProps } from "@/src/types/commonTypes/commonTypes";
 
 export const ModalResetPassword = memo(function ModalResetPassword({ showModal }: ModalCreateBaseProps) {
   const toggleResetPasswordModal = useAppStore(state => state.toggleResetPasswordModal)

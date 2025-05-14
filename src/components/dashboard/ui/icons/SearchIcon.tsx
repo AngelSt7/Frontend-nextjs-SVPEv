@@ -1,8 +1,4 @@
-import { SVGProps } from "react";
-
-type IconSvgProps = SVGProps<SVGSVGElement> & {
-  size?: number;
-};
+import { IconSvgProps } from "@/src/types/commonTypes/commonTypes";
 
 export const SearchIcon = (props: IconSvgProps) => {
   return (

@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { DashboardSupplierSchema, DashboardSuppliersSchema, SupplierByIdSchema, SupplierFormDataSchema } from "../schemas/dashboard/Suppliers";
+import { DashboardProductSchema, DashboardProductsSchema, DashboardSupplierSchema, DashboardSuppliersSchema, SupplierByIdSchema, SupplierFormDataSchema } from "../schemas/dashboard/Suppliers";
 
 export type DashboardPaginationType = { page: number, take: number }
 export type DashboardSupplier = z.infer<typeof DashboardSupplierSchema>

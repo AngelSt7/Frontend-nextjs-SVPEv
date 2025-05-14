@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { dashboardFindByIdSupplierService } from '@/src/services/dashboard/Supplier/dashboardFindByIdSupplierService';
+import { dashboardFindByIdSupplierService } from '@/src/services/dashboard/supplier/dashboardFindByIdSupplierService';
 import GenericModal from '../../ui/GenericModal';
 
 type EditSupplierWrapperProps = {
@@ -17,5 +17,5 @@ export default function EditSupplierWrapper({ closeModal, id }: EditSupplierWrap
     enabled: id !== undefined,
   });
 
-  if (supplier) return <GenericModal closeModal={closeModal} defaultValues={supplier} />;
+  if (supplier) return <GenericModal id={id} closeModal={closeModal} defaultValues={supplier} />;
 }

@@ -1,8 +1,5 @@
-import { SVGProps } from "react";
+import { IconSvgProps } from "@/src/types/commonTypes/commonTypes";
 
-type IconSvgProps = SVGProps<SVGSVGElement> & {
-  size?: number;
-};
 export const ChevronDownIcon = ({strokeWidth = 1.5, ...otherProps}: IconSvgProps) => {
   return (
     <svg

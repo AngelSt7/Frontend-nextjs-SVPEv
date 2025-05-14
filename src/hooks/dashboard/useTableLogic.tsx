@@ -1,51 +1,47 @@
 import { useMemo, useState } from "react";
 
-type ColumnDefinition<T> = {
+export type ColumnDefinition<T> = {
   uid: keyof T | string;
   name: string;
   sortable?: boolean;
 };
 
+export type SortKey<T> = Extract<keyof T, string | number>;
+
+
 type useTableLogicProps<T> = {
   data: T[];
   defaultVisibleColumns: (keyof T | string)[];
   columns: ColumnDefinition<T>[];
-  searchableField?: keyof T;  
+  searchableField?: keyof T;
   statusField?: keyof T;
 };
 
-export const useTableLogic = <T extends { id: number | string }>({ data, defaultVisibleColumns, columns, searchableField, statusField}: useTableLogicProps<T>) => {
+export const useTableLogic = <T extends { id: number | string }>({
+  data,
+  defaultVisibleColumns,
+  columns,
+  searchableField,
+  statusField,
+}: useTableLogicProps<T>) => {
 
-  // Filtrar por algun string
   const [filterValue, setFilterValue] = useState("");
-
   const [selectedKeys, setSelectedKeys] = useState<Set<string>>(new Set());
-
-  // Columnas visibles
   const [visibleColumns, setVisibleColumns] = useState<"all" | Set<string>>(
     new Set(defaultVisibleColumns.map(String))
   );
-
-  // Array filtrado
   const [statusFilter, setStatusFilter] = useState<string>("all");
-
-  // Filas por pagina (falta usar el app store)
   const [rowsPerPage, setRowsPerPage] = useState(5);
-
-  // Ordenador de columnas
   const [sortDescriptor, setSortDescriptor] = useState<{
-    column: keyof T;
-    direction: "ascending" | "descending";
+    column: SortKey<T>;
+    direction: 'ascending' | 'descending';
   }>({
-    column: defaultVisibleColumns[0] as keyof T,
-    direction: "ascending",
+    column: defaultVisibleColumns[0] as SortKey<T>,
+    direction: 'ascending',
   });
   const [page, setPage] = useState(1);
-
-  // ¿Se esta filtrando?
   const hasSearchFilter = Boolean(filterValue);
 
-  // Ver que columnas mostrar
   const headerColumns = useMemo(() => {
     if (visibleColumns === "all") return columns;
     return columns.filter((column) =>
@@ -53,7 +49,6 @@ export const useTableLogic = <T extends { id: number | string }>({ data, default
     );
   }, [visibleColumns, columns]);
 
-  // Filtrador
   const filteredItems = useMemo(() => {
     let filtered = [...data];
     if (hasSearchFilter && searchableField) {
@@ -71,17 +66,14 @@ export const useTableLogic = <T extends { id: number | string }>({ data, default
     }
     return filtered;
   }, [filterValue, statusFilter, data, searchableField, statusField]);
-
-  // Calculador de paginas
+  
   const pages = Math.ceil(filteredItems.length / rowsPerPage) || 1;
-
-  // Items en si
   const items = useMemo(() => {
     const start = (page - 1) * rowsPerPage;
     return filteredItems.slice(start, start + rowsPerPage);
   }, [page, filteredItems, rowsPerPage]);
 
-  // Ordenador de items
+
   const sortedItems = useMemo(() => {
     return [...items].sort((a, b) => {
       const first = a[sortDescriptor.column];
@@ -91,9 +83,9 @@ export const useTableLogic = <T extends { id: number | string }>({ data, default
     });
   }, [sortDescriptor, items]);
 
-  return { 
+  return {
     filterValue, setFilterValue, selectedKeys, setSelectedKeys, visibleColumns, setVisibleColumns,
-    statusFilter, setStatusFilter, rowsPerPage, setRowsPerPage, sortDescriptor, setSortDescriptor, 
+    statusFilter, setStatusFilter, rowsPerPage, setRowsPerPage, sortDescriptor, setSortDescriptor,
     page, setPage, headerColumns, filteredItems, sortedItems, pages,
   };
 };

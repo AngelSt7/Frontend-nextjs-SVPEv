@@ -109,7 +109,6 @@ export default function SupplierForm({ register, errors }: SupplierFormProps) {
           })}
           errorMessage={errors.telefono}
         />
-
       </div>
     </div>
   )

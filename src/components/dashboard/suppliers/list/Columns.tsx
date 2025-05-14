@@ -1,6 +1,8 @@
 // Archivo de columnas para la tabla, sortable activa el ordenador por alfaberticamente
 
-export const Columns = [
+import { ColumnsType } from "@/src/types/commonTypes/commonTypes";
+
+export const Columns : ColumnsType = [
   { name: "ID", uid: "id", sortable: true },
   { name: "Razón Social", uid: "razon_social", sortable: true },
   { name: "RUC", uid: "ruc", sortable: true },

@@ -13,7 +13,9 @@ interface Props {
 export const BottomContent: React.FC<Props> = ({ page, pages, onPreviousPage, onNextPage, onSetPage}) => {
   return (
     <div className="py-2 px-2 flex justify-between items-center">
-      <span className="w-[30%] text-small text-default-400 invisible"></span>
+      <span className="w-[30%] text-small text-default-400">
+        Rows per page
+      </span>
       <Pagination
         isCompact
         showControls
