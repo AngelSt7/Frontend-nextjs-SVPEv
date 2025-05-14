@@ -9,8 +9,9 @@ import { dashboardListProductService } from '@/src/services/dashboard/product/da
 import EditProductWrapper from '../edit/EditProductWrapper'
 import useSubmitMutation from '@/src/hooks/dashboard/useSubmitMutation'
 import { dashboardChangeStatusProductService } from '@/src/services/dashboard/product/dashboardChangeStatusProductService'
+import { AuthUserInfo } from '@/src/types/AuthTypes'
 
-export default function ContentPage({ id }: { id: string | undefined }) {
+export default function ContentPage({ id, user }: { id: string | undefined, user?: AuthUserInfo }) {
     const { openModalCreate, openModalEdit, closeModal } = useModalUtils()
 
     const { mutate } = useSubmitMutation({
@@ -31,8 +32,8 @@ export default function ContentPage({ id }: { id: string | undefined }) {
                 mutate={mutate}
             />
 
-            <GenericModal closeModal={closeModal} />
-            {id && <EditProductWrapper closeModal={closeModal} id={id} />}
+            <GenericModal user={user} closeModal={closeModal} />
+            {id && user && <EditProductWrapper user={user} closeModal={closeModal} id={id} />}
         </div>
     )
 }

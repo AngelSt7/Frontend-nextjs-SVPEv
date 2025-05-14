@@ -5,6 +5,7 @@ import { formatDate } from "@/src/utils/format/formatDate";
 import { ToastDelete } from "../../ui/ToastDelete";
 import { mutateProps } from "@/src/types/commonTypes/commonTypes";
 import { statusColorMap } from "@/src/utils/constants/constans";
+import { formatCurrency } from "@/src/utils/format/formatCurrency";
 
 export const RenderCellProduct = (mutate: mutateProps, item: DashboardProduct, columnKey: React.Key, openModalEdit: (id: number) => void) => {
   const cellValue = item[columnKey as keyof typeof item];
@@ -23,6 +24,14 @@ export const RenderCellProduct = (mutate: mutateProps, item: DashboardProduct, c
           {item.fecha_creacion}
         </User>
       );
+    case "precio_venta":
+      return (
+      <p>{formatCurrency(item.precio_venta)}</p>
+    )
+    case "precio_compra":
+      return (
+      <p>{formatCurrency(item.precio_compra)}</p>
+    )
     case "activo":
       const statusText = item.activo === 1 ? "activo" : "inactivo";
       return (

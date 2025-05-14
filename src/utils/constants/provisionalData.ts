@@ -1,17 +1,18 @@
 export const SubCategories = [
-    { id: "1", label: "Teclados mecánicos", activo: true },
-    { id: "2", label: "Ratones gamer", activo: true },
-    { id: "3", label: "Monitores Full HD", activo: true },
-    { id: "4", label: "Monitores 144Hz+", activo: true },
-    { id: "5", label: "Auriculares con micrófono", activo: true },
-    { id: "6", label: "Auriculares inalámbricos", activo: true },
+    { id: "1", label: "Auriculares", activo: true },
+    { id: "2", label: "Parlantes", activo: true },
+    { id: "3", label: "Laptops", activo: true },
+    { id: "4", label: "Teclados", activo: true },
+    { id: "5", label: "PlayStation", activo: true },
+    { id: "6", label: "Xbox", activo: true },
+    { id: "7", label: "Cables USB", activo: true },
+    { id: "8", label: "Cargadores", activo: true },
 ];
 
 export const Brands = [
-    { id: "1", label: "Logitech", activo: true },
-    { id: "2", label: "Razer", activo: true },
-    { id: "3", label: "ASUS", activo: true },
-    { id: "4", label: "LG+", activo: true },
-    { id: "5", label: "Subcategorías", activo: true },
-    { id: "6", label: "SteelSeries", activo: true },
+    { id: "1", label: "Sony", activo: true },
+    { id: "2", label: "Dell", activo: true },
+    { id: "3", label: "HP", activo: true },
+    { id: "4", label: "Apple", activo: true },
+    { id: "5", label: "Samsung", activo: true },
 ]

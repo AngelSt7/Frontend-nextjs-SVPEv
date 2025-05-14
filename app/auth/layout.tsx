@@ -2,9 +2,7 @@ import useInfoUser from '@/src/hooks/auth/useInfoUser'
 import Image from 'next/image'
 import React from 'react'
 
-export default async function layout({ children }: { children: React.ReactNode }) {
-  // const user = await useInfoUser()
-  // console.log(user)
+export default async function layout({ children }: { children: React.ReactNode }) {''
   return (
     <main className='h-screen flex relative bg-[#fafafa]'>
       <div className='absolute inset-0 z-0'>

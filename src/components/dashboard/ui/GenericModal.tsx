@@ -4,14 +4,17 @@ import CreateSupplierForm from "../suppliers/create/CreateSupplierForm";
 import EditSupplierForm from "../suppliers/edit/EditSupplierForm";
 import CreateProductForm from "../products/create/CreateProductForm";
 import { pluralToSingular } from "@/src/utils/resolves/resolveTittle";
+import { AuthUserInfo } from "@/src/types/AuthTypes";
+import EditProductForm from "../products/edit/EditProductForm";
 
 type GenericModalProps = {
+  user?: AuthUserInfo;
   id?: string;
   closeModal: () => void;
   defaultValues?: any;
 };
 
-export default function GenericModal({ id, closeModal, defaultValues }: GenericModalProps) {
+export default function GenericModal({ user, id, closeModal, defaultValues }: GenericModalProps) {
   const path = usePathname();
   const searchParams = useSearchParams();
   const action = searchParams.get("action");
@@ -35,7 +38,7 @@ export default function GenericModal({ id, closeModal, defaultValues }: GenericM
     if (isCreate) {
       switch (entity) {
         case "proveedor": return <CreateSupplierForm closeModal={closeModal} />;
-        case "producto": return <CreateProductForm closeModal={closeModal} />;
+        case "producto": return <CreateProductForm user={user} closeModal={closeModal} />;
         // case "usuario": return <CreateUserForm closeModalCreate={closeModal} />;
       }
     }
@@ -43,7 +46,7 @@ export default function GenericModal({ id, closeModal, defaultValues }: GenericM
     if (isEdit) {
       switch (entity) {
         case "proveedor": return <EditSupplierForm id={id} closeModal={closeModal} defaultValues={defaultValues} />;
-        // case "producto": return <EditProductForm closeModalEdit={closeModal} defaultValues={defaultValues} />;
+        case "producto": return <EditProductForm user={user} closeModal={closeModal} defaultValues={defaultValues} />;
         // case "usuario": return <EditUserForm closeModalEdit={closeModal} defaultValues={defaultValues} />;
       }
     }
@@ -53,7 +56,7 @@ export default function GenericModal({ id, closeModal, defaultValues }: GenericM
   if (!showModal) return null;
 
   return (
-    <Modal size="xl" backdrop="opaque" isOpen={showModal} onClose={closeModal}>
+    <Modal scrollBehavior="inside" size="xl" backdrop="opaque" isOpen={showModal} onClose={closeModal}>
       <ModalContent>
         {(onClose) => (
           <>

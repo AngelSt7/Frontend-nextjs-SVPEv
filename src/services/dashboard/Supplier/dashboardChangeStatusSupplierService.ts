@@ -17,7 +17,7 @@ export async function dashboardChangeStatusSupplierService(formdata: ChangeStatu
         const selected = actions[formdata.activo];
         const url = `/proveedores/${selected.action}/${formdata.id}`;
         const { data } = await api.put(url);
-        return data
+        return data.mensaje
     } catch (error) {
         if (isAxiosError(error) && error.response) {
             throw new Error(error.response.data.error);

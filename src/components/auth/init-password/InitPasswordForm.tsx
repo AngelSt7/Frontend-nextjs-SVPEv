@@ -14,11 +14,10 @@ type InitPasswordFormProps = {
 };
 
 export default function InitPasswordForm({shouldShowResetPasswordModal, toggleResetPasswordModal } : InitPasswordFormProps) {
-    const { register, handleSubmit, formState: { errors }, reset, watch } = useForm<AuthInitPassword>();
+    const { register, handleSubmit, formState: { errors }, watch } = useForm<AuthInitPassword>();
     const { mutate } = useAuthMutation({
-        onSuccessCallback: () => reset(),
+        onSuccessCallback: toggleResetPasswordModal,
         serviceFunction: authInitPasswordService,
-        redirection: '/auth/iniciar-sesion',
     });
     const claveNueva = watch('clave_nueva');
     const repeatClaveNueva = watch('repeat_clave_nueva');

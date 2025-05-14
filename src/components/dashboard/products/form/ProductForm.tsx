@@ -15,7 +15,6 @@ type ProductFormProps = {
 export default function ProductForm({ register, errors, watch, setValue }: ProductFormProps) {
   return (
     <div className="flex flex-col gap-3">
-
       <Input
         type="text"
         placeholder="Nombre del producto"
@@ -156,6 +155,28 @@ export default function ProductForm({ register, errors, watch, setValue }: Produ
           setValue={setValue}
           errorMessage={errors.id_marca}
         />
+      </div>
+
+      <div className="mt-4">
+        <p className="text-sm text-gray-500 mb-2">Campos opcionales</p>
+        <div className="grid grid-cols-2 gap-5">
+          <Input
+            type="text"
+            placeholder="Modelo (opcional)"
+            htmlFor="modelo"
+            label="Modelo"
+            register={register('modelo')}
+            errorMessage={errors.modelo}
+          />
+          <Input
+            type="text"
+            placeholder="Color (opcional)"
+            htmlFor="color"
+            label="Color"
+            register={register('color')}
+            errorMessage={errors.color}
+          />
+        </div>
       </div>
     </div>
   );
