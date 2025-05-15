@@ -3,7 +3,7 @@ import Link from "next/link";
 export default function NavBar() {
     const styles = 'text-zinc-700 font-semibold sm:hover:scale-125 sm:transition-transform text-sm'
     const links = [
-        { href: '#', text: 'Resumen' }, { href: '/dashboard/ventas', text: 'Ventas' }, 
+        { href: '#', text: 'Resumen' }, { href: '/dashboard/usuarios', text: 'Usuarios' }, 
         { href: '/dashboard/productos', text: 'Productos' }, { href: '/dashboard/proveedores', text: 'Proveedores' },
     ]
     return (

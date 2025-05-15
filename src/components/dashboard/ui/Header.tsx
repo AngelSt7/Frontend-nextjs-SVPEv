@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import { FaRegUser } from "react-icons/fa";
-import { IoMdExit } from "react-icons/io";
 import CloseSession from './CloseSession';
 
 export default function Header() {

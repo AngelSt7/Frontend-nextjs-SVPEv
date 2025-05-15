@@ -16,3 +16,9 @@ export const Brands = [
     { id: "4", label: "Apple", activo: true },
     { id: "5", label: "Samsung", activo: true },
 ]
+
+export const Roles = [
+    { id: "1", label: "Administrador", activo: true },
+    { id: "2", label: "Alamacenista", activo: true },
+    { id: "3", label: "Vendedor", activo: true },
+]

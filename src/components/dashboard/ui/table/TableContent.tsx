@@ -5,9 +5,18 @@ import { useTableLogic } from "../../../../hooks/dashboard/useTableLogic";
 import { useQuery, keepPreviousData } from "@tanstack/react-query";
 import { TopContent } from "./TopContent";
 import { useTableHandlers } from "@/src/hooks/dashboard/useTableHandlers";
-import { isDashboardProduct, isDashboardSupplier } from "@/src/utils/format/formatObject";
+import { isDashboardProduct, isDashboardSupplier, isDashboardUser, renderMap } from "@/src/utils/format/formatObject";
 import { RenderCellProduct } from "../../products/list/RenderCellProduct";
 import { ColumnsType, mutateProps } from "@/src/types/commonTypes/commonTypes";
+import { RenderCellUser } from "../../users/list/RenderCellUser";
+import type { JSX } from "react";
+
+const labelMap: Record<string, string> = {
+  suppliers: "Proveedor",
+  users: "Usuario",
+  products: "Producto",
+};
+
 
 type TableComponentProps<T> = {
   openModalCreate: () => void;
@@ -105,7 +114,7 @@ export const TableComponent = <T extends { id: number; activo: number }>({
             { name: "Inactivo", uid: "inactivo" },
           ]}
           columns={columns}
-          messageButton={queryKey === "suppliers" ? "Proveedor" : "Producto"}
+          messageButton={labelMap[queryKey] || "Elemento"}
         />
       }
       topContentPlacement="outside"
@@ -131,10 +140,7 @@ export const TableComponent = <T extends { id: number; activo: number }>({
           <TableRow className="hover:bg-[#f3f4f6]" key={item.id}>
             {(columnKey) => (
               <TableCell>
-                {queryKey === "suppliers"
-                  ? isDashboardSupplier(item) && RenderCellSupplier(mutate, item, columnKey, openModalEdit)
-                  : isDashboardProduct(item) && RenderCellProduct(mutate, item, columnKey, openModalEdit)
-                }
+                {renderMap[queryKey]?.(mutate, item, columnKey, openModalEdit)}
               </TableCell>
             )}
           </TableRow>

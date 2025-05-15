@@ -1,11 +1,11 @@
 import api from "@/src/axios/axios";
-import { ProductFormData } from "@/src/types/ProductTypes";
+import { UserFormData } from "@/src/types/UserTypes";
 import { isAxiosError } from "axios";
 
-export async function dashboardUpdatProductService(formData: ProductFormData) {
+export async function dashboardCreateUserService(formData: UserFormData) {
     try {
-        const url = '/producto/actualizar'
-        const { data } = await api.put(url, formData)
+        const url = '/autenticacion/registro'
+        const { data } = await api.post(url, formData)
         return data
     } catch (error) {
         if (isAxiosError(error) && error.response) {
