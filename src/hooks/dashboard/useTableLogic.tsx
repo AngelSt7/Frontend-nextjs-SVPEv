@@ -8,7 +8,6 @@ export type ColumnDefinition<T> = {
 
 export type SortKey<T> = Extract<keyof T, string | number>;
 
-
 type useTableLogicProps<T> = {
   data: T[];
   defaultVisibleColumns: (keyof T | string)[];

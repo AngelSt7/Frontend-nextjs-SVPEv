@@ -1,4 +1,6 @@
 import { z } from 'zod';
-import { DashboardUsuarioSchema } from '../schemas/user/User';
+import { DashboardUserByIdSchema, DashboardUserSchema, UserFormDataSchema } from '../schemas/dashboard/Users';
 
-export type DashboardUsuario = z.infer<typeof DashboardUsuarioSchema>
+export type UserFormData = z.infer<typeof UserFormDataSchema>
+export type DashboardUser = z.infer<typeof DashboardUserSchema>
+export type DashboardUserById = z.infer<typeof DashboardUserByIdSchema>

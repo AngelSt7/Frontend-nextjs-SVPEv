@@ -27,6 +27,10 @@ export default function ProductForm({ register, errors, watch, setValue }: Produ
             value: 2,
             message: 'Debe tener al menos 2 caracteres',
           },
+          maxLength: {
+            value: 25,
+            message: 'Debe tener menos de 25 caracteres',
+          },
         })}
         errorMessage={errors.nombre}
       />
@@ -36,7 +40,17 @@ export default function ProductForm({ register, errors, watch, setValue }: Produ
         placeholder="Escribe la descripción del producto"
         htmlFor="descripcion"
         label="Descripción"
-        register={register('descripcion')}
+        register={register('descripcion', {
+          required: 'Este campo es obligatorio',
+          minLength: {
+            value: 10,
+            message: 'Debe tener al menos 10 caracteres',
+          },
+          maxLength: {
+            value: 100,
+            message: 'Debe tener menos de 100 caracteres',
+          },
+        })}
         errorMessage={errors.descripcion}
       />
 
@@ -87,6 +101,10 @@ export default function ProductForm({ register, errors, watch, setValue }: Produ
               value: 0,
               message: 'Debe ser un valor positivo',
             },
+            max: {
+              value: 48,
+              message: 'No puede ser mayor a 48 meses',
+            },
             valueAsNumber: true,
           })}
           errorMessage={errors.garantia_meses}
@@ -122,6 +140,9 @@ export default function ProductForm({ register, errors, watch, setValue }: Produ
             min: {
               value: 0,
               message: 'No puede ser negativo',
+            }, max: {
+              value: 100,
+              message: 'No puede ser mayor a 100',
             },
             valueAsNumber: true,
           })}
