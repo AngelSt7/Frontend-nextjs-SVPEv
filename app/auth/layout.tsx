@@ -1,6 +1,4 @@
-import useInfoUser from '@/src/hooks/auth/useInfoUser'
 import Image from 'next/image'
-import React from 'react'
 
 export default async function layout({ children }: { children: React.ReactNode }) {''
   return (

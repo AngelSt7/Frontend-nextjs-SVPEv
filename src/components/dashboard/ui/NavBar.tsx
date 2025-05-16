@@ -10,7 +10,7 @@ export default function NavBar() {
         <nav className=' bg-white py-4 border-b-1 border-[#c7c7c7]'>
             <div className='w-[90%] max-w-[1600px] mx-auto flex justify-between xs:justify-start gap-8'>
                 {links.map((link, index) => (
-                    <Link key={index} href={link.href} className={styles}>
+                    <Link key={index} href={link.href} className={styles} prefetch>
                         {link.text}
                     </Link>
                 ))}

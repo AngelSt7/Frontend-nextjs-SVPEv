@@ -9,11 +9,11 @@ import { useForm } from 'react-hook-form';
 import { MdLockOutline } from 'react-icons/md';
 
 type InitPasswordFormProps = {
-  shouldShowResetPasswordModal: boolean;
-  toggleResetPasswordModal: () => void;
+    shouldShowResetPasswordModal: boolean;
+    toggleResetPasswordModal: () => void;
 };
 
-export default function InitPasswordForm({shouldShowResetPasswordModal, toggleResetPasswordModal } : InitPasswordFormProps) {
+export default function InitPasswordForm({ shouldShowResetPasswordModal, toggleResetPasswordModal }: InitPasswordFormProps) {
     const { register, handleSubmit, formState: { errors }, watch } = useForm<AuthInitPassword>();
     const { mutate } = useAuthMutation({
         onSuccessCallback: toggleResetPasswordModal,
@@ -21,7 +21,7 @@ export default function InitPasswordForm({shouldShowResetPasswordModal, toggleRe
     });
     const claveNueva = watch('clave_nueva');
     const repeatClaveNueva = watch('repeat_clave_nueva');
-    const onSubmit = (data: AuthInitPassword) => mutate({formData: data, shouldShowResetPasswordModal, toggleResetPasswordModal});  
+    const onSubmit = (data: AuthInitPassword) => mutate({ formData: data, shouldShowResetPasswordModal, toggleResetPasswordModal });
 
     return (
         <form className='flex flex-col justify-between gap-3 flex-1 py-5' onSubmit={handleSubmit(onSubmit)}>
@@ -35,7 +35,10 @@ export default function InitPasswordForm({shouldShowResetPasswordModal, toggleRe
                     errorMessage={errors.clave_actual}
                 />
                 <Input
-                    type='password' placeholder='Nueva contraseña' htmlFor='clave_nueva' label='Nueva clave'
+                    type='password'
+                    placeholder='Nueva contraseña'
+                    htmlFor='clave_nueva'
+                    label='Nueva clave'
                     Icon={MdLockOutline}
                     register={register('clave_nueva', {
                         required: 'Este campo es obligatorio',
@@ -43,9 +46,19 @@ export default function InitPasswordForm({shouldShowResetPasswordModal, toggleRe
                             value: 8,
                             message: 'La contraseña debe tener al menos 8 caracteres'
                         },
+                        maxLength: {
+                            value: 20,
+                            message: 'La contraseña no debe exceder los 20 caracteres'
+                        },
+                        pattern: {
+                            value: /^(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9]).{8,20}$/,
+                            message:
+                                'Debe incluir al menos una mayúscula, un número y un símbolo especial',
+                        },
                     })}
                     errorMessage={errors.clave_nueva}
                 />
+
                 <Input
                     type='password' placeholder='Repite nueva contraseña' htmlFor='repeat_clave_nueva' label='Repite la nueva clave'
                     Icon={MdLockOutline}

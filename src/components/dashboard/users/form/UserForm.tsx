@@ -26,8 +26,8 @@ export default function UserForm({ register, errors, watch, setValue }: UserForm
                     register={register('nombre', {
                         required: 'Este campo es obligatorio',
                         minLength: {
-                            value: 2,
-                            message: 'Debe tener al menos 2 caracteres',
+                            value: 8,
+                            message: 'Debe tener al menos 8 caracteres',
                         },
                     })}
                     errorMessage={errors.nombre}
@@ -42,45 +42,47 @@ export default function UserForm({ register, errors, watch, setValue }: UserForm
                     register={register('apellido', {
                         required: 'Este campo es obligatorio',
                         minLength: {
-                            value: 2,
-                            message: 'Debe tener al menos 2 caracteres',
+                            value: 8,
+                            message: 'Debe tener al menos 8 caracteres',
                         },
                     })}
                     errorMessage={errors.apellido}
                 />
             </div>
 
-            <Input
-                type="text"
-                placeholder="DNI"
-                htmlFor="dni"
-                label="DNI"
-                Icon={FaRegIdCard}
-                register={register('dni', {
-                    required: 'Este campo es obligatorio',
-                    pattern: {
-                        value: /^[0-9]{8}$/,
-                        message: 'El DNI debe tener 8 dígitos',
-                    },
-                })}
-                errorMessage={errors.dni}
-            />
+            <div className="flex gap-5">
+                <Input
+                    type="text"
+                    placeholder="DNI"
+                    htmlFor="dni"
+                    label="DNI"
+                    Icon={FaRegIdCard}
+                    register={register('dni', {
+                        required: 'Este campo es obligatorio',
+                        pattern: {
+                            value: /^[1-9][0-9]{7}$/,
+                            message: 'El DNI debe tener 8 dígitos y no comenzar con 0',
+                        },
+                    })}
+                    errorMessage={errors.dni}
+                />
 
-            <Input
-                type="email"
-                placeholder="Correo electrónico"
-                htmlFor="correo"
-                label="Correo electrónico"
-                Icon={MdOutlineMail}
-                register={register('correo', {
-                    required: 'Este campo es obligatorio',
-                    pattern: {
-                        value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-                        message: 'El formato del correo electrónico no es válido',
-                    },
-                })}
-                errorMessage={errors.correo}
-            />
+                <Input
+                    type="email"
+                    placeholder="Correo electrónico"
+                    htmlFor="correo"
+                    label="Correo electrónico"
+                    Icon={MdOutlineMail}
+                    register={register('correo', {
+                        required: 'Este campo es obligatorio',
+                        pattern: {
+                            value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+                            message: 'El formato del correo electrónico no es válido',
+                        },
+                    })}
+                    errorMessage={errors.correo}
+                />
+            </div>
 
             <Input
                 type="text"
@@ -91,8 +93,8 @@ export default function UserForm({ register, errors, watch, setValue }: UserForm
                 register={register('celular', {
                     required: 'Este campo es obligatorio',
                     pattern: {
-                        value: /^[0-9]{9}$/,
-                        message: 'El número de celular debe tener 9 dígitos',
+                        value: /^9[0-9]{8}$/,
+                        message: 'El número de celular debe comenzar con 9 y tener 9 dígitos',
                     },
                 })}
                 errorMessage={errors.celular}
@@ -110,7 +112,6 @@ export default function UserForm({ register, errors, watch, setValue }: UserForm
                 setValue={setValue}
                 errorMessage={errors.id_rol}
             />
-
 
         </div>
     );

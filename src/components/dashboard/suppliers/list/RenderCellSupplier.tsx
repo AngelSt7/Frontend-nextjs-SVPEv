@@ -15,7 +15,7 @@ export const RenderCellSupplier = (mutate: mutateProps, item: DashboardSupplier,
         <User
           avatarProps={{
             radius: "lg",
-            src: "https://www.pokemon.com/static-assets/content-assets/cms2/img/pokedex/full/025.png",
+            src: "/images/supplier-provisional.jpeg",
           }}
           description={item.correo}
           name={cellValue}

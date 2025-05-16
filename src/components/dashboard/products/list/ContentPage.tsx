@@ -27,7 +27,7 @@ export default function ContentPage({ id, user }: { id: string | undefined, user
                 columns={Columns}
                 queryKey="products"
                 functionService={dashboardListProductService}
-                defaultVisibleColumns={["nombre", "precio_venta", "nombre_marca", "nombre_subcategoria", "min_stock", "activo", "actions"]}
+                defaultVisibleColumns={["nombre", "precio_venta", "nombre_marca", "nombre_subcategoria", "sku", "min_stock", "activo", "actions"]}
                 searchableField="nombre"
                 mutate={mutate}
             />

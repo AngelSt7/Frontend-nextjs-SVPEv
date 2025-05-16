@@ -1,15 +1,11 @@
 import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, Spinner } from "@heroui/react";
 import { BottomContent } from "./BottomContent";
-import { RenderCellSupplier } from "../../suppliers/list/RenderCellSupplier";
 import { useTableLogic } from "../../../../hooks/dashboard/useTableLogic";
 import { useQuery, keepPreviousData } from "@tanstack/react-query";
 import { TopContent } from "./TopContent";
 import { useTableHandlers } from "@/src/hooks/dashboard/useTableHandlers";
-import { isDashboardProduct, isDashboardSupplier, isDashboardUser, renderMap } from "@/src/utils/format/formatObject";
-import { RenderCellProduct } from "../../products/list/RenderCellProduct";
+import { renderMap } from "@/src/utils/format/formatObject";
 import { ColumnsType, mutateProps } from "@/src/types/commonTypes/commonTypes";
-import { RenderCellUser } from "../../users/list/RenderCellUser";
-import type { JSX } from "react";
 
 const labelMap: Record<string, string> = {
   suppliers: "Proveedor",
@@ -27,6 +23,7 @@ type TableComponentProps<T> = {
   defaultVisibleColumns: (keyof T | string)[];
   searchableField?: keyof T;
   mutate: mutateProps;
+  categoryOptions?: { name: string; uid: string;}[]
 };
 
 export const TableComponent = <T extends { id: number; activo: number }>({
@@ -37,6 +34,7 @@ export const TableComponent = <T extends { id: number; activo: number }>({
   functionService,
   defaultVisibleColumns,
   searchableField,
+  categoryOptions,
   mutate
 }: TableComponentProps<T>) => {
   const { data = [], isLoading } = useQuery({

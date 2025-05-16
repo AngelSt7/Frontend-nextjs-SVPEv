@@ -21,8 +21,12 @@ export default function SupplierForm({ register, errors }: SupplierFormProps) {
         register={register('razon_social', {
           required: 'Este campo es obligatorio',
           minLength: {
-            value: 2,
-            message: 'Debe tener al menos 2 caracteres',
+            value: 8,
+            message: 'Debe tener al menos 8 caracteres',
+          },
+          maxLength: {
+            value: 100,
+            message: 'No debe superar los 100 caracteres',
           },
         })}
         errorMessage={errors.razon_social}
@@ -54,8 +58,8 @@ export default function SupplierForm({ register, errors }: SupplierFormProps) {
           register={register('celular', {
             required: 'Este campo es obligatorio',
             pattern: {
-              value: /^[0-9]{9}$/,
-              message: 'El número de celular debe tener 9 dígitos',
+              value: /^9\d{8}$/,
+              message: 'Debe comenzar con 9 y tener exactamente 9 dígitos',
             },
           })}
           errorMessage={errors.celular}
@@ -71,7 +75,7 @@ export default function SupplierForm({ register, errors }: SupplierFormProps) {
             required: 'Este campo es obligatorio',
             pattern: {
               value: /^[0-9]{11}$/,
-              message: 'El RUC debe tener 11 dígitos numéricos',
+              message: 'El RUC debe tener exactamente 11 dígitos numéricos',
             },
           })}
           errorMessage={errors.ruc}
@@ -88,8 +92,12 @@ export default function SupplierForm({ register, errors }: SupplierFormProps) {
           register={register('direccion', {
             required: 'Este campo es obligatorio',
             minLength: {
-              value: 5,
-              message: 'La dirección debe tener al menos 5 caracteres',
+              value: 10,
+              message: 'La dirección debe tener al menos 10 caracteres',
+            },
+            maxLength: {
+              value: 200,
+              message: 'La dirección no debe superar los 200 caracteres',
             },
           })}
           errorMessage={errors.direccion}
@@ -102,14 +110,15 @@ export default function SupplierForm({ register, errors }: SupplierFormProps) {
           label="Teléfono"
           Icon={MdPhone}
           register={register('telefono', {
+            required: 'Este campo es obligatorio',
             pattern: {
-              value: /^[0-9]{7}$/,
-              message: "Debe contener exactamente 7 dígitos numéricos",
+              value: /^[1-9][0-9]{6}$/,
+              message: 'Debe contener 7 dígitos y no debe iniciar con 0',
             },
           })}
           errorMessage={errors.telefono}
         />
       </div>
-    </div>
+    </div >
   )
 }
