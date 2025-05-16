@@ -22,3 +22,12 @@ export const Roles = [
     { id: "2", label: "Alamacenista", activo: true },
     { id: "3", label: "Vendedor", activo: true },
 ]
+
+export const CategoryOptions = [
+    { name: "Todos", uid: "all" },
+    { name: "Sony", uid: "activo" },
+    { name: "Dell", uid: "inactivo" },
+    { name: "HP", uid: "inactivo" },
+    { name: "Apple", uid: "inactivo" },
+    { name: "Samsung", uid: "inactivo" },
+]

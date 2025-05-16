@@ -16,7 +16,7 @@ export const RenderCellProduct = (mutate: mutateProps, item: DashboardProduct, c
         <User
           avatarProps={{
             radius: "lg",
-            src: "https://www.pokemon.com/static-assets/content-assets/cms2/img/pokedex/full/025.png",
+            src: "/images/product-provisional.jpeg",
           }}
           description={formatDate(item.fecha_creacion)}
           name={cellValue}

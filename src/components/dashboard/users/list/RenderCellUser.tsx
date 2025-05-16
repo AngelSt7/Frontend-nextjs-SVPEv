@@ -20,7 +20,7 @@ export const RenderCellUser = (
                 <User
                     avatarProps={{
                         radius: "lg",
-                        src: "https://www.pokemon.com/static-assets/content-assets/cms2/img/pokedex/full/025.png",
+                        src: "/image/user-provisional.jpeg",
                     }}
                     name={`${item.nombre} ${item.apellido}`}
                     description={item.correo}

@@ -28,6 +28,7 @@ export const DashboardProductSchema = z.object({
   max_stock: z.number(),
   garantia_meses: z.number(),
   activo: z.number(),
+  sku: z.string(),
   fecha_creacion: z.string(),
   nombre_subcategoria: z.string(),
   nombre_categoria: z.string(),

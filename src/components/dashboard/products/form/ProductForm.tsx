@@ -23,13 +23,9 @@ export default function ProductForm({ register, errors, watch, setValue }: Produ
         Icon={MdDriveFileRenameOutline}
         register={register('nombre', {
           required: 'Este campo es obligatorio',
-          minLength: {
-            value: 2,
-            message: 'Debe tener al menos 2 caracteres',
-          },
-          maxLength: {
-            value: 25,
-            message: 'Debe tener menos de 25 caracteres',
+          pattern: {
+            value: /^[A-Za-zÁÉÍÓÚÑáéíóúñ0-9\s]{8,50}$/,
+            message: 'Debe tener entre 8 y 50 caracteres (letras y números)',
           },
         })}
         errorMessage={errors.nombre}
@@ -65,9 +61,16 @@ export default function ProductForm({ register, errors, watch, setValue }: Produ
             required: 'Este campo es obligatorio',
             min: {
               value: 0,
-              message: 'El valor no puede ser negativo',
+              message: 'No puede ser negativo',
+            },
+            max: {
+              value: 10000,
+              message: 'No puede exceder los 10,000',
             },
             valueAsNumber: true,
+            validate: (value) =>
+              value < watch('precio_venta') ||
+              'Debe ser menor que el precio de venta',
           })}
           errorMessage={errors.precio_compra}
         />
@@ -84,7 +87,14 @@ export default function ProductForm({ register, errors, watch, setValue }: Produ
               value: 0,
               message: 'No puede ser negativo',
             },
+            max: {
+              value: 10000,
+              message: 'No puede exceder los 10,000',
+            },
             valueAsNumber: true,
+            validate: (value) =>
+              value > watch('precio_compra') ||
+              'Debe ser mayor que el precio de compra',
           })}
           errorMessage={errors.precio_venta}
         />
@@ -99,11 +109,11 @@ export default function ProductForm({ register, errors, watch, setValue }: Produ
             required: 'Este campo es obligatorio',
             min: {
               value: 0,
-              message: 'Debe ser un valor positivo',
+              message: 'Debe ser positivo',
             },
             max: {
               value: 48,
-              message: 'No puede ser mayor a 48 meses',
+              message: 'No puede superar los 48 meses',
             },
             valueAsNumber: true,
           })}
@@ -122,9 +132,12 @@ export default function ProductForm({ register, errors, watch, setValue }: Produ
             required: 'Este campo es obligatorio',
             min: {
               value: 0,
-              message: 'No puede ser negativo',
+              message: 'Debe ser positivo',
             },
             valueAsNumber: true,
+            validate: (value) =>
+              value <= watch('max_stock') ||
+              'No puede ser mayor que el stock máximo',
           })}
           errorMessage={errors.min_stock}
         />
@@ -139,12 +152,16 @@ export default function ProductForm({ register, errors, watch, setValue }: Produ
             required: 'Este campo es obligatorio',
             min: {
               value: 0,
-              message: 'No puede ser negativo',
-            }, max: {
-              value: 100,
-              message: 'No puede ser mayor a 100',
+              message: 'Debe ser positivo',
+            },
+            max: {
+              value: 10000,
+              message: 'No puede exceder los 10,000',
             },
             valueAsNumber: true,
+            validate: (value) =>
+              value >= watch('min_stock') ||
+              'No puede ser menor que el stock mínimo',
           })}
           errorMessage={errors.max_stock}
         />
