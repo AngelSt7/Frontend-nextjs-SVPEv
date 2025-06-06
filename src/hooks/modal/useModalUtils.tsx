@@ -13,7 +13,6 @@ export function useModalUtils() {
         const params = new URLSearchParams(searchParams.toString());
         params.set("action", "edit");
         params.set("id", Number(id).toString());
-        console.log(params.toString());
         router.replace(`?${params.toString()}`);
     };
 

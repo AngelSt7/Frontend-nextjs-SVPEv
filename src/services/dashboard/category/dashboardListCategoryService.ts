@@ -1,12 +1,14 @@
 import api from "@/src/axios/axios";
-import { DashboardUsersSchema } from "@/src/schemas/dashboard/Users";
+import { DashboardCategoriesSchema, DashboardCategorySchema } from "@/src/schemas/dashboard/Category";
 import { isAxiosError } from "axios";
 
-export async function dashboardListUserService() {
+export async function dashboardListCategoryService() {
     try {
-        const url = '/empleado/listar'
+        const url = '/categoria/listar'
         const { data } = await api(url)
-        const response = DashboardUsersSchema.safeParse(data)
+        const response = DashboardCategoriesSchema.safeParse(data)
+        console.log(response)
+        console.log(data)
         if(response.success){
             return response.data
         }

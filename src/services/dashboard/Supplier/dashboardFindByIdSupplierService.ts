@@ -7,7 +7,6 @@ export async function dashboardFindByIdSupplierService(id : number) {
         const url = `/proveedores/buscar/${id}`
         const { data } = await api.get(url)
         const response = SupplierByIdSchema.safeParse(data)
-        console.log(response)
         if(response.success){
             return response.data
         }

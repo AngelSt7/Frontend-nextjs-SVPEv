@@ -11,3 +11,4 @@ export const DashboardCategorySchema = z.object({
     activo: z.number()
 });
 
+export const DashboardCategoriesSchema = z.array(DashboardCategorySchema);

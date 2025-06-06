@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
-import { dashboardFindByIdSupplierService } from '@/src/services/dashboard/supplier/dashboardFindByIdSupplierService';
 import GenericModal from '../../ui/GenericModal';
+import { dashboardFindByIdSupplierService } from '@/src/services/dashboard/Supplier/dashboardFindByIdSupplierService';
 
 type EditSupplierWrapperProps = {
   closeModal: () => void

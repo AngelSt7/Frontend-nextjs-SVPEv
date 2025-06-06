@@ -7,9 +7,6 @@ export async function dashboardFindByIdProductService(id : number) {
         const url = `/producto/buscar/${id}`
         const { data } = await api.get(url)
         const response = DashboardProductByIdSchema.safeParse(data)
-
-        console.log(response)
-        console.log(data)
         if(response.success){
             return response.data
         }

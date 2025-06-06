@@ -4,15 +4,14 @@ import { useTableLogic } from "../../../../hooks/dashboard/useTableLogic";
 import { useQuery, keepPreviousData } from "@tanstack/react-query";
 import { TopContent } from "./TopContent";
 import { useTableHandlers } from "@/src/hooks/dashboard/useTableHandlers";
-import { renderMap } from "@/src/utils/format/formatObject";
 import { ColumnsType, mutateProps } from "@/src/types/commonTypes/commonTypes";
 
 const labelMap: Record<string, string> = {
   suppliers: "Proveedor",
   users: "Usuario",
   products: "Producto",
+  categories: "Categoria",
 };
-
 
 type TableComponentProps<T> = {
   openModalCreate: () => void;
@@ -24,6 +23,7 @@ type TableComponentProps<T> = {
   searchableField?: keyof T;
   mutate: mutateProps;
   categoryOptions?: { name: string; uid: string;}[]
+  renderCells?: (mutate: mutateProps, item: T, columnKey: React.Key, openModalEdit: (id: number) => void) => any
 };
 
 export const TableComponent = <T extends { id: number; activo: number }>({
@@ -35,6 +35,7 @@ export const TableComponent = <T extends { id: number; activo: number }>({
   defaultVisibleColumns,
   searchableField,
   categoryOptions,
+  renderCells,
   mutate
 }: TableComponentProps<T>) => {
   const { data = [], isLoading } = useQuery({
@@ -138,7 +139,7 @@ export const TableComponent = <T extends { id: number; activo: number }>({
           <TableRow className="hover:bg-[#f3f4f6]" key={item.id}>
             {(columnKey) => (
               <TableCell>
-                {renderMap[queryKey]?.(mutate, item, columnKey, openModalEdit)}
+                {renderCells?.(mutate, item, columnKey, openModalEdit)}
               </TableCell>
             )}
           </TableRow>
