@@ -8,4 +8,3 @@ export const DashboardDiscountSchema = z.object({
     fecha_final: z.string(),
     activo: z.number()
 });
-

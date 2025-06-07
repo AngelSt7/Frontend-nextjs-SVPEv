@@ -26,7 +26,7 @@ type TableComponentProps<T> = {
   categoryOptions?: { name: string; uid: string;}[]
 };
 
-export const TableComponent = <T extends { id: number; activo: number }>({
+export const TableComponent = <T extends { id: number }>({
   openModalCreate,
   openModalEdit,
   columns,
@@ -55,8 +55,7 @@ export const TableComponent = <T extends { id: number; activo: number }>({
     data: dataToRender,
     defaultVisibleColumns,
     columns,
-    searchableField,
-    statusField: "activo",
+    searchableField
   });
 
   const {

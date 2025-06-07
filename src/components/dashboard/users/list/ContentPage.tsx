@@ -34,7 +34,7 @@ export default function ContentPage({ id, user }: { id: string | undefined, user
             />
 
             <GenericModal user={user} closeModal={closeModal} />
-             {id && user && <EditUserWrapper closeModal={closeModal} id={id} />} 
+            {id && user && <EditUserWrapper closeModal={closeModal} id={id} />}
         </div>
     )
 }
