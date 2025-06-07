@@ -10,6 +10,7 @@ import EditProductWrapper from '../edit/EditProductWrapper'
 import useSubmitMutation from '@/src/hooks/dashboard/useSubmitMutation'
 import { dashboardChangeStatusProductService } from '@/src/services/dashboard/product/dashboardChangeStatusProductService'
 import { AuthUserInfo } from '@/src/types/AuthTypes'
+import { RenderCellProduct } from './RenderCellProduct'
 
 export default function ContentPage({ id, user }: { id: string | undefined, user?: AuthUserInfo }) {
     const { openModalCreate, openModalEdit, closeModal } = useModalUtils()
@@ -30,6 +31,7 @@ export default function ContentPage({ id, user }: { id: string | undefined, user
                 defaultVisibleColumns={["nombre", "precio_venta", "nombre_marca", "nombre_subcategoria", "sku", "min_stock", "activo", "actions"]}
                 searchableField="nombre"
                 mutate={mutate}
+                renderCells={RenderCellProduct}
             />
 
             <GenericModal user={user} closeModal={closeModal} />

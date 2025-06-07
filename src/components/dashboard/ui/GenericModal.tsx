@@ -8,6 +8,8 @@ import { AuthUserInfo } from "@/src/types/AuthTypes";
 import EditProductForm from "../products/edit/EditProductForm";
 import CreateUserForm from "../users/create/CreateUserForm";
 import EditUserForm from "../users/edit/EditUserForm";
+import CreateCategoryForm from "../category/create/CreateCategoryForm";
+import EditCategoryForm from "../category/edit/EditCategoryForm";
 
 type GenericModalProps = {
   user?: AuthUserInfo;
@@ -42,6 +44,7 @@ export default function GenericModal({ user, id, closeModal, defaultValues }: Ge
         case "proveedor": return <CreateSupplierForm closeModal={closeModal} />;
         case "producto": return <CreateProductForm user={user} closeModal={closeModal} />;
         case "usuario": return <CreateUserForm closeModal={closeModal} />;
+        case "categorias": return <CreateCategoryForm closeModal={closeModal} />;
       }
     }
 
@@ -50,6 +53,7 @@ export default function GenericModal({ user, id, closeModal, defaultValues }: Ge
         case "proveedor": return <EditSupplierForm id={id} closeModal={closeModal} defaultValues={defaultValues} />;
         case "producto": return <EditProductForm user={user} closeModal={closeModal} defaultValues={defaultValues} />;
         case "usuario": return <EditUserForm closeModal={closeModal} defaultValues={defaultValues} />;
+        case "categorias": return <EditCategoryForm closeModal={closeModal} defaultValues={defaultValues} />;
       }
     }
     return null;
