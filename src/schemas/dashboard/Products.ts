@@ -10,7 +10,7 @@ export const ProductFormDataSchema = z.object({
   max_stock: z.number(),
   garantia_meses: z.number(),
   id_usuario: z.number(),
-  id_subcategoria: z.number(),
+  id_categoria: z.number(),
   id_marca: z.number(),
   activo: z.number(),
   modelo: z.string().nullish(),
@@ -30,7 +30,6 @@ export const DashboardProductSchema = z.object({
   activo: z.number(),
   sku: z.string(),
   fecha_creacion: z.string(),
-  nombre_subcategoria: z.string(),
   nombre_categoria: z.string(),
   nombre_marca: z.string(),
 });

@@ -9,6 +9,13 @@ export const SubCategories = [
     { id: "8", label: "Cargadores", activo: true },
 ];
 
+export const Categories = [
+    { id: "1", label: "Audio", activo: true },
+    { id: "2", label: "Computadoras", activo: true },
+    { id: "3", label: "Consolas", activo: true },
+    { id: "4", label: "Accesorios", activo: true }
+];
+
 export const Brands = [
     { id: "1", label: "Sony", activo: true },
     { id: "2", label: "Dell", activo: true },

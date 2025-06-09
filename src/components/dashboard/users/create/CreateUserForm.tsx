@@ -8,7 +8,7 @@ import { dashboardCreateUserService } from '@/src/services/dashboard/users/dashb
 type CreateUserFormProps = {
   closeModal: () => void;
 };
-// http://localhost:7575/autenticacion/registro
+
 export default function CreateUserForm({ closeModal }: CreateUserFormProps) {
   const { register, handleSubmit, formState: { errors }, setValue, watch } = useForm<UserFormData>();
   

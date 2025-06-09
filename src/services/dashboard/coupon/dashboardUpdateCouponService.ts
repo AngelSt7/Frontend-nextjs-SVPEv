@@ -1,10 +1,10 @@
 import api from "@/src/axios/axios";
-import { CategoryFormData } from "@/src/types/CategoryTypes";
+import { CouponFormData } from "@/src/types/CouponTypes";
 import { isAxiosError } from "axios";
 
-export async function dashboardUpdatCategoryService(formData: CategoryFormData) {
+export async function dashboardUpdateCouponService(formData: CouponFormData) {
     try {
-        const url = '/categoria/actualizar'
+        const url = '/cupon/actualizar'
         const { data } = await api.put(url, formData)
         return data
     } catch (error) {

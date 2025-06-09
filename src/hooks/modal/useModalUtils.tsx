@@ -1,8 +1,10 @@
+import { useAppStore } from "@/src/store/useAppStore";
 import { useRouter, useSearchParams } from "next/navigation";
 
 export function useModalUtils() {
     const router = useRouter();
     const searchParams = useSearchParams();
+
     const openModalCreate = () => {
         const params = new URLSearchParams(searchParams.toString());
         params.set("action", "create");

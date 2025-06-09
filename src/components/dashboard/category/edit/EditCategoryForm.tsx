@@ -7,7 +7,7 @@ import { useForm } from 'react-hook-form';
 import { AuthUserInfo } from '@/src/types/AuthTypes';
 import { CategoryFormData } from '@/src/types/CategoryTypes';
 import CategoryForm from '../form/CategoryForm';
-import { dashboardUpdatCategoryService } from '@/src/services/dashboard/category/dashboardUpdatCategoryService';
+import { dashboardUpdateCategoryService } from '@/src/services/dashboard/category/dashboardUpdateCategoryService';
 
 type EditCategoryForm = {
   user?: AuthUserInfo;
@@ -20,7 +20,7 @@ export default function EditCategoryForm({ user,closeModal, defaultValues }: Edi
   const { register, handleSubmit, formState: { errors }, watch, setValue } = useForm<CategoryFormData>({defaultValues: defaultValues});
 
   const { mutate } = useSubmitMutation({
-    serviceFunction: dashboardUpdatCategoryService,
+    serviceFunction: dashboardUpdateCategoryService,
     invalidateQuery: [
       ["categories"],
       ["category", defaultValues.id.toString()]

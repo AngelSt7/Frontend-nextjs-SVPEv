@@ -40,6 +40,7 @@ export default function InitPasswordForm({ shouldShowResetPasswordModal, toggleR
                     htmlFor='clave_nueva'
                     label='Nueva clave'
                     Icon={MdLockOutline}
+                    maxLength={20}
                     register={register('clave_nueva', {
                         required: 'Este campo es obligatorio',
                         minLength: {

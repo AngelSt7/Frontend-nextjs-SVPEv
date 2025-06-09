@@ -16,6 +16,7 @@ type InputProps<T extends FieldValues> = {
   errorMessage?: FieldError;
   Icon?: IconType;
   variant?: 'default' | 'floating';
+  maxLength?: number;
 };
 
 export default function Input<T extends FieldValues>({
@@ -26,6 +27,7 @@ export default function Input<T extends FieldValues>({
   errorMessage,
   placeholder,
   Icon,
+  maxLength,
   variant = 'default',
 }: InputProps<T>) {
   const isTextArea = type === 'textarea';
@@ -59,6 +61,7 @@ export default function Input<T extends FieldValues>({
         {isTextArea ? (
           <textarea
             id={inputId}
+            maxLength={maxLength}
             placeholder={variant === 'floating' ? ' ' : placeholder}
             className={inputClasses}
             {...register}
@@ -67,6 +70,7 @@ export default function Input<T extends FieldValues>({
           <input
             id={inputId}
             type={type}
+            maxLength={maxLength}
             placeholder={variant === 'floating' ? ' ' : placeholder}
             autoComplete={autoCompleteValue}
             className={inputClasses}

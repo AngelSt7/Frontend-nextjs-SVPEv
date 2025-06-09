@@ -10,7 +10,7 @@ import { dashboardCreateCategoryService } from '@/src/services/dashboard/categor
 type CreateCategoryFormProps = {
   closeModal: () => void;
 };
-// http://localhost:7575/autenticacion/registro
+
 export default function CreateCategoryForm({ closeModal }: CreateCategoryFormProps) {
   const { register, handleSubmit, formState: { errors }, setValue, watch } = useForm<CategoryFormData>();
   

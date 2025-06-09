@@ -10,7 +10,6 @@ export const Columns: ColumnsType = [
   { name: "Stock Mínimo", uid: "min_stock", sortable: true },
   { name: "Stock Máximo", uid: "max_stock", sortable: true },
   { name: "Garantía (meses)", uid: "garantia_meses" },
-  { name: "Subcategoría", uid: "nombre_subcategoria", sortable: true },
   { name: "Categoría", uid: "nombre_categoria", sortable: true },
   { name: "Marca", uid: "nombre_marca", sortable: true },
   { name: "Activo", uid: "activo" },

@@ -10,7 +10,7 @@ type EditCategoryWrapperProps = {
 export default function EditCategoryWrapper({ closeModal, id }: EditCategoryWrapperProps) {
 
   const { data: category } = useQuery({
-    queryKey: ["category", id],
+    queryKey: ["coupon", id],
     queryFn: () => dashboardFindByIdCategoryService(Number(id)),
     refetchOnWindowFocus: false,
     retry: false,

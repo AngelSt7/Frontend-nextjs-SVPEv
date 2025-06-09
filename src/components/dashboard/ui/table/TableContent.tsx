@@ -11,6 +11,9 @@ const labelMap: Record<string, string> = {
   users: "Usuario",
   products: "Producto",
   categories: "Categoria",
+  discounts: "Descuento",
+  coupons: "Cupón",
+  returns: "Devolución"
 };
 
 type TableComponentProps<T> = {
