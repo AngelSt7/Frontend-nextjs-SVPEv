@@ -1,9 +1,10 @@
 import Input from '@/src/components/ui/Input';
 import { FieldErrors, UseFormRegister, UseFormSetValue, UseFormWatch } from 'react-hook-form';
 import { MdDriveFileRenameOutline, MdOutlineAttachMoney, MdStorage, MdSecurity } from 'react-icons/md';
-import { ProductFormData } from '@/src/types/ProductTypes';
+import { ProductFormData } from '@/src/types/dashboard/ProductTypes';
 import SelectItem from '../../ui/SelectItem';
-import { Brands, SubCategories } from '@/src/utils/constants/provisionalData';
+import { Brands } from '@/src/utils/constants/provisionalData';
+import { useGetCategories } from '@/src/hooks/dashboard/useGetCategories';
 
 type ProductFormProps = {
   register: UseFormRegister<ProductFormData>;
@@ -12,7 +13,10 @@ type ProductFormProps = {
   setValue: UseFormSetValue<ProductFormData>;
 };
 
+
 export default function ProductForm({ register, errors, watch, setValue }: ProductFormProps) {
+  const { data: categoryData = [] } = useGetCategories();
+
   return (
     <div className="flex flex-col gap-3">
       <Input
@@ -20,6 +24,7 @@ export default function ProductForm({ register, errors, watch, setValue }: Produ
         placeholder="Nombre del producto"
         htmlFor="nombre"
         label="Nombre"
+        maxLength={50}
         Icon={MdDriveFileRenameOutline}
         register={register('nombre', {
           required: 'Este campo es obligatorio',
@@ -36,6 +41,7 @@ export default function ProductForm({ register, errors, watch, setValue }: Produ
         placeholder="Escribe la descripción del producto"
         htmlFor="descripcion"
         label="Descripción"
+        maxLength={100}
         register={register('descripcion', {
           required: 'Este campo es obligatorio',
           minLength: {
@@ -169,16 +175,16 @@ export default function ProductForm({ register, errors, watch, setValue }: Produ
 
       <div className="grid grid-cols-2 gap-5">
         <SelectItem
-          name="id_subcategoria"
-          label="Subcategoría"
-          data={SubCategories}
-          register={register('id_subcategoria', {
+          name="id_categoria"
+          label="Categoría"
+          data={categoryData}
+          register={register('id_categoria', {
             required: 'Este campo es obligatorio',
             valueAsNumber: true,
           })}
           watch={watch}
           setValue={setValue}
-          errorMessage={errors.id_subcategoria}
+          errorMessage={errors.id_categoria}
         />
 
         <SelectItem

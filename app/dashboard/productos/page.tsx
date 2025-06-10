@@ -12,7 +12,6 @@ export default async function page({ searchParams }: { searchParams: { id?: stri
   return (
     <div className="bg-white w-[95%] max-w-[1600px] mx-auto my-3 rounded-md font-semibold border">
       <ContentPage user={user} id={id} />
-      {/* <ContentPage id={id} /> */}
     </div>
   )
 }

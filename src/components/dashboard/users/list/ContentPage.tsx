@@ -8,9 +8,10 @@ import useSubmitMutation from '@/src/hooks/dashboard/useSubmitMutation'
 import { AuthUserInfo } from '@/src/types/AuthTypes'
 import { Columns } from './Columns'
 import { dashboardListUserService } from '@/src/services/dashboard/users/dashboardListUserService'
-import { DashboardUser } from '@/src/types/UserTypes'
+import { DashboardUser } from '@/src/types/dashboard/UserTypes'
 import { dashboardChangeStatusUserService } from '@/src/services/dashboard/users/dashboardChangeStatusUserService'
 import EditUserWrapper from '../edit/EditUserWrapper'
+import { RenderCellUser } from './RenderCellUser'
 
 export default function ContentPage({ id, user }: { id: string | undefined, user?: AuthUserInfo }) {
     const { openModalCreate, openModalEdit, closeModal } = useModalUtils()
@@ -31,10 +32,11 @@ export default function ContentPage({ id, user }: { id: string | undefined, user
                 defaultVisibleColumns={["nombre", "dni", "correo", "celular", "activo", "actions"]}
                 searchableField="nombre"
                 mutate={mutate}
+                renderCells={RenderCellUser}
             />
 
             <GenericModal user={user} closeModal={closeModal} />
-             {id && user && <EditUserWrapper closeModal={closeModal} id={id} />} 
+            {id && user && <EditUserWrapper closeModal={closeModal} id={id} />}
         </div>
     )
 }

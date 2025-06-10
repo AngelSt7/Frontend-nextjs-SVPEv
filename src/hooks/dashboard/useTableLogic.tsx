@@ -13,17 +13,18 @@ type useTableLogicProps<T> = {
   defaultVisibleColumns: (keyof T | string)[];
   columns: ColumnDefinition<T>[];
   searchableField?: keyof T;
-  statusField?: keyof T;
 };
+
+
 
 export const useTableLogic = <T extends { id: number | string }>({
   data,
   defaultVisibleColumns,
   columns,
   searchableField,
-  statusField,
 }: useTableLogicProps<T>) => {
 
+  const statusField = "activo" as keyof T;
   const [filterValue, setFilterValue] = useState("");
   const [selectedKeys, setSelectedKeys] = useState<Set<string>>(new Set());
   const [visibleColumns, setVisibleColumns] = useState<"all" | Set<string>>(
@@ -50,6 +51,7 @@ export const useTableLogic = <T extends { id: number | string }>({
 
   const filteredItems = useMemo(() => {
     let filtered = [...data];
+
     if (hasSearchFilter && searchableField) {
       filtered = filtered.filter((item) =>
         String(item[searchableField])
@@ -57,15 +59,21 @@ export const useTableLogic = <T extends { id: number | string }>({
           .includes(filterValue.toLowerCase())
       );
     }
-    if (statusField && statusFilter !== "all") {
+
+    if (statusFilter !== "all") {
       const statusValue = statusFilter === "activo" ? 1 : 0;
-      filtered = filtered.filter(
-        (item) => Number(item[statusField]) === statusValue
-      );
+
+      filtered = filtered.filter((item) => {
+        return statusField in item
+          ? Number(item[statusField]) === statusValue
+          : true;
+      });
     }
+
     return filtered;
-  }, [filterValue, statusFilter, data, searchableField, statusField]);
-  
+  }, [filterValue, statusFilter, data, searchableField]);
+
+
   const pages = Math.ceil(filteredItems.length / rowsPerPage) || 1;
   const items = useMemo(() => {
     const start = (page - 1) * rowsPerPage;

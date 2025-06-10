@@ -1,9 +1,9 @@
 import React from "react";
 import { Chip, User, Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, Button, ChipProps } from "@heroui/react";
 import { VerticalDotsIcon } from "../../ui/icons/VerticalDotsIcon";
-import { DashboardSupplier } from "@/src/types/DashboardTypes";
+import { DashboardSupplier } from "@/src/types/dashboard/DashboardTypes";
 import { ToastDelete } from "../../ui/ToastDelete";
-import { mutateProps } from "@/src/types/commonTypes/commonTypes";
+import { mutateProps } from "@/src/types/dashboard/commonTypes/commonTypes";
 import { statusColorMap } from "@/src/utils/constants/constans";
 
 export const RenderCellSupplier = (mutate: mutateProps, item: DashboardSupplier, columnKey: React.Key, openModalEdit: (id: number) => void) => {

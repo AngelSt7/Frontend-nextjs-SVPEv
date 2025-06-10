@@ -1,8 +1,10 @@
+import { useAppStore } from "@/src/store/useAppStore";
 import { useRouter, useSearchParams } from "next/navigation";
 
 export function useModalUtils() {
     const router = useRouter();
     const searchParams = useSearchParams();
+
     const openModalCreate = () => {
         const params = new URLSearchParams(searchParams.toString());
         params.set("action", "create");
@@ -13,7 +15,6 @@ export function useModalUtils() {
         const params = new URLSearchParams(searchParams.toString());
         params.set("action", "edit");
         params.set("id", Number(id).toString());
-        console.log(params.toString());
         router.replace(`?${params.toString()}`);
     };
 

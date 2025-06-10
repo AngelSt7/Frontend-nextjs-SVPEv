@@ -1,0 +1,71 @@
+import { Chip, Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, Button } from "@heroui/react";
+import { VerticalDotsIcon } from "../../ui/icons/VerticalDotsIcon";
+import { ToastDelete } from "../../ui/ToastDelete";
+import { mutateProps } from "@/src/types/dashboard/commonTypes/commonTypes";
+import { statusColorMap } from "@/src/utils/constants/constans";
+import { DashboardDiscount } from "@/src/types/dashboard/DiscountTypes";
+import { formatDate } from "@/src/utils/format/formatDate";
+
+export const RenderCellDiscount = (mutate: mutateProps, item: DashboardDiscount, columnKey: React.Key, openModalEdit: (id: number) => void) => {
+    const cellValue = item[columnKey as keyof typeof item];
+
+    switch (columnKey) {
+
+        case "porcentaje": return (
+            <p>{`${item.porcentaje.toFixed(2)} %`}</p>
+        )
+
+        case "fecha_inicio":
+            return (
+                <p>{formatDate(item.fecha_inicio.toString())}</p>
+            )
+        case "fecha_final":
+            return (
+                <p>{formatDate(item.fecha_final.toString())}</p>
+            )
+
+        case "activo":
+            const statusText = item.activo === true ? "activo" : "inactivo";
+            return (
+                <Chip
+                    className="capitalize cursor-pointer select-none"
+                    color={statusColorMap[statusText]}
+                    size="sm"
+                    variant="flat"
+                    onDoubleClick={() => mutate({ id: item.id, activo: item.activo ? 1 : 0 })}
+                    role="button"
+                    tabIndex={0}
+                >
+                    {statusText}
+                </Chip>
+
+            );
+        case "actions":
+            return (
+                <div className="relative flex justify-end items-center gap-2">
+                    <Dropdown>
+                        <DropdownTrigger>
+                            <Button isIconOnly size="sm" variant="light">
+                                <VerticalDotsIcon className="text-default-300" />
+                            </Button>
+                        </DropdownTrigger>
+                        <DropdownMenu disabledKeys={item.activo === false ? ["edit", "delete"] : []}>
+                            <DropdownItem key="edit" onPress={() => openModalEdit(item.id)}>Editar</DropdownItem>
+                            <DropdownItem key="delete" className="text-danger" color="danger"
+                                onPress={() => {
+                                    ToastDelete({
+                                        name: item.nombreCategoria!,
+                                        onConfirm: () => mutate({ id: item.id, activo: 1 }),
+                                    })
+                                }}
+                            >
+                                Eliminar
+                            </DropdownItem>
+                        </DropdownMenu>
+                    </Dropdown>
+                </div>
+            );
+        default:
+            return cellValue;
+    }
+};

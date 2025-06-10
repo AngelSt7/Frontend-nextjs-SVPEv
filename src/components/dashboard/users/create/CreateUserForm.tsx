@@ -1,14 +1,14 @@
 import { Button } from '@heroui/react';
 import { useForm } from 'react-hook-form';
 import useSubmitMutation from '@/src/hooks/dashboard/useSubmitMutation';
-import { UserFormData } from '@/src/types/UserTypes';
+import { UserFormData } from '@/src/types/dashboard/UserTypes';
 import UserForm from '../form/UserForm';
 import { dashboardCreateUserService } from '@/src/services/dashboard/users/dashboardCreateUserService';
 
 type CreateUserFormProps = {
   closeModal: () => void;
 };
-// http://localhost:7575/autenticacion/registro
+
 export default function CreateUserForm({ closeModal }: CreateUserFormProps) {
   const { register, handleSubmit, formState: { errors }, setValue, watch } = useForm<UserFormData>();
   

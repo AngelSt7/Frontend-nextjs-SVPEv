@@ -1,5 +1,5 @@
 import Input from '@/src/components/ui/Input';
-import { SupplierFormData } from '@/src/types/DashboardTypes';
+import { SupplierFormData } from '@/src/types/dashboard/DashboardTypes';
 import { FieldErrors, UseFormRegister } from 'react-hook-form';
 import { FaRegIdCard } from 'react-icons/fa';
 import { MdOutlineMail, MdPermIdentity, MdLocationOn, MdPhone, MdPhoneIphone } from 'react-icons/md';
@@ -18,6 +18,7 @@ export default function SupplierForm({ register, errors }: SupplierFormProps) {
         htmlFor="razon_social"
         label="Razón Social"
         Icon={MdPermIdentity}
+        maxLength={100}
         register={register('razon_social', {
           required: 'Este campo es obligatorio',
           minLength: {
@@ -89,6 +90,7 @@ export default function SupplierForm({ register, errors }: SupplierFormProps) {
           htmlFor="direccion"
           label="Dirección"
           Icon={MdLocationOn}
+          maxLength={100}
           register={register('direccion', {
             required: 'Este campo es obligatorio',
             minLength: {
@@ -96,7 +98,7 @@ export default function SupplierForm({ register, errors }: SupplierFormProps) {
               message: 'La dirección debe tener al menos 10 caracteres',
             },
             maxLength: {
-              value: 200,
+              value: 100,
               message: 'La dirección no debe superar los 200 caracteres',
             },
           })}

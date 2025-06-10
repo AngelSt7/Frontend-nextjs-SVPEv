@@ -5,7 +5,7 @@ import {
 } from "react-hook-form";
 
 type SelectItemProps<T extends FieldValues> = {
-    data: { id: string; label: string; activo: boolean; }[];
+    data: { id: string | number; label?: string; nombre?: string; activo: boolean | number; }[];
     register: UseFormRegisterReturn;
     errorMessage?: FieldError | Merge<FieldError, FieldErrorsImpl<any>>;
     name: Path<T>;
@@ -39,10 +39,11 @@ export default function SelectItem<T extends FieldValues>({ data, register, erro
                     placeholder="Selecciona una opción"
                     selectedKeys={selectedValue ? [selectedValue.toString()] : []}
                     onSelectionChange={(keys) => handleChange(Array.from(keys)[0] as string)}
+                    disabledKeys={data.filter(item => item.activo === 0 ? item.id.toString() : null).map(item => item.id.toString())}
                 >
                     {(item) => (
-                        <HeroSelectItem key={item.id}>
-                            {item.label}
+                        <HeroSelectItem key={item.id.toString()}>
+                            {item.label ?? item.nombre}
                         </HeroSelectItem>
                     )}
                 </Select>

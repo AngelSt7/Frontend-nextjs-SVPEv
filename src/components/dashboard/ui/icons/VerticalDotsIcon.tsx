@@ -1,4 +1,4 @@
-import { IconSvgProps } from "@/src/types/commonTypes/commonTypes";
+import { IconSvgProps } from "@/src/types/dashboard/commonTypes/commonTypes";
 
 export const VerticalDotsIcon = ({size = 24, width, height, ...props}: IconSvgProps) => {
   return (

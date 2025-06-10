@@ -4,15 +4,18 @@ import { useTableLogic } from "../../../../hooks/dashboard/useTableLogic";
 import { useQuery, keepPreviousData } from "@tanstack/react-query";
 import { TopContent } from "./TopContent";
 import { useTableHandlers } from "@/src/hooks/dashboard/useTableHandlers";
-import { renderMap } from "@/src/utils/format/formatObject";
-import { ColumnsType, mutateProps } from "@/src/types/commonTypes/commonTypes";
+import { ColumnsType, mutateProps } from "@/src/types/dashboard/commonTypes/commonTypes";
 
 const labelMap: Record<string, string> = {
   suppliers: "Proveedor",
   users: "Usuario",
   products: "Producto",
+  categories: "Categoria",
+  discounts: "Descuento",
+  coupons: "Cupón",
+  returns: "Devolución",
+  stocks: "Stock",
 };
-
 
 type TableComponentProps<T> = {
   openModalCreate: () => void;
@@ -22,11 +25,13 @@ type TableComponentProps<T> = {
   functionService: () => Promise<T[] | undefined>;
   defaultVisibleColumns: (keyof T | string)[];
   searchableField?: keyof T;
-  mutate: mutateProps;
+  mutate?: mutateProps;
   categoryOptions?: { name: string; uid: string;}[]
+  renderCells?: (mutate: mutateProps, item: T, columnKey: React.Key, openModalEdit: (id: number) => void) => any
+  showButton?: boolean
 };
 
-export const TableComponent = <T extends { id: number; activo: number }>({
+export const TableComponent = <T extends { id: number }>({
   openModalCreate,
   openModalEdit,
   columns,
@@ -35,7 +40,9 @@ export const TableComponent = <T extends { id: number; activo: number }>({
   defaultVisibleColumns,
   searchableField,
   categoryOptions,
-  mutate
+  renderCells,
+  mutate,
+  showButton = true
 }: TableComponentProps<T>) => {
   const { data = [], isLoading } = useQuery({
     queryKey: [queryKey],
@@ -55,8 +62,7 @@ export const TableComponent = <T extends { id: number; activo: number }>({
     data: dataToRender,
     defaultVisibleColumns,
     columns,
-    searchableField,
-    statusField: "activo",
+    searchableField
   });
 
   const {
@@ -95,6 +101,7 @@ export const TableComponent = <T extends { id: number; activo: number }>({
       }}
       topContent={
         <TopContent
+          showButton={showButton}
           filterValue={filterValue}
           setFilterValue={setFilterValue}
           onSearchChange={onSearchChange}
@@ -138,7 +145,7 @@ export const TableComponent = <T extends { id: number; activo: number }>({
           <TableRow className="hover:bg-[#f3f4f6]" key={item.id}>
             {(columnKey) => (
               <TableCell>
-                {renderMap[queryKey]?.(mutate, item, columnKey, openModalEdit)}
+                {renderCells?.(mutate!, item, columnKey, openModalEdit)}
               </TableCell>
             )}
           </TableRow>

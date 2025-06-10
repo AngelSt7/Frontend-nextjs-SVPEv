@@ -1,9 +1,9 @@
 import React from "react";
 import { Chip, User, Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, Button } from "@heroui/react";
 import { VerticalDotsIcon } from "../../ui/icons/VerticalDotsIcon";
-import { mutateProps } from "@/src/types/commonTypes/commonTypes";
+import { mutateProps } from "@/src/types/dashboard/commonTypes/commonTypes";
 import { statusColorMap } from "@/src/utils/constants/constans";
-import { DashboardUser } from "@/src/types/UserTypes";
+import { DashboardUser } from "@/src/types/dashboard/UserTypes";
 import { ToastDelete } from "../../ui/ToastDelete";
 
 export const RenderCellUser = (

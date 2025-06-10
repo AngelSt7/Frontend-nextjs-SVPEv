@@ -1,7 +1,6 @@
 import useSubmitMutation from '@/src/hooks/dashboard/useSubmitMutation';
 import { dashboardUpdatProductService } from '@/src/services/dashboard/product/dashboardUpdatProductService';
-import { SupplierById } from '@/src/types/DashboardTypes';
-import { ProductFormData } from '@/src/types/ProductTypes';
+import { DashboardProductById, ProductFormData } from '@/src/types/dashboard/ProductTypes';
 import { Button } from '@heroui/react';
 import { useForm } from 'react-hook-form';
 import ProductForm from '../form/ProductForm';
@@ -10,7 +9,7 @@ import { AuthUserInfo } from '@/src/types/AuthTypes';
 type EditProductForm = {
   user?: AuthUserInfo;
   closeModal: () => void;
-  defaultValues: SupplierById
+  defaultValues: DashboardProductById
 };
 
 export default function EditProductForm({ user,closeModal, defaultValues }: EditProductForm) {

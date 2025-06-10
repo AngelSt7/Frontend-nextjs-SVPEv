@@ -16,6 +16,8 @@ type InputProps<T extends FieldValues> = {
   errorMessage?: FieldError;
   Icon?: IconType;
   variant?: 'default' | 'floating';
+  maxLength?: number;
+  disabled?: boolean;
 };
 
 export default function Input<T extends FieldValues>({
@@ -26,14 +28,15 @@ export default function Input<T extends FieldValues>({
   errorMessage,
   placeholder,
   Icon,
+  maxLength,
+  disabled = false,
   variant = 'default',
 }: InputProps<T>) {
   const isTextArea = type === 'textarea';
 
   const inputClasses = useMemo(() => {
-    const base = `text-sm block w-full text-sm p-2 border border-[#afaeae] bg-[#f4f4f5] hover:bg-[#e4e4e7] rounded-md outline-none focus:ring-1 focus:ring-white/10 ${
-      errorMessage ? 'ring-1 ring-[#d10b30]' : ''
-    }`;
+    const base = `text-sm block w-full p-2 border border-[#afaeae] bg-[#f4f4f5] hover:bg-[#e4e4e7] rounded-md outline-none focus:ring-1 focus:ring-white/10 ${errorMessage ? 'ring-1 ring-[#d10b30]' : ''
+      }`;
 
     return variant === 'floating'
       ? `${base} peer px-3 pt-6 pb-2`
@@ -59,6 +62,7 @@ export default function Input<T extends FieldValues>({
         {isTextArea ? (
           <textarea
             id={inputId}
+            maxLength={maxLength}
             placeholder={variant === 'floating' ? ' ' : placeholder}
             className={inputClasses}
             {...register}
@@ -67,11 +71,20 @@ export default function Input<T extends FieldValues>({
           <input
             id={inputId}
             type={type}
+            disabled={disabled}
+            maxLength={maxLength}
+            min={type === 'number' ? 0 : undefined}
             placeholder={variant === 'floating' ? ' ' : placeholder}
             autoComplete={autoCompleteValue}
             className={inputClasses}
+            onKeyDown={(e) => {
+              if (type === 'number' && (e.key === '-' || e.key === 'e')) {
+                e.preventDefault()
+              }
+            }}
             {...register}
           />
+
         )}
 
         {Icon && !isTextArea && (

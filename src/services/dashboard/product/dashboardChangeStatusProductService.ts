@@ -1,5 +1,5 @@
 import api from "@/src/axios/axios";
-import { DashboardProduct, ProductFormData } from "@/src/types/ProductTypes";
+import { DashboardProduct, ProductFormData } from "@/src/types/dashboard/ProductTypes";
 import { actions } from "@/src/utils/constants/constans";
 import { isAxiosError } from "axios";
 

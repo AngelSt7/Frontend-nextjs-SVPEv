@@ -7,8 +7,6 @@ export async function dashboardListUserService() {
         const url = '/empleado/listar'
         const { data } = await api(url)
         const response = DashboardUsersSchema.safeParse(data)
-        console.log(data)
-        console.log(response)
         if(response.success){
             return response.data
         }

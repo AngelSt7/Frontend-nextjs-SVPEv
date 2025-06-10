@@ -1,5 +1,5 @@
 import api from "@/src/axios/axios";
-import { UserFormData } from "@/src/types/UserTypes";
+import { UserFormData } from "@/src/types/dashboard/UserTypes";
 import { isAxiosError } from "axios";
 
 export async function dashboardCreateUserService(formData: UserFormData) {
