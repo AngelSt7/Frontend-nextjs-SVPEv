@@ -1,11 +1,11 @@
 import useSubmitMutation from '@/src/hooks/dashboard/useSubmitMutation';
-import { SupplierById } from '@/src/types/DashboardTypes';
 import { Button } from '@heroui/react';
 import { useForm } from 'react-hook-form';
 import { AuthUserInfo } from '@/src/types/AuthTypes';
-import { ReturnFormData } from '@/src/types/ReturnTypes';
+import { ReturnFormData } from '@/src/types/dashboard/ReturnTypes';
 import ReturnForm from '../form/ReturnForm';
 import { dashboardUpdateReturnService } from '@/src/services/dashboard/return/dashboardUpdateReturnService';
+import { SupplierById } from '@/src/types/DashboardTypes';
 
 type EditReturnFormProps = {
   user?: AuthUserInfo;

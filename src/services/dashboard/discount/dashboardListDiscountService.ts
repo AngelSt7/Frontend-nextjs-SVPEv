@@ -4,9 +4,10 @@ import { isAxiosError } from "axios";
 
 export async function dashboardListDiscountService() {
     try {
-        const url = '/descuentos/listar'
+        const url = '/descuento/listar'
         const { data } = await api(url)
         const response = DashboardDiscountsSchema.safeParse(data)
+        console.log(response)
         if(response.success){
             return response.data
         }
@@ -16,3 +17,13 @@ export async function dashboardListDiscountService() {
         }
     }
 }
+
+
+// {
+//     "id": 1,
+//     "nombreCategoria": "Computadoras2",
+//     "porcentaje": 20.0,
+//     "fechaInicio": "2025-06-01",
+//     "fechaFinal": "2025-06-30",
+//     "activo": 1
+// }

@@ -4,7 +4,7 @@ import { TableComponent } from '@/src/components/dashboard/ui/table/TableContent
 import { useModalUtils } from '@/src/hooks/modal/useModalUtils'
 import useSubmitMutation from '@/src/hooks/dashboard/useSubmitMutation'
 import { Columns } from './Columns'
-import { DashboardCoupon } from '@/src/types/CouponTypes'
+import { DashboardCoupon } from '@/src/types/dashboard/CouponTypes'
 import { RenderCellCoupons } from './RenderCellCoupons'
 import { dashboardListCouponService } from '@/src/services/dashboard/coupon/dashboardListCouponService'
 import GenericModal from '../../ui/GenericModal'

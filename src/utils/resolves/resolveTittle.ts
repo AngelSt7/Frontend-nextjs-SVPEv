@@ -11,7 +11,7 @@ export const Tittles: Record<string, string> = {
 };
 
 // Mapear entidades
-type Entity = 'proveedor' | 'producto' | 'usuario' | 'categoria' | 'descuento' | 'cupón' | 'devolución_producto';
+type Entity = 'proveedor' | 'producto' | 'usuario' | 'categoria' | 'descuento' | 'cupón' | 'devolución_producto' | 'stock';
 
 // ruta => singular
 export const pluralToSingular: Record<string, Entity> = {
@@ -21,5 +21,6 @@ export const pluralToSingular: Record<string, Entity> = {
     categorias: "categoria",
     descuentos: "descuento",
     cupones: "cupón",
-    devoluciones_productos: "devolución_producto"
+    devoluciones_productos: "devolución_producto",
+    stock: "stock"
 };

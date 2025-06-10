@@ -1,5 +1,5 @@
 import api from "@/src/axios/axios";
-import { ReturnFormData } from "@/src/types/ReturnTypes";
+import { ReturnFormData } from "@/src/types/dashboard/ReturnTypes";
 import { isAxiosError } from "axios";
 
 export async function dashboardUpdateReturnService(formData: ReturnFormData) {

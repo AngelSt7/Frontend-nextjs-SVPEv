@@ -1,5 +1,5 @@
 import api from "@/src/axios/axios";
-import { CouponFormData } from "@/src/types/CouponTypes";
+import { CouponFormData } from "@/src/types/dashboard/CouponTypes";
 import { isAxiosError } from "axios";
 
 export async function dashboardCreateCouponService(formData: CouponFormData) {

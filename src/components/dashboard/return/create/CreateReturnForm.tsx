@@ -2,7 +2,7 @@ import { Button } from '@heroui/react';
 import { useForm } from 'react-hook-form';
 import useSubmitMutation from '@/src/hooks/dashboard/useSubmitMutation';
 import ReturnForm from '../form/ReturnForm';
-import { ReturnFormData } from '@/src/types/ReturnTypes';
+import { ReturnFormData } from '@/src/types/dashboard/ReturnTypes';
 import { dashboardCreateReturnService } from '@/src/services/dashboard/return/dashboardCreateReturnService';
 
 type CreateReturnFormProps = {

@@ -1,10 +1,10 @@
 import useSubmitMutation from '@/src/hooks/dashboard/useSubmitMutation';
-import { SupplierById } from '@/src/types/DashboardTypes';
+import { SupplierById } from '@/src/types/dashboard/DashboardTypes';
 import { Button } from '@heroui/react';
 import { useForm } from 'react-hook-form';
 import { AuthUserInfo } from '@/src/types/AuthTypes';
 import CouponForm from '../form/CouponForm';
-import { CouponFormData } from '@/src/types/CouponTypes';
+import { CouponFormData } from '@/src/types/dashboard/CouponTypes';
 import { dashboardUpdateCouponService } from '@/src/services/dashboard/coupon/dashboardUpdateCouponService';
 
 type EditCouponFormProps = {

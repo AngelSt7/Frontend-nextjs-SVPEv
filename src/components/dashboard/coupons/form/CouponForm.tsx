@@ -1,5 +1,5 @@
 import Input from '@/src/components/ui/Input';
-import { CouponFormData } from '@/src/types/CouponTypes';
+import { CouponFormData } from '@/src/types/dashboard/CouponTypes';
 import { FieldErrors, UseFormRegister, UseFormSetValue, UseFormWatch } from 'react-hook-form';
 import { MdDiscount, MdPermIdentity } from 'react-icons/md';
 import SelectDate from '../../category/create/SelectDate';

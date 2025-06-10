@@ -4,7 +4,7 @@ import { useTableLogic } from "../../../../hooks/dashboard/useTableLogic";
 import { useQuery, keepPreviousData } from "@tanstack/react-query";
 import { TopContent } from "./TopContent";
 import { useTableHandlers } from "@/src/hooks/dashboard/useTableHandlers";
-import { ColumnsType, mutateProps } from "@/src/types/commonTypes/commonTypes";
+import { ColumnsType, mutateProps } from "@/src/types/dashboard/commonTypes/commonTypes";
 
 const labelMap: Record<string, string> = {
   suppliers: "Proveedor",
@@ -13,7 +13,8 @@ const labelMap: Record<string, string> = {
   categories: "Categoria",
   discounts: "Descuento",
   coupons: "Cupón",
-  returns: "Devolución"
+  returns: "Devolución",
+  stocks: "Stock",
 };
 
 type TableComponentProps<T> = {
@@ -24,9 +25,10 @@ type TableComponentProps<T> = {
   functionService: () => Promise<T[] | undefined>;
   defaultVisibleColumns: (keyof T | string)[];
   searchableField?: keyof T;
-  mutate: mutateProps;
+  mutate?: mutateProps;
   categoryOptions?: { name: string; uid: string;}[]
   renderCells?: (mutate: mutateProps, item: T, columnKey: React.Key, openModalEdit: (id: number) => void) => any
+  showButton?: boolean
 };
 
 export const TableComponent = <T extends { id: number }>({
@@ -39,7 +41,8 @@ export const TableComponent = <T extends { id: number }>({
   searchableField,
   categoryOptions,
   renderCells,
-  mutate
+  mutate,
+  showButton = true
 }: TableComponentProps<T>) => {
   const { data = [], isLoading } = useQuery({
     queryKey: [queryKey],
@@ -98,6 +101,7 @@ export const TableComponent = <T extends { id: number }>({
       }}
       topContent={
         <TopContent
+          showButton={showButton}
           filterValue={filterValue}
           setFilterValue={setFilterValue}
           onSearchChange={onSearchChange}
@@ -141,7 +145,7 @@ export const TableComponent = <T extends { id: number }>({
           <TableRow className="hover:bg-[#f3f4f6]" key={item.id}>
             {(columnKey) => (
               <TableCell>
-                {renderCells?.(mutate, item, columnKey, openModalEdit)}
+                {renderCells?.(mutate!, item, columnKey, openModalEdit)}
               </TableCell>
             )}
           </TableRow>

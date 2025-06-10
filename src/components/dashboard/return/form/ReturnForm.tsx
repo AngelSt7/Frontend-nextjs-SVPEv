@@ -4,7 +4,7 @@ import { MdDiscount, MdPermIdentity } from 'react-icons/md';
 import SelectDate from '../../category/create/SelectDate';
 import { useGetCategories } from '@/src/hooks/dashboard/useGetCategories';
 import SelectItem from '../../ui/SelectItem';
-import { ReturnFormData } from '@/src/types/ReturnTypes';
+import { ReturnFormData } from '@/src/types/dashboard/ReturnTypes';
 import { useGetSuppliers } from '@/src/hooks/dashboard/useGetSuppliers';
 
 type ReturnFormProps = {

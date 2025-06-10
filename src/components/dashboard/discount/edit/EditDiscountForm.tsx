@@ -1,9 +1,9 @@
 import useSubmitMutation from '@/src/hooks/dashboard/useSubmitMutation';
-import { SupplierById } from '@/src/types/DashboardTypes';
+import { SupplierById } from '@/src/types/dashboard/DashboardTypes';
 import { Button } from '@heroui/react';
 import { useForm } from 'react-hook-form';
 import { AuthUserInfo } from '@/src/types/AuthTypes';
-import { DiscountFormData } from '@/src/types/DiscountTypes';
+import { DiscountFormData } from '@/src/types/dashboard/DiscountTypes';
 import DiscountForm from '../form/DiscountForm';
 import { dashboardUpdateDiscountService } from '@/src/services/dashboard/discount/dashboardUpdateDiscountService';
 

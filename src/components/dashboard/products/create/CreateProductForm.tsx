@@ -1,7 +1,7 @@
 import { Button } from '@heroui/react';
 import { useForm } from 'react-hook-form';
 import ProductForm from '../form/ProductForm';
-import { ProductFormData } from '@/src/types/ProductTypes';
+import { ProductFormData } from '@/src/types/dashboard/ProductTypes';
 import useSubmitMutation from '@/src/hooks/dashboard/useSubmitMutation';
 import { dashboardProductCreateProductService } from '@/src/services/dashboard/product/dashboardProductCreateProductService';
 import { AuthUserInfo } from '@/src/types/AuthTypes';

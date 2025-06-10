@@ -1,6 +1,6 @@
 import api from "@/src/axios/axios";
-import { CategoryFormData, DashboardCategory } from "@/src/types/CategoryTypes";
-import { DashboardDiscount } from "@/src/types/DiscountTypes";
+import { CategoryFormData, DashboardCategory } from "@/src/types/dashboard/CategoryTypes";
+import { DashboardDiscount } from "@/src/types/dashboard/DiscountTypes";
 import { actions } from "@/src/utils/constants/constans";
 import { isAxiosError } from "axios";
 

@@ -2,7 +2,7 @@ import { Button } from '@heroui/react';
 import { useForm } from 'react-hook-form';
 import { dashboardCreateSupplierService } from '@/src/services/dashboard/supplier/dashboardCreateSupplierService';
 import SupplierForm from '../form/SupplierForm';
-import { SupplierFormData } from '@/src/types/DashboardTypes';
+import { SupplierFormData } from '@/src/types/dashboard/DashboardTypes';
 import useSubmitMutation from '@/src/hooks/dashboard/useSubmitMutation';
 
 type CreateSupplierFormProps = {

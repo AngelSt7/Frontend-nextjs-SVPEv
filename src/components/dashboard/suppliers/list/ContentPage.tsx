@@ -5,7 +5,7 @@ import { useModalUtils } from '@/src/hooks/modal/useModalUtils'
 import EditSupplierWrapper from '../edit/EditSupplierWrapper'
 import GenericModal from '../../ui/GenericModal'
 import { Columns } from './Columns'
-import { DashboardSupplier } from "@/src/types/DashboardTypes"
+import { DashboardSupplier } from "@/src/types/dashboard/DashboardTypes"
 import useSubmitMutation from '@/src/hooks/dashboard/useSubmitMutation'
 import { dashboardChangeStatusSupplierService } from '@/src/services/dashboard/supplier/dashboardChangeStatusSupplierService'
 import { RenderCellSupplier } from './RenderCellSupplier'

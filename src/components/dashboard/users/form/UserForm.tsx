@@ -1,5 +1,5 @@
 import Input from '@/src/components/ui/Input';
-import { UserFormData } from '@/src/types/UserTypes';
+import { UserFormData } from '@/src/types/dashboard/UserTypes';
 import { FieldErrors, UseFormRegister, UseFormSetValue, UseFormWatch } from 'react-hook-form';
 import { FaRegIdCard } from 'react-icons/fa';
 import { MdOutlineMail, MdPermIdentity, MdPhoneIphone } from 'react-icons/md';

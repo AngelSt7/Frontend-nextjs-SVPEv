@@ -1,10 +1,10 @@
 import { Chip, Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, Button } from "@heroui/react";
 import { VerticalDotsIcon } from "../../ui/icons/VerticalDotsIcon";
 import { ToastDelete } from "../../ui/ToastDelete";
-import { mutateProps } from "@/src/types/commonTypes/commonTypes";
+import { mutateProps } from "@/src/types/dashboard/commonTypes/commonTypes";
 import { statusColorMap } from "@/src/utils/constants/constans";
 import { formatDate } from "@/src/utils/format/formatDate";
-import { DashboardReturn } from "@/src/types/ReturnTypes";
+import { DashboardReturn } from "@/src/types/dashboard/ReturnTypes";
 import { useModalUtils } from "@/src/hooks/modal/useModalUtils";
 import { useAppStore } from "@/src/store/useAppStore";
 

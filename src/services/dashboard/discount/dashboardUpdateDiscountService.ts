@@ -1,5 +1,5 @@
 import api from "@/src/axios/axios";
-import { DiscountFormData } from "@/src/types/DiscountTypes";
+import { DiscountFormData } from "@/src/types/dashboard/DiscountTypes";
 import { isAxiosError } from "axios";
 
 export async function dashboardUpdateDiscountService(formData: DiscountFormData) {

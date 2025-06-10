@@ -16,6 +16,7 @@ import CreateCouponForm from "../coupons/create/CreateCouponForm";
 import EditCouponForm from "../coupons/edit/EditCouponForm";
 import CreateReturnForm from "../return/create/CreateReturnForm";
 import EditReturnForm from "../return/edit/EditReturnForm";
+import CreateStockForm from "../stock/create/CreateStockForm";
 
 type GenericModalProps = {
   user?: AuthUserInfo;
@@ -57,6 +58,7 @@ export default function GenericModal({ user, id, closeModal, defaultValues, idRe
         case "categoria": return <CreateCategoryForm closeModal={closeModal} />;
         case "cupón": return <CreateCouponForm closeModal={closeModal} />;
         case "devolución_producto":  return  <CreateReturnForm closeModal={closeModal} idReturnProduct={idReturnProduct!} />
+        case "stock": return  <CreateStockForm user={user} closeModal={closeModal} />
       }
     }
 

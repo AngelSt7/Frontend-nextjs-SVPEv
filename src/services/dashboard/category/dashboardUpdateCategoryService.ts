@@ -1,5 +1,5 @@
 import api from "@/src/axios/axios";
-import { CategoryFormData } from "@/src/types/CategoryTypes";
+import { CategoryFormData } from "@/src/types/dashboard/CategoryTypes";
 import { isAxiosError } from "axios";
 
 export async function dashboardUpdateCategoryService(formData: CategoryFormData) {

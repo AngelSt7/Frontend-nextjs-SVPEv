@@ -1,5 +1,5 @@
 import api from "@/src/axios/axios";
-import { SupplierFormData } from "@/src/types/DashboardTypes";
+import { SupplierFormData } from "@/src/types/dashboard/DashboardTypes";
 import { isAxiosError } from "axios";
 
 export async function dashboardUpdateSupplierService(formData: SupplierFormData) {

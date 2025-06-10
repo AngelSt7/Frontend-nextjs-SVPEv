@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import useSubmitMutation from '@/src/hooks/dashboard/useSubmitMutation';
 
 import CouponForm from '../form/CouponForm';
-import { CouponFormData } from '@/src/types/CouponTypes';
+import { CouponFormData } from '@/src/types/dashboard/CouponTypes';
 import { dashboardCreateCouponService } from '@/src/services/dashboard/coupon/dashboardCreateCouponService';
 
 type CreateCuoponFormProps = {

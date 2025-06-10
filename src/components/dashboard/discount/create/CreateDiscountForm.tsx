@@ -1,34 +1,30 @@
 import { Button } from '@heroui/react';
 import { useForm } from 'react-hook-form';
 import useSubmitMutation from '@/src/hooks/dashboard/useSubmitMutation';
-import { DiscountFormData } from '@/src/types/DiscountTypes';
+import { DiscountFormData } from '@/src/types/dashboard/DiscountTypes';
 import DiscountForm from '../form/DiscountForm';
 import { dashboardCreateDiscountService } from '@/src/services/dashboard/discount/dashboardCreateDiscountService';
-import { today, getLocalTimeZone } from "@internationalized/date";
-
 
 type CreateDiscountFormProps = {
   closeModal: () => void;
 };
 
 export default function CreateDiscountForm({ closeModal }: CreateDiscountFormProps) {
-  const hoy = today(getLocalTimeZone());
-const unaSemanaDespues = hoy.add({ weeks: 1 });
   const { register, handleSubmit, formState: { errors }, setValue, watch } = useForm<DiscountFormData>({
     defaultValues: {
-      fecha_final: '',
+      fecha_fin: '',
       fecha_inicio: '',
     }
   });
   
   const { mutate } = useSubmitMutation({
     serviceFunction: dashboardCreateDiscountService,
-    invalidateQuery: ['users'],
+    invalidateQuery: ['discounts'],
     onSuccessCallback: closeModal,
-    message: 'Usuario registrado exitosamente'
+    message: 'Descuento registrado exitosamente'
   })
-
-  const onSubmit = (data: DiscountFormData) => console.log(data);
+// mutate(data);
+  const onSubmit = (data: DiscountFormData) => mutate(data);
 
   return (
     <form
@@ -39,7 +35,7 @@ const unaSemanaDespues = hoy.add({ weeks: 1 });
 
       <div className="w-full flex gap-4 justify-end mt-3">
         <Button color='danger' variant='flat' onPress={closeModal}>Cancelar</Button>
-        <Button color='success' type='submit'>Registrar Usuario</Button>
+        <Button color='success' type='submit'>Registrar Descuento</Button>
       </div>
     </form>
   );

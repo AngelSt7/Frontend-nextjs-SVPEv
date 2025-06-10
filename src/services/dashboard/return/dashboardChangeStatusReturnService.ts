@@ -1,5 +1,5 @@
 import api from "@/src/axios/axios";
-import { DashboardReturn } from "@/src/types/ReturnTypes";
+import { DashboardReturn } from "@/src/types/dashboard/ReturnTypes";
 import { actions } from "@/src/utils/constants/constans";
 import { isAxiosError } from "axios";
 

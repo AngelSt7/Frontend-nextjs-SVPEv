@@ -23,7 +23,6 @@ export const DashboardProductSchema = z.object({
   nombre: z.string(),
   descripcion: z.string(),
   precio_venta: z.number(),
-  precio_compra: z.number(),
   min_stock: z.number(),
   max_stock: z.number(),
   garantia_meses: z.number(),
@@ -35,8 +34,8 @@ export const DashboardProductSchema = z.object({
 });
 
 export const DashboardProductByIdSchema = ProductFormDataSchema.extend({
-  id: z.number()
-}).omit({ id_usuario: true })
+  id: z.number(),
+}).omit({ id_usuario: true, precio_compra: true });
 
 // El conjunto de elementos del dashboard
 export const DashboardProductsSchema = z.array(DashboardProductSchema)

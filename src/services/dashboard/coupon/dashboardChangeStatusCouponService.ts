@@ -1,5 +1,5 @@
 import api from "@/src/axios/axios";
-import { DashboardCoupon } from "@/src/types/CouponTypes";
+import { DashboardCoupon } from "@/src/types/dashboard/CouponTypes";
 import { actions } from "@/src/utils/constants/constans";
 import { isAxiosError } from "axios";
 

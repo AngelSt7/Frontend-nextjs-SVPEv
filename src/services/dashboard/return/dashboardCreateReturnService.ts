@@ -1,6 +1,6 @@
 import api from "@/src/axios/axios";
-import { CategoryFormData } from "@/src/types/CategoryTypes";
-import { ReturnFormData } from "@/src/types/ReturnTypes";
+import { CategoryFormData } from "@/src/types/dashboard/CategoryTypes";
+import { ReturnFormData } from "@/src/types/dashboard/ReturnTypes";
 import { isAxiosError } from "axios";
 
 export async function dashboardCreateReturnService(formData: ReturnFormData) {

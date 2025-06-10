@@ -3,7 +3,7 @@ import { SearchIcon } from "../icons/SearchIcon";
 import { ChevronDownIcon } from "../icons/ChevronDownIcon";
 import { PlusIcon } from "../icons/PlusIcon";
 import { capitalize } from "@/src/utils/format/formatText";
-import { ColumnsType } from "@/src/types/commonTypes/commonTypes";
+import { ColumnsType } from "@/src/types/dashboard/commonTypes/commonTypes";
 import { ChangeEvent, Dispatch, SetStateAction } from "react";
 
 interface TopContentProps {
@@ -18,12 +18,13 @@ interface TopContentProps {
   setVisibleColumns: Dispatch<SetStateAction<"all" | Set<string>>>;
   onRowsPerPageChange: (e: ChangeEvent<HTMLSelectElement>) => void;
   total: number;
-  statusOptions: { name: string; uid: string;}[],
+  statusOptions: { name: string; uid: string; }[],
   columns: ColumnsType,
-  messageButton: string
+  messageButton: string,
+  showButton?: boolean
 }
 
-export const TopContent: React.FC<TopContentProps> = ({ filterValue, onSearchChange, onClear, statusFilter, setStatusFilter, visibleColumns, setVisibleColumns, onRowsPerPageChange, total, openModalCreate, statusOptions, columns, messageButton }) => {
+export const TopContent: React.FC<TopContentProps> = ({ filterValue, onSearchChange, onClear, statusFilter, setStatusFilter, visibleColumns, setVisibleColumns, onRowsPerPageChange, total, openModalCreate, statusOptions, columns, messageButton, showButton = true }) => {
   return (
     <div className="flex flex-col gap-4 p-4">
       <div className="flex justify-between gap-3 items-end">
@@ -90,25 +91,29 @@ export const TopContent: React.FC<TopContentProps> = ({ filterValue, onSearchCha
               ))}
             </DropdownMenu>
           </Dropdown>
-          <Button className="bg-[#2c2c2c] text-white shadow-lg" endContent={<PlusIcon />} onPress={openModalCreate}>
-            {`Agregar ${messageButton}`}
-          </Button>
+          {showButton &&
+            <Button className="bg-[#2c2c2c] text-white shadow-lg" endContent={<PlusIcon />} onPress={openModalCreate}>
+              {`Agregar ${messageButton}`}
+            </Button>
+          }
         </div>
       </div>
-      <div className="flex justify-between items-center">
-        <span className="text-default-400 text-small">Total {total} proveedores</span>
-        <label className="flex items-center text-default-400 text-small">
-          Registros por pagina:
-          <select
-            className="bg-transparent outline-none text-default-400 text-small"
-            onChange={onRowsPerPageChange}
-          >
-            <option value="5">5</option>
-            <option value="10">10</option>
-            <option value="15">15</option>
-          </select>
-        </label>
-      </div>
+      {showButton &&
+        <div className="flex justify-between items-center">
+          <span className="text-default-400 text-small">Total {total} proveedores</span>
+          <label className="flex items-center text-default-400 text-small">
+            Registros por pagina:
+            <select
+              className="bg-transparent outline-none text-default-400 text-small"
+              onChange={onRowsPerPageChange}
+            >
+              <option value="5">5</option>
+              <option value="10">10</option>
+              <option value="15">15</option>
+            </select>
+          </label>
+        </div>
+      }
     </div>
   );
 };

@@ -1,4 +1,4 @@
-import { ColumnsType } from "@/src/types/commonTypes/commonTypes";
+import { ColumnsType } from "@/src/types/dashboard/commonTypes/commonTypes";
 
 export const Columns: ColumnsType = [
   { name: "ID Categoría", uid: "id_categoria", sortable: true },

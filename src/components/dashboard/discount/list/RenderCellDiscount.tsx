@@ -1,9 +1,9 @@
 import { Chip, Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, Button } from "@heroui/react";
 import { VerticalDotsIcon } from "../../ui/icons/VerticalDotsIcon";
 import { ToastDelete } from "../../ui/ToastDelete";
-import { mutateProps } from "@/src/types/commonTypes/commonTypes";
+import { mutateProps } from "@/src/types/dashboard/commonTypes/commonTypes";
 import { statusColorMap } from "@/src/utils/constants/constans";
-import { DashboardDiscount } from "@/src/types/DiscountTypes";
+import { DashboardDiscount } from "@/src/types/dashboard/DiscountTypes";
 import { formatDate } from "@/src/utils/format/formatDate";
 
 export const RenderCellDiscount = (mutate: mutateProps, item: DashboardDiscount, columnKey: React.Key, openModalEdit: (id: number) => void) => {
@@ -11,24 +11,28 @@ export const RenderCellDiscount = (mutate: mutateProps, item: DashboardDiscount,
 
     switch (columnKey) {
 
+        case "porcentaje": return (
+            <p>{`${item.porcentaje.toFixed(2)} %`}</p>
+        )
+
         case "fecha_inicio":
             return (
-                <p>{formatDate(item.fecha_inicio)}</p>
+                <p>{formatDate(item.fecha_inicio.toString())}</p>
             )
         case "fecha_final":
             return (
-                <p>{formatDate(item.fecha_final)}</p>
+                <p>{formatDate(item.fecha_final.toString())}</p>
             )
 
         case "activo":
-            const statusText = item.activo === 1 ? "activo" : "inactivo";
+            const statusText = item.activo === true ? "activo" : "inactivo";
             return (
                 <Chip
                     className="capitalize cursor-pointer select-none"
                     color={statusColorMap[statusText]}
                     size="sm"
                     variant="flat"
-                    onDoubleClick={() => mutate({ id: item.id, activo: item.activo })}
+                    onDoubleClick={() => mutate({ id: item.id, activo: item.activo ? 1 : 0 })}
                     role="button"
                     tabIndex={0}
                 >
@@ -45,12 +49,12 @@ export const RenderCellDiscount = (mutate: mutateProps, item: DashboardDiscount,
                                 <VerticalDotsIcon className="text-default-300" />
                             </Button>
                         </DropdownTrigger>
-                        <DropdownMenu disabledKeys={item.activo === 0 ? ["edit", "delete"] : []}>
+                        <DropdownMenu disabledKeys={item.activo === false ? ["edit", "delete"] : []}>
                             <DropdownItem key="edit" onPress={() => openModalEdit(item.id)}>Editar</DropdownItem>
                             <DropdownItem key="delete" className="text-danger" color="danger"
                                 onPress={() => {
                                     ToastDelete({
-                                        name: item.categoria,
+                                        name: item.nombreCategoria!,
                                         onConfirm: () => mutate({ id: item.id, activo: 1 }),
                                     })
                                 }}

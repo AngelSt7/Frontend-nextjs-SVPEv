@@ -6,7 +6,7 @@ import GenericModal from '../../ui/GenericModal'
 import useSubmitMutation from '@/src/hooks/dashboard/useSubmitMutation'
 import { Columns } from './Columns'
 import { RenderCellDiscount } from './RenderCellDiscount'
-import { DashboardDiscount } from '@/src/types/DiscountTypes'
+import { DashboardDiscount } from '@/src/types/dashboard/DiscountTypes'
 import EditDiscountWrapper from '../edit/EditDiscountWrapper'
 import { dashboardListDiscountService } from '@/src/services/dashboard/discount/dashboardListDiscountService'
 import { dashboardChangeStatusCategoryService } from '@/src/services/dashboard/category/dashboardChangeStatusCategoryService'
@@ -27,8 +27,8 @@ export default function ContentPage({ id }: { id: string | undefined }) {
                 columns={Columns}
                 queryKey="discounts"
                 functionService={dashboardListDiscountService}
-                defaultVisibleColumns={["categoria", "descuento", "fecha_inicio", "fecha_final", "activo", "actions"]}
-                searchableField="categoria"
+                defaultVisibleColumns={["nombreCategoria", "porcentaje", "fecha_inicio", "fecha_final", "activo", "actions"]}
+                searchableField="nombreCategoria"
                 mutate={mutate}
                 renderCells={RenderCellDiscount}
             />

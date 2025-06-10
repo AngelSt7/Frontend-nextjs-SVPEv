@@ -1,5 +1,5 @@
 import Input from '@/src/components/ui/Input';
-import { SupplierFormData } from '@/src/types/DashboardTypes';
+import { SupplierFormData } from '@/src/types/dashboard/DashboardTypes';
 import { FieldErrors, UseFormRegister } from 'react-hook-form';
 import { FaRegIdCard } from 'react-icons/fa';
 import { MdOutlineMail, MdPermIdentity, MdLocationOn, MdPhone, MdPhoneIphone } from 'react-icons/md';

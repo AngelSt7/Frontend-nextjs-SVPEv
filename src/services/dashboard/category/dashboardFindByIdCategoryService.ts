@@ -1,12 +1,12 @@
 import api from "@/src/axios/axios";
-import { DashboardCategorySchema } from "@/src/schemas/dashboard/Category";
+import { DashboardCategoryByIdSchema, DashboardCategorySchema } from "@/src/schemas/dashboard/Category";
 import { isAxiosError } from "axios";
 
 export async function dashboardFindByIdCategoryService(id : number) {
     try {
         const url = `/categoria/buscar/${id}`
         const { data } = await api.get(url)
-        const response = DashboardCategorySchema.safeParse(data)
+        const response = DashboardCategoryByIdSchema.safeParse(data) 
         if(response.success){
             return response.data
         }
