@@ -1,26 +1,27 @@
 import { Button } from '@heroui/react';
 import { useForm } from 'react-hook-form';
 import useSubmitMutation from '@/src/hooks/dashboard/useSubmitMutation';
-import ReturnForm from '../form/ReturnForm';
-import { ReturnFormData } from '@/src/types/dashboard/ReturnTypes';
-import { dashboardCreateReturnService } from '@/src/services/dashboard/return/dashboardCreateReturnService';
+import ReturnForm from '../form/ReturnProductForm';
+import { dashboardCreateReturnProductService } from '@/src/services/dashboard/return/dashboardCreateReturnService';
+import { ReturnProductFormData } from '@/src/types/dashboard/ReturnProductTypes';
+import { AuthUserInfo } from '@/src/types/AuthTypes';
 
 type CreateReturnFormProps = {
   closeModal: () => void;
-  idReturnProduct: ReturnFormData['id_producto'];
+  user?: AuthUserInfo
 };
 
-export default function CreateReturnForm({ closeModal, idReturnProduct }: CreateReturnFormProps) {
-  const { register, handleSubmit, formState: { errors }, setValue, watch } = useForm<ReturnFormData>();
+export default function CreateReturnProductForm({ closeModal, user }: CreateReturnFormProps) {
+  const { register, handleSubmit, formState: { errors }, setValue, watch } = useForm<ReturnProductFormData>();
   
   const { mutate } = useSubmitMutation({
-    serviceFunction: dashboardCreateReturnService,
-    invalidateQuery: ['returns'],
+    serviceFunction: dashboardCreateReturnProductService,
+    invalidateQuery: ['returnsProducts'],
     onSuccessCallback: closeModal,
     message: 'Devolucion registrada exitosamente'
   })
 
-  const onSubmit = (data: ReturnFormData) => mutate({...data, activo: 1, id_producto: Number(idReturnProduct)});
+  const onSubmit = (data: ReturnProductFormData) => mutate({...data, id_usuario: user!.id});
 
   return (
     <form

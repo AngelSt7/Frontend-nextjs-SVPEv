@@ -1,21 +1,25 @@
 import useSubmitMutation from '@/src/hooks/dashboard/useSubmitMutation';
-import { SupplierById } from '@/src/types/dashboard/DashboardTypes';
 import { Button } from '@heroui/react';
 import { useForm } from 'react-hook-form';
 import { AuthUserInfo } from '@/src/types/AuthTypes';
-import { DiscountFormData } from '@/src/types/dashboard/DiscountTypes';
+import { DashboardDiscountById, DiscountFormData } from '@/src/types/dashboard/DiscountTypes';
 import DiscountForm from '../form/DiscountForm';
 import { dashboardUpdateDiscountService } from '@/src/services/dashboard/discount/dashboardUpdateDiscountService';
 
 type EditDiscountForm = {
   user?: AuthUserInfo;
   closeModal: () => void;
-  defaultValues: SupplierById
+  defaultValues: DashboardDiscountById
 };
 
-export default function EditDiscountForm({ user,closeModal, defaultValues }: EditDiscountForm) {
-
-  const { register, handleSubmit, formState: { errors }, watch, setValue } = useForm<DiscountFormData>({defaultValues: defaultValues});
+export default function EditDiscountForm({ user, closeModal, defaultValues }: EditDiscountForm) {
+  const { register, handleSubmit, formState: { errors }, watch, setValue } = useForm<DiscountFormData>({
+    defaultValues: {
+      ...defaultValues,
+      fecha_inicio: defaultValues.fechaInicio,
+      fecha_fin: defaultValues.fechaFinal
+    }
+  });
 
   const { mutate } = useSubmitMutation({
     serviceFunction: dashboardUpdateDiscountService,

@@ -16,7 +16,6 @@ export default function EditDiscountWrapper({ closeModal, id }: EditDiscountWrap
     retry: false,
     enabled: id !== undefined,
   });
-
   if (category) return <GenericModal id={id} closeModal={closeModal} defaultValues={category} />;
 }
 

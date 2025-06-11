@@ -14,9 +14,11 @@ import CreateDiscountForm from "../discount/create/CreateDiscountForm";
 import EditDiscountForm from "../discount/edit/EditDiscountForm";
 import CreateCouponForm from "../coupons/create/CreateCouponForm";
 import EditCouponForm from "../coupons/edit/EditCouponForm";
-import CreateReturnForm from "../return/create/CreateReturnForm";
-import EditReturnForm from "../return/edit/EditReturnForm";
 import CreateStockForm from "../stock/create/CreateStockForm";
+import EditStockForm from "../stock/edit/EditStockForm";
+import CreateReturnForm from "../return-product/create/CreateReturnProductForm";
+import EditReturnForm from "../return-product/edit/EditReturnProductForm";
+import CreateReturnProductForm from "../return-product/create/CreateReturnProductForm";
 
 type GenericModalProps = {
   user?: AuthUserInfo;
@@ -57,7 +59,7 @@ export default function GenericModal({ user, id, closeModal, defaultValues, idRe
         case "descuento": return <CreateDiscountForm closeModal={closeModal} />;
         case "categoria": return <CreateCategoryForm closeModal={closeModal} />;
         case "cupón": return <CreateCouponForm closeModal={closeModal} />;
-        case "devolución_producto":  return  <CreateReturnForm closeModal={closeModal} idReturnProduct={idReturnProduct!} />
+        case "devolución_producto":  return  <CreateReturnProductForm user={user} closeModal={closeModal} />
         case "stock": return  <CreateStockForm user={user} closeModal={closeModal} />
       }
     }
@@ -70,7 +72,8 @@ export default function GenericModal({ user, id, closeModal, defaultValues, idRe
         case "categoria": return <EditCategoryForm closeModal={closeModal} defaultValues={defaultValues} />;
         case "descuento": return <EditDiscountForm closeModal={closeModal} defaultValues={defaultValues} />;
         case "cupón": return <EditCouponForm closeModal={closeModal} defaultValues={defaultValues} />;
-        case "devolución_producto": return <EditReturnForm closeModal={closeModal} defaultValues={defaultValues} />;
+        case "devolución_producto": return <EditReturnForm user={user} closeModal={closeModal} defaultValues={defaultValues} />;
+        case "stock": return <EditStockForm user={user} closeModal={closeModal} defaultValues={defaultValues} />
       }
     }
     return null;

@@ -11,7 +11,7 @@ export type ChangeStatusCouponService = {
 export async function dashboardChangeStatusCouponService(formdata: ChangeStatusCouponService) {
     try {
         const selected = actions[formdata.activo];
-        const url = `/cupones/${selected.action}/${formdata.id}`;
+        const url = `/cupon/${selected.action}/${formdata.id}`;
         const { data } = await api.put(url);
         return data.mensaje
     } catch (error) {

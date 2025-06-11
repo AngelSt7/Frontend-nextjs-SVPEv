@@ -4,8 +4,11 @@ import { isAxiosError } from "axios";
 
 export async function dashboardCreateCouponService(formData: CouponFormData) {
     try {
-        const url = '/categoria/registrar'
-        const { data } = await api.post(url, formData)
+        const url = '/cupon/registrar'
+        const { data } = await api.post(url, {
+            ...formData,
+            tipo_descuento: formData.tipo_descuento === 1 ? 'PORCENTAJE' : 'MONTO'
+        })
         return data
     } catch (error) {
         if (isAxiosError(error) && error.response) {

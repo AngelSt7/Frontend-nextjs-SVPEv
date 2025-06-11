@@ -1,10 +1,10 @@
 import { Chip, Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, Button } from "@heroui/react";
 import { VerticalDotsIcon } from "../../ui/icons/VerticalDotsIcon";
 import { ToastDelete } from "../../ui/ToastDelete";
-import { mutateProps } from "@/src/types/dashboard/commonTypes/commonTypes";
 import { statusColorMap } from "@/src/utils/constants/constans";
 import { DashboardDiscount } from "@/src/types/dashboard/DiscountTypes";
 import { formatDate } from "@/src/utils/format/formatDate";
+import { mutateProps } from "@/src/types/commonTypes/commonTypes";
 
 export const RenderCellDiscount = (mutate: mutateProps, item: DashboardDiscount, columnKey: React.Key, openModalEdit: (id: number) => void) => {
     const cellValue = item[columnKey as keyof typeof item];
@@ -17,15 +17,15 @@ export const RenderCellDiscount = (mutate: mutateProps, item: DashboardDiscount,
 
         case "fecha_inicio":
             return (
-                <p>{formatDate(item.fecha_inicio.toString())}</p>
+                <p>{formatDate(item.fechaInicio.toString())}</p>
             )
         case "fecha_final":
             return (
-                <p>{formatDate(item.fecha_final.toString())}</p>
+                <p>{formatDate(item.fechaFinal.toString())}</p>
             )
 
         case "activo":
-            const statusText = item.activo === true ? "activo" : "inactivo";
+            const statusText = item.activo === 1 ? "activo" : "inactivo";
             return (
                 <Chip
                     className="capitalize cursor-pointer select-none"
@@ -49,7 +49,7 @@ export const RenderCellDiscount = (mutate: mutateProps, item: DashboardDiscount,
                                 <VerticalDotsIcon className="text-default-300" />
                             </Button>
                         </DropdownTrigger>
-                        <DropdownMenu disabledKeys={item.activo === false ? ["edit", "delete"] : []}>
+                        <DropdownMenu disabledKeys={item.activo === 0 ? ["edit", "delete"] : []}>
                             <DropdownItem key="edit" onPress={() => openModalEdit(item.id)}>Editar</DropdownItem>
                             <DropdownItem key="delete" className="text-danger" color="danger"
                                 onPress={() => {

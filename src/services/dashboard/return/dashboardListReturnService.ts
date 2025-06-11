@@ -1,12 +1,13 @@
 import api from "@/src/axios/axios";
-import { DashboardReturnsSchema } from "@/src/schemas/dashboard/Return";
+import { DashboardReturnsProductsSchema } from "@/src/schemas/dashboard/ReturnProducts";
 import { isAxiosError } from "axios";
 
-export async function dashboardListReturnService() {
+export async function dashboardListReturnProductService() {
     try {
-        const url = '/devoluciones/listar'
+        // devolucion-producto
+        const url = '/devolucion-producto/listar'
         const { data } = await api(url)
-        const response = DashboardReturnsSchema.safeParse(data)
+        const response = DashboardReturnsProductsSchema.safeParse(data)
         if(response.success){
             return response.data
         }

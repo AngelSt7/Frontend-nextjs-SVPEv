@@ -1,11 +1,11 @@
 import { Chip, Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, Button } from "@heroui/react";
 import { VerticalDotsIcon } from "../../ui/icons/VerticalDotsIcon";
 import { ToastDelete } from "../../ui/ToastDelete";
-import { mutateProps } from "@/src/types/dashboard/commonTypes/commonTypes";
 import { statusColorMap } from "@/src/utils/constants/constans";
-import { DashboardDiscount } from "@/src/types/dashboard/DiscountTypes";
 import { formatDate } from "@/src/utils/format/formatDate";
 import { DashboardCoupon } from "@/src/types/dashboard/CouponTypes";
+import { mutateProps } from "@/src/types/commonTypes/commonTypes";
+import { formatCurrency } from "@/src/utils/format/formatCurrency";
 
 
 export const RenderCellCoupons = (mutate: mutateProps, item: DashboardCoupon, columnKey: React.Key, openModalEdit: (id: number) => void) => {
@@ -13,13 +13,19 @@ export const RenderCellCoupons = (mutate: mutateProps, item: DashboardCoupon, co
 
     switch (columnKey) {
 
-        case "fecha_inicio":
+        case "tipoDescuento":
             return (
-                <p>{formatDate(item.fecha_inicio)}</p>
+                <p>{item.tipoDescuento === "PORCENTAJE" ? "Porcentual" : "Monetario"}</p>
             )
+
+        case "descuento":
+            return (
+                <p>{item.descuentoMonto ? formatCurrency(item.descuentoMonto) : `${item.descuentoPorcentaje!.toFixed(2)} %`}</p>
+            )
+
         case "fecha_final":
             return (
-                <p>{formatDate(item.fecha_final)}</p>
+                <p>{formatDate(item.fechaFin)}</p>
             )
 
         case "activo":

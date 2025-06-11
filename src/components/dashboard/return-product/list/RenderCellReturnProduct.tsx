@@ -1,37 +1,36 @@
 import { Chip, Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, Button } from "@heroui/react";
 import { VerticalDotsIcon } from "../../ui/icons/VerticalDotsIcon";
 import { ToastDelete } from "../../ui/ToastDelete";
-import { mutateProps } from "@/src/types/dashboard/commonTypes/commonTypes";
 import { statusColorMap } from "@/src/utils/constants/constans";
 import { formatDate } from "@/src/utils/format/formatDate";
-import { DashboardReturn } from "@/src/types/dashboard/ReturnTypes";
 import { useModalUtils } from "@/src/hooks/modal/useModalUtils";
-import { useAppStore } from "@/src/store/useAppStore";
+import { mutateProps } from "@/src/types/commonTypes/commonTypes";
+import { DashboardReturnProduct } from "@/src/types/dashboard/ReturnProductTypes";
 
 export const RenderCellReturn = (
   mutate: mutateProps,
-  item: DashboardReturn, columnKey: React.Key
+  item: DashboardReturnProduct, columnKey: React.Key,
+  openModalEdit: (id: number) => void
 ) => {
-  const setIdReturnProduct = useAppStore(state => state.setIdReturnProduct)
-  const { openModalCreate, openModalEdit } = useModalUtils()
+
   const cellValue = item[columnKey as keyof typeof item];
 
   switch (columnKey) {
 
     case "precio_venta":
       return (
-        <p>{formatDate(item.fecha)}</p>
+        <p>{formatDate(item.fecha_devolucion)}</p>
       )
 
-    case "activo":
-      const statusText = item.activo === 1 ? "activo" : "inactivo";
+    case "estado":
+      const statusText = item.estado === 1 ? "activo" : "inactivo";
       return (
         <Chip
           className="capitalize cursor-pointer select-none"
           color={statusColorMap[statusText]}
           size="sm"
           variant="flat"
-          onDoubleClick={() => mutate({ id: item.id, activo: item.activo })}
+          onDoubleClick={() => mutate({ id: item.id, activo: item.estado })}
           role="button"
           tabIndex={0}
         >
@@ -48,16 +47,12 @@ export const RenderCellReturn = (
                 <VerticalDotsIcon className="text-default-300" />
               </Button>
             </DropdownTrigger>
-            <DropdownMenu disabledKeys={item.activo === 0 ? ["edit", "delete"] : []}>
-              <DropdownItem key="create" onPress={() => {
-                openModalCreate(),
-                  setIdReturnProduct(item.id)
-              }}>Crear</DropdownItem>
-              <DropdownItem key="edit" onPress={() => openModalEdit(item.id)}>Editar</DropdownItem>
+            <DropdownMenu disabledKeys={item.estado === 0 ? ["edit", "delete"] : []}>
+              <DropdownItem key="edit" onPress={() => openModalEdit(item.id_devolucion_producto)}>Editar</DropdownItem>
               <DropdownItem key="delete" className="text-danger" color="danger"
                 onPress={() => {
                   ToastDelete({
-                    name: item.producto,
+                    name: item.codigo_lote,
                     onConfirm: () => mutate({ id: item.id, activo: 1 }),
                   })
                 }}

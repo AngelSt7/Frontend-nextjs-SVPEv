@@ -1,36 +1,27 @@
 import Input from '@/src/components/ui/Input';
 import { FieldError, FieldErrors, UseFormRegister, UseFormSetValue, UseFormWatch } from 'react-hook-form';
-import { useGetProducts } from '@/src/hooks/dashboard/useGetProducts';
-import SelectTabs from './SelectTabs';
-import { useGetSuppliers } from '@/src/hooks/dashboard/useGetSuppliers';
+import SelectTabs, { ItemOption } from './SelectTabs';
 import SelectItem from '../../ui/SelectItem';
-import SerieTabs from './SerieTabs';
-import { Switch } from '@heroui/react';
-import { useEffect, useState } from 'react';
 import { StockFormData } from '@/src/types/dashboard/Stocktypes';
+import SerieControl from './SerieControl';
 
 type StockFormProps = {
     register: UseFormRegister<StockFormData>;
     errors: FieldErrors<StockFormData>;
     watch: UseFormWatch<StockFormData>;
     setValue: UseFormSetValue<StockFormData>;
+    productOptions: ItemOption[]
+    suppliersOptions: ItemOption[]
 };
 
-export default function StockForm({ register, errors, watch, setValue }: StockFormProps) {
-    const { data: products = [] } = useGetProducts();
-    const { data: suppliers = [] } = useGetSuppliers();
-
-    const [isSelected, setIsSelected] = useState(false);
-    useEffect(() => {
-        setValue('tipo_serie', isSelected ? 'serie' : 'individual');
-    }, [isSelected]);
+export default function StockForm({ register, errors, watch, setValue, productOptions, suppliersOptions }: StockFormProps) {
 
     return (
         <div className="flex flex-col gap-4">
             <SelectTabs
                 name="id_producto"
                 label="Producto"
-                data={products.map((p) => ({ label: p.nombre, value: p.id }))}
+                data={productOptions}
                 setValue={setValue}
                 watch={watch}
                 register={register('id_producto', {
@@ -42,7 +33,7 @@ export default function StockForm({ register, errors, watch, setValue }: StockFo
             <SelectTabs
                 name="id_proveedor"
                 label="Proveedor"
-                data={suppliers.map((p) => ({ label: p.razon_social, value: p.id }))}
+                data={suppliersOptions}
                 setValue={setValue}
                 watch={watch}
                 register={register('id_proveedor', {
@@ -120,15 +111,10 @@ export default function StockForm({ register, errors, watch, setValue }: StockFo
             </div>
 
             <div>
-                <div className="flex gap-4 mt-2 justify-between">
-                    <label className="text-base font-semibold text-[#202021]">Habilitar Series</label>
-                    <Switch isSelected={isSelected} onValueChange={setIsSelected} size="sm" />
-                </div>
-
-                <SerieTabs
-                    isEnabled={isSelected}
-                    name="series_individuales"
-                    register={register('series_individuales')}
+                <SerieControl
+                    name="tipo_serie"
+                    tabsName="series_individuales"
+                    register={register}
                     setValue={setValue}
                     watch={watch}
                     errorMessage={errors.series_individuales as FieldError}

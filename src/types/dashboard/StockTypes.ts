@@ -1,5 +1,6 @@
+import { DashboardStockByIdSchema, DashboardStockSchema, DashboardStocksSchema, StockFormDataSchema } from "@/src/schemas/dashboard/Stock";
 import { z } from "zod";
-import { StockFormDataSchema, DashboardStockSchema, DashboardStockByIdSchema, DashboardStocksSchema } from "../schemas/dashboard/Stock";
+
 
 export type StockFormData = z.infer<typeof StockFormDataSchema>;
 export type DashboardStock = z.infer<typeof DashboardStockSchema>;

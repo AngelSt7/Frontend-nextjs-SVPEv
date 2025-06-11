@@ -3,8 +3,8 @@ import { SearchIcon } from "../icons/SearchIcon";
 import { ChevronDownIcon } from "../icons/ChevronDownIcon";
 import { PlusIcon } from "../icons/PlusIcon";
 import { capitalize } from "@/src/utils/format/formatText";
-import { ColumnsType } from "@/src/types/dashboard/commonTypes/commonTypes";
 import { ChangeEvent, Dispatch, SetStateAction } from "react";
+import { ColumnsType } from "@/src/types/commonTypes/commonTypes";
 
 interface TopContentProps {
   openModalCreate: () => void
