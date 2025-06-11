@@ -10,6 +10,7 @@ import { RenderCellStock } from './RenderCellStock'
 import { dashboardListStockService } from '@/src/services/dashboard/stock/dashboardListStockService'
 import { DashboardStock } from '@/src/types/dashboard/Stocktypes'
 import { dashboardChangeStatusStockService } from '@/src/services/dashboard/stock/dashboardChangeStatusStockService'
+import EditStockWrapper from '../edit/EditStockWrapper'
 
 export default function ContentPage({ id, user }: { id: string | undefined, user?: AuthUserInfo }) {
     const { openModalCreate, openModalEdit, closeModal } = useModalUtils()
@@ -28,13 +29,13 @@ export default function ContentPage({ id, user }: { id: string | undefined, user
                 queryKey="stocks"
                 functionService={dashboardListStockService}
                 defaultVisibleColumns={["producto", "proveedor", "lote", "tipo_documento", "numero_documento", "activo", "actions"]}
-                searchableField="producto"
+                searchableField="lote"
                 mutate={mutate}
                 renderCells={RenderCellStock}
             />
 
             <GenericModal user={user} closeModal={closeModal} />
-            {/* {id && user && <EditProductWrapper user={user} closeModal={closeModal} id={id} />} */}
+            {id && user && <EditStockWrapper user={user} closeModal={closeModal} id={id} />}
         </div>
     )
 }

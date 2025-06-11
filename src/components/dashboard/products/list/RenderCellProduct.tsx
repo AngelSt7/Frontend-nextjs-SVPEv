@@ -3,9 +3,9 @@ import { VerticalDotsIcon } from "../../ui/icons/VerticalDotsIcon";
 import { DashboardProduct } from "@/src/types/dashboard/ProductTypes";
 import { formatDate } from "@/src/utils/format/formatDate";
 import { ToastDelete } from "../../ui/ToastDelete";
-import { mutateProps } from "@/src/types/dashboard/commonTypes/commonTypes";
 import { statusColorMap } from "@/src/utils/constants/constans";
 import { formatCurrency } from "@/src/utils/format/formatCurrency";
+import { mutateProps } from "@/src/types/commonTypes/commonTypes";
 
 export const RenderCellProduct = (mutate: mutateProps, item: DashboardProduct, columnKey: React.Key, openModalEdit: (id: number) => void) => {
   const cellValue = item[columnKey as keyof typeof item];

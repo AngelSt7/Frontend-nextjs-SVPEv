@@ -10,12 +10,7 @@ type CreateDiscountFormProps = {
 };
 
 export default function CreateDiscountForm({ closeModal }: CreateDiscountFormProps) {
-  const { register, handleSubmit, formState: { errors }, setValue, watch } = useForm<DiscountFormData>({
-    defaultValues: {
-      fecha_fin: '',
-      fecha_inicio: '',
-    }
-  });
+  const { register, handleSubmit, formState: { errors }, setValue, watch } = useForm<DiscountFormData>();
   
   const { mutate } = useSubmitMutation({
     serviceFunction: dashboardCreateDiscountService,

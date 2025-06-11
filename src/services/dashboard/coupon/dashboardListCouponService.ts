@@ -5,7 +5,7 @@ import { isAxiosError } from "axios";
 
 export async function dashboardListCouponService() {
     try {
-        const url = '/cupones/listar'
+        const url = '/cupon/listar'
         const { data } = await api(url)
         const response = DashboardCouponsSchema.safeParse(data)
         if (response.success) {

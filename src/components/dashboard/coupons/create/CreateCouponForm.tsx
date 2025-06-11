@@ -19,8 +19,8 @@ export default function CreateCouponForm({ closeModal }: CreateCuoponFormProps) 
     onSuccessCallback: closeModal,
     message: 'Cupón registrado exitosamente'
   })
-
-  const onSubmit = (data: CouponFormData) => mutate({...data, activo: 1});
+// mutate({...data, activo: 1});
+  const onSubmit = (data: CouponFormData) =>  mutate({...data, activo: 1})
 
   return (
     <form

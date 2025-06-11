@@ -7,7 +7,6 @@ export async function dashboardListDiscountService() {
         const url = '/descuento/listar'
         const { data } = await api(url)
         const response = DashboardDiscountsSchema.safeParse(data)
-        console.log(response)
         if(response.success){
             return response.data
         }

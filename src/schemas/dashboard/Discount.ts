@@ -2,12 +2,12 @@ import { z } from "zod";
 
 export const DashboardDiscountSchema = z.object({
   id: z.number(),
-  categoria: z.string().nullish(),
+  id_categoria: z.number(),
   porcentaje: z.number(),
-  fecha_inicio: z.coerce.date(),
-  fecha_final: z.coerce.date(),
+  fechaInicio: z.coerce.date(),
+  fechaFinal: z.coerce.date(),
   nombreCategoria: z.string().nullish(),
-  activo: z.boolean(),
+  activo: z.number().min(0).max(1),
 });
 
 
@@ -35,10 +35,13 @@ export const DiscountFormDataSchema = z.object({
 
 export const DashboardDiscountByIdSchema = z.object({
   id: z.number(),
+  id_categoria: z.number(),
   nombreCategoria: z.string(),
   porcentaje: z.number(),
-  fecha_inicio: z.string(),
-  fecha_final: z.string(),
-  activo: z.boolean(),
-})
+  fechaInicio: z.string(),
+  fechaFinal: z.string(),
+  activo: z.number()
+});
+
+
 export const DashboardDiscountsSchema = z.array(DashboardDiscountSchema);

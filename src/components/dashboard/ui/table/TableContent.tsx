@@ -4,7 +4,7 @@ import { useTableLogic } from "../../../../hooks/dashboard/useTableLogic";
 import { useQuery, keepPreviousData } from "@tanstack/react-query";
 import { TopContent } from "./TopContent";
 import { useTableHandlers } from "@/src/hooks/dashboard/useTableHandlers";
-import { ColumnsType, mutateProps } from "@/src/types/dashboard/commonTypes/commonTypes";
+import { ColumnsType, mutateProps } from "@/src/types/commonTypes/commonTypes";
 
 const labelMap: Record<string, string> = {
   suppliers: "Proveedor",
@@ -15,6 +15,7 @@ const labelMap: Record<string, string> = {
   coupons: "Cupón",
   returns: "Devolución",
   stocks: "Stock",
+  returnsProducts: "Devolución Producto",
 };
 
 type TableComponentProps<T> = {

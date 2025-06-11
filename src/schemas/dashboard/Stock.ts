@@ -27,13 +27,16 @@ export const DashboardStockSchema = z.object({
 export const DashboardStockByIdSchema = z.object({
   id: z.number(),
   id_producto: z.number(),
+  producto: z.string(),
   id_proveedor: z.number(),
-  fecha_ingreso: z.string(),
+  proveedor: z.string(),
+  fecha_ingreso: z.coerce.date(),
   lote: z.string(),
-  cantidad: z.number(),
+  cantidad_producto: z.number(),
   tipo_documento: z.string(),
-  numero_documento: z.number(),
+  numero_documento: z.string(),
   observaciones: z.string(),
+  precio_unitario: z.number()
 });
 
 export const DashboardStocksSchema = z.array(DashboardStockSchema);

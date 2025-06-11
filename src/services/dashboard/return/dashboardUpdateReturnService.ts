@@ -1,10 +1,10 @@
 import api from "@/src/axios/axios";
-import { ReturnFormData } from "@/src/types/dashboard/ReturnTypes";
+import { ReturnProductFormData } from "@/src/types/dashboard/ReturnProductTypes";
 import { isAxiosError } from "axios";
 
-export async function dashboardUpdateReturnService(formData: ReturnFormData) {
+export async function dashboardUpdateReturnService(formData: ReturnProductFormData) {
     try {
-        const url = '/devolución/actualizar'
+        const url = '/devolucion-producto/actualizar'
         const { data } = await api.put(url, formData)
         return data
     } catch (error) {

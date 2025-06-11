@@ -17,8 +17,7 @@ export const useAppStore = create<PaginationSlice & ControlSessionSlice & Extras
                 name: "property-storage", 
                 partialize: (state) => ({ 
                     take: state.take,
-                    shouldShowResetPasswordModal: state.shouldShowResetPasswordModal,
-                    idReturnProduct: state.idReturnProduct
+                    shouldShowResetPasswordModal: state.shouldShowResetPasswordModal
                 }),
             }
         )

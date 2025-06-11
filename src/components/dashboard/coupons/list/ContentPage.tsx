@@ -10,6 +10,7 @@ import { dashboardListCouponService } from '@/src/services/dashboard/coupon/dash
 import GenericModal from '../../ui/GenericModal'
 import EditCategoryWrapper from '../../category/edit/EditCategoryWrapper'
 import { dashboardChangeStatusCouponService } from '@/src/services/dashboard/coupon/dashboardChangeStatusCouponService'
+import EditCouponWrapper from '../edit/EditCouponWrapper'
 
 export default function ContentPage({ id }: { id: string | undefined }) {
     const { openModalCreate, openModalEdit, closeModal } = useModalUtils()
@@ -27,14 +28,14 @@ export default function ContentPage({ id }: { id: string | undefined }) {
                 columns={Columns}
                 queryKey="coupons"
                 functionService={dashboardListCouponService}
-                defaultVisibleColumns={["codigo", "descuento", "fecha_inicio", "fecha_final", "activo", "actions"]}
+                defaultVisibleColumns={["codigo", "tipoDescuento", "descuento", "fecha_inicio", "fecha_final", "activo", "actions"]}
                 searchableField="codigo"
                 mutate={mutate}
                 renderCells={RenderCellCoupons}
             />
 
             <GenericModal closeModal={closeModal} />
-            {id && <EditCategoryWrapper closeModal={closeModal} id={id} />}
+            {id && <EditCouponWrapper closeModal={closeModal} id={id} />}
         </div>
     )
 }

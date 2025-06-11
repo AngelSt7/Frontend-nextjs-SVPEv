@@ -5,6 +5,9 @@ import StockForm from '../form/StockForm';
 import { StockFormData } from '@/src/types/dashboard/Stocktypes';
 import { AuthUserInfo } from '@/src/types/AuthTypes';
 import { dashboardCreateStockService } from '@/src/services/dashboard/stock/dashboardCreateStockService';
+import { useGetProducts } from '@/src/hooks/dashboard/useGetProducts';
+import { useGetSuppliers } from '@/src/hooks/dashboard/useGetSuppliers';
+import { useMemo } from 'react';
 
 type CreateStockFormProps = {
   closeModal: () => void;
@@ -12,8 +15,13 @@ type CreateStockFormProps = {
 };
 
 export default function CreateStockForm({ closeModal, user }: CreateStockFormProps) {
+  const { data: products = [] } = useGetProducts();
+  const { data: suppliers = [] } = useGetSuppliers();
+  const productOptions = useMemo(() => products.map((p) => ({ label: p.nombre, value: p.id })), [products])
+  const suppliersOptions = useMemo(() => suppliers.map((p) => ({ label: p.razon_social, value: p.id })), [suppliers])
+
   const { register, handleSubmit, formState: { errors }, setValue, watch } = useForm<StockFormData>();
-  
+
   const { mutate } = useSubmitMutation({
     serviceFunction: dashboardCreateStockService,
     invalidateQuery: ['stocks'],
@@ -21,15 +29,22 @@ export default function CreateStockForm({ closeModal, user }: CreateStockFormPro
     message: 'Stock registrado exitosamente'
   })
 
-  const onSubmit = (data: StockFormData) => mutate({...data, id_usuario: user?.id!});
+  const onSubmit = (data: StockFormData) => mutate({...data, id_usuario: user!.id});
 
   return (
     <form
       className="flex flex-col justify-between gap-3 flex-1 mt-2"
       onSubmit={handleSubmit(onSubmit)}
     >
-      <StockForm setValue={setValue} watch={watch} register={register} errors={errors} />
-
+      <StockForm
+        productOptions={productOptions}
+        suppliersOptions={suppliersOptions}
+        setValue={setValue}
+        watch={watch}
+        register={register}
+        errors={errors} 
+      />
+      
       <div className="w-full flex gap-4 justify-end mt-3">
         <Button color='danger' variant='flat' onPress={closeModal}>Cancelar</Button>
         <Button color='success' type='submit'>Registrar Stock</Button>
