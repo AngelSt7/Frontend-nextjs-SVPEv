@@ -6,7 +6,7 @@ import { DashboardDiscount } from "@/src/types/dashboard/DiscountTypes";
 import { formatDate } from "@/src/utils/format/formatDate";
 import { mutateProps } from "@/src/types/commonTypes/commonTypes";
 
-export const RenderCellDiscount = (mutate: mutateProps, item: DashboardDiscount, columnKey: React.Key, openModalEdit: (id: number) => void) => {
+export const RenderCellDiscount = (mutate: mutateProps, item: DashboardDiscount, columnKey: React.Key, openModalEdit?: (id: number) => void) => {
     const cellValue = item[columnKey as keyof typeof item];
 
     switch (columnKey) {
@@ -50,7 +50,7 @@ export const RenderCellDiscount = (mutate: mutateProps, item: DashboardDiscount,
                             </Button>
                         </DropdownTrigger>
                         <DropdownMenu disabledKeys={item.activo === 0 ? ["edit", "delete"] : []}>
-                            <DropdownItem key="edit" onPress={() => openModalEdit(item.id)}>Editar</DropdownItem>
+                            <DropdownItem key="edit" onPress={() => openModalEdit!(item.id)}>Editar</DropdownItem>
                             <DropdownItem key="delete" className="text-danger" color="danger"
                                 onPress={() => {
                                     ToastDelete({

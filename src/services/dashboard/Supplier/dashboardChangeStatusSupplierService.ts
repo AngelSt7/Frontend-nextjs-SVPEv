@@ -1,5 +1,6 @@
 import api from "@/src/axios/axios";
-import { DashboardSupplier, SupplierFormData } from "@/src/types/dashboard/DashboardTypes";
+import { DashboardSupplier, SupplierFormData } from "@/src/types/DashboardTypes";
+
 import { isAxiosError } from "axios";
 
 export type ChangeStatusSupplierService = {

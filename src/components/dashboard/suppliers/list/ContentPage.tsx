@@ -4,12 +4,12 @@ import { TableComponent } from '@/src/components/dashboard/ui/table/TableContent
 import { useModalUtils } from '@/src/hooks/modal/useModalUtils'
 import EditSupplierWrapper from '../edit/EditSupplierWrapper'
 import GenericModal from '../../ui/GenericModal'
-import { Columns } from './Columns'
-import { DashboardSupplier } from "@/src/types/dashboard/DashboardTypes"
 import useSubmitMutation from '@/src/hooks/dashboard/useSubmitMutation'
-import { dashboardChangeStatusSupplierService } from '@/src/services/dashboard/supplier/dashboardChangeStatusSupplierService'
 import { RenderCellSupplier } from './RenderCellSupplier'
 import { dashboardListSupplierService } from '@/src/services/dashboard/Supplier/dashboardListSupplierService'
+import { DashboardSupplier } from '@/src/types/DashboardTypes'
+import { dashboardChangeStatusSupplierService } from '@/src/services/dashboard/Supplier/dashboardChangeStatusSupplierService'
+import { Columns } from './Columns'
 
 export default function ContentPage({ id }: { id: string | undefined }) {
   const { openModalCreate, openModalEdit, closeModal } = useModalUtils()

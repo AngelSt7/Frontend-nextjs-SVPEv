@@ -27,6 +27,7 @@ export default function ContentPage({ user }: { user?: AuthUserInfo }) {
                 searchableField="nombre"
                 renderCellSaleProduct={renderCellSaleProduct}
                 showActions={false}
+                isSales={true}
             />
         </div>
     )

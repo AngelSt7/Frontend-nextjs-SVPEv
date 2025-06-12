@@ -7,7 +7,7 @@ import { statusColorMap } from "@/src/utils/constants/constans";
 import { formatCurrency } from "@/src/utils/format/formatCurrency";
 import { mutateProps } from "@/src/types/commonTypes/commonTypes";
 
-export const RenderCellProduct = (mutate: mutateProps, item: DashboardProduct, columnKey: React.Key, openModalEdit: (id: number) => void) => {
+export const RenderCellProduct = (mutate: mutateProps, item: DashboardProduct, columnKey: React.Key, openModalEdit?: (id: number) => void) => {
   const cellValue = item[columnKey as keyof typeof item];
 
   switch (columnKey) {
@@ -56,7 +56,7 @@ export const RenderCellProduct = (mutate: mutateProps, item: DashboardProduct, c
               </Button>
             </DropdownTrigger>
             <DropdownMenu disabledKeys={item.activo === 0 ? ["edit", "delete"] : []}>
-              <DropdownItem key="edit" onPress={() => openModalEdit(item.id)}>Editar</DropdownItem>
+              <DropdownItem key="edit" onPress={() => openModalEdit!(item.id)}>Editar</DropdownItem>
               <DropdownItem key="delete" className="text-danger" color="danger"
                 onPress={() => {
                   ToastDelete({

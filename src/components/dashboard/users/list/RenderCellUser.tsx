@@ -10,7 +10,7 @@ export const RenderCellUser = (
     mutate: mutateProps,
     item: DashboardUser,
     columnKey: React.Key,
-    openModalEdit: (id: number) => void
+    openModalEdit?: (id: number) => void
 ) => {
     const cellValue = item[columnKey as keyof typeof item];
 
@@ -55,7 +55,7 @@ export const RenderCellUser = (
                             </Button>
                         </DropdownTrigger>
                         <DropdownMenu disabledKeys={item.activo === 0 ? ["edit", "delete"] : []}>
-                            <DropdownItem key="edit" onPress={() => openModalEdit(item.id)}>
+                            <DropdownItem key="edit" onPress={() => openModalEdit!(item.id)}>
                                 Editar
                             </DropdownItem>
                             <DropdownItem

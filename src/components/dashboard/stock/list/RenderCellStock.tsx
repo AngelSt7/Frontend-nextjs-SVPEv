@@ -6,7 +6,7 @@ import { DashboardStock } from "@/src/types/dashboard/Stocktypes";
 import { mutateProps } from "@/src/types/commonTypes/commonTypes";
 import toast from "react-hot-toast";
 
-export const RenderCellStock = (mutate: mutateProps, item: DashboardStock, columnKey: React.Key, openModalEdit: (id: number) => void) => {
+export const RenderCellStock = (mutate: mutateProps, item: DashboardStock, columnKey: React.Key, openModalEdit?: (id: number) => void) => {
   const cellValue = item[columnKey as keyof typeof item];
 
   switch (columnKey) {
@@ -81,7 +81,7 @@ export const RenderCellStock = (mutate: mutateProps, item: DashboardStock, colum
               </Button>
             </DropdownTrigger>
             <DropdownMenu disabledKeys={item.activo === 0 ? ["edit", "delete"] : []}>
-              <DropdownItem key="edit" onPress={() => openModalEdit(item.id)}>Editar</DropdownItem>
+              <DropdownItem key="edit" onPress={() => openModalEdit!(item.id)}>Editar</DropdownItem>
               <DropdownItem key="delete" className="text-danger" color="danger"
                 onPress={() => {
                   ToastDelete({

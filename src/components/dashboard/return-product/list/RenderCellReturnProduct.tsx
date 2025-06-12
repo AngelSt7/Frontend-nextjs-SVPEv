@@ -10,7 +10,7 @@ import { DashboardReturnProduct } from "@/src/types/dashboard/ReturnProductTypes
 export const RenderCellReturn = (
   mutate: mutateProps,
   item: DashboardReturnProduct, columnKey: React.Key,
-  openModalEdit: (id: number) => void
+  openModalEdit?: (id: number) => void
 ) => {
 
   const cellValue = item[columnKey as keyof typeof item];
