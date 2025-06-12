@@ -25,6 +25,7 @@ export const DashboardProductSchema = z.object({
   precio_venta: z.number(),
   min_stock: z.number(),
   max_stock: z.number(),
+  stock_actual: z.number(),
   garantia_meses: z.number(),
   activo: z.number(),
   sku: z.string(),

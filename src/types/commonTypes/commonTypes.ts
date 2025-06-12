@@ -1,4 +1,5 @@
-import { ChangeStatusSupplierService } from "@/src/services/dashboard/supplier/dashboardChangeStatusSupplierService";
+
+import { ChangeStatusSupplierService } from "@/src/services/dashboard/Supplier/dashboardChangeStatusSupplierService";
 import { UseMutateFunction } from "@tanstack/react-query";
 import { SVGProps } from "react";
 
@@ -20,4 +21,4 @@ export type IconSvgProps = SVGProps<SVGSVGElement> & {
 };
 
 // typado de funciones
-export type mutateProps = UseMutateFunction<any, Error, ChangeStatusSupplierService, unknown> 
+export type mutateProps = UseMutateFunction<any, Error, ChangeStatusSupplierService, unknown>  

@@ -8,7 +8,6 @@ import { DashboardCoupon } from '@/src/types/dashboard/CouponTypes'
 import { RenderCellCoupons } from './RenderCellCoupons'
 import { dashboardListCouponService } from '@/src/services/dashboard/coupon/dashboardListCouponService'
 import GenericModal from '../../ui/GenericModal'
-import EditCategoryWrapper from '../../category/edit/EditCategoryWrapper'
 import { dashboardChangeStatusCouponService } from '@/src/services/dashboard/coupon/dashboardChangeStatusCouponService'
 import EditCouponWrapper from '../edit/EditCouponWrapper'
 

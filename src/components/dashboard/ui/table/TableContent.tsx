@@ -5,6 +5,7 @@ import { useQuery, keepPreviousData } from "@tanstack/react-query";
 import { TopContent } from "./TopContent";
 import { useTableHandlers } from "@/src/hooks/dashboard/useTableHandlers";
 import { ColumnsType, mutateProps } from "@/src/types/commonTypes/commonTypes";
+import { Product } from "@/src/types/dashboard/SaleTypes";
 
 const labelMap: Record<string, string> = {
   suppliers: "Proveedor",
@@ -19,17 +20,22 @@ const labelMap: Record<string, string> = {
 };
 
 type TableComponentProps<T> = {
-  openModalCreate: () => void;
-  openModalEdit: (id: number) => void;
+  openModalCreate?: () => void;
+  openModalEdit?: (id: number) => void;
   columns: ColumnsType;
   queryKey: string;
   functionService: () => Promise<T[] | undefined>;
   defaultVisibleColumns: (keyof T | string)[];
   searchableField?: keyof T;
   mutate?: mutateProps;
-  categoryOptions?: { name: string; uid: string;}[]
-  renderCells?: (mutate: mutateProps, item: T, columnKey: React.Key, openModalEdit: (id: number) => void) => any
-  showButton?: boolean
+  categoryOptions?: { name: string; uid: string; }[]
+  renderCells?: (mutate: mutateProps, item: T, columnKey: React.Key, openModalEdit?: (id: number) => void) => any
+  showActions?: boolean,
+  isSales?: boolean,
+  renderCellSaleProduct?: ( item: T, columnKey: React.Key, addProduct?: (product: Product) => void, decreaseQuantity?: (id: Product["id"]) => void, increaseQuantity?: (id: Product["id"]) => void) => any
+  addProduct?: (product: Product) => void
+  decreaseQuantity?: (id: Product["id"]) => void
+  increaseQuantity?: (id: Product["id"]) => void
 };
 
 export const TableComponent = <T extends { id: number }>({
@@ -40,10 +46,14 @@ export const TableComponent = <T extends { id: number }>({
   functionService,
   defaultVisibleColumns,
   searchableField,
-  categoryOptions,
   renderCells,
   mutate,
-  showButton = true
+  renderCellSaleProduct,
+  showActions = true,
+  isSales = false,
+  addProduct,
+  decreaseQuantity,
+  increaseQuantity
 }: TableComponentProps<T>) => {
   const { data = [], isLoading } = useQuery({
     queryKey: [queryKey],
@@ -102,7 +112,7 @@ export const TableComponent = <T extends { id: number }>({
       }}
       topContent={
         <TopContent
-          showButton={showButton}
+          showActions={showActions}
           filterValue={filterValue}
           setFilterValue={setFilterValue}
           onSearchChange={onSearchChange}
@@ -137,21 +147,39 @@ export const TableComponent = <T extends { id: number }>({
         )}
       </TableHeader>
 
-      <TableBody
-        items={sortedItems}
-        isLoading={isLoading}
-        loadingContent={<Spinner />}
-      >
-        {(item) => (
-          <TableRow className="hover:bg-[#f3f4f6]" key={item.id}>
-            {(columnKey) => (
-              <TableCell>
-                {renderCells?.(mutate!, item, columnKey, openModalEdit)}
-              </TableCell>
-            )}
-          </TableRow>
-        )}
-      </TableBody>
+      {isSales ? (
+        <TableBody
+          items={sortedItems}
+          isLoading={isLoading}
+          loadingContent={<Spinner />}
+        >
+          {(item) => (
+            <TableRow className="hover:bg-[#f3f4f6]" key={item.id}>
+              {(columnKey) => (
+                <TableCell>
+                  {renderCells?.(mutate!, item, columnKey, openModalEdit)}
+                </TableCell>
+              )}
+            </TableRow>
+          )}
+        </TableBody>
+      ) : (
+        <TableBody
+          items={sortedItems}
+          isLoading={isLoading}
+          loadingContent={<Spinner />}
+        >
+          {(item) => (
+            <TableRow className="hover:bg-[#f3f4f6]" key={item.id}>
+              {(columnKey) => (
+                <TableCell>
+                  {renderCellSaleProduct?.( item, columnKey, addProduct!, decreaseQuantity!, increaseQuantity!)}
+                </TableCell>
+              )}
+            </TableRow>
+          )}
+        </TableBody>
+      )}
     </Table>
   );
 };

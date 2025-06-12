@@ -11,3 +11,5 @@ export const statusColorMap: Record<string, ChipProps["color"]> = {
     inactivo: "danger",
 };
 
+export const MIN_QUANTITY = 1
+export const MAX_QUANTITY = 5

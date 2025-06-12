@@ -2,16 +2,16 @@ import { create } from "zustand";
 import { devtools, persist } from "zustand/middleware";
 import { paginationSlice, PaginationSlice } from "./paginationSlice";
 import { ControlSessionSlice, controlSessionSlice } from "./controlSessionSlice";
-import { ExtrasSlice, extrasSlice } from "./extrasSlice";
+import { cartSlice, CartSlice } from "./cartSlice";
 
 //partialize para guardar take en localStorage 
-export const useAppStore = create<PaginationSlice & ControlSessionSlice & ExtrasSlice>()(
+export const useAppStore = create<PaginationSlice & ControlSessionSlice & CartSlice>()(
     devtools(
         persist(
             (...a) => ({
                 ...paginationSlice(...a),
                 ...controlSessionSlice(...a),
-                ...extrasSlice(...a)
+                ...cartSlice(...a)
             }),
             {
                 name: "property-storage", 

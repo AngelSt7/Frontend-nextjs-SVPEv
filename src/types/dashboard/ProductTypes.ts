@@ -1,5 +1,6 @@
 import { z } from "zod"
-import { DashboardProductByIdSchema, DashboardProductSchema, ProductFormDataSchema } from "../schemas/dashboard/Products"
+import { ProductFormDataSchema, DashboardProductByIdSchema, DashboardProductSchema } from "@/src/schemas/dashboard/Products"
+
 
 export type ProductFormData = z.infer<typeof ProductFormDataSchema>
 export type DashboardProductById = z.infer<typeof DashboardProductByIdSchema>
