@@ -25,11 +25,9 @@ type GenericModalProps = {
   id?: string;
   closeModal: () => void;
   defaultValues?: any;
-  idReturnProduct?: number;
-  clearIdReturnProduct?: () => void
 };
 
-export default function GenericModal({ user, id, closeModal, defaultValues, idReturnProduct, clearIdReturnProduct }: GenericModalProps) {
+export default function GenericModal({ user, id, closeModal, defaultValues }: GenericModalProps) {
 
   const path = usePathname();
   const searchParams = useSearchParams();

@@ -7,7 +7,7 @@ import { ChangeEvent, Dispatch, SetStateAction } from "react";
 import { ColumnsType } from "@/src/types/commonTypes/commonTypes";
 
 interface TopContentProps {
-  openModalCreate: () => void
+  openModalCreate?: () => void
   filterValue: string;
   setFilterValue: (value: string) => void;
   onSearchChange: (value?: string) => void;
@@ -21,10 +21,10 @@ interface TopContentProps {
   statusOptions: { name: string; uid: string; }[],
   columns: ColumnsType,
   messageButton: string,
-  showButton?: boolean
+  showActions?: boolean
 }
 
-export const TopContent: React.FC<TopContentProps> = ({ filterValue, onSearchChange, onClear, statusFilter, setStatusFilter, visibleColumns, setVisibleColumns, onRowsPerPageChange, total, openModalCreate, statusOptions, columns, messageButton, showButton = true }) => {
+export const TopContent: React.FC<TopContentProps> = ({ filterValue, onSearchChange, onClear, statusFilter, setStatusFilter, visibleColumns, setVisibleColumns, onRowsPerPageChange, total, openModalCreate, statusOptions, columns, messageButton, showActions = true }) => {
   return (
     <div className="flex flex-col gap-4 p-4">
       <div className="flex justify-between gap-3 items-end">
@@ -39,7 +39,8 @@ export const TopContent: React.FC<TopContentProps> = ({ filterValue, onSearchCha
         />
 
         <div className="flex gap-3">
-          <Dropdown>
+          {showActions && (
+            <Dropdown>
             <DropdownTrigger className="hidden sm:flex">
               <Button endContent={<ChevronDownIcon className="text-small" />} variant="flat">
                 Status
@@ -63,6 +64,7 @@ export const TopContent: React.FC<TopContentProps> = ({ filterValue, onSearchCha
               ))}
             </DropdownMenu>
           </Dropdown>
+          )}
           <Dropdown>
             <DropdownTrigger className="hidden sm:flex">
               <Button endContent={<ChevronDownIcon className="text-small" />} variant="flat">
@@ -91,14 +93,14 @@ export const TopContent: React.FC<TopContentProps> = ({ filterValue, onSearchCha
               ))}
             </DropdownMenu>
           </Dropdown>
-          {showButton &&
+          {showActions &&
             <Button className="bg-[#2c2c2c] text-white shadow-lg" endContent={<PlusIcon />} onPress={openModalCreate}>
               {`Agregar ${messageButton}`}
             </Button>
           }
         </div>
       </div>
-      {showButton &&
+
         <div className="flex justify-between items-center">
           <span className="text-default-400 text-small">Total {total} proveedores</span>
           <label className="flex items-center text-default-400 text-small">
@@ -113,7 +115,6 @@ export const TopContent: React.FC<TopContentProps> = ({ filterValue, onSearchCha
             </select>
           </label>
         </div>
-      }
     </div>
   );
 };

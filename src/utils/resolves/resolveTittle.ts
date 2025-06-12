@@ -7,7 +7,10 @@ export const Tittles: Record<string, string> = {
     '/dashboard/categorias': 'Administrar Categorias',
     '/dashboard/descuentos': 'Administrar Descuentos',
     '/dashboard/cupones': 'Administrar Cupones',
-    '/dashboard/returns': 'Administrar Devoluciones',
+    '/dashboard/devolucion-productos': 'Administrar Devoluciones',
+    '/dashboard/stock': 'Administrar Stock',
+    '/dashboard/ventas': 'Administrar Ventas',
+    '/dashboard/ventas/registrar': 'Generar Venta'
 };
 
 // Mapear entidades
