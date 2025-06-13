@@ -17,7 +17,8 @@ export default function EditReturnForm({ user, closeModal, defaultValues }: Edit
   const { register, handleSubmit, formState: { errors }, watch, setValue } = useForm<ReturnProductFormData>({
     defaultValues: {
       ...defaultValues,
-      id_detalle_ingreso: defaultValues.id_detalle_ingreso
+      id_detalle_ingreso: defaultValues.id_detalle_ingreso,
+      reposicionAplicada: defaultValues.reposicionAplicada
     }
   });
 
@@ -42,7 +43,7 @@ export default function EditReturnForm({ user, closeModal, defaultValues }: Edit
       <ReturnForm isEdit={true} register={register} errors={errors} watch={watch} setValue={setValue} />
       <div className="w-full flex gap-4 justify-end mt-3">
         <Button color='danger' variant='flat' onPress={() => closeModal()}>Cancelar</Button>
-        <Button color='success' type='submit'>Actualizar Categoria</Button>
+        <Button color='success' type='submit'>Actualizar Devolución</Button>
       </div>
     </form>
   );

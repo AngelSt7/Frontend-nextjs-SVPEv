@@ -17,6 +17,7 @@ const labelMap: Record<string, string> = {
   returns: "Devolución",
   stocks: "Stock",
   returnsProducts: "Devolución Producto",
+  sales: "Venta",
   warrantyClaims: "Reclamo de Garantía",
   warranties: "Garantía",
 };
@@ -35,8 +36,9 @@ const entityLabelMap: Record<string, string> = {
 };
 
 type TableComponentProps<T> = {
+  newPath?: string
   openModalCreate?: () => void;
-  openModalEdit?: (id: number) => void;
+  openModalEdit?: (id: number ) => void;
   columns: ColumnsType;
   queryKey: string;
   functionService: () => Promise<T[] | undefined>;
@@ -68,7 +70,8 @@ export const TableComponent = <T extends { id: number }>({
   isSales = false,
   addProduct,
   decreaseQuantity,
-  increaseQuantity
+  increaseQuantity,
+  newPath
 }: TableComponentProps<T>) => {
   const { data = [], isLoading } = useQuery({
     queryKey: [queryKey],
@@ -127,6 +130,7 @@ export const TableComponent = <T extends { id: number }>({
       }}
       topContent={
         <TopContent
+          newPath={newPath}
           showActions={showActions}
           filterValue={filterValue}
           setFilterValue={setFilterValue}
@@ -138,7 +142,7 @@ export const TableComponent = <T extends { id: number }>({
           setVisibleColumns={setVisibleColumns}
           onRowsPerPageChange={onRowsPerPageChange}
           total={filteredItems.length}
-          openModalCreate={openModalCreate}
+          openModalCreate={openModalCreate!}
           statusOptions={[
             { name: "Todos", uid: "all" },
             { name: "Activo", uid: "activo" },
@@ -173,7 +177,7 @@ export const TableComponent = <T extends { id: number }>({
             <TableRow className="hover:bg-[#f3f4f6]" key={item.id}>
               {(columnKey) => (
                 <TableCell>
-                  {renderCells?.(mutate!, item, columnKey, openModalEdit)}
+                  {renderCells?.(mutate!, item, columnKey, openModalEdit!)}
                 </TableCell>
               )}
             </TableRow>

@@ -8,7 +8,7 @@ import { mutateProps } from "@/src/types/commonTypes/commonTypes";
 import { formatCurrency } from "@/src/utils/format/formatCurrency";
 
 
-export const RenderCellCoupons = (mutate: mutateProps, item: DashboardCoupon, columnKey: React.Key, openModalEdit: (id: number) => void) => {
+export const RenderCellCoupons = (mutate: mutateProps, item: DashboardCoupon, columnKey: React.Key, openModalEdit?: (id: number) => void) => {
     const cellValue = item[columnKey as keyof typeof item];
 
     switch (columnKey) {
@@ -54,7 +54,7 @@ export const RenderCellCoupons = (mutate: mutateProps, item: DashboardCoupon, co
                             </Button>
                         </DropdownTrigger>
                         <DropdownMenu disabledKeys={item.activo === 0 ? ["edit", "delete"] : []}>
-                            <DropdownItem key="edit" onPress={() => openModalEdit(item.id)}>Editar</DropdownItem>
+                            <DropdownItem key="edit" onPress={() => openModalEdit!(item.id)}>Editar</DropdownItem>
                             <DropdownItem key="delete" className="text-danger" color="danger"
                                 onPress={() => {
                                     ToastDelete({
