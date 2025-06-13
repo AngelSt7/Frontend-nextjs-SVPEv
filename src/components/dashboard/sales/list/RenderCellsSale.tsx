@@ -2,35 +2,50 @@ import { Chip, Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, Button } f
 import { VerticalDotsIcon } from "../../ui/icons/VerticalDotsIcon";
 import { ToastDelete } from "../../ui/ToastDelete";
 import { statusColorMap } from "@/src/utils/constants/constans";
-import { formatDate } from "@/src/utils/format/formatDate";
-import { useModalUtils } from "@/src/hooks/modal/useModalUtils";
 import { mutateProps } from "@/src/types/commonTypes/commonTypes";
-import { DashboardReturnProduct } from "@/src/types/dashboard/ReturnProductTypes";
+import { DashboardSale } from "@/src/types/dashboard/SaleTypes";
+import { formatDate } from "@/src/utils/format/formatDate";
+import { formatCurrency } from "@/src/utils/format/formatCurrency";
 
-export const RenderCellReturn = (
-  mutate: mutateProps,
-  item: DashboardReturnProduct, columnKey: React.Key,
-  openModalEdit?: (id: number) => void
-) => {
-
+export const RenderCellSale = (mutate: mutateProps, item: DashboardSale, columnKey: React.Key) => {
   const cellValue = item[columnKey as keyof typeof item];
 
   switch (columnKey) {
 
-    case "precio_venta":
+    case "total" : return (
+      <p>{formatCurrency(item.total)}</p>
+    )
+
+    case "cancelado":
+      const statusTextCancel = item.cancelado === true ? "activo" : "inactivo";
       return (
-        <p>{formatDate(item.fecha_devolucion)}</p>
+        <Chip
+          className="capitalize cursor-pointer select-none"
+          color={statusColorMap[statusTextCancel]}
+          size="sm"
+          variant="flat"
+          role="button"
+          tabIndex={0}
+        >
+          {item.cancelado === true ? "Cancelado" : "No Cancelado"}
+        </Chip>
+
+      );
+
+    case "fecha":
+      return (
+        <p>{formatDate(item.fecha.toString())}</p>
       )
 
-    case "estado":
-      const statusText = item.estado === 1 ? "activo" : "inactivo";
+    case "activo":
+      const statusText = item.activo === 1 ? "activo" : "inactivo";
       return (
         <Chip
           className="capitalize cursor-pointer select-none"
           color={statusColorMap[statusText]}
           size="sm"
           variant="flat"
-          onDoubleClick={() => mutate({ id: item.id, activo: item.estado })}
+          onDoubleClick={() => mutate({ id: item.id, activo: item.activo })}
           role="button"
           tabIndex={0}
         >
@@ -47,12 +62,12 @@ export const RenderCellReturn = (
                 <VerticalDotsIcon className="text-default-300" />
               </Button>
             </DropdownTrigger>
-            <DropdownMenu disabledKeys={item.estado === 0 ? ["edit", "delete"] : []}>
-              <DropdownItem key="edit" onPress={() => openModalEdit(item.id_devolucion_producto)}>Editar</DropdownItem>
+            <DropdownMenu disabledKeys={item.activo === 0 ? ["edit", "delete"] : []}>
+              <DropdownItem key="edit" onPress={() => console.log(item.id)}>Editar</DropdownItem>
               <DropdownItem key="delete" className="text-danger" color="danger"
                 onPress={() => {
                   ToastDelete({
-                    name: item.codigo_lote,
+                    name: item.id.toString(),
                     onConfirm: () => mutate({ id: item.id, activo: 1 }),
                   })
                 }}

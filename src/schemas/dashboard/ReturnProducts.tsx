@@ -1,6 +1,5 @@
 import { z } from "zod";
 
-
 export const DashboardReturnProductSchema = z.object({
   id_devolucion_producto: z.number(),
   codigo_lote: z.string(),
@@ -14,7 +13,6 @@ export const DashboardReturnProductSchema = z.object({
   ...data,
   id: data.id_devolucion_producto
 }));
-
 
 export const ReturnProductFormDataSchema = z.object({
     id_detalle_ingreso: z.number(),
@@ -40,6 +38,5 @@ export const DashboardReturnProductByIdSchema = z.object({
   ...data,
   id: data.id_devolucion_producto
 }));
-
 
 export const DashboardReturnsProductsSchema = z.array(DashboardReturnProductSchema);

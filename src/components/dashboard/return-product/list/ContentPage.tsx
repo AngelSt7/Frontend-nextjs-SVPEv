@@ -4,13 +4,13 @@ import useSubmitMutation from "@/src/hooks/dashboard/useSubmitMutation"
 import { useModalUtils } from "@/src/hooks/modal/useModalUtils"
 import { dashboardChangeStatusReturnService } from "@/src/services/dashboard/return/dashboardChangeStatusReturnService"
 import { dashboardListReturnProductService } from "@/src/services/dashboard/return/dashboardListReturnService"
-import { Columns } from "../../category/list/Columns"
 import EditReturnWrapper from "../../return-product/edit/EditReturnProductWrapper"
 import { RenderCellReturn } from "../../return-product/list/RenderCellReturnProduct"
 import GenericModal from "../../ui/GenericModal"
 import { TableComponent } from "../../ui/table/TableContent"
 import { DashboardReturnProduct } from "@/src/types/dashboard/ReturnProductTypes"
 import { AuthUserInfo } from "@/src/types/AuthTypes"
+import { Columns } from "./Columns"
 
 
 export default function ContentPage({ id, user }: { id: string | undefined, user?: AuthUserInfo }) {

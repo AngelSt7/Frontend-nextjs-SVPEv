@@ -2,7 +2,7 @@ import Input from '@/src/components/ui/Input';
 import { FieldError, FieldErrors, UseFormRegister, UseFormSetValue, UseFormWatch } from 'react-hook-form';
 import SelectTabs, { ItemOption } from './SelectTabs';
 import SelectItem from '../../ui/SelectItem';
-import { StockFormData } from '@/src/types/dashboard/Stocktypes';
+import { StockFormData } from '@/src/types/dashboard/StockTypes';
 import SerieControl from './SerieControl';
 
 type StockFormProps = {
@@ -67,10 +67,10 @@ export default function StockForm({ register, errors, watch, setValue, productOp
                     maxLength={11}
                     register={register('numero_documento', {
                         required: 'Este campo es obligatorio',
-                        pattern: {
-                            value: /^F\d{3}-\d{6}$/,
-                            message: 'Formato inválido. Ej: F001-000125',
-                        },
+                        minLength: {
+                            value: 8,
+                            message: 'El N° de documento debe tener al menos 8 caracteres',
+                        }
                     })}
                     errorMessage={errors.numero_documento}
                 />

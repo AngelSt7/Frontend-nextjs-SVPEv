@@ -5,7 +5,7 @@ import { statusColorMap } from "@/src/utils/constants/constans";
 import { DashboardCategory } from "@/src/types/dashboard/CategoryTypes";
 import { mutateProps } from "@/src/types/commonTypes/commonTypes";
 
-export const RenderCellCategory = (mutate: mutateProps, item: DashboardCategory, columnKey: React.Key, openModalEdit: (id: number) => void) => {
+export const RenderCellCategory = (mutate: mutateProps, item: DashboardCategory, columnKey: React.Key, openModalEdit?: (id: number) => void) => {
   const cellValue = item[columnKey as keyof typeof item];
 
   switch (columnKey) {
@@ -49,7 +49,7 @@ export const RenderCellCategory = (mutate: mutateProps, item: DashboardCategory,
               </Button>
             </DropdownTrigger>
             <DropdownMenu disabledKeys={item.activo === 0 ? ["edit", "delete"] : []}>
-              <DropdownItem key="edit" onPress={() => openModalEdit(item.id)}>Editar</DropdownItem>
+              <DropdownItem key="edit" onPress={() => openModalEdit!(item.id)}>Editar</DropdownItem>
               <DropdownItem key="delete" className="text-danger" color="danger"
                 onPress={() => {
                   ToastDelete({

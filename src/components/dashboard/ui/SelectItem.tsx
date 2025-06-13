@@ -1,8 +1,6 @@
 import Errors from "@/src/components/ui/Errors";
 import { Select, SelectItem as HeroSelectItem } from "@heroui/react";
-import {
-    FieldError, FieldErrorsImpl, FieldValues, Merge, Path, PathValue, UseFormRegisterReturn, UseFormSetValue, UseFormWatch,
-} from "react-hook-form";
+import { FieldError, FieldErrorsImpl, FieldValues, Merge, Path, PathValue, UseFormRegisterReturn, UseFormSetValue, UseFormWatch} from "react-hook-form";
 
 type SelectItemProps<T extends FieldValues> = {
     data: { id: string | number; label?: string; nombre?: string; activo: boolean | number; }[];

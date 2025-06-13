@@ -3,7 +3,7 @@ import { Button } from '@heroui/react';
 import { useForm } from 'react-hook-form';
 import { AuthUserInfo } from '@/src/types/AuthTypes';
 import StockForm from '../form/StockForm';
-import { DashboardStockById, StockFormData } from '@/src/types/dashboard/Stocktypes';
+import { DashboardStockById, StockFormData } from '@/src/types/dashboard/StockTypes';
 import { useGetProducts } from '@/src/hooks/dashboard/useGetProducts';
 import { useGetSuppliers } from '@/src/hooks/dashboard/useGetSuppliers';
 import { useMemo } from 'react';

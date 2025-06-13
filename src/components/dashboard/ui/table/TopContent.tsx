@@ -7,6 +7,7 @@ import { ChangeEvent, Dispatch, SetStateAction } from "react";
 import { ColumnsType } from "@/src/types/commonTypes/commonTypes";
 
 interface TopContentProps {
+  newPath?: string
   openModalCreate?: () => void
   filterValue: string;
   setFilterValue: (value: string) => void;
@@ -24,7 +25,7 @@ interface TopContentProps {
   showActions?: boolean
 }
 
-export const TopContent: React.FC<TopContentProps> = ({ filterValue, onSearchChange, onClear, statusFilter, setStatusFilter, visibleColumns, setVisibleColumns, onRowsPerPageChange, total, openModalCreate, statusOptions, columns, messageButton, showActions = true }) => {
+export const TopContent: React.FC<TopContentProps> = ({ filterValue, onSearchChange, onClear, statusFilter, setStatusFilter, visibleColumns, setVisibleColumns, onRowsPerPageChange, total, openModalCreate, statusOptions, columns, messageButton, showActions = true, newPath }) => {
   return (
     <div className="flex flex-col gap-4 p-4">
       <div className="flex justify-between gap-3 items-end">
@@ -41,29 +42,29 @@ export const TopContent: React.FC<TopContentProps> = ({ filterValue, onSearchCha
         <div className="flex gap-3">
           {showActions && (
             <Dropdown>
-            <DropdownTrigger className="hidden sm:flex">
-              <Button endContent={<ChevronDownIcon className="text-small" />} variant="flat">
-                Status
-              </Button>
-            </DropdownTrigger>
-            <DropdownMenu
-              disallowEmptySelection
-              aria-label="Table Columns"
-              closeOnSelect={true}
-              selectedKeys={new Set([statusFilter])}
-              selectionMode="single"
-              onSelectionChange={(keys) => {
-                const key = typeof keys === "string" ? keys : String([...keys][0]);
-                setStatusFilter(key);
-              }}
-            >
-              {statusOptions.map((status) => (
-                <DropdownItem key={status.uid} className="capitalize">
-                  {capitalize(status.name)}
-                </DropdownItem>
-              ))}
-            </DropdownMenu>
-          </Dropdown>
+              <DropdownTrigger className="hidden sm:flex">
+                <Button endContent={<ChevronDownIcon className="text-small" />} variant="flat">
+                  Status
+                </Button>
+              </DropdownTrigger>
+              <DropdownMenu
+                disallowEmptySelection
+                aria-label="Table Columns"
+                closeOnSelect={true}
+                selectedKeys={new Set([statusFilter])}
+                selectionMode="single"
+                onSelectionChange={(keys) => {
+                  const key = typeof keys === "string" ? keys : String([...keys][0]);
+                  setStatusFilter(key);
+                }}
+              >
+                {statusOptions.map((status) => (
+                  <DropdownItem key={status.uid} className="capitalize">
+                    {capitalize(status.name)}
+                  </DropdownItem>
+                ))}
+              </DropdownMenu>
+            </Dropdown>
           )}
           <Dropdown>
             <DropdownTrigger className="hidden sm:flex">
@@ -94,27 +95,40 @@ export const TopContent: React.FC<TopContentProps> = ({ filterValue, onSearchCha
             </DropdownMenu>
           </Dropdown>
           {showActions &&
-            <Button className="bg-[#2c2c2c] text-white shadow-lg" endContent={<PlusIcon />} onPress={openModalCreate}>
-              {`Agregar ${messageButton}`}
-            </Button>
+            (newPath ? (
+              <a
+                href={newPath}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Button className="bg-[#2c2c2c] text-white shadow-lg" endContent={<PlusIcon />}>
+                  {`Agregar ${messageButton}`}
+                </Button>
+              </a>
+            ) : (
+              <Button className="bg-[#2c2c2c] text-white shadow-lg" endContent={<PlusIcon />} onPress={openModalCreate}>
+                {`Agregar ${messageButton}`}
+              </Button>
+            ))
           }
+
         </div>
       </div>
 
-        <div className="flex justify-between items-center">
-          <span className="text-default-400 text-small">Total {total} proveedores</span>
-          <label className="flex items-center text-default-400 text-small">
-            Registros por pagina:
-            <select
-              className="bg-transparent outline-none text-default-400 text-small"
-              onChange={onRowsPerPageChange}
-            >
-              <option value="5">5</option>
-              <option value="10">10</option>
-              <option value="15">15</option>
-            </select>
-          </label>
-        </div>
+      <div className="flex justify-between items-center">
+        <span className="text-default-400 text-small">Total {total}</span>
+        <label className="flex items-center text-default-400 text-small">
+          Registros por pagina:
+          <select
+            className="bg-transparent outline-none text-default-400 text-small"
+            onChange={onRowsPerPageChange}
+          >
+            <option value="5">5</option>
+            <option value="10">10</option>
+            <option value="15">15</option>
+          </select>
+        </label>
+      </div>
     </div>
   );
 };

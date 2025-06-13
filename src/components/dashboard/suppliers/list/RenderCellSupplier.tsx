@@ -6,7 +6,7 @@ import { mutateProps } from "@/src/types/commonTypes/commonTypes";
 import { DashboardSupplier } from "@/src/types/DashboardTypes";
 import { ToastDelete } from "../../ui/ToastDelete";
 
-export const RenderCellSupplier = (mutate: mutateProps, item: DashboardSupplier, columnKey: React.Key, openModalEdit: (id: number) => void) => {
+export const RenderCellSupplier = (mutate: mutateProps, item: DashboardSupplier, columnKey: React.Key, openModalEdit?: (id: number) => void) => {
   const cellValue = item[columnKey as keyof typeof item];
 
   switch (columnKey) {
@@ -49,7 +49,7 @@ export const RenderCellSupplier = (mutate: mutateProps, item: DashboardSupplier,
               </Button>
             </DropdownTrigger>
             <DropdownMenu disabledKeys={item.activo === 0 ? ["edit", "delete"] : []}> 
-              <DropdownItem key="edit" onPress={() => openModalEdit(item.id)}>Editar</DropdownItem>
+              <DropdownItem key="edit" onPress={() => openModalEdit!(item.id)}>Editar</DropdownItem>
               <DropdownItem key="delete" className="text-danger" color="danger"
                 onPress={() => {
                   ToastDelete({

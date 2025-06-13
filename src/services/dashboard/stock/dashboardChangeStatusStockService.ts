@@ -1,5 +1,5 @@
 import api from "@/src/axios/axios";
-import { DashboardStock } from "@/src/types/dashboard/Stocktypes";
+import { DashboardStock } from "@/src/types/dashboard/StockTypes";
 import { actions } from "@/src/utils/constants/constans";
 import { isAxiosError } from "axios";
 

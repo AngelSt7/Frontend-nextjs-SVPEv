@@ -42,7 +42,7 @@ export default function EditDiscountForm({ user, closeModal, defaultValues }: Ed
        <DiscountForm register={register} errors={errors} watch={watch} setValue={setValue} />
       <div className="w-full flex gap-4 justify-end mt-3">
         <Button color='danger' variant='flat' onPress={() => closeModal()}>Cancelar</Button>
-        <Button color='success' type='submit'>Actualizar Categoria</Button>
+        <Button color='success' type='submit'>Actualizar Descuento</Button>
       </div> 
     </form>
   );

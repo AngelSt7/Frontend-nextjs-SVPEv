@@ -5,6 +5,10 @@ export const actions: { [key: number]: { action: string } } = {
     0: { action: "activar" },
 };
 
+export const actionsSale: { [key: number]: { action: string } } = {
+    1: { action: "cancelar" },
+    0: { action: "activar" },
+};
 
 export const statusColorMap: Record<string, ChipProps["color"]> = {
     activo: "success",

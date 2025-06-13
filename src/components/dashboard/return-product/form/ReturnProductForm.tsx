@@ -113,7 +113,7 @@ export default function ReturnForm({ register, errors, watch, setValue, isEdit =
                 errorMessage={errors.motivo}
             />
 
-            <Switch isSelected={isSelected} onValueChange={handleChange}>
+            <Switch  isSelected={isSelected} onValueChange={handleChange} {...register("reposicionAplicada")}>
                 ¿Aplicar reposición?
             </Switch>
         </div>
