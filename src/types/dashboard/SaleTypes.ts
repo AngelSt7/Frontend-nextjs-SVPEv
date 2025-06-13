@@ -1,3 +1,11 @@
+import { DashboardSaleSchema, SalesFormDataSchema } from "@/src/schemas/dashboard/Sales"
+import { z } from "zod"
+
+export type Discount = {
+    nombreCategoria: string,
+    porcentaje: number,
+}
+
 export type Product = {
     id: number,
     nombre: string,
@@ -11,4 +19,8 @@ export type Product = {
 export type ProductCart = Product & {
     cantidad: number,
     subtotal: number,
+    descuento: number
 }
+
+export type SalesFormData = z.infer<typeof SalesFormDataSchema>
+export type DashboardSale = z.infer<typeof DashboardSaleSchema>

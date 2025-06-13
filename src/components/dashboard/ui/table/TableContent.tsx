@@ -17,9 +17,11 @@ const labelMap: Record<string, string> = {
   returns: "Devolución",
   stocks: "Stock",
   returnsProducts: "Devolución Producto",
+  sales: "Venta"
 };
 
 type TableComponentProps<T> = {
+  newPath?: string
   openModalCreate?: () => void;
   openModalEdit?: (id: number ) => void;
   columns: ColumnsType;
@@ -53,7 +55,8 @@ export const TableComponent = <T extends { id: number }>({
   isSales = false,
   addProduct,
   decreaseQuantity,
-  increaseQuantity
+  increaseQuantity,
+  newPath
 }: TableComponentProps<T>) => {
   const { data = [], isLoading } = useQuery({
     queryKey: [queryKey],
@@ -112,6 +115,7 @@ export const TableComponent = <T extends { id: number }>({
       }}
       topContent={
         <TopContent
+          newPath={newPath}
           showActions={showActions}
           filterValue={filterValue}
           setFilterValue={setFilterValue}

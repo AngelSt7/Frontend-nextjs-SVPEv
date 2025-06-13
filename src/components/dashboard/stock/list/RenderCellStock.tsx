@@ -2,7 +2,7 @@ import { Chip, User, Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, Butt
 import { VerticalDotsIcon } from "../../ui/icons/VerticalDotsIcon";
 import { ToastDelete } from "../../ui/ToastDelete";
 import { statusColorMap } from "@/src/utils/constants/constans";
-import { DashboardStock } from "@/src/types/dashboard/Stocktypes";
+import { DashboardStock } from "@/src/types/dashboard/StockTypes";
 import { mutateProps } from "@/src/types/commonTypes/commonTypes";
 import toast from "react-hot-toast";
 

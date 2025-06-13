@@ -2,7 +2,7 @@ import { Button } from '@heroui/react';
 import { useForm } from 'react-hook-form';
 import useSubmitMutation from '@/src/hooks/dashboard/useSubmitMutation';
 import StockForm from '../form/StockForm';
-import { StockFormData } from '@/src/types/dashboard/Stocktypes';
+import { StockFormData } from '@/src/types/dashboard/StockTypes';
 import { AuthUserInfo } from '@/src/types/AuthTypes';
 import { dashboardCreateStockService } from '@/src/services/dashboard/stock/dashboardCreateStockService';
 import { useGetProducts } from '@/src/hooks/dashboard/useGetProducts';
@@ -17,9 +17,8 @@ type CreateStockFormProps = {
 export default function CreateStockForm({ closeModal, user }: CreateStockFormProps) {
   const { data: products = [] } = useGetProducts();
   const { data: suppliers = [] } = useGetSuppliers();
-  const productOptions = useMemo(() => products.map((p) => ({ label: p.nombre, value: p.id })), [products])
-  const suppliersOptions = useMemo(() => suppliers.map((p) => ({ label: p.razon_social, value: p.id })), [suppliers])
-
+  const productOptions = useMemo(() => products.filter(p => p.activo === 1).map(p => ({ label: p.nombre, value: p.id })), [products]);
+  const suppliersOptions = useMemo(() => suppliers.filter(p => p.activo === 1).map((p) => ({ label: p.razon_social, value: p.id })), [suppliers])
   const { register, handleSubmit, formState: { errors }, setValue, watch } = useForm<StockFormData>();
 
   const { mutate } = useSubmitMutation({
@@ -29,7 +28,7 @@ export default function CreateStockForm({ closeModal, user }: CreateStockFormPro
     message: 'Stock registrado exitosamente'
   })
 
-  const onSubmit = (data: StockFormData) => mutate({...data, id_usuario: user!.id});
+  const onSubmit = (data: StockFormData) => mutate({ ...data, id_usuario: user!.id });
 
   return (
     <form
@@ -42,9 +41,9 @@ export default function CreateStockForm({ closeModal, user }: CreateStockFormPro
         setValue={setValue}
         watch={watch}
         register={register}
-        errors={errors} 
+        errors={errors}
       />
-      
+
       <div className="w-full flex gap-4 justify-end mt-3">
         <Button color='danger' variant='flat' onPress={closeModal}>Cancelar</Button>
         <Button color='success' type='submit'>Registrar Stock</Button>

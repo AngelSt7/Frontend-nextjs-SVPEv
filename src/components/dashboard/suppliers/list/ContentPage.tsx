@@ -30,6 +30,7 @@ export default function ContentPage({ id }: { id: string | undefined }) {
         searchableField="razon_social"
         mutate={mutate}
         renderCells={RenderCellSupplier}
+        isSales={false}
       />
       <GenericModal closeModal={closeModal} />
       {id && <EditSupplierWrapper closeModal={closeModal} id={id} />}

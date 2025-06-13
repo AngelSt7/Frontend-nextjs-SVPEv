@@ -8,6 +8,7 @@ export const Columns: ColumnsType = [
   { name: "SKU", uid: "sku" },
   { name: "Stock Mínimo", uid: "min_stock", sortable: true },
   { name: "Stock Máximo", uid: "max_stock", sortable: true },
+  { name: "Stock Actual", uid: "stock_actual", sortable: true },
   { name: "Garantía (meses)", uid: "garantia_meses" },
   { name: "Categoría", uid: "nombre_categoria", sortable: true },
   { name: "Marca", uid: "nombre_marca", sortable: true },

@@ -1,6 +1,6 @@
 import { FieldError, FieldErrorsImpl, Merge, FieldValues, Path, PathValue, UseFormRegisterReturn, UseFormSetValue, UseFormWatch} from "react-hook-form";
 import { DateValue, RangeCalendar, RangeValue } from '@heroui/react';
-import { parseDate } from "@internationalized/date";
+import { parseDate, today, getLocalTimeZone } from "@internationalized/date";
 import Errors from "@/src/components/ui/Errors";
 
 type SelectDateProps<T extends FieldValues> = {
@@ -50,6 +50,7 @@ export default function SelectDate<T extends FieldValues>({
         value={value}
         onChange={onChange}
         color="success"
+        minValue={today(getLocalTimeZone())}
       />
 
       <div className='flex justify-between '>

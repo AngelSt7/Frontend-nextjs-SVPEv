@@ -7,3 +7,5 @@ export const Columns: ColumnsType = [
   { name: "Activo", uid: "activo", sortable: true },
   { name: "Acciones", uid: "actions" },
 ];
+
+

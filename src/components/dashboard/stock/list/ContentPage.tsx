@@ -8,7 +8,7 @@ import useSubmitMutation from '@/src/hooks/dashboard/useSubmitMutation'
 import { AuthUserInfo } from '@/src/types/AuthTypes'
 import { RenderCellStock } from './RenderCellStock'
 import { dashboardListStockService } from '@/src/services/dashboard/stock/dashboardListStockService'
-import { DashboardStock } from '@/src/types/dashboard/Stocktypes'
+import { DashboardStock } from '@/src/types/dashboard/StockTypes'
 import { dashboardChangeStatusStockService } from '@/src/services/dashboard/stock/dashboardChangeStatusStockService'
 import EditStockWrapper from '../edit/EditStockWrapper'
 
@@ -29,7 +29,7 @@ export default function ContentPage({ id, user }: { id: string | undefined, user
                 queryKey="stocks"
                 functionService={dashboardListStockService}
                 defaultVisibleColumns={["producto", "proveedor", "lote", "tipo_documento", "numero_documento", "activo", "actions"]}
-                searchableField="lote"
+                searchableField="numero_documentou"
                 mutate={mutate}
                 renderCells={RenderCellStock}
             />
