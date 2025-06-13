@@ -10,11 +10,14 @@ export const Tittles: Record<string, string> = {
     '/dashboard/devolucion-productos': 'Administrar Devoluciones',
     '/dashboard/stock': 'Administrar Stock',
     '/dashboard/ventas': 'Administrar Ventas',
-    '/dashboard/ventas/registrar': 'Generar Venta'
+    '/dashboard/ventas/registrar': 'Generar Venta',
+    '/dashboard/returns-sales': 'Administrar Devoluciones de Ventas',
+    '/dashboard/reclamos-garantia': 'Administrar Reclamos de Garantía',
+    '/dashboard/garantia': 'Administrar Garantías',
 };
 
 // Mapear entidades
-type Entity = 'proveedor' | 'producto' | 'usuario' | 'categoria' | 'descuento' | 'cupón' | 'devolución_producto' | 'stock';
+type Entity = 'proveedor' | 'producto' | 'usuario' | 'categoria' | 'descuento' | 'cupón' | 'devolución_producto' | 'devolución_venta' | 'garantia' | 'reclamo_garantia' | 'stock';
 
 // ruta => singular
 export const pluralToSingular: Record<string, Entity> = {
@@ -25,5 +28,8 @@ export const pluralToSingular: Record<string, Entity> = {
     descuentos: "descuento",
     cupones: "cupón",
     devoluciones_productos: "devolución_producto",
-    stock: "stock"
+    devoluciones_ventas: "devolución_venta",
+    stock: "stock",
+    reclamos_garantia: "reclamo_garantia",
+    garantia: "garantia",
 };

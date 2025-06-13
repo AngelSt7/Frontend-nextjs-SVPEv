@@ -19,15 +19,23 @@ import EditStockForm from "../stock/edit/EditStockForm";
 import CreateReturnForm from "../return-product/create/CreateReturnProductForm";
 import EditReturnForm from "../return-product/edit/EditReturnProductForm";
 import CreateReturnProductForm from "../return-product/create/CreateReturnProductForm";
+import CreateReturnSaleForm from "../return-sale/create/CreateReturnSaleForm";
+import EditReturnSaleForm from "../return-sale/edit/EditReturnSaleForm";
+import CreateWarrantyClaimForm from "../warranty-claim/create/CreateWarrantyClaimForm";
+import EditWarrantyClaimForm from "../warranty-claim/edit/EditWarrantyClaimForm";
+import CreateWarrantyForm from "../warranty/create/CreateWarrantyForm";
+import EditWarrantyForm from "../warranty/edit/EditWarrantyForm";
 
 type GenericModalProps = {
   user?: AuthUserInfo;
   id?: string;
   closeModal: () => void;
   defaultValues?: any;
+  idReturnSaleDetail?: number;
+  clearIdReturnSaleDetail?: () => void;
 };
 
-export default function GenericModal({ user, id, closeModal, defaultValues }: GenericModalProps) {
+export default function GenericModal({ user, id, closeModal, defaultValues, idReturnSaleDetail, clearIdReturnSaleDetail }: GenericModalProps) {
 
   const path = usePathname();
   const searchParams = useSearchParams();
@@ -59,6 +67,9 @@ export default function GenericModal({ user, id, closeModal, defaultValues }: Ge
         case "cupón": return <CreateCouponForm closeModal={closeModal} />;
         case "devolución_producto":  return  <CreateReturnProductForm user={user} closeModal={closeModal} />
         case "stock": return  <CreateStockForm user={user} closeModal={closeModal} />
+        case "devolución_venta":  return  <CreateReturnSaleForm closeModal={closeModal} idReturnSaleDetail={idReturnSaleDetail!} />
+        case "reclamo_garantia": return <CreateWarrantyClaimForm closeModal={closeModal} />
+        case "garantia": return <CreateWarrantyForm closeModal={closeModal} />;
       }
     }
 
@@ -72,6 +83,9 @@ export default function GenericModal({ user, id, closeModal, defaultValues }: Ge
         case "cupón": return <EditCouponForm closeModal={closeModal} defaultValues={defaultValues} />;
         case "devolución_producto": return <EditReturnForm user={user} closeModal={closeModal} defaultValues={defaultValues} />;
         case "stock": return <EditStockForm user={user} closeModal={closeModal} defaultValues={defaultValues} />
+        case "devolución_venta": return <EditReturnSaleForm closeModal={closeModal} defaultValues={defaultValues} />;
+        case "reclamo_garantia": return <EditWarrantyClaimForm user={user} closeModal={closeModal} defaultValues={defaultValues} />;
+        case "garantia": return <EditWarrantyForm user={user} closeModal={closeModal} defaultValues={defaultValues} />;
       }
     }
     return null;

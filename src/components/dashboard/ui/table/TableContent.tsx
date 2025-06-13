@@ -17,6 +17,21 @@ const labelMap: Record<string, string> = {
   returns: "Devolución",
   stocks: "Stock",
   returnsProducts: "Devolución Producto",
+  warrantyClaims: "Reclamo de Garantía",
+  warranties: "Garantía",
+};
+
+const entityLabelMap: Record<string, string> = {
+  suppliers: "proveedores",
+  users: "usuarios",
+  products: "productos",
+  categories: "categorías",
+  discounts: "descuentos",
+  coupons: "cupones",
+  returnsProducts: "devoluciones de producto",
+  stocks: "stocks",
+  warrantyClaims: "reclamos de garantía",
+  warranties: "garantías",
 };
 
 type TableComponentProps<T> = {
@@ -131,6 +146,7 @@ export const TableComponent = <T extends { id: number }>({
           ]}
           columns={columns}
           messageButton={labelMap[queryKey] || "Elemento"}
+          entityLabel={entityLabelMap[queryKey] || "elementos"}
         />
       }
       topContentPlacement="outside"
@@ -147,7 +163,7 @@ export const TableComponent = <T extends { id: number }>({
         )}
       </TableHeader>
 
-      {isSales ? (
+      {!isSales ? (
         <TableBody
           items={sortedItems}
           isLoading={isLoading}
