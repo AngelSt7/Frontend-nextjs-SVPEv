@@ -20,5 +20,7 @@ export type IconSvgProps = SVGProps<SVGSVGElement> & {
   size?: number;
 };
 
+export type ItemOption = { label: string; value: number }
+
 // typado de funciones
 export type mutateProps = UseMutateFunction<any, Error, ChangeStatusSupplierService, unknown>  

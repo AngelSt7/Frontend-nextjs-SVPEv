@@ -1,15 +1,7 @@
-'use client'
-
-import { FaRegEye } from "react-icons/fa";
-import React, { useEffect, useState, useMemo } from 'react'
-import {
-  FieldError, FieldValues, Path, PathValue,
-  UseFormSetValue, UseFormWatch, UseFormRegisterReturn
-} from 'react-hook-form'
-import { useSearchParams } from 'next/navigation'
-import Link from 'next/link'
-
-export type ItemOption = { label: string, value: number }
+import { useSelectTabs } from '@/src/hooks/dashboard/useSelectTabs';
+import { ItemOption } from '@/src/types/commonTypes/commonTypes';
+import React from 'react'
+import { FieldError, FieldValues, Path, UseFormSetValue, UseFormWatch, UseFormRegisterReturn } from 'react-hook-form'
 
 type TabsProductProps<T extends FieldValues> = {
   data: ItemOption[]
@@ -22,68 +14,12 @@ type TabsProductProps<T extends FieldValues> = {
   view: string
 }
 
-export default function SelectTabs<T extends FieldValues>({
-  data,
-  name,
-  setValue,
-  watch,
-  register,
-  errorMessage,
-  label,
-  view
-}: TabsProductProps<T>) {
-  const searchParams = useSearchParams()
-  const isEditMode = searchParams.get('action') === 'edit'
+export default function SelectTabs<T extends FieldValues>({ data, name, setValue, watch, register, errorMessage, label }: TabsProductProps<T>) {
 
-  const selected = watch(name)
-
-  const selectedLabel = useMemo(() => {
-    const found = data.find(item => item.value === selected)
-    return found ? found.label : ''
-  }, [selected, data])
-
-  const [search, setSearch] = useState('')
-  const [filtered, setFiltered] = useState<ItemOption[]>([])
-
-  useEffect(() => {
-    if (isEditMode && selectedLabel) {
-      setSearch(selectedLabel)
-      const matches = data.filter((item) =>
-        item.label.toLowerCase().includes(selectedLabel.toLowerCase())
-      )
-      setFiltered(matches)
-    }
-  }, [isEditMode, selectedLabel, data])
-
-  const onChangeSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value
-    setSearch(value)
-
-    const filteredItems = value.length > 0
-      ? data.filter((item) =>
-        item.label.toLowerCase().includes(value.toLowerCase())
-      )
-      : []
-
-    setFiltered(filteredItems)
-
-    const exactMatch = data.find(item =>
-      item.label.toLowerCase() === value.toLowerCase()
-    )
-
-    if (!exactMatch) {
-      setValue(name, '' as PathValue<T, Path<T>>, { shouldValidate: true })
-    }
-  }
-
-  const onSelectProduct = (id: number, label: string) => {
-    setValue(name, id as PathValue<T, Path<T>>, { shouldValidate: true })
-    setSearch(label)
-    const filteredItems = data.filter((item) =>
-      item.label.toLowerCase().includes(label.toLowerCase())
-    )
-    setFiltered(filteredItems)
-  }
+  const { search, filtered, selected, onChangeSearch, onSelectProduct } = useSelectTabs({
+    data, name,
+    watch, setValue
+  })
 
   return (
     <div className="flex flex-col gap-4">
@@ -102,7 +38,7 @@ export default function SelectTabs<T extends FieldValues>({
       }`}
         type="text"
         placeholder="Ingrese su búsqueda"
-        onChange={onChangeSearch}
+        onChange={(e) => onChangeSearch(e.target.value)}
         value={search}
       />
 
