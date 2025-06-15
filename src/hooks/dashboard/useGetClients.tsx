@@ -1,10 +1,10 @@
+import { dashboardListClientService } from '@/src/services/dashboard/client/dashboardListClientService';
 import { useQuery, keepPreviousData } from '@tanstack/react-query';
-import { dashboardListClientsService } from '@/src/services/dashboard/clients/dashboardListClientsService';
 
 export const useGetClients = () => {
   return useQuery({
     queryKey: ['clients'],
-    queryFn: dashboardListClientsService,
+    queryFn: dashboardListClientService,
     refetchOnWindowFocus: false,
     retry: false,
     placeholderData: keepPreviousData,

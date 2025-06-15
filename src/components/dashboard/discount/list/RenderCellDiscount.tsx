@@ -54,6 +54,7 @@ export const RenderCellDiscount = (mutate: mutateProps, item: DashboardDiscount,
                             <DropdownItem key="delete" className="text-danger" color="danger"
                                 onPress={() => {
                                     ToastDelete({
+                                        message: "¿Desea eliminar el descuento de la categoría",
                                         name: item.nombreCategoria!,
                                         onConfirm: () => mutate({ id: item.id, activo: 1 }),
                                     })

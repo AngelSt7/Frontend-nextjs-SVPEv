@@ -14,6 +14,10 @@ input[type="number"] {
   -moz-appearance: textfield;
 }
 
+.custom-container {
+  @apply bg-white dark:bg-[#17171a] w-[95%] max-w-[1600px] mx-auto rounded-md font-semibold border dark:border-none;
+}
+
 /* Animación de Toast que por alguna razon no quiere chapar */
 @layer utilities {
   .animate-enter { animation: enter 0.3s ease-out; }

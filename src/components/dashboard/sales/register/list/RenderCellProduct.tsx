@@ -3,8 +3,9 @@ import { DashboardProduct } from "@/src/types/dashboard/ProductTypes";
 import { formatDate } from "@/src/utils/format/formatDate";
 import { formatCurrency } from "@/src/utils/format/formatCurrency";
 import { Product } from "@/src/types/dashboard/SaleTypes";
+import toast from "react-hot-toast";
 
-export const renderCellSaleProduct = ( 
+export const renderCellSaleProduct = (
   item: DashboardProduct,
   columnKey: React.Key,
   addProduct?: (product: Product) => void
@@ -34,19 +35,26 @@ export const renderCellSaleProduct = (
     case "actions":
       return (
         <div className="relative flex justify-end items-center gap-2">
-          <Button color="warning" size="sm" variant="flat"
-            onPress={() => addProduct!({
-              id: item.id,
-              nombre: item.nombre,
-              precio_venta: item.precio_venta,
-              min_stock: item.min_stock,
-              stock_actual: item.stock_actual,
-              nombre_categoria: item.nombre_categoria,
-              nombre_marca: item.nombre_marca,  
-            })}
+          <Button
+            color="warning"
+            size="sm"
+            variant="flat"
+            onPress={() => {
+              addProduct?.({
+                id: item.id,
+                nombre: item.nombre,
+                precio_venta: item.precio_venta,
+                min_stock: item.min_stock,
+                stock_actual: item.stock_actual,
+                nombre_categoria: item.nombre_categoria,
+                nombre_marca: item.nombre_marca,
+              });
+              toast.success(`¡${item.nombre} fue agregado al carrito! ¡Que gran decisión!`);
+            }}
           >
             Agregar al carrito
           </Button>
+
         </div>
       );
     default:

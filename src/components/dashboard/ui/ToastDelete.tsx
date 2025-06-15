@@ -1,21 +1,20 @@
 import { toast } from 'react-hot-toast';
 
 type ToastDeleteProps = {
+  message: string
   name: string
   onConfirm: () => void
 }
-export function ToastDelete({ name, onConfirm } : ToastDeleteProps ) {
+export function ToastDelete({ message, onConfirm, name } : ToastDeleteProps ) {
   toast.custom((t) => (
     <div
       className={`${
         t.visible ? 'animate-enter' : 'animate-leave'
       } max-w-md w-full bg-white dark:bg-zinc-900 shadow-lg rounded-lg pointer-events-auto flex overflow-hidden ring-1 ring-black ring-opacity-5`}
     >
-      {/* Franja roja a la izquierda */}
       <div className="w-1.5 bg-red-500"></div>
       
       <div className="flex-1 flex items-start p-4">
-        {/* Icono de alerta */}
         <div className="flex-shrink-0 mr-3">
           <svg 
             className="w-6 h-6 text-red-500" 
@@ -32,15 +31,15 @@ export function ToastDelete({ name, onConfirm } : ToastDeleteProps ) {
           </svg>
         </div>
         
-        {/* Contenido del mensaje */}
         <div className="flex-1">
           <p className="text-sm font-medium text-gray-900 dark:text-white">
-            ¿Desea eliminar el proveedor <span className='font-semibold '>{`${name}`}</span>? Se marcará como <span className='font-semibold '>inactivo</span> hasta una nueva actualización.
+            {message} <span className='font-semibold '>{`${name}`}
+              </span>? Se marcará como <span className='font-semibold '>inactivo </span> 
+              hasta una nueva actualización.
           </p>
         </div>
       </div>
       
-      {/* Botones de acción */}
       <div className="flex flex-col  justify-center gap-3 border-l border-gray-200 dark:border-zinc-700 px-4 py-2">
         <button
           onClick={() => {

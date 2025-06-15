@@ -2,14 +2,15 @@
 
 import { TableComponent } from '@/src/components/dashboard/ui/table/TableContent'
 import { useModalUtils } from '@/src/hooks/modal/useModalUtils'
-import GenericModal from '../../ui/GenericModal'
+import GenericModal from '../../ui/generics/GenericModal'
 import useSubmitMutation from '@/src/hooks/dashboard/useSubmitMutation'
 import { Columns } from './Columns'
 import { RenderCellDiscount } from './RenderCellDiscount'
 import { DashboardDiscount } from '@/src/types/dashboard/DiscountTypes'
-import EditDiscountWrapper from '../edit/EditDiscountWrapper'
 import { dashboardListDiscountService } from '@/src/services/dashboard/discount/dashboardListDiscountService'
 import { dashboardChangeStatusCategoryService } from '@/src/services/dashboard/category/dashboardChangeStatusCategoryService'
+import GenericEditWrapper from '../../ui/generics/GenericEditWrapper'
+import { dashboardFindByIdDiscountService } from '@/src/services/dashboard/discount/dashboardFindByIdDiscountService'
 
 export default function ContentPage({ id }: { id: string | undefined }) {
     const { openModalCreate, openModalEdit, closeModal } = useModalUtils()
@@ -33,8 +34,16 @@ export default function ContentPage({ id }: { id: string | undefined }) {
                 renderCells={RenderCellDiscount}
             />
 
+            {id && (
+                <GenericEditWrapper
+                    id={id}
+                    closeModal={closeModal}
+                    serviceFunction={dashboardFindByIdDiscountService}
+                    queryKey="discount"
+                />
+            )}
+
             <GenericModal closeModal={closeModal} />
-            {id && <EditDiscountWrapper closeModal={closeModal} id={id} />}
         </div>
     )
 }

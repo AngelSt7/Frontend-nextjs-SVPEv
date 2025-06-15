@@ -1,6 +1,5 @@
 import { Product, ProductCart } from "@/src/types/dashboard/SaleTypes"
 import { formatCurrency } from "@/src/utils/format/formatCurrency"
-import { Button, Tooltip } from "@heroui/react"
 import { useState } from "react"
 
 type ItemCartProps = {

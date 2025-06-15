@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import GenericModal from '../../ui/GenericModal';
+import GenericModal from '../../ui/generics/GenericModal';
 import { dashboardFindByIdWarrantyClaimService } from '@/src/services/dashboard/warranty-claim/dashboardFindByIdWarrantyClaimService';
 import { AuthUserInfo } from '@/src/types/AuthTypes';
 

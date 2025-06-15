@@ -1,9 +1,5 @@
 import { useMemo } from 'react';
-import {
-  FieldError,
-  FieldValues,
-  UseFormRegister,
-} from 'react-hook-form';
+import { FieldError, FieldValues, UseFormRegister} from 'react-hook-form';
 import { IconType } from 'react-icons';
 import Errors from './Errors';
 
@@ -18,6 +14,8 @@ type InputProps<T extends FieldValues> = {
   variant?: 'default' | 'floating';
   maxLength?: number;
   disabled?: boolean;
+  inputMode?: 'text' | 'numeric' | 'decimal' | 'tel' | 'email' | 'url'; 
+  pattern?: string; 
 };
 
 export default function Input<T extends FieldValues>({
@@ -31,16 +29,18 @@ export default function Input<T extends FieldValues>({
   maxLength,
   disabled = false,
   variant = 'default',
+  inputMode,
+  pattern,  
 }: InputProps<T>) {
   const isTextArea = type === 'textarea';
 
   const inputClasses = useMemo(() => {
-    const base = `text-sm block w-full p-2 border border-[#afaeae] bg-[#f4f4f5] hover:bg-[#e4e4e7] rounded-md outline-none focus:ring-1 focus:ring-white/10 ${errorMessage ? 'ring-1 ring-[#d10b30]' : ''
+    const base = `text-sm block w-full p-2 border border-[#afaeae] dark:border-[#3f3f46] bg-[#f4f4f5] hover:bg-[#e4e4e7] dark:bg-[#242428] dark:hover:bg-[#3f3f46] rounded-md outline-none focus:ring-1 focus:ring-white/10 ${errorMessage ? 'ring-1 ring-[#d10b30]' : ''
       }`;
 
     return variant === 'floating'
       ? `${base} peer px-3 pt-6 pb-2`
-      : `${base} px-3 py-2.5 pr-10 ${isTextArea ? 'min-h-[120px]' : 'h-12'}`;
+      : `${base} px-3 py-2.5 pr-10 ${isTextArea ? 'min-h-[120px]' : 'h-[50px]'}`;
   }, [errorMessage, variant, isTextArea]);
 
   const autoCompleteValue = useMemo(
@@ -53,7 +53,7 @@ export default function Input<T extends FieldValues>({
   return (
     <div className="flex flex-col w-full gap-2">
       {variant === 'default' && label && (
-        <label htmlFor={inputId} className="overflow-hidden whitespace-nowrap text-ellipsis text-base font-semibold text-[#202021]">
+        <label htmlFor={inputId} className="overflow-hidden whitespace-nowrap text-ellipsis text-base font-semibold text-[#202021] dark:text-[#c5c5c7]">
           {label}
         </label>
       )}
@@ -73,6 +73,8 @@ export default function Input<T extends FieldValues>({
             type={type}
             disabled={disabled}
             maxLength={maxLength}
+            inputMode={inputMode}
+            pattern={pattern}
             min={type === 'number' ? 0 : undefined}
             placeholder={variant === 'floating' ? ' ' : placeholder}
             autoComplete={autoCompleteValue}
@@ -84,12 +86,11 @@ export default function Input<T extends FieldValues>({
             }}
             {...register}
           />
-
         )}
 
         {Icon && !isTextArea && (
           <Icon
-            className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500"
+            className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 dark:text-gray-400"
             size={20}
           />
         )}

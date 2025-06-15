@@ -1,11 +1,6 @@
 import Input from '@/src/components/ui/Input';
 import { FieldErrors, UseFormRegister, UseFormSetValue, UseFormWatch } from 'react-hook-form';
-import { MdDiscount, MdPermIdentity } from 'react-icons/md';
-import SelectDate from '../../category/create/SelectDate';
-import { useGetCategories } from '@/src/hooks/dashboard/useGetCategories';
-import SelectItem from '../../ui/SelectItem';
 import { ReturnSaleFormData } from '@/src/types/dashboard/ReturnSaleTypes';
-import { useGetSuppliers } from '@/src/hooks/dashboard/useGetSuppliers';
 
 type ReturnSaleFormProps = {
     register: UseFormRegister<ReturnSaleFormData>;
@@ -47,7 +42,6 @@ export default function ReturnSaleForm({ register, errors}: ReturnSaleFormProps)
                     errorMessage={errors.motivo}
                 />
             </div>
-
 
         </div>
     );

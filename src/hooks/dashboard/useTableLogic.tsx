@@ -1,3 +1,4 @@
+import { useAppStore } from "@/src/store/useAppStore";
 import { useMemo, useState } from "react";
 
 export type ColumnDefinition<T> = {
@@ -15,14 +16,14 @@ type useTableLogicProps<T> = {
   searchableField?: keyof T;
 };
 
-
-
 export const useTableLogic = <T extends { id: number | string }>({
   data,
   defaultVisibleColumns,
   columns,
   searchableField,
 }: useTableLogicProps<T>) => {
+  const rowsPerPage = useAppStore(state => state.take)
+  const setRowsPerPage = useAppStore(state => state.setChangeTake)
 
   const statusField = "activo" as keyof T;
   const [filterValue, setFilterValue] = useState("");
@@ -31,7 +32,6 @@ export const useTableLogic = <T extends { id: number | string }>({
     new Set(defaultVisibleColumns.map(String))
   );
   const [statusFilter, setStatusFilter] = useState<string>("all");
-  const [rowsPerPage, setRowsPerPage] = useState(5);
   const [sortDescriptor, setSortDescriptor] = useState<{
     column: SortKey<T>;
     direction: 'ascending' | 'descending';

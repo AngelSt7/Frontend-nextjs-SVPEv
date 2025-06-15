@@ -11,7 +11,7 @@ export default async function page({ searchParams }: { searchParams: { id?: stri
     if (!id) { redirect('/dashboard/stock') }
   }
   return (
-    <div className="bg-white w-[95%] max-w-[1600px] mx-auto my-3 rounded-md font-semibold border">
+    <div className="bg-white dark:bg-[#17171a] w-[95%] max-w-[1600px] mx-auto my-3 rounded-md font-semibold border dark:border-none">
       <ContentPage user={user} id={id} />
     </div>
   )

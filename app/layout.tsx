@@ -17,9 +17,11 @@ export default function RootLayout({
   children: React.ReactNode;
   dehydratedState?: DehydratedState;
 }) {
+  
   return (
-    <html lang="en">
+    <html lang="es" suppressHydrationWarning>
       <head>
+      <script src="/theme-loader.ts" />
         <link
           href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap"
           rel="stylesheet"
@@ -30,7 +32,6 @@ export default function RootLayout({
           <NextUIProvider>
             {children}
           </NextUIProvider>
-          <Toaster position="top-right" reverseOrder={true} />
         </ReactQueryProvider>
       </body>
     </html>

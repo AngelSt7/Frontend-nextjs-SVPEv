@@ -19,14 +19,14 @@ export default function SelectItem<T extends FieldValues>({ data, register, erro
 
     return (
         <div className="w-full">
-            <label htmlFor={name} className="text-base font-semibold text-[#202021]">
+            <label htmlFor={name} className="text-base font-semibold text-[#202021] dark:text-[#c5c5c7] ">
                 {label}
             </label>
 
             <input type="hidden" {...register} />
 
             <div
-                className={`border rounded-md mt-1 ${errorMessage ? "ring-1 ring-[#d10b30]" : "border-[#afaeae]"
+                className={`border dark:border-[#3f3f46] mt-[8px] rounded-md  ${errorMessage ? "ring-1 ring-[#d10b30]" : "border-[#afaeae]"
                     }`}
             >
                 <Select

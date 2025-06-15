@@ -7,7 +7,7 @@ import { dashboardListWarrantyClaimsService } from "@/src/services/dashboard/war
 import { Columns } from "../../warranty-claim/list/Columns"
 import EditWarrantyClaimWrapper from "../../warranty-claim/edit/EditWarrantyClaimWrapper"
 import { RenderCellWarrantyClaim } from "../../warranty-claim/list/RenderCellWarrantyClaim"
-import GenericModal from "../../ui/GenericModal"
+import GenericModal from "../../ui/generics/GenericModal"
 import { TableComponent } from "../../ui/table/TableContent"
 import { DashboardWarrantyClaim } from "@/src/types/dashboard/WarrantyClaimTypes"
 import { AuthUserInfo } from "@/src/types/AuthTypes"

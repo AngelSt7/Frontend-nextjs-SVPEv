@@ -2,7 +2,7 @@
 
 import { TableComponent } from '@/src/components/dashboard/ui/table/TableContent'
 import { useModalUtils } from '@/src/hooks/modal/useModalUtils'
-import GenericModal from '../../ui/GenericModal'
+import GenericModal from '../../ui/generics/GenericModal'
 import useSubmitMutation from '@/src/hooks/dashboard/useSubmitMutation'
 import { Columns } from './Columns'
 import { DashboardReturnSale } from '@/src/types/dashboard/ReturnSaleTypes'

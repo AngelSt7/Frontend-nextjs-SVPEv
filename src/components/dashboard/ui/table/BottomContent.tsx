@@ -19,7 +19,6 @@ export const BottomContent: React.FC<Props> = ({ page, pages, onPreviousPage, on
       <Pagination
         isCompact
         showControls
-        showShadow
         color="warning"
         page={page}
         total={pages}

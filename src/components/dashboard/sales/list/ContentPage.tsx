@@ -28,7 +28,6 @@ export default function ContentPage() {
                 isSales={false}
                 newPath="/dashboard/ventas/registrar"
             />
-
         </div>
     )
 }

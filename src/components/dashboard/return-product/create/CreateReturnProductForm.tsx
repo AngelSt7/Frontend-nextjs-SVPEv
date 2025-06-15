@@ -12,7 +12,9 @@ type CreateReturnFormProps = {
 };
 
 export default function CreateReturnProductForm({ closeModal, user }: CreateReturnFormProps) {
-  const { register, handleSubmit, formState: { errors }, setValue, watch } = useForm<ReturnProductFormData>();
+  const { register, handleSubmit, formState: { errors }, setValue, watch } = useForm<ReturnProductFormData>({
+    defaultValues: { reposicion_aplicada: 0 }
+  });
   
   const { mutate } = useSubmitMutation({
     serviceFunction: dashboardCreateReturnProductService,

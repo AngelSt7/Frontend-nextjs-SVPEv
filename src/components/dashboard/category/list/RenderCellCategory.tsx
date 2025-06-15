@@ -53,6 +53,7 @@ export const RenderCellCategory = (mutate: mutateProps, item: DashboardCategory,
               <DropdownItem key="delete" className="text-danger" color="danger"
                 onPress={() => {
                   ToastDelete({
+                    message: "¿Esta seguro de eliminar la categoria",
                     name: item.nombre,
                     onConfirm: () => mutate({ id: item.id, activo: 1 }),
                   })

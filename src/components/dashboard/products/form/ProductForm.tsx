@@ -56,30 +56,7 @@ export default function ProductForm({ register, errors, watch, setValue }: Produ
         errorMessage={errors.descripcion}
       />
 
-      <div className="grid grid-cols-3 gap-5 items-center">
-        <Input
-          type="number"
-          placeholder="Precio de compra"
-          htmlFor="precio_compra"
-          label="Precio Compra"
-          Icon={MdOutlineAttachMoney}
-          register={register('precio_compra', {
-            required: 'Este campo es obligatorio',
-            min: {
-              value: 0,
-              message: 'No puede ser negativo',
-            },
-            max: {
-              value: 10000,
-              message: 'No puede exceder los 10,000',
-            },
-            valueAsNumber: true,
-            validate: (value) =>
-              value < watch('precio_venta') ||
-              'Debe ser menor que el precio de venta',
-          })}
-          errorMessage={errors.precio_compra}
-        />
+      <div className="grid grid-cols-2 gap-5 items-center">
 
         <Input
           type="number"
@@ -98,9 +75,7 @@ export default function ProductForm({ register, errors, watch, setValue }: Produ
               message: 'No puede exceder los 10,000',
             },
             valueAsNumber: true,
-            validate: (value) =>
-              value > watch('precio_compra') ||
-              'Debe ser mayor que el precio de compra',
+            
           })}
           errorMessage={errors.precio_venta}
         />

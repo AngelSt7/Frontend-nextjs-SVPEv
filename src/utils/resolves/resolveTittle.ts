@@ -14,10 +14,13 @@ export const Tittles: Record<string, string> = {
     '/dashboard/returns-sales': 'Administrar Devoluciones de Ventas',
     '/dashboard/reclamos-garantia': 'Administrar Reclamos de Garantía',
     '/dashboard/garantia': 'Administrar Garantías',
+    '/dashboard/clientes': 'Administrar Clientes',
+    '/dashboard/devoluciones-productos': 'Administrar Devoluciones de Productos',
+
 };
 
 // Mapear entidades
-type Entity = 'proveedor' | 'producto' | 'usuario' | 'categoria' | 'descuento' | 'cupón' | 'devolución_producto' | 'devolución_venta' | 'garantia' | 'reclamo_garantia' | 'stock';
+type Entity = 'proveedor' | 'producto' | 'usuario' | 'categoria' | 'descuento' | 'cupón' | 'devolución_producto' | 'devolución_venta' | 'garantia' | 'reclamo_garantia' | 'stock' | 'cliente';
 
 // ruta => singular
 export const pluralToSingular: Record<string, Entity> = {
@@ -32,4 +35,5 @@ export const pluralToSingular: Record<string, Entity> = {
     stock: "stock",
     reclamos_garantia: "reclamo_garantia",
     garantia: "garantia",
+    clientes: "cliente",
 };

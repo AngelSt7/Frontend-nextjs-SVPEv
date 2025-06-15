@@ -20,7 +20,7 @@ export default function CreateReturnSaleForm({ closeModal, idReturnSaleDetail }:
     message: 'Devolucion registrada exitosamente'
   })
 
-  const onSubmit = (data: ReturnSaleFormData) => mutate({...data, activo: 1, id_detalle: Number(idReturnSaleDetail)});
+  const onSubmit = (data: ReturnSaleFormData) => mutate({...data, id_detalle: Number(idReturnSaleDetail)});
 
   return (
     <form

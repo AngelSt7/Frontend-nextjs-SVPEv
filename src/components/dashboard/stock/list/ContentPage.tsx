@@ -2,7 +2,7 @@
 
 import { TableComponent } from '@/src/components/dashboard/ui/table/TableContent'
 import { useModalUtils } from '@/src/hooks/modal/useModalUtils'
-import GenericModal from '../../ui/GenericModal'
+import GenericModal from '../../ui/generics/GenericModal'
 import { Columns } from './Columns'
 import useSubmitMutation from '@/src/hooks/dashboard/useSubmitMutation'
 import { AuthUserInfo } from '@/src/types/AuthTypes'
@@ -10,7 +10,8 @@ import { RenderCellStock } from './RenderCellStock'
 import { dashboardListStockService } from '@/src/services/dashboard/stock/dashboardListStockService'
 import { DashboardStock } from '@/src/types/dashboard/StockTypes'
 import { dashboardChangeStatusStockService } from '@/src/services/dashboard/stock/dashboardChangeStatusStockService'
-import EditStockWrapper from '../edit/EditStockWrapper'
+import { dashboardFindByIdStockService } from '@/src/services/dashboard/stock/dashboardFindByIdStockService'
+import GenericEditWrapper from '../../ui/generics/GenericEditWrapper'
 
 export default function ContentPage({ id, user }: { id: string | undefined, user?: AuthUserInfo }) {
     const { openModalCreate, openModalEdit, closeModal } = useModalUtils()
@@ -29,13 +30,23 @@ export default function ContentPage({ id, user }: { id: string | undefined, user
                 queryKey="stocks"
                 functionService={dashboardListStockService}
                 defaultVisibleColumns={["producto", "proveedor", "lote", "tipo_documento", "numero_documento", "activo", "actions"]}
-                searchableField="numero_documentou"
+                searchableField="numero_documento"
                 mutate={mutate}
                 renderCells={RenderCellStock}
             />
 
+            {id && (
+                <GenericEditWrapper
+                    id={id}
+                    user={user}
+                    closeModal={closeModal}
+                    serviceFunction={dashboardFindByIdStockService}
+                    queryKey="stock"
+                />
+            )}
+
             <GenericModal user={user} closeModal={closeModal} />
-            {id && user && <EditStockWrapper user={user} closeModal={closeModal} id={id} />}
+
         </div>
     )
 }

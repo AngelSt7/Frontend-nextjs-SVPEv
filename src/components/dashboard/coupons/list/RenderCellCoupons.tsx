@@ -58,6 +58,7 @@ export const RenderCellCoupons = (mutate: mutateProps, item: DashboardCoupon, co
                             <DropdownItem key="delete" className="text-danger" color="danger"
                                 onPress={() => {
                                     ToastDelete({
+                                        message: "¿Desea eliminar el cupon cuyo codigo es",
                                         name: item.codigo,
                                         onConfirm: () => mutate({ id: item.id, activo: 1 }),
                                     })

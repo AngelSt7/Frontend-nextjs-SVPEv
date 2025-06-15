@@ -5,6 +5,7 @@ import { PlusIcon } from "../icons/PlusIcon";
 import { capitalize } from "@/src/utils/format/formatText";
 import { ChangeEvent, Dispatch, SetStateAction } from "react";
 import { ColumnsType } from "@/src/types/commonTypes/commonTypes";
+import { useAppStore } from "@/src/store/useAppStore";
 
 interface TopContentProps {
   newPath?: string
@@ -27,6 +28,7 @@ interface TopContentProps {
 }
 
 export const TopContent: React.FC<TopContentProps> = ({ filterValue, onSearchChange, onClear, statusFilter, setStatusFilter, visibleColumns, setVisibleColumns, onRowsPerPageChange, total, openModalCreate, statusOptions, columns, messageButton, showActions = true, entityLabel, newPath }) => {
+  const take = useAppStore((state) => state.take);  
   return (
     <div className="flex flex-col gap-4 p-4">
       <div className="flex justify-between gap-3 items-end">
@@ -121,6 +123,7 @@ export const TopContent: React.FC<TopContentProps> = ({ filterValue, onSearchCha
           <label className="flex items-center text-default-400 text-small">
             Registros por pagina:
             <select
+              value={take}
               className="bg-transparent outline-none text-default-400 text-small"
               onChange={onRowsPerPageChange}
             >

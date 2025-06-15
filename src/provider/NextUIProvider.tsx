@@ -1,10 +1,17 @@
+"use client"
 
-import { HeroUIProvider } from "@heroui/react"; // IMPORT CORRECTO
+import { HeroUIProvider } from "@heroui/react"
+import { ThemeProvider as NextThemesProvider } from "next-themes"
+import { ReactNode } from "react"
+import ToasterWrapper from "../components/dashboard/ui/darkmode/ToasterWrapper"
 
-export function NextUIProvider({ children }: { children: React.ReactNode }) {
+export function NextUIProvider({ children }: { children: ReactNode }) {
   return (
-    <HeroUIProvider>
-      {children}
-    </HeroUIProvider>
-  );
+    <NextThemesProvider attribute="class" enableSystem defaultTheme="system">
+      <HeroUIProvider>
+        {children}
+        <ToasterWrapper />
+      </HeroUIProvider>
+    </NextThemesProvider>
+  )
 }

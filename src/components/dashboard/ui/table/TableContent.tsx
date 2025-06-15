@@ -20,6 +20,7 @@ const labelMap: Record<string, string> = {
   sales: "Venta",
   warrantyClaims: "Reclamo de Garantía",
   warranties: "Garantía",
+  clients: "Cliente",
 };
 
 const entityLabelMap: Record<string, string> = {
@@ -37,12 +38,12 @@ const entityLabelMap: Record<string, string> = {
 
 type TableComponentProps<T> = {
   newPath?: string
-  openModalCreate?: () => void;
-  openModalEdit?: (id: number ) => void;
   columns: ColumnsType;
   queryKey: string;
   functionService: () => Promise<T[] | undefined>;
   defaultVisibleColumns: (keyof T | string)[];
+  openModalCreate?: () => void;
+  openModalEdit?: (id: number ) => void;
   searchableField?: keyof T;
   mutate?: mutateProps;
   categoryOptions?: { name: string; uid: string; }[]
@@ -84,9 +85,7 @@ export const TableComponent = <T extends { id: number }>({
   const dataToRender: T[] = data;
 
   const {
-    filterValue, setFilterValue, selectedKeys, setSelectedKeys, visibleColumns,
-    setVisibleColumns, statusFilter, setStatusFilter, setRowsPerPage, sortDescriptor,
-    setSortDescriptor, page, setPage, headerColumns, filteredItems, sortedItems, pages
+    filterValue, setFilterValue, selectedKeys, setSelectedKeys, visibleColumns, setVisibleColumns, statusFilter, setStatusFilter, setRowsPerPage, sortDescriptor, setSortDescriptor, page, setPage, headerColumns, filteredItems, sortedItems, pages
   } = useTableLogic({
     data: dataToRender,
     defaultVisibleColumns,
@@ -169,12 +168,13 @@ export const TableComponent = <T extends { id: number }>({
 
       {!isSales ? (
         <TableBody
+          emptyContent="No se encontraron registros"
           items={sortedItems}
           isLoading={isLoading}
           loadingContent={<Spinner />}
         >
           {(item) => (
-            <TableRow className="hover:bg-[#f3f4f6]" key={item.id}>
+            <TableRow className="hover:bg-[#f3f4f6] dark:hover:bg-[#222225] dark:text-[#c9cacb]" key={item.id}>
               {(columnKey) => (
                 <TableCell>
                   {renderCells?.(mutate!, item, columnKey, openModalEdit!)}
@@ -190,7 +190,7 @@ export const TableComponent = <T extends { id: number }>({
           loadingContent={<Spinner />}
         >
           {(item) => (
-            <TableRow className="hover:bg-[#f3f4f6]" key={item.id}>
+            <TableRow className="hover:bg-[#f3f4f6] dark:hover:bg-[#222225]" key={item.id}>
               {(columnKey) => (
                 <TableCell>
                   {renderCellSaleProduct?.( item, columnKey, addProduct!, decreaseQuantity!, increaseQuantity!)}

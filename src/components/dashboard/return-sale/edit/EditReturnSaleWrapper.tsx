@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import GenericModal from '../../ui/GenericModal';
+import GenericModal from '../../ui/generics/GenericModal';
 import { dashboardFindByIdReturnSaleService } from '@/src/services/dashboard/return-sale/dashboardFindByIdReturnSaleService';
 
 type EditReturnSaleWrapperProps = {

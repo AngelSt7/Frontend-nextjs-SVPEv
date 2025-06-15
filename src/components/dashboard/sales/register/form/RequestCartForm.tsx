@@ -20,7 +20,6 @@ export default function RequesteCartForm({ register, errors, watch, setValue }: 
     return (
         <div className="flex flex-col gap-3">
 
-
                 <SelectTabs
                     name="id_cliente"
                     label="Cliente"
@@ -31,6 +30,7 @@ export default function RequesteCartForm({ register, errors, watch, setValue }: 
                         required: 'Este campo es obligatorio',
                     })}
                     errorMessage={errors.id_cliente}
+                    view='/dashboard/clientes'
                 />
 
                 <SelectItem

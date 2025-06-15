@@ -44,6 +44,7 @@ export function useTableHandlers<T extends object>({
 
   const onRowsPerPageChange = useCallback((e: React.ChangeEvent<HTMLSelectElement>) => {
     setRowsPerPage(Number(e.target.value));
+  
     setPage(1);
   }, [setRowsPerPage, setPage]);
 

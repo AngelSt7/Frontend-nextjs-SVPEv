@@ -22,7 +22,7 @@ export const ReturnProductFormDataSchema = z.object({
     motivo: z.string(),
     observaciones: z.string().optional(),
     id_usuario: z.number(),
-    reposicionAplicada: z.number().min(0).max(1)
+    reposicion_aplicada: z.number().min(0).max(1)
 });
 
 export const DashboardReturnProductByIdSchema = z.object({

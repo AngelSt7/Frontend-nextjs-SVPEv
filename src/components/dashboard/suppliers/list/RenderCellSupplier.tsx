@@ -53,6 +53,7 @@ export const RenderCellSupplier = (mutate: mutateProps, item: DashboardSupplier,
               <DropdownItem key="delete" className="text-danger" color="danger"
                 onPress={() => {
                   ToastDelete({
+                    message: "¿Desea eliminar el proveedor cuya razón social es",
                     name: item.razon_social,
                     onConfirm: () => mutate({ id: item.id, activo: 1 }),
                   })

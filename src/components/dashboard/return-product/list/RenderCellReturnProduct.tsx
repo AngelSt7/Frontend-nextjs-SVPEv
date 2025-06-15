@@ -3,9 +3,9 @@ import { VerticalDotsIcon } from "../../ui/icons/VerticalDotsIcon";
 import { ToastDelete } from "../../ui/ToastDelete";
 import { statusColorMap } from "@/src/utils/constants/constans";
 import { formatDate } from "@/src/utils/format/formatDate";
-import { useModalUtils } from "@/src/hooks/modal/useModalUtils";
 import { mutateProps } from "@/src/types/commonTypes/commonTypes";
 import { DashboardReturnProduct } from "@/src/types/dashboard/ReturnProductTypes";
+import Clipboard from "../../ui/Clipboard";
 
 export const RenderCellReturn = (
   mutate: mutateProps,
@@ -21,6 +21,40 @@ export const RenderCellReturn = (
       return (
         <p>{formatDate(item.fecha_devolucion)}</p>
       )
+
+    case "codigo_lote":
+      return (
+        <Clipboard
+          text={item.codigo_lote}
+          context="Lote"
+          opacity={true}
+        />
+      )
+
+    case "fecha_devolucion":
+      return (
+        <Clipboard
+          text={item.fecha_devolucion}
+          context="Fecha devolución"
+          opacity={true}
+        />
+      )
+
+      case "reposicion_aplicada":
+      const statusTextReposicion = item.reposicion_aplicada === 1 ? "activo" : "inactivo";
+      return (
+        <Chip
+          className="capitalize cursor-pointer select-none"
+          color={statusColorMap[statusTextReposicion]}
+          size="sm"
+          variant="flat"
+          role="button"
+          tabIndex={0}
+        >
+          {item.reposicion_aplicada === 1 ? 'Aplica' : 'No aplica'}
+        </Chip>
+
+      );
 
     case "estado":
       const statusText = item.estado === 1 ? "activo" : "inactivo";
@@ -48,10 +82,11 @@ export const RenderCellReturn = (
               </Button>
             </DropdownTrigger>
             <DropdownMenu disabledKeys={item.estado === 0 ? ["edit", "delete"] : []}>
-              <DropdownItem key="edit" onPress={() => openModalEdit(item.id_devolucion_producto)}>Editar</DropdownItem>
+              <DropdownItem key="edit" onPress={() => openModalEdit!(item.id_devolucion_producto)}>Editar</DropdownItem>
               <DropdownItem key="delete" className="text-danger" color="danger"
                 onPress={() => {
                   ToastDelete({
+                    message: "Desea elminar la devolucción ligada al lote",
                     name: item.codigo_lote,
                     onConfirm: () => mutate({ id: item.id, activo: 1 }),
                   })

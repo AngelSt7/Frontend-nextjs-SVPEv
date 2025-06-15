@@ -18,7 +18,7 @@ export default function EditReturnForm({ user, closeModal, defaultValues }: Edit
     defaultValues: {
       ...defaultValues,
       id_detalle_ingreso: defaultValues.id_detalle_ingreso,
-      reposicionAplicada: defaultValues.reposicionAplicada
+      reposicion_aplicada: defaultValues.reposicion_aplicada
     }
   });
 

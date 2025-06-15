@@ -7,7 +7,7 @@ import { dashboardListWarrantiesService } from "@/src/services/dashboard/warrant
 import { Columns } from "../../warranty/list/Columns";
 import EditWarrantyWrapper from "../../warranty/edit/EditWarrantyWrapper";
 import { RenderCellWarranty } from "../../warranty/list/RenderCellWarranty";
-import GenericModal from "../../ui/GenericModal";
+import GenericModal from "../../ui/generics/GenericModal";
 import { TableComponent } from "../../ui/table/TableContent";
 import { DashboardWarranty } from "@/src/types/dashboard/WarrantyTypes";
 import { AuthUserInfo } from "@/src/types/AuthTypes";

@@ -4,13 +4,14 @@ import useSubmitMutation from "@/src/hooks/dashboard/useSubmitMutation"
 import { useModalUtils } from "@/src/hooks/modal/useModalUtils"
 import { dashboardChangeStatusReturnService } from "@/src/services/dashboard/return/dashboardChangeStatusReturnService"
 import { dashboardListReturnProductService } from "@/src/services/dashboard/return/dashboardListReturnService"
-import EditReturnWrapper from "../../return-product/edit/EditReturnProductWrapper"
 import { RenderCellReturn } from "../../return-product/list/RenderCellReturnProduct"
-import GenericModal from "../../ui/GenericModal"
+import GenericModal from "../../ui/generics/GenericModal"
 import { TableComponent } from "../../ui/table/TableContent"
 import { DashboardReturnProduct } from "@/src/types/dashboard/ReturnProductTypes"
 import { AuthUserInfo } from "@/src/types/AuthTypes"
 import { Columns } from "./Columns"
+import GenericEditWrapper from "../../ui/generics/GenericEditWrapper"
+import { dashboardFindByIdReturnService } from "@/src/services/dashboard/return/dashboardFindByIdReturnService"
 
 
 export default function ContentPage({ id, user }: { id: string | undefined, user?: AuthUserInfo }) {
@@ -29,14 +30,23 @@ export default function ContentPage({ id, user }: { id: string | undefined, user
                 columns={Columns}
                 queryKey="returnsProducts"
                 functionService={dashboardListReturnProductService}
-                defaultVisibleColumns={[ "id", "codigo_lote", "cantidad", "fecha_devolucion", "motivo", "estado", "actions"]}
+                defaultVisibleColumns={["codigo_lote", "cantidad", "fecha_devolucion", "reposicion_aplicada", "estado", "actions"]}
                 searchableField="codigo_lote"
                 mutate={mutate}
                 renderCells={RenderCellReturn}
             />
 
-            <GenericModal user={user} closeModal={closeModal}  />
-            {id && <EditReturnWrapper user={user} closeModal={closeModal} id={id} />} 
+            {id && (
+                <GenericEditWrapper
+                    id={id}
+                    closeModal={closeModal}
+                    serviceFunction={dashboardFindByIdReturnService}
+                    queryKey="returnProduct"
+                    user={user}
+                />
+            )}
+
+            <GenericModal user={user} closeModal={closeModal} />
         </div>
     )
 }

@@ -23,7 +23,7 @@ export default function EditProductForm({ user,closeModal, defaultValues }: Edit
       ["product", defaultValues.id.toString()]
     ],
     onSuccessCallback: closeModal,
-    message: 'Proveedor actualizado exitosamente'
+    message: 'Products actualizado exitosamente'
   })
 
   const onSubmit = (data: ProductFormData) => mutate({...data, id_usuario: user?.id!});

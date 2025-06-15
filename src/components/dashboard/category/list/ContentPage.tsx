@@ -2,14 +2,15 @@
 
 import { TableComponent } from '@/src/components/dashboard/ui/table/TableContent'
 import { useModalUtils } from '@/src/hooks/modal/useModalUtils'
-import GenericModal from '../../ui/GenericModal'
+import GenericModal from '../../ui/generics/GenericModal'
 import useSubmitMutation from '@/src/hooks/dashboard/useSubmitMutation'
 import { DashboardCategory } from '@/src/types/dashboard/CategoryTypes'
 import { dashboardListCategoryService } from '@/src/services/dashboard/category/dashboardListCategoryService'
-import EditCategoryWrapper from '../edit/EditCategoryWrapper'
 import { RenderCellCategory } from './RenderCellCategory'
 import { dashboardChangeStatusCategoryService } from '@/src/services/dashboard/category/dashboardChangeStatusCategoryService'
 import { Columns } from './Columns'
+import GenericEditWrapper from '../../ui/generics/GenericEditWrapper'
+import { dashboardFindByIdCategoryService } from '@/src/services/dashboard/category/dashboardFindByIdCategoryService'
 
 export default function ContentPage({ id }: { id: string | undefined }) {
     const { openModalCreate, openModalEdit, closeModal } = useModalUtils()
@@ -19,7 +20,7 @@ export default function ContentPage({ id }: { id: string | undefined }) {
         invalidateQuery: ["categories"]
     })
 
-    return (    
+    return (
         <div>
             <TableComponent<DashboardCategory>
                 openModalCreate={openModalCreate}
@@ -33,8 +34,16 @@ export default function ContentPage({ id }: { id: string | undefined }) {
                 renderCells={RenderCellCategory}
             />
 
+            {id && (
+                <GenericEditWrapper
+                    id={id}
+                    closeModal={closeModal}
+                    serviceFunction={dashboardFindByIdCategoryService}
+                    queryKey="category"
+                />
+            )}
+
             <GenericModal closeModal={closeModal} />
-            {id && <EditCategoryWrapper closeModal={closeModal} id={id} />}
         </div>
     )
 }

@@ -57,6 +57,7 @@ export const RenderCellReturnSale = (
               <DropdownItem key="delete" className="text-danger" color="danger"
                 onPress={() => {
                   ToastDelete({
+                    message: `¿Desea eliminar el motivo`,
                     name: item.motivo,
                     onConfirm: () => mutate({ id: item.id, activo: 1 }),
                   })

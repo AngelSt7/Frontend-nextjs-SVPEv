@@ -42,7 +42,7 @@ export default function SerieControl<T extends FieldValues>({
   return (
     <div>
       <div className="flex gap-4 mt-2 justify-between">
-        <label className="text-base font-semibold text-[#202021]">{label}</label>
+        <label className="text-base font-semibold text-[#202021] dark:text-[#c5c5c7]">{label}</label>
         <Switch isSelected={isSelected} onValueChange={setIsSelected} size="sm" />
       </div>
 

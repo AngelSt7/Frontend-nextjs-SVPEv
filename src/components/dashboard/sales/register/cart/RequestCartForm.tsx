@@ -6,16 +6,18 @@ import useSubmitMutation from '@/src/hooks/dashboard/useSubmitMutation';
 import { dashboardCreateSaleService } from '@/src/services/dashboard/sales/register/dashboardCreateSaleService';
 import { Button } from '@heroui/react';
 import { useAppStore } from '@/src/store/useAppStore';
+import TotalPay from './TotalPay';
 
 type RequestCartFormProps = {
     step: boolean,
     cart: ProductCart[],
     increaseQuantity: (id: Product['id']) => void,
     decreaseQuantity: (id: Product['id']) => void,
-    deleteProduct: (id: Product['id']) => void
+    deleteProduct: (id: Product['id']) => void,
+    total: number
 }
 
-export default function RequestCartForm({ cart, increaseQuantity, decreaseQuantity, deleteProduct, step }: RequestCartFormProps) {
+export default function RequestCartForm({ cart, increaseQuantity, decreaseQuantity, deleteProduct, step, total }: RequestCartFormProps) {
     const toggleShowModal = useAppStore(state => state.toggleShowModal)
     const { register, handleSubmit, formState: { errors }, setValue, watch } = useForm<SalesFormData>();
 
@@ -23,7 +25,7 @@ export default function RequestCartForm({ cart, increaseQuantity, decreaseQuanti
         serviceFunction: dashboardCreateSaleService,
         invalidateQuery: ['sales'],
         onSuccessCallback: () => toggleShowModal(),
-        message: 'Crear venta registrado exitosamente'
+        message: 'Venta registrado exitosamente'
     });
 
     const onSubmit = (data: SalesFormData) => {
@@ -39,7 +41,7 @@ export default function RequestCartForm({ cart, increaseQuantity, decreaseQuanti
     return (
         <div>
             {step ?
-                cart.map((item, index) => <ItemCart key={index} item={item} increaseQuantity={increaseQuantity} decreaseQuantity={decreaseQuantity} deleteProduct={deleteProduct} />)
+                cart.map((item, index) => <ItemCart key={item.id} item={item} increaseQuantity={increaseQuantity} decreaseQuantity={decreaseQuantity} deleteProduct={deleteProduct} />)
                 : (
                     <form
                         className="flex flex-col justify-between gap-3 flex-1 mt-2"
@@ -53,8 +55,10 @@ export default function RequestCartForm({ cart, increaseQuantity, decreaseQuanti
                             setValue={setValue}
                         />
 
-                        <div className="w-full flex gap-4 justify-end mt-3 mx-auto">
-                            <Button color='success' type='submit'>Crear venta</Button>
+                        <TotalPay total={total} />
+
+                        <div className="w-full flex gap-4 justify-end mt-3">
+                            <Button className=' w-full bg-[#373737] text-white font-bold' color='success' type='submit'>Crear venta</Button>
                         </div>
                     </form>
                 )}

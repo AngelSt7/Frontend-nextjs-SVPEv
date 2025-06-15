@@ -67,6 +67,7 @@ export const RenderCellSale = (mutate: mutateProps, item: DashboardSale, columnK
               <DropdownItem key="delete" className="text-danger" color="danger"
                 onPress={() => {
                   ToastDelete({
+                    message: "¿Desea eliminar Nro",
                     name: item.id.toString(),
                     onConfirm: () => mutate({ id: item.id, activo: 1 }),
                   })

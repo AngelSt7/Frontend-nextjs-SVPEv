@@ -15,7 +15,7 @@ type StockFormProps = {
 };
 
 export default function StockForm({ register, errors, watch, setValue, productOptions, suppliersOptions }: StockFormProps) {
-
+  console.log("reenderizando stock form");
     return (
         <div className="flex flex-col gap-4">
             <SelectTabs
@@ -28,6 +28,7 @@ export default function StockForm({ register, errors, watch, setValue, productOp
                     required: 'Este campo es obligatorio',
                 })}
                 errorMessage={errors.id_producto}
+                view={'/dashboard/productos'}
             />
 
             <SelectTabs
@@ -40,6 +41,7 @@ export default function StockForm({ register, errors, watch, setValue, productOp
                     required: 'Este campo es obligatorio',
                 })}
                 errorMessage={errors.id_proveedor}
+                view={'/dashboard/proveedores'}
             />
 
             <div className="grid grid-cols-2 gap-5">

@@ -64,6 +64,7 @@ export const RenderCellUser = (
                                 color="danger"
                                 onPress={() => {
                                     ToastDelete({
+                                        message: `¿Desea eliminar el usuario`,
                                         name: `${item.nombre} ${item.apellido}`,
                                         onConfirm: () => mutate({ id: item.id, activo: 1 }),
                                     });

@@ -7,9 +7,10 @@ import { Columns } from './Columns'
 import { DashboardCoupon } from '@/src/types/dashboard/CouponTypes'
 import { RenderCellCoupons } from './RenderCellCoupons'
 import { dashboardListCouponService } from '@/src/services/dashboard/coupon/dashboardListCouponService'
-import GenericModal from '../../ui/GenericModal'
+import GenericModal from '../../ui/generics/GenericModal'
 import { dashboardChangeStatusCouponService } from '@/src/services/dashboard/coupon/dashboardChangeStatusCouponService'
-import EditCouponWrapper from '../edit/EditCouponWrapper'
+import { dashboardFindByIdCouponService } from '@/src/services/dashboard/coupon/dashboardFindByIdCouponService'
+import GenericEditWrapper from '../../ui/generics/GenericEditWrapper'
 
 export default function ContentPage({ id }: { id: string | undefined }) {
     const { openModalCreate, openModalEdit, closeModal } = useModalUtils()
@@ -19,7 +20,7 @@ export default function ContentPage({ id }: { id: string | undefined }) {
         invalidateQuery: ["coupons"]
     })
 
-    return (    
+    return (
         <div>
             <TableComponent<DashboardCoupon>
                 openModalCreate={openModalCreate}
@@ -33,8 +34,17 @@ export default function ContentPage({ id }: { id: string | undefined }) {
                 renderCells={RenderCellCoupons}
             />
 
+            {id && (
+                <GenericEditWrapper
+                    id={id}
+                    closeModal={closeModal}
+                    serviceFunction={dashboardFindByIdCouponService}
+                    queryKey="coupon"
+                />
+            )}
+
             <GenericModal closeModal={closeModal} />
-            {id && <EditCouponWrapper closeModal={closeModal} id={id} />}
+
         </div>
     )
 }

@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import GenericModal from '../../ui/GenericModal';
+import GenericModal from '../../ui/generics/GenericModal';
 import { dashboardFindByIdWarrantyService } from '@/src/services/dashboard/warranty/dashboardFindByIdWarrantyService';
 import { AuthUserInfo } from '@/src/types/AuthTypes';
 
@@ -21,8 +21,8 @@ export default function EditWarrantyWrapper({ user, closeModal, id }: EditWarran
   if (warrantyData) {
     return (
       <GenericModal
-        user={user}
         id={id}
+        user={user}
         closeModal={closeModal}
         defaultValues={warrantyData}
       />

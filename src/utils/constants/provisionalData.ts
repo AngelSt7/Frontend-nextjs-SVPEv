@@ -17,21 +17,21 @@ export const Categories = [
 ];
 
 export const Brands = [
-    { id: "16", label: "Samsung", activo: true },
-    { id: "17", label: "LG", activo: true },
-    { id: "18", label: "Sony", activo: true },
-    { id: "19", label: "HP", activo: true },
-    { id: "20", label: "Lenovo", activo: true },
-    { id: "21", label: "Dell", activo: true },
-    { id: "22", label: "Apple", activo: true },
-    { id: "23", label: "Xiaomi", activo: true },
-    { id: "24", label: "Asus", activo: true },
-    { id: "25", label: "Acer", activo: true },
-    { id: "26", label: "Huawei", activo: true },
-    { id: "27", label: "Philips", activo: true },
-    { id: "28", label: "Panasonic", activo: true },
-    { id: "29", label: "Motorola", activo: true },
-    { id: "30", label: "Toshiba", activo: true }
+    { id: "1", label: "Samsung", activo: true },
+    { id: "2", label: "LG", activo: true },
+    { id: "3", label: "Sony", activo: true },
+    { id: "4", label: "HP", activo: true },
+    { id: "5", label: "Lenovo", activo: true },
+    { id: "6", label: "Dell", activo: true },
+    { id: "7", label: "Apple", activo: true },
+    { id: "8", label: "Xiaomi", activo: true },
+    { id: "9", label: "Asus", activo: true },
+    { id: "10", label: "Acer", activo: true },
+    { id: "11", label: "Huawei", activo: true },
+    { id: "12", label: "Philips", activo: true },
+    { id: "13", label: "Panasonic", activo: true },
+    { id: "14", label: "Motorola", activo: true },
+    { id: "15", label: "Toshiba", activo: true }
 ];
 
 

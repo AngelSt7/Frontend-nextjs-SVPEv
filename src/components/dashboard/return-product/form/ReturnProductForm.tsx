@@ -6,7 +6,7 @@ import SelectTabs from '../../stock/form/SelectTabs';
 import Input from '@/src/components/ui/Input';
 import { MdPermIdentity } from 'react-icons/md';
 import SerieControl from '../../stock/form/SerieControl';
-import { Switch } from '@heroui/react';
+import ActiveReposition from '../create/ActiveReposition';
 
 type ReturnFormProps = {
     register: UseFormRegister<ReturnProductFormData>;
@@ -20,12 +20,12 @@ export default function ReturnForm({ register, errors, watch, setValue, isEdit =
     const { data: returnProducts = [] } = useGetStock();
     const returnProductsFormated = useMemo(() => returnProducts.map(r => ({ value: r.id, label: r.lote })), [returnProducts])
 
-    const reposicionAplicada = watch("reposicionAplicada");
-    const isSelected = reposicionAplicada === 1;
-    const handleChange = (value: boolean) => { setValue("reposicionAplicada", value ? 1 : 0); };
-
     return (
         <div className="flex flex-col gap-3">
+
+            {isEdit && (
+                <p className=' text-justify'>Por el momento, no se puede cambiar de devolucion a una que cuente con lote, contactar con el servicio tecnico: +51 940 104 078</p>
+            )}
 
             {!isEdit && (
                 <SelectTabs
@@ -38,6 +38,7 @@ export default function ReturnForm({ register, errors, watch, setValue, isEdit =
                         required: 'Este campo es obligatorio',
                     })}
                     errorMessage={errors.id_detalle_ingreso}
+                    view={'/dashboard/stock'}
                 />
             )}
 
@@ -113,9 +114,12 @@ export default function ReturnForm({ register, errors, watch, setValue, isEdit =
                 errorMessage={errors.motivo}
             />
 
-            <Switch  isSelected={isSelected} onValueChange={handleChange} {...register("reposicionAplicada")}>
-                ¿Aplicar reposición?
-            </Switch>
+            <ActiveReposition
+                register={register}
+                watch={watch}
+                setValue={setValue}
+            />
+
         </div>
     );
 }

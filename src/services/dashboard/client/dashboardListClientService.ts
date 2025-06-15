@@ -1,9 +1,8 @@
 import api from "@/src/axios/axios";
 import { DashboardClientsSchema } from "@/src/schemas/dashboard/Client";
-import { DashboardDiscountsSchema } from "@/src/schemas/dashboard/Discount";
 import { isAxiosError } from "axios";
 
-export async function dashboardListClientsService() {
+export async function dashboardListClientService() {
     try {
         const url = '/cliente/listar'
         const { data } = await api(url)

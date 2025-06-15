@@ -24,17 +24,17 @@ export default function ShowSumary() {
                                 <RequestCartForm
                                     step={step}
                                     cart={cart}
+                                    total={total}
                                     increaseQuantity={increaseQuantity}
                                     decreaseQuantity={decreaseQuantity}
                                     deleteProduct={deleteProduct}
                                 />
-                                <TotalPay total={total} />
                             </>
                         </ModalBody>
 
                         <ModalFooter>
                             <div className=" flex  justify-between w-full">
-                                <Button className="w-fix" color="warning" onPress={() => setStep(!step)}>{step ? 'Proceder' : 'Ver resumen'}</Button>
+                                <Button className="w-fix bg-[#716a9c] text-white shadow-lg" onPress={() => setStep(!step)}>{step ? 'Continuar' : 'Ver resumen'}</Button>
                                 <div className=" flex gap-4">
                                     <Button color="danger" variant="light" onPress={() => toggleShowModal()}>
                                         Cancelar

@@ -1,30 +1,31 @@
 import { Modal, ModalContent, ModalHeader, ModalBody } from "@heroui/react";
 import { usePathname, useSearchParams } from "next/navigation";
-import CreateSupplierForm from "../suppliers/create/CreateSupplierForm";
-import EditSupplierForm from "../suppliers/edit/EditSupplierForm";
-import CreateProductForm from "../products/create/CreateProductForm";
 import { pluralToSingular } from "@/src/utils/resolves/resolveTittle";
 import { AuthUserInfo } from "@/src/types/AuthTypes";
-import EditProductForm from "../products/edit/EditProductForm";
-import CreateUserForm from "../users/create/CreateUserForm";
-import EditUserForm from "../users/edit/EditUserForm";
-import CreateCategoryForm from "../category/create/CreateCategoryForm";
-import EditCategoryForm from "../category/edit/EditCategoryForm";
-import CreateDiscountForm from "../discount/create/CreateDiscountForm";
-import EditDiscountForm from "../discount/edit/EditDiscountForm";
-import CreateCouponForm from "../coupons/create/CreateCouponForm";
-import EditCouponForm from "../coupons/edit/EditCouponForm";
-import CreateStockForm from "../stock/create/CreateStockForm";
-import EditStockForm from "../stock/edit/EditStockForm";
-import CreateReturnForm from "../return-product/create/CreateReturnProductForm";
-import EditReturnForm from "../return-product/edit/EditReturnProductForm";
-import CreateReturnProductForm from "../return-product/create/CreateReturnProductForm";
-import CreateReturnSaleForm from "../return-sale/create/CreateReturnSaleForm";
-import EditReturnSaleForm from "../return-sale/edit/EditReturnSaleForm";
-import CreateWarrantyClaimForm from "../warranty-claim/create/CreateWarrantyClaimForm";
-import EditWarrantyClaimForm from "../warranty-claim/edit/EditWarrantyClaimForm";
-import CreateWarrantyForm from "../warranty/create/CreateWarrantyForm";
-import EditWarrantyForm from "../warranty/edit/EditWarrantyForm";
+import CreateCategoryForm from "../../category/create/CreateCategoryForm";
+import EditCategoryForm from "../../category/edit/EditCategoryForm";
+import CreateClientForm from "../../client/create/CreateClientForm";
+import EditClientForm from "../../client/edit/EditClientForm";
+import CreateCouponForm from "../../coupons/create/CreateCouponForm";
+import EditCouponForm from "../../coupons/edit/EditCouponForm";
+import CreateDiscountForm from "../../discount/create/CreateDiscountForm";
+import EditDiscountForm from "../../discount/edit/EditDiscountForm";
+import CreateProductForm from "../../products/create/CreateProductForm";
+import EditProductForm from "../../products/edit/EditProductForm";
+import CreateReturnProductForm from "../../return-product/create/CreateReturnProductForm";
+import EditReturnForm from "../../return-product/edit/EditReturnProductForm";
+import CreateReturnSaleForm from "../../return-sale/create/CreateReturnSaleForm";
+import EditReturnSaleForm from "../../return-sale/edit/EditReturnSaleForm";
+import CreateStockForm from "../../stock/create/CreateStockForm";
+import EditStockForm from "../../stock/edit/EditStockForm";
+import CreateSupplierForm from "../../suppliers/create/CreateSupplierForm";
+import EditSupplierForm from "../../suppliers/edit/EditSupplierForm";
+import CreateUserForm from "../../users/create/CreateUserForm";
+import EditUserForm from "../../users/edit/EditUserForm";
+import CreateWarrantyClaimForm from "../../warranty-claim/create/CreateWarrantyClaimForm";
+import EditWarrantyClaimForm from "../../warranty-claim/edit/EditWarrantyClaimForm";
+import CreateWarrantyForm from "../../warranty/create/CreateWarrantyForm";
+import EditWarrantyForm from "../../warranty/edit/EditWarrantyForm";
 
 type GenericModalProps = {
   user?: AuthUserInfo;
@@ -70,6 +71,7 @@ export default function GenericModal({ user, id, closeModal, defaultValues, idRe
         case "devolución_venta":  return  <CreateReturnSaleForm closeModal={closeModal} idReturnSaleDetail={idReturnSaleDetail!} />
         case "reclamo_garantia": return <CreateWarrantyClaimForm closeModal={closeModal} />
         case "garantia": return <CreateWarrantyForm closeModal={closeModal} />;
+        case "cliente" : return <CreateClientForm closeModal={closeModal} />
       }
     }
 
@@ -86,6 +88,7 @@ export default function GenericModal({ user, id, closeModal, defaultValues, idRe
         case "devolución_venta": return <EditReturnSaleForm closeModal={closeModal} defaultValues={defaultValues} />;
         case "reclamo_garantia": return <EditWarrantyClaimForm user={user} closeModal={closeModal} defaultValues={defaultValues} />;
         case "garantia": return <EditWarrantyForm user={user} closeModal={closeModal} defaultValues={defaultValues} />;
+        case "cliente" : return <EditClientForm closeModal={closeModal} defaultValues={defaultValues} />
       }
     }
     return null;

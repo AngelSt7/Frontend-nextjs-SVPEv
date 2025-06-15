@@ -1,4 +1,4 @@
-import { Chip, User, Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, Button, ChipProps } from "@heroui/react";
+import { Chip, User, Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, Button } from "@heroui/react";
 import { VerticalDotsIcon } from "../../ui/icons/VerticalDotsIcon";
 import { DashboardProduct } from "@/src/types/dashboard/ProductTypes";
 import { formatDate } from "@/src/utils/format/formatDate";
@@ -6,55 +6,65 @@ import { ToastDelete } from "../../ui/ToastDelete";
 import { statusColorMap } from "@/src/utils/constants/constans";
 import { formatCurrency } from "@/src/utils/format/formatCurrency";
 import { mutateProps } from "@/src/types/commonTypes/commonTypes";
-import toast from "react-hot-toast";
+import Clipboard from "../../ui/Clipboard";
 
 export const RenderCellProduct = (mutate: mutateProps, item: DashboardProduct, columnKey: React.Key, openModalEdit?: (id: number) => void) => {
   const cellValue = item[columnKey as keyof typeof item];
 
   switch (columnKey) {
-      case "nombre":
-    return (
-      <User
-        avatarProps={{
-          radius: "lg",
-          src: "/images/product-provisional.jpeg",
-        }}
-        description={
-          <div className="flex items-center gap-2 group">
-            <span className="text-xs text-gray-500">
-              {item.fecha_creacion && formatDate(item.fecha_creacion)}
-            </span>
-            <button
-              className="p-1 rounded hover:bg-gray-100 transition-colors duration-200 opacity-0 group-hover:opacity-100"
-              onClick={() => {
-                navigator.clipboard.writeText(item.nombre);
-                toast.success("Nombre copiado al portapapeles");
-              }}
-              title="Copiar lote"
-            >
-              <svg
-                className="w-4 h-4 text-gray-400 hover:text-gray-600"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
-                />
-              </svg>
-            </button>
-          </div>
-        }
-        name={cellValue}
-      />
-    );
+
+    case "nombre":
+      return (
+        <div className="group flex items-center gap-2">
+          <User
+            avatarProps={{
+              radius: "lg",
+              src: "/images/supplier-provisional.jpeg",
+            }}
+            description={formatDate(item.fecha_creacion)}
+            name={<Clipboard
+              text={`${item.nombre}`}
+              context="Producto"
+              opacity={false}
+            />}
+          />
+        </div>
+      );
 
     case "precio_venta":
       return (
-        <p>{formatCurrency(item.precio_venta)}</p>
+        <Clipboard
+          text={formatCurrency(item.precio_venta)}
+          context="Precio"
+          opacity={true}
+        />
+      )
+
+    case "sku":
+      return (
+        <Clipboard
+          text={item.sku}
+          context="SKU"
+          opacity={true}
+        />
+      )
+
+    case "nombre_categoria":
+      return (
+        <Clipboard
+          text={item.nombre_categoria}
+          context="Categoría"
+          opacity={true}
+        />
+      )
+
+    case "nombre_marca":
+      return (
+        <Clipboard
+          text={item.nombre_marca}
+          context="Marca"
+          opacity={true}
+        />
       )
 
     case "activo":
@@ -87,6 +97,7 @@ export const RenderCellProduct = (mutate: mutateProps, item: DashboardProduct, c
               <DropdownItem key="delete" className="text-danger" color="danger"
                 onPress={() => {
                   ToastDelete({
+                    message: `¿Desea eliminar el producto`,
                     name: item.nombre,
                     onConfirm: () => mutate({ id: item.id, activo: 1 }),
                   })
