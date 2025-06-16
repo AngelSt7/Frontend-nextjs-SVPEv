@@ -48,7 +48,7 @@ export const RenderCellReturnSale = (
                 <VerticalDotsIcon className="text-default-300" />
               </Button>
             </DropdownTrigger>
-            <DropdownMenu disabledKeys={item.activo === 0 ? ["edit", "delete"] : []}>
+            <DropdownMenu disabledKeys={item === 0 ? ["edit", "delete"] : []}>
               <DropdownItem key="create" onPress={() => {
                 openModalCreate(),
                   setIdReturnSaleDetail(item.id)

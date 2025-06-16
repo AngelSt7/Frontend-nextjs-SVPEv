@@ -25,9 +25,11 @@ export function useSelectTabs<T extends FieldValues>({
   const [search, setSearch] = useState(selectedLabel)
   const [hasInteracted, setHasInteracted] = useState(false)
 
-  useEffect(() => {
+useEffect(() => {
+  if (!hasInteracted) {
     setSearch(selectedLabel)
-  }, [selectedLabel])
+  }
+}, [selectedLabel, hasInteracted])
 
   const filtered = useMemo(() => {
     const query = search.trim().toLowerCase()
@@ -55,11 +57,11 @@ export function useSelectTabs<T extends FieldValues>({
     setSearch(value)
   }
 
-  const onSelectProduct = (id: number, label: string) => {
-    setHasInteracted(true)
-    setValue(name, id as PathValue<T, Path<T>>, { shouldValidate: true })
-    setSearch(label)
-  }
+const onSelectProduct = (id: number, label: string) => {
+  setSearch(label);
+  setHasInteracted(true);
+  setValue(name, id as PathValue<T, Path<T>>, { shouldValidate: true, shouldDirty: true });
+};
 
   return {
     selected,

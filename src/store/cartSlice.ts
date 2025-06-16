@@ -3,97 +3,114 @@ import { Discount, Product, ProductCart } from "../types/dashboard/SaleTypes";
 import { puedeDecrementar, puedeIncrementar } from "../utils/resolves/sales";
 
 export type CartSlice = {
-    discounts: Discount[],
-    cart: ProductCart[],
-    addProduct: (product: Product) => void,
-    deleteProduct: (id: Product['id']) => void,
-    increaseQuantity: (id: Product['id']) => void,
-    decreaseQuantity: (id: Product['id']) => void,
-    formatProduct: (product: Product) => ProductCart,
-    setDiscounts: (arrayDiscounts: Discount[]) => void,
+  discounts: Discount[],
+  cart: ProductCart[],
+  addProduct: (product: Product) => void,
+  deleteProduct: (id: Product['id']) => void,
+  increaseQuantity: (id: Product['id']) => void,
+  decreaseQuantity: (id: Product['id']) => void,
+  formatProduct: (product: Product) => ProductCart,
+  setDiscounts: (arrayDiscounts: Discount[]) => void,
 }
 
 export const cartSlice: StateCreator<CartSlice> = (set, get) => ({
-    discounts: [] as Discount[],
-    cart: [] as ProductCart[],
-    addProduct: (product) => {
-        const productInCart = get().cart.find(p => p.id === product.id);
-        let updateCart: ProductCart[] = [];
+  discounts: [],
+  cart: [],
 
-        if (productInCart) {
-            if (!puedeIncrementar(productInCart)) return;
-            updateCart = get().cart.map(product => product.id === productInCart.id && puedeIncrementar(product)
-                ? {
-                    ...product,
-                    cantidad: product.cantidad + 1,
-                    subtotal: (product.cantidad + 1) * product.precio_venta,
-                } : product
-            )
-        } else {
-            updateCart = [...get().cart, get().formatProduct(product)];
-        }
+  addProduct: (product) => {
+    const productInCart = get().cart.find(p => p.id === product.id);
+    let updateCart: ProductCart[] = [];
 
-        set(() => ({ cart: updateCart }));
-    },
+    const precioVentaSinIGV = product.precio_venta * 0.82;
+    const igvUnitario = product.precio_venta * 0.18;
 
-    deleteProduct: (id) => {
-        const updateCart = get().cart.filter(product => product.id !== id)
-        set(() => ({
-            cart: updateCart
-        }))
-    },
-    increaseQuantity: (id) => {
-        const updateCart = get().cart.map(product => {
-            if (product.id === id && puedeIncrementar(product)) {
-                const porcentaje = product.descuento / 100;
-                const nuevaCantidad = product.cantidad + 1;
-                return {
-                    ...product,
-                    cantidad: nuevaCantidad,
-                    subtotal: product.precio_venta * nuevaCantidad * (1 - porcentaje),
-                };
-            }
-            return product;
-        });
+    if (productInCart) {
+      if (!puedeIncrementar(productInCart)) return;
 
-        set(() => ({ cart: updateCart }));
-    },
+      const newQuantity = productInCart.cantidad + 1;
+      const descuento = productInCart.descuento / 100;
+      updateCart = get().cart.map(p =>
+        p.id === product.id
+          ? {
+            ...p,
+            cantidad: newQuantity,
+            subtotal: precioVentaSinIGV * newQuantity * (1 - descuento),
+            igv: igvUnitario * newQuantity
+          }
+          : p
+      );
+    } else {
+      updateCart = [...get().cart, get().formatProduct(product)];
+    }
 
-    decreaseQuantity: (id) => {
-        const updateCart = get().cart.map(product => {
-            if (product.id === id && puedeDecrementar(product)) {
-                const porcentaje = product.descuento / 100;
-                const nuevaCantidad = product.cantidad - 1;
-                return {
-                    ...product,
-                    cantidad: nuevaCantidad,
-                    subtotal: product.precio_venta * nuevaCantidad * (1 - porcentaje),
-                };
-            }
-            return product;
-        });
+    set(() => ({ cart: updateCart }));
+  },
 
-        set(() => ({ cart: updateCart }));
-    },
+  deleteProduct: (id) => {
+    const updateCart = get().cart.filter(product => product.id !== id);
+    set(() => ({ cart: updateCart }));
+  },
 
-    formatProduct: (product: Product): ProductCart => {
-        const discount = get().discounts.find(discount =>
-            discount.nombreCategoria === product.nombre_categoria
-        )
-
-        const porcentaje = discount ? discount.porcentaje / 100 : 0
+  increaseQuantity: (id) => {
+    const updateCart = get().cart.map(product => {
+      if (product.id === id && puedeIncrementar(product)) {
+        const newQuantity = product.cantidad + 1;
+        const descuento = product.descuento / 100;
+        const igvUnitario = (product.precio_venta / 0.82) * 0.18;
 
         return {
-            ...product,
-            cantidad: 1,
-            descuento: discount?.porcentaje ?? 0,
-            subtotal: product.precio_venta * (1 - porcentaje),
-        }
-    },
+          ...product,
+          cantidad: newQuantity,
+          subtotal: product.precio_venta * newQuantity * (1 - descuento),
+          igv: igvUnitario * newQuantity // ✅ ahora sí correcto
+        };
+      }
+      return product;
+    });
 
+    set(() => ({ cart: updateCart }));
+  }
+  ,
 
+  decreaseQuantity: (id) => {
+    const updateCart = get().cart.map(product => {
+      if (product.id === id && puedeDecrementar(product)) {
+        const newQuantity = product.cantidad - 1;
+        const descuento = product.descuento / 100;
+        const igvUnitario = (product.precio_venta / 0.82) * 0.18;
 
-    setDiscounts: (arrayDiscounts) => {
-        set(() => ({ discounts: arrayDiscounts }))
-    }
-})
+        return {
+          ...product,
+          cantidad: newQuantity,
+          subtotal: product.precio_venta * newQuantity * (1 - descuento),
+          igv: igvUnitario * newQuantity
+        };
+      }
+      return product;
+    });
+
+    set(() => ({ cart: updateCart }));
+  },
+  formatProduct: (product: Product): ProductCart => {
+    const discount = get().discounts.find(discount =>
+      discount.nombreCategoria === product.nombre_categoria
+    );
+
+    const porcentaje = discount ? discount.porcentaje / 100 : 0;
+    const precioVentaSinIGV = product.precio_venta * 0.82;
+    const igvUnitario = product.precio_venta * 0.18;
+
+    return {
+      ...product,
+      cantidad: 1,
+      precio_venta: precioVentaSinIGV,
+      descuento: discount?.porcentaje ?? 0,
+      subtotal: precioVentaSinIGV * (1 - porcentaje),
+      igv: igvUnitario
+    };
+  },
+
+  setDiscounts: (arrayDiscounts) => {
+    set(() => ({ discounts: arrayDiscounts }));
+  }
+});

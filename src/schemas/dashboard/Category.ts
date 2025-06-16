@@ -13,9 +13,22 @@ export const DashboardCategorySchema = z.object({
     activo: z.number(),
 });
 
-export const DashboardCategoryByIdSchema = DashboardCategorySchema.extend({
-    id_padre: z.number().positive().nullish(),
+export const DashboardCategoryByIdSchema = z.object({
+    id: z.number().positive(),
+    nombre: z.string(),
+    activo: z.number(),
+    id_padre: z.number().min(-1),
     nivel: z.number()
+})
+
+
+export const DashboardLevelCategorySchema = z.object({
+    id: z.number().positive(),
+    nombre: z.string(),
+    id_padre: z.number().min(-1),
+    activo: z.number()
 });
+
+export const DashboardLevelCategoriesSchema = z.array(DashboardLevelCategorySchema);
 
 export const DashboardCategoriesSchema = z.array(DashboardCategorySchema);

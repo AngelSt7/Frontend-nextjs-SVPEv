@@ -190,7 +190,7 @@ export const TableComponent = <T extends { id: number }>({
           loadingContent={<Spinner />}
         >
           {(item) => (
-            <TableRow className="hover:bg-[#f3f4f6] dark:hover:bg-[#222225]" key={item.id}>
+            <TableRow className="hover:bg-[#f3f4f6] dark:hover:bg-[#222225] dark:text-[#c9cacb]" key={item.id}>
               {(columnKey) => (
                 <TableCell>
                   {renderCellSaleProduct?.( item, columnKey, addProduct!, decreaseQuantity!, increaseQuantity!)}

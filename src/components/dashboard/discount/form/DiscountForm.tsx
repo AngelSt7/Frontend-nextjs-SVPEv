@@ -2,9 +2,9 @@ import Input from '@/src/components/ui/Input';
 import { FieldErrors, UseFormRegister, UseFormSetValue, UseFormWatch } from 'react-hook-form';
 import { MdDiscount } from 'react-icons/md';
 import { DiscountFormData } from '@/src/types/dashboard/DiscountTypes';
-import { useGetCategories } from '@/src/hooks/dashboard/useGetCategories';
 import SelectItem from '../../ui/SelectItem';
 import SelectDate from '../../category/create/SelectDate';
+import { useGetCategories } from '@/src/hooks/dashboard/useGetCategories';
 
 type DiscountFormProps = {
     register: UseFormRegister<DiscountFormData>;

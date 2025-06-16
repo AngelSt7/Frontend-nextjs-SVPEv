@@ -13,13 +13,14 @@ export type Product = {
     min_stock: number,
     stock_actual: number,
     nombre_categoria: string,
-    nombre_marca: string
+    nombre_marca: string,
 }
 
 export type ProductCart = Product & {
     cantidad: number,
     subtotal: number,
-    descuento: number
+    descuento: number,
+    igv: number
 }
 
 export type SalesFormData = z.infer<typeof SalesFormDataSchema>

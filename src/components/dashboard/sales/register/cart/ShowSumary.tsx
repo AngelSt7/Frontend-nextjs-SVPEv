@@ -1,18 +1,19 @@
 import { useAppStore } from "@/src/store/useAppStore";
 import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button } from "@heroui/react";
 import { useMemo, useState } from "react";
-import TotalPay from "./TotalPay";
 import RequestCartForm from "./RequestCartForm";
 
 export default function ShowSumary() {
     const showModal = useAppStore(state => state.showModal);
     const toggleShowModal = useAppStore(state => state.toggleShowModal);
-    const cart = useAppStore(state => state.cart);
     const increaseQuantity = useAppStore(state => state.increaseQuantity);
     const decreaseQuantity = useAppStore(state => state.decreaseQuantity);
     const deleteProduct = useAppStore(state => state.deleteProduct);
-    const total = useMemo(() => cart.reduce((item, acc) => item + ((acc.precio_venta * acc.cantidad) * (1 - (acc.descuento / 100))), 0), [cart])
+    const cart = useAppStore(state => state.cart);
+    const igv = useMemo(() => cart.reduce((sum, item) => sum + item.igv, 0), [cart]);
+    const total = useMemo(() => cart.reduce((sum, item) => sum + (item.subtotal + item.igv), 0), [cart]);
     const [step, setStep] = useState(true);
+
     return (
         <Modal size="xl" scrollBehavior="inside" isOpen={showModal} onClose={() => toggleShowModal()}>
             <ModalContent>
@@ -24,6 +25,7 @@ export default function ShowSumary() {
                                 <RequestCartForm
                                     step={step}
                                     cart={cart}
+                                    igv={igv}
                                     total={total}
                                     increaseQuantity={increaseQuantity}
                                     decreaseQuantity={decreaseQuantity}
@@ -34,7 +36,7 @@ export default function ShowSumary() {
 
                         <ModalFooter>
                             <div className=" flex  justify-between w-full">
-                                <Button className="w-fix bg-[#716a9c] text-white shadow-lg" onPress={() => setStep(!step)}>{step ? 'Continuar' : 'Ver resumen'}</Button>
+                                <Button disabled={cart.length === 0} className="w-fix bg-[#716a9c] text-white shadow-lg" onPress={() => setStep(!step)}>{step ? 'Continuar' : 'Ver resumen'}</Button>
                                 <div className=" flex gap-4">
                                     <Button color="danger" variant="light" onPress={() => toggleShowModal()}>
                                         Cancelar

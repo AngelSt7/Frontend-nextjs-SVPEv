@@ -1,14 +1,12 @@
-
 import api from "@/src/axios/axios";
-import { DashboardSalesSchema } from "@/src/schemas/dashboard/Sales";
-import { DashboardStocksSchema } from "@/src/schemas/dashboard/Stock";
+import { DashboardLevelCategoriesSchema } from "@/src/schemas/dashboard/Category";
 import { isAxiosError } from "axios";
 
-export async function dashboardListSaleService() {
+export async function dashboardListLevelCategoryService({ level } : { level: number}) {
     try {
-        const url = '/venta/listar'
+        const url = `/categoria/listar/nivel/${Number(level)}`
         const { data } = await api(url)
-        const response = DashboardSalesSchema.safeParse(data)
+        const response = DashboardLevelCategoriesSchema.safeParse(data) 
         if(response.success){
             return response.data
         }

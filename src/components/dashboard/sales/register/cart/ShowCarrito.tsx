@@ -49,8 +49,8 @@ export default function ShowCarrito() {
       >
         <div className={`flex flex-col items-center rounded-lg shadow-lg pt-4 px-2 border transition-all duration-300 ${
           isDisabled 
-            ? 'bg-gray-100 border-gray-300 shadow-sm' 
-            : 'bg-transparent border-gray-200 hover:shadow-xl hover:border-blue-300'
+            ? 'bg-gray-100 dark:bg-gray-800 border-gray-300 dark:border-gray-600 shadow-sm' 
+            : 'bg-transparent dark:bg-gray-900/50 border-gray-200 dark:border-gray-700 hover:shadow-xl hover:border-blue-300 dark:hover:border-blue-500'
         }`}>
           <div className="relative mb-2">
             <svg
@@ -60,8 +60,8 @@ export default function ShowCarrito() {
               fill="none"
               className={`transition-colors duration-200 ${
                 isDisabled 
-                  ? 'text-gray-400' 
-                  : 'text-gray-700 hover:text-blue-600'
+                  ? 'text-gray-400 dark:text-gray-500' 
+                  : 'text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400'
               }`}
             >
               <path
@@ -76,8 +76,8 @@ export default function ShowCarrito() {
             </svg>
             {totalProducts > 0 && (
               <div
-                className={`absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full min-w-[20px] h-5 flex items-center justify-center px-1 transform transition-all duration-300 ${isAnimating
-                  ? 'scale-125 bg-red-600 shadow-lg animate-bounce'
+                className={`absolute -top-2 -right-2 bg-red-500 dark:bg-red-600 text-white text-xs font-bold rounded-full min-w-[20px] h-5 flex items-center justify-center px-1 transform transition-all duration-300 ${isAnimating
+                  ? 'scale-125 bg-red-600 dark:bg-red-500 shadow-lg animate-bounce'
                   : 'scale-100'
                   }`}
               >

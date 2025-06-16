@@ -12,7 +12,7 @@ export default function Clipboard({ text, context, opacity = true }: { text: str
         >
             <span className="text-sm text-[#11181c] dark:text-[#c9cacb]">{text}</span>
             <svg
-                className="w-4 h-4 text-gray-500 hover:text-zinc-100"
+                className="w-4 h-4 text-gray-500 hover:text-zinc-800 dark:hover:text-zinc-100"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"

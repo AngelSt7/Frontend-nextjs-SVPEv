@@ -11,21 +11,6 @@ export const DashboardDiscountSchema = z.object({
 });
 
 
-// Para descuento
-// Crear :
-//  id_categoria,
-//    Double porcentaje,
-//   fecha_inicio,
-//  fecha_fin
-
-// Actualizar:
-// Long Id_descuento, 
-// Long id_categoria,
-//    Double porcentaje,
-//   fecha_inicio,
-//  fecha_fin
-
-
 export const DiscountFormDataSchema = z.object({
   id_categoria: z.number(),
   porcentaje: z.number(),
