@@ -11,6 +11,7 @@ import { dashboardChangeStatusSupplierService } from '@/src/services/dashboard/S
 import { Columns } from './Columns'
 import { dashboardFindByIdSupplierService } from '@/src/services/dashboard/Supplier/dashboardFindByIdSupplierService'
 import GenericEditWrapper from '../../ui/generics/GenericEditWrapper'
+import { getRenderCell } from '../../ui/getRenderCell'
 
 export default function ContentPage({ id }: { id: string | undefined }) {
   const { openModalCreate, openModalEdit, closeModal } = useModalUtils()
@@ -30,7 +31,7 @@ export default function ContentPage({ id }: { id: string | undefined }) {
         defaultVisibleColumns={["razon_social", "ruc", "correo", "activo", "actions"]}
         searchableField="razon_social"
         mutate={mutate}
-        renderCells={RenderCellSupplier}
+        renderCells={getRenderCell(RenderCellSupplier, mutate, openModalEdit)}
         isSales={false}
       />
 

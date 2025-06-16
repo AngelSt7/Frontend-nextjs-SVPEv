@@ -79,7 +79,13 @@ export const RenderCellSale = (mutate: mutateProps, item: DashboardSale, columnK
           </Dropdown>
         </div>
       );
-    default:
-      return cellValue;
+     default:
+      if (cellValue instanceof Date) {
+        return cellValue.toLocaleDateString();
+      }
+      if (typeof cellValue === "object" && cellValue !== null) {
+        return JSON.stringify(cellValue);
+      }
+      return String(cellValue);
   }
 };

@@ -11,6 +11,7 @@ import GenericModal from '../../ui/generics/GenericModal'
 import { dashboardChangeStatusCouponService } from '@/src/services/dashboard/coupon/dashboardChangeStatusCouponService'
 import { dashboardFindByIdCouponService } from '@/src/services/dashboard/coupon/dashboardFindByIdCouponService'
 import GenericEditWrapper from '../../ui/generics/GenericEditWrapper'
+import { getRenderCell } from '../../ui/getRenderCell'
 
 export default function ContentPage({ id }: { id: string | undefined }) {
     const { openModalCreate, openModalEdit, closeModal } = useModalUtils()
@@ -31,7 +32,7 @@ export default function ContentPage({ id }: { id: string | undefined }) {
                 defaultVisibleColumns={["codigo", "tipoDescuento", "descuento", "fecha_inicio", "fecha_final", "activo", "actions"]}
                 searchableField="codigo"
                 mutate={mutate}
-                renderCells={RenderCellCoupons}
+                renderCells={getRenderCell(RenderCellCoupons, mutate, openModalEdit)}
             />
 
             {id && (

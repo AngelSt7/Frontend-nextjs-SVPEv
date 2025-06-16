@@ -67,6 +67,9 @@ export const RenderCellDiscount = (mutate: mutateProps, item: DashboardDiscount,
                 </div>
             );
         default:
-            return cellValue;
+            if (cellValue instanceof Date) {
+                return cellValue.toLocaleDateString();
+            }
+            return <span>{String(cellValue)}</span>;
     }
 };

@@ -12,6 +12,7 @@ import { dashboardChangeStatusUserService } from '@/src/services/dashboard/users
 import { RenderCellUser } from './RenderCellUser'
 import { dashboardFindByIdUserService } from '@/src/services/dashboard/users/dashboardFindByIdUserService'
 import GenericEditWrapper from '../../ui/generics/GenericEditWrapper'
+import { getRenderCell } from '../../ui/getRenderCell'
 
 export default function ContentPage({ id, user }: { id: string | undefined, user?: AuthUserInfo }) {
     const { openModalCreate, openModalEdit, closeModal } = useModalUtils()
@@ -32,7 +33,7 @@ export default function ContentPage({ id, user }: { id: string | undefined, user
                 defaultVisibleColumns={["nombre", "dni", "correo", "celular", "activo", "actions"]}
                 searchableField="nombre"
                 mutate={mutate}
-                renderCells={RenderCellUser}
+                renderCells={getRenderCell(RenderCellUser, mutate, openModalEdit)}
             />
 
             {id && (

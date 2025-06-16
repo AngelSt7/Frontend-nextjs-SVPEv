@@ -12,6 +12,7 @@ import { AuthUserInfo } from "@/src/types/AuthTypes"
 import { Columns } from "./Columns"
 import GenericEditWrapper from "../../ui/generics/GenericEditWrapper"
 import { dashboardFindByIdReturnService } from "@/src/services/dashboard/return/dashboardFindByIdReturnService"
+import { getRenderCell } from "../../ui/getRenderCell"
 
 
 export default function ContentPage({ id, user }: { id: string | undefined, user?: AuthUserInfo }) {
@@ -33,7 +34,7 @@ export default function ContentPage({ id, user }: { id: string | undefined, user
                 defaultVisibleColumns={["codigo_lote", "cantidad", "fecha_devolucion", "reposicion_aplicada", "estado", "actions"]}
                 searchableField="codigo_lote"
                 mutate={mutate}
-                renderCells={RenderCellReturn}
+                renderCells={getRenderCell(RenderCellReturn, mutate, openModalEdit)}
             />
 
             {id && (

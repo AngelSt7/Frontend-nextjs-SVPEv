@@ -7,6 +7,7 @@ import { DashboardSale } from '@/src/types/dashboard/SaleTypes'
 import { dashboardListSaleService } from '@/src/services/dashboard/sales/dashboardListSaleService'
 import { RenderCellSale } from './RenderCellsSale'
 import { dashboardChangeStatusSalesService } from '@/src/services/dashboard/sales/dashboardChangeStatusSalesService'
+import { getRenderCell } from '../../ui/getRenderCell'
 
 export default function ContentPage() {
 
@@ -24,7 +25,7 @@ export default function ContentPage() {
                 defaultVisibleColumns={[  "fecha",  "nombreCliente",  "nombreMetodoPago",  "total",  "cancelado",  "activo",  "actions"]}
                 searchableField="nombreCliente"
                 mutate={mutate}
-                renderCells={RenderCellSale}
+                renderCells={getRenderCell(RenderCellSale, mutate)}
                 isSales={false}
                 newPath="/dashboard/ventas/registrar"
             />

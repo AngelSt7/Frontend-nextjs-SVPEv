@@ -12,6 +12,7 @@ import { RenderCellProduct } from './RenderCellProduct'
 import { AuthUserInfo } from '@/src/types/AuthTypes'
 import GenericEditWrapper from '../../ui/generics/GenericEditWrapper'
 import { dashboardFindByIdProductService } from '@/src/services/dashboard/product/dashboardFindByIdProductService'
+import { getRenderCell } from '../../ui/getRenderCell'
 
 export default function ContentPage({ id, user }: { id: string | undefined, user?: AuthUserInfo }) {
     const { openModalCreate, openModalEdit, closeModal } = useModalUtils()
@@ -32,7 +33,7 @@ export default function ContentPage({ id, user }: { id: string | undefined, user
                 defaultVisibleColumns={["nombre", "precio_venta", "nombre_marca", "nombre_categoria", "sku", "min_stock", "activo", "actions"]}
                 searchableField="nombre"
                 mutate={mutate}
-                renderCells={RenderCellProduct}
+                renderCells={getRenderCell(RenderCellProduct, mutate, openModalEdit)}
             />
 
             {id && (

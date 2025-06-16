@@ -11,6 +11,7 @@ import GenericModal from "../../ui/generics/GenericModal"
 import { TableComponent } from "../../ui/table/TableContent"
 import { DashboardWarrantyClaim } from "@/src/types/dashboard/WarrantyClaimTypes"
 import { AuthUserInfo } from "@/src/types/AuthTypes"
+import { getRenderCell } from "../../ui/getRenderCell"
 
 export default function ContentPage({ id, user }: { id: string | undefined, user?: AuthUserInfo }) {
   const { openModalCreate, openModalEdit, closeModal } = useModalUtils()
@@ -40,7 +41,7 @@ export default function ContentPage({ id, user }: { id: string | undefined, user
         ]}
         searchableField="descripcion"
         mutate={mutate}
-        renderCells={RenderCellWarrantyClaim}
+        renderCells={getRenderCell(RenderCellWarrantyClaim, mutate, openModalEdit)}
       />
 
       <GenericModal user={user} closeModal={closeModal} />

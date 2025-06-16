@@ -47,7 +47,7 @@ type TableComponentProps<T> = {
   searchableField?: keyof T;
   mutate?: mutateProps;
   categoryOptions?: { name: string; uid: string; }[]
-  renderCells?: (mutate: mutateProps, item: T, columnKey: React.Key, openModalEdit?: (id: number) => void) => any
+  renderCells?: (item: T, columnKey: React.Key) => React.ReactNode;
   showActions?: boolean,
   isSales?: boolean,
   renderCellSaleProduct?: ( item: T, columnKey: React.Key, addProduct?: (product: Product) => void, decreaseQuantity?: (id: Product["id"]) => void, increaseQuantity?: (id: Product["id"]) => void) => any
@@ -177,7 +177,7 @@ export const TableComponent = <T extends { id: number }>({
             <TableRow className="hover:bg-[#f3f4f6] dark:hover:bg-[#222225] dark:text-[#c9cacb]" key={item.id}>
               {(columnKey) => (
                 <TableCell>
-                  {renderCells?.(mutate!, item, columnKey, openModalEdit!)}
+                  {renderCells?.(item, columnKey)}
                 </TableCell>
               )}
             </TableRow>
