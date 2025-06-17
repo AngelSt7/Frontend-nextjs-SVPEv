@@ -26,13 +26,11 @@ export default function ContentPage({ id }: { id: string | undefined }) {
         <div>
             <TableComponent<DashboardReturnSale>
                 openModalCreate={openModalCreate}
-                openModalEdit={openModalEdit}
                 columns={Columns}
                 queryKey="returns-sales"
                 functionService={dashboardListReturnSaleService}
                 defaultVisibleColumns={["correoUsuario", "motivo", "cantidad", "fecha", "actions"]}
                 searchableField="motivo"
-                mutate={mutate}
                 renderCells={getRenderCell(RenderCellReturnSale, mutate, openModalEdit)}
             />
 

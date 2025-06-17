@@ -25,13 +25,11 @@ export default function ContentPage({ id }: { id: string | undefined }) {
         <div>
             <TableComponent<DashboardCategory>
                 openModalCreate={openModalCreate}
-                openModalEdit={openModalEdit}
                 columns={Columns}
                 queryKey="categories"
                 functionService={dashboardListCategoryService}
                 defaultVisibleColumns={["nombre", "activo", "actions"]}
                 searchableField="nombre"
-                mutate={mutate}
                 renderCells={getRenderCell(RenderCellCategory, mutate, openModalEdit)}
             />
 

@@ -5,10 +5,10 @@ import { formatCurrency } from "@/src/utils/format/formatCurrency";
 import { Product } from "@/src/types/dashboard/SaleTypes";
 import toast from "react-hot-toast";
 
-export const renderCellSaleProduct = (
+export const renderCellCart = (
   item: DashboardProduct,
   columnKey: React.Key,
-  addProduct?: (product: Product) => void
+  addProduct: (product: Product) => void
 ) => {
   const cellValue = item[columnKey as keyof typeof item]
   if (item.activo !== 1) return null;
@@ -40,7 +40,7 @@ export const renderCellSaleProduct = (
             size="sm"
             variant="flat"
             onPress={() => {
-              addProduct?.({
+              addProduct({
                 id: item.id,
                 nombre: item.nombre,
                 precio_venta: item.precio_venta,

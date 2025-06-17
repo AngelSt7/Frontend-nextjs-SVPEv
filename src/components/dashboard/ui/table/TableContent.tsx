@@ -4,76 +4,31 @@ import { useTableLogic } from "../../../../hooks/dashboard/useTableLogic";
 import { useQuery, keepPreviousData } from "@tanstack/react-query";
 import { TopContent } from "./TopContent";
 import { useTableHandlers } from "@/src/hooks/dashboard/useTableHandlers";
-import { ColumnsType, mutateProps } from "@/src/types/commonTypes/commonTypes";
-import { Product } from "@/src/types/dashboard/SaleTypes";
-
-const labelMap: Record<string, string> = {
-  suppliers: "Proveedor",
-  users: "Usuario",
-  products: "Producto",
-  categories: "Categoria",
-  discounts: "Descuento",
-  coupons: "Cupón",
-  returns: "Devolución",
-  stocks: "Stock",
-  returnsProducts: "Devolución Producto",
-  sales: "Venta",
-  warrantyClaims: "Reclamo de Garantía",
-  warranties: "Garantía",
-  clients: "Cliente",
-};
-
-const entityLabelMap: Record<string, string> = {
-  suppliers: "proveedores",
-  users: "usuarios",
-  products: "productos",
-  categories: "categorías",
-  discounts: "descuentos",
-  coupons: "cupones",
-  returnsProducts: "devoluciones de producto",
-  stocks: "stocks",
-  warrantyClaims: "reclamos de garantía",
-  warranties: "garantías",
-};
+import { ColumnsType } from "@/src/types/commonTypes/commonTypes";
+import { entityLabelMap, labelMap } from "@/src/utils/resolves/resolveTittle";
 
 type TableComponentProps<T> = {
-  newPath?: string
   columns: ColumnsType;
   queryKey: string;
-  functionService: () => Promise<T[] | undefined>;
   defaultVisibleColumns: (keyof T | string)[];
-  openModalCreate?: () => void;
-  openModalEdit?: (id: number ) => void;
+  functionService: () => Promise<T[] | undefined>;
+  newPath?: string
   searchableField?: keyof T;
-  mutate?: mutateProps;
   categoryOptions?: { name: string; uid: string; }[]
-  renderCells?: (item: T, columnKey: React.Key) => React.ReactNode;
   showActions?: boolean,
   isSales?: boolean,
-  renderCellSaleProduct?: ( item: T, columnKey: React.Key, addProduct?: (product: Product) => void, decreaseQuantity?: (id: Product["id"]) => void, increaseQuantity?: (id: Product["id"]) => void) => any
-  addProduct?: (product: Product) => void
-  decreaseQuantity?: (id: Product["id"]) => void
-  increaseQuantity?: (id: Product["id"]) => void
+  openModalCreate?: () => void;
+  renderCells?: (item: T, columnKey: React.Key) => React.ReactNode;
+  renderCellsCart?: (item: T, columnKey: React.Key) => React.ReactNode;
 };
 
 export const TableComponent = <T extends { id: number }>({
-  openModalCreate,
-  openModalEdit,
-  columns,
-  queryKey,
-  functionService,
-  defaultVisibleColumns,
-  searchableField,
-  renderCells,
-  mutate,
-  renderCellSaleProduct,
-  showActions = true,
-  isSales = false,
-  addProduct,
-  decreaseQuantity,
-  increaseQuantity,
-  newPath
+  openModalCreate, columns, queryKey,
+  functionService, defaultVisibleColumns, searchableField,
+  renderCells, renderCellsCart, showActions = true, 
+  isSales = false, newPath
 }: TableComponentProps<T>) => {
+
   const { data = [], isLoading } = useQuery({
     queryKey: [queryKey],
     queryFn: functionService,
@@ -166,6 +121,7 @@ export const TableComponent = <T extends { id: number }>({
         )}
       </TableHeader>
 
+      {/* Una sola comprobacion en ves de cada fila */}
       {!isSales ? (
         <TableBody
           emptyContent="No se encontraron registros"
@@ -193,7 +149,7 @@ export const TableComponent = <T extends { id: number }>({
             <TableRow className="hover:bg-[#f3f4f6] dark:hover:bg-[#222225] dark:text-[#c9cacb]" key={item.id}>
               {(columnKey) => (
                 <TableCell>
-                  {renderCellSaleProduct?.( item, columnKey, addProduct!, decreaseQuantity!, increaseQuantity!)}
+                  {renderCellsCart?.( item, columnKey)}
                 </TableCell>
               )}
             </TableRow>

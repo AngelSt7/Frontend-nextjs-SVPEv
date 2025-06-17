@@ -25,13 +25,11 @@ export default function ContentPage({ id }: { id: string | undefined }) {
         <div>
             <TableComponent<DashboardDiscount>
                 openModalCreate={openModalCreate}
-                openModalEdit={openModalEdit}
                 columns={Columns}
                 queryKey="discounts"
                 functionService={dashboardListDiscountService}
                 defaultVisibleColumns={["nombreCategoria", "porcentaje", "fecha_inicio", "fecha_final", "activo", "actions"]}
                 searchableField="nombreCategoria"
-                mutate={mutate}
                 renderCells={getRenderCell(RenderCellDiscount, mutate, openModalEdit)}
             />
 

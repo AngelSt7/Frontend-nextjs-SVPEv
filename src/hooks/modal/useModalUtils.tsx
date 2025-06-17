@@ -11,6 +11,12 @@ export function useModalUtils() {
         router.replace(`?${params.toString()}`);
     };
 
+    const openDetailsModal = () => {
+        const params = new URLSearchParams(searchParams.toString());
+        params.set("action", "details");
+        router.replace(`?${params.toString()}`);
+    };
+
     const openModalEdit = (id : number) => {
         const params = new URLSearchParams(searchParams.toString());
         params.set("action", "edit");
@@ -23,5 +29,5 @@ export function useModalUtils() {
         router.replace(`?${params.toString()}`);
     };
 
-    return { openModalCreate, openModalEdit, closeModal };
+    return { openModalCreate, openDetailsModal, openModalEdit, closeModal };
 };

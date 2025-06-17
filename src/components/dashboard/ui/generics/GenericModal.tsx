@@ -2,30 +2,9 @@ import { Modal, ModalContent, ModalHeader, ModalBody } from "@heroui/react";
 import { usePathname, useSearchParams } from "next/navigation";
 import { pluralToSingular } from "@/src/utils/resolves/resolveTittle";
 import { AuthUserInfo } from "@/src/types/AuthTypes";
-import CreateCategoryForm from "../../category/create/CreateCategoryForm";
-import EditCategoryForm from "../../category/edit/EditCategoryForm";
-import CreateClientForm from "../../client/create/CreateClientForm";
-import EditClientForm from "../../client/edit/EditClientForm";
-import CreateCouponForm from "../../coupons/create/CreateCouponForm";
-import EditCouponForm from "../../coupons/edit/EditCouponForm";
-import CreateDiscountForm from "../../discount/create/CreateDiscountForm";
-import EditDiscountForm from "../../discount/edit/EditDiscountForm";
-import CreateProductForm from "../../products/create/CreateProductForm";
-import EditProductForm from "../../products/edit/EditProductForm";
-import CreateReturnProductForm from "../../return-product/create/CreateReturnProductForm";
-import EditReturnForm from "../../return-product/edit/EditReturnProductForm";
-import CreateReturnSaleForm from "../../return-sale/create/CreateReturnSaleForm";
-import EditReturnSaleForm from "../../return-sale/edit/EditReturnSaleForm";
-import CreateStockForm from "../../stock/create/CreateStockForm";
-import EditStockForm from "../../stock/edit/EditStockForm";
-import CreateSupplierForm from "../../suppliers/create/CreateSupplierForm";
-import EditSupplierForm from "../../suppliers/edit/EditSupplierForm";
-import CreateUserForm from "../../users/create/CreateUserForm";
-import EditUserForm from "../../users/edit/EditUserForm";
-import CreateWarrantyClaimForm from "../../warranty-claim/create/CreateWarrantyClaimForm";
-import EditWarrantyClaimForm from "../../warranty-claim/edit/EditWarrantyClaimForm";
-import CreateWarrantyForm from "../../warranty/create/CreateWarrantyForm";
-import EditWarrantyForm from "../../warranty/edit/EditWarrantyForm";
+import { CreateCategoryForm, EditCategoryForm, CreateClientForm, EditClientForm, CreateCouponForm, EditCouponForm, CreateDiscountForm, EditDiscountForm, CreateProductForm, EditProductForm, CreateReturnProductForm, EditReturnForm, CreateReturnSaleForm, EditReturnSaleForm, CreateStockForm, EditStockForm, CreateSupplierForm, EditSupplierForm, CreateUserForm, EditUserForm, CreateWarrantyClaimForm, EditWarrantyClaimForm, CreateWarrantyForm, EditWarrantyForm } from ".";
+import { DashboardSale } from "@/src/types/dashboard/SaleTypes";
+import DetailsProduct from "../../sales/list/DetailsProduct";
 
 type GenericModalProps = {
   user?: AuthUserInfo;
@@ -34,9 +13,10 @@ type GenericModalProps = {
   defaultValues?: any;
   idReturnSaleDetail?: number;
   clearIdReturnSaleDetail?: () => void;
+  detailsSale?: DashboardSale['detallesVenta']
 };
 
-export default function GenericModal({ user, id, closeModal, defaultValues, idReturnSaleDetail, clearIdReturnSaleDetail }: GenericModalProps) {
+export default function GenericModal({ user, id, closeModal, defaultValues, idReturnSaleDetail, detailsSale, clearIdReturnSaleDetail }: GenericModalProps) {
 
   const path = usePathname();
   const searchParams = useSearchParams();
@@ -45,12 +25,28 @@ export default function GenericModal({ user, id, closeModal, defaultValues, idRe
 
   const entity = pluralToSingular[rawEntity];
 
+  const isDetails = action === "details" && !!entity
   const isCreate = action === "create" && !!entity;
   const isEdit = action === "edit" && !!entity && !!defaultValues;
-  const showModal = isCreate || isEdit;
+  const showModal = isCreate || isEdit || isDetails;
 
   const getTitle = () => {
-    const base = isCreate ? "Agregar" : "Editar";
+    let base = "";
+
+    switch (action) {
+      case "create":
+        base = "Agregar";
+        break;
+      case "edit":
+        base = "Editar";
+        break;
+      case "details":
+        base = "Detalle de";
+        break;
+      default:
+        base = "";
+    }
+
     const entityName = entity?.charAt(0).toUpperCase() + entity?.slice(1);
     return `${base} ${entityName}`;
   };
@@ -66,12 +62,12 @@ export default function GenericModal({ user, id, closeModal, defaultValues, idRe
         case "descuento": return <CreateDiscountForm closeModal={closeModal} />;
         case "categoria": return <CreateCategoryForm closeModal={closeModal} />;
         case "cupón": return <CreateCouponForm closeModal={closeModal} />;
-        case "devolución_producto":  return  <CreateReturnProductForm user={user} closeModal={closeModal} />
-        case "stock": return  <CreateStockForm user={user} closeModal={closeModal} />
-        case "devolución_venta":  return  <CreateReturnSaleForm closeModal={closeModal} idReturnSaleDetail={idReturnSaleDetail!} />
+        case "devolución_producto": return <CreateReturnProductForm user={user} closeModal={closeModal} />
+        case "stock": return <CreateStockForm user={user} closeModal={closeModal} />
+        case "devolución_venta": return <CreateReturnSaleForm closeModal={closeModal} idReturnSaleDetail={idReturnSaleDetail!} />
         case "reclamo_garantia": return <CreateWarrantyClaimForm closeModal={closeModal} />
         case "garantia": return <CreateWarrantyForm closeModal={closeModal} />;
-        case "cliente" : return <CreateClientForm closeModal={closeModal} />
+        case "cliente": return <CreateClientForm closeModal={closeModal} />
       }
     }
 
@@ -88,7 +84,13 @@ export default function GenericModal({ user, id, closeModal, defaultValues, idRe
         case "devolución_venta": return <EditReturnSaleForm closeModal={closeModal} defaultValues={defaultValues} />;
         case "reclamo_garantia": return <EditWarrantyClaimForm user={user} closeModal={closeModal} defaultValues={defaultValues} />;
         case "garantia": return <EditWarrantyForm user={user} closeModal={closeModal} defaultValues={defaultValues} />;
-        case "cliente" : return <EditClientForm closeModal={closeModal} defaultValues={defaultValues} />
+        case "cliente": return <EditClientForm closeModal={closeModal} defaultValues={defaultValues} />
+      }
+    }
+
+    if (isDetails) {
+      switch (entity) {
+        case "venta": return <DetailsProduct />
       }
     }
     return null;
@@ -98,7 +100,7 @@ export default function GenericModal({ user, id, closeModal, defaultValues, idRe
 
   const tittle = getTitle();
   return (
-    <Modal scrollBehavior="inside" size="xl" backdrop="opaque" isOpen={showModal} onClose={closeModal}>
+    <Modal scrollBehavior="inside" size={isDetails ? "2xl" : "xl"} backdrop="opaque" isOpen={showModal} onClose={closeModal}>
       <ModalContent>
         {(onClose) => (
           <>

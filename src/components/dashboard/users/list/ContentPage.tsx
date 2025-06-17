@@ -26,13 +26,11 @@ export default function ContentPage({ id, user }: { id: string | undefined, user
         <div>
             <TableComponent<DashboardUser>
                 openModalCreate={openModalCreate}
-                openModalEdit={openModalEdit}
                 columns={Columns}
                 queryKey="users"
                 functionService={dashboardListUserService}
                 defaultVisibleColumns={["nombre", "dni", "correo", "celular", "activo", "actions"]}
                 searchableField="nombre"
-                mutate={mutate}
                 renderCells={getRenderCell(RenderCellUser, mutate, openModalEdit)}
             />
 

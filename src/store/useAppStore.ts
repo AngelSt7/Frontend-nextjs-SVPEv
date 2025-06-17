@@ -4,9 +4,9 @@ import { paginationSlice, PaginationSlice } from "./paginationSlice";
 import { ControlSessionSlice, controlSessionSlice } from "./controlSessionSlice";
 import { cartSlice, CartSlice } from "./cartSlice";
 import { controlSaleSlice, ControlSaleSlice } from "./controlSaleSlice";
+import { detailsSaleSlice, DetailsSaleSlice } from './detailsSaleSlice';
 
-//partialize para guardar take en localStorage 
-export const useAppStore = create<PaginationSlice & ControlSessionSlice & CartSlice & ControlSaleSlice>()(
+export const useAppStore = create<PaginationSlice & ControlSessionSlice & CartSlice & ControlSaleSlice & ControlSaleSlice & DetailsSaleSlice>()(
     devtools(
         persist(
             (...a) => ({
@@ -14,12 +14,15 @@ export const useAppStore = create<PaginationSlice & ControlSessionSlice & CartSl
                 ...controlSessionSlice(...a),
                 ...cartSlice(...a),
                 ...controlSaleSlice(...a),
+                ...detailsSaleSlice(...a),
             }),
             {
                 name: "property-storage", 
                 partialize: (state) => ({ 
                     take: state.take,
-                    shouldShowResetPasswordModal: state.shouldShowResetPasswordModal
+                    shouldShowResetPasswordModal: state.shouldShowResetPasswordModal,
+                    showModal: state.showModal,
+                    detail: state.detail
                 }),
             }
         )

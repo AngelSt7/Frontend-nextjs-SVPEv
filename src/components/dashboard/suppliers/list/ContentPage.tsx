@@ -24,13 +24,11 @@ export default function ContentPage({ id }: { id: string | undefined }) {
     <div>
       <TableComponent<DashboardSupplier>
         openModalCreate={openModalCreate}
-        openModalEdit={openModalEdit}
         columns={Columns}
         queryKey="suppliers"
         functionService={dashboardListSupplierService}
         defaultVisibleColumns={["razon_social", "ruc", "correo", "activo", "actions"]}
         searchableField="razon_social"
-        mutate={mutate}
         renderCells={getRenderCell(RenderCellSupplier, mutate, openModalEdit)}
         isSales={false}
       />

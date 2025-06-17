@@ -25,7 +25,6 @@ export default function ContentPage({ id, user }: { id: string | undefined, user
     <div>
       <TableComponent<DashboardWarrantyClaim>
         openModalCreate={openModalCreate}
-        openModalEdit={openModalEdit}
         columns={Columns}
         queryKey="warrantyClaims"
         functionService={dashboardListWarrantyClaimsService}
@@ -40,7 +39,6 @@ export default function ContentPage({ id, user }: { id: string | undefined, user
           "actions"
         ]}
         searchableField="descripcion"
-        mutate={mutate}
         renderCells={getRenderCell(RenderCellWarrantyClaim, mutate, openModalEdit)}
       />
 
