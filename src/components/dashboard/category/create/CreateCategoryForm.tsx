@@ -22,7 +22,7 @@ export default function CreateCategoryForm({ closeModal }: CreateCategoryFormPro
     message: 'Categoria registrado exitosamente'
   })
 
-  const onSubmit = (data: CategoryFormData) => mutate({ ...data, activo: 1 });
+  const onSubmit = (data: CategoryFormData) => mutate({ ...data, id_categoria_padre: data.id_categoria_padre === 0 ? null : data.id_categoria_padre, activo: 1 });
 
   return (
     <form

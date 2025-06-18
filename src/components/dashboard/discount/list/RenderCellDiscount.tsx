@@ -17,11 +17,11 @@ export const RenderCellDiscount = (mutate: mutateProps, item: DashboardDiscount,
 
         case "fecha_inicio":
             return (
-                <p>{formatDate(item.fechaInicio.toString())}</p>
+                <p>{formatDate(item.fecha_inicio.toString())}</p>
             )
         case "fecha_final":
             return (
-                <p>{formatDate(item.fechaFinal.toString())}</p>
+                <p>{formatDate(item.fecha_fin.toString())}</p>
             )
 
         case "activo":

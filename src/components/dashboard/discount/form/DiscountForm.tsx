@@ -15,7 +15,6 @@ type DiscountFormProps = {
 
 export default function DiscountForm({ register, errors, watch, setValue }: DiscountFormProps) {
     const { data: categoryData = [] } = useGetCategories();
-    const formatCategory = categoryData.map((category) => ({ label: category.nombre, id: category.id, activo: category.activo }));
 
     return (
         <div className="flex flex-col gap-3">

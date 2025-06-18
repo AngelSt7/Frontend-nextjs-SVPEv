@@ -1,11 +1,10 @@
-import { FieldError, FieldErrors, UseFormRegister, UseFormSetValue, UseFormWatch } from 'react-hook-form';
+import { FieldErrors, UseFormRegister, UseFormSetValue, UseFormWatch } from 'react-hook-form';
 import { ReturnProductFormData } from '@/src/types/dashboard/ReturnProductTypes';
 import { useGetStock } from '@/src/hooks/dashboard/useGetStock';
-import { useEffect, useMemo } from 'react';
+import { useMemo } from 'react';
 import SelectTabs from '../../stock/form/SelectTabs';
 import Input from '@/src/components/ui/Input';
 import { MdPermIdentity } from 'react-icons/md';
-import SerieControl from '../../stock/form/SerieControl';
 import ActiveReposition from '../create/ActiveReposition';
 import MultiSelectTabs from '../../stock/form/MultiSelectTabs';
 
@@ -14,24 +13,21 @@ type ReturnFormProps = {
     errors: FieldErrors<ReturnProductFormData>;
     watch: UseFormWatch<ReturnProductFormData>;
     setValue: UseFormSetValue<ReturnProductFormData>;
-    seriesFormated: { label: string, value: number, filter: number }[],
-    isEdit?: boolean
+    seriesFormated?: { label: string, value: number, filter: number }[],
+    isEdit: boolean
 };
 
-export default function ReturnForm({ register, errors, watch, setValue, isEdit = false, seriesFormated }: ReturnFormProps) {
+export default function ReturnForm({ register, errors, watch, setValue, isEdit, seriesFormated }: ReturnFormProps) {
     const { data: returnProducts = [] } = useGetStock();
     const returnProductsFormated = useMemo(() => returnProducts.map(r => ({ value: r.id, label: r.lote })), [returnProducts])
     const id_ingreso = watch('id_detalle_ingreso');
-
-    useEffect(() => {
-        console.log('id_ingreso', id_ingreso);
-    }, [id_ingreso]);
+    const data = seriesFormated?.filter(s => s.filter === id_ingreso)
 
     return (
         <div className="flex flex-col gap-3">
 
             {isEdit && (
-                <p className=' text-justify'>Por el momento, no se puede cambiar de devolucion a una que cuente con lote, contactar con el servicio tecnico: +51 940 104 078</p>
+                <p className=' text-justify'>Por el momento, no se puede cambiar de devolucion a una que cuente con series, ni cambiar estas series, contactar con el servicio tecnico: +51 940 104 078</p>
             )}
 
             {!isEdit && (
@@ -72,11 +68,13 @@ export default function ReturnForm({ register, errors, watch, setValue, isEdit =
                 />
             </div>
 
-            {id_ingreso &&
+            {(!isEdit && id_ingreso && data && data.length > 0) &&
                 <MultiSelectTabs
-                    data={seriesFormated.filter(s => s.filter === id_ingreso)}
+                    data={data}
                     name="series"
-                    register={register("series")}
+                    register={register("series", {
+                        required: 'Este campo es obligatorio'
+                    })}
                     setValue={setValue}
                     watch={watch}
                     label="Selecciona las series"

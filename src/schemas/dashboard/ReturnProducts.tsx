@@ -18,7 +18,7 @@ export const ReturnProductFormDataSchema = z.object({
     id_detalle_ingreso: z.number(),
     tipo_serie: z.string(),
     cantidad: z.number(),
-    series: z.array(z.number()).optional(),
+    series: z.string(),
     motivo: z.string(),
     observaciones: z.string().optional(),
     id_usuario: z.number(),

@@ -99,6 +99,7 @@ export default function GenericModal({ user, id, closeModal, defaultValues, idRe
   if (!showModal) return null;
 
   const tittle = getTitle();
+  
   return (
     <Modal scrollBehavior="inside" size={isDetails ? "2xl" : "xl"} backdrop="opaque" isOpen={showModal} onClose={closeModal}>
       <ModalContent>

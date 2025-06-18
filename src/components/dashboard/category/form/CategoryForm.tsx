@@ -1,10 +1,8 @@
-import React from 'react';
 import { FieldErrors, UseFormRegister, UseFormSetValue, UseFormWatch } from 'react-hook-form';
 import { CategoryFormData } from '@/src/types/dashboard/CategoryTypes';
 import { MdPermIdentity } from 'react-icons/md';
 import Input from '@/src/components/ui/Input';
 import SelectItem from '../../ui/SelectItem';
-import { useEffect } from 'react';
 
 type CategoryFormProps = {
     register: UseFormRegister<CategoryFormData>;
@@ -17,11 +15,7 @@ type CategoryFormProps = {
 
 export default function CategoryForm({ register, errors, watch, setValue, formatCategoryTwo, formatCategoryThree }: CategoryFormProps) {
     const showField = watch('nivel')
-    useEffect(() => {
-        if (showField === 1) {
-            setValue('id_categoria_padre', 0)
-        }
-    }, [showField])
+
     return (
         <div className="flex flex-col gap-3">
             {showField ? <p> Según el nivel que seleccionaste, la categoria será de nivel {showField}</p> : null}

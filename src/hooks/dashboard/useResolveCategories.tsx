@@ -12,7 +12,7 @@ export default function useResolveCategories() {
         .map((category) => ({
           label: category.nombre,
           activo: category.activo,
-          id: category.id,
+          id: category.id ? category.id : 0,
         })),
     [categoryLevelTwo]
   );
@@ -24,7 +24,7 @@ export default function useResolveCategories() {
         .map((category) => ({
           label: category.nombre,
           activo: category.activo,
-          id: category.id,
+          id: category.id ? category.id : 0,
         })),
     [categoryLevelThree]
   );

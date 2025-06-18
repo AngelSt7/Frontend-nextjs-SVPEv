@@ -7,6 +7,7 @@ export async function dashboardFindByIdDiscountService(id : number) {
         const url = `/descuento/buscar/${id}`
         const { data } = await api.get(url)
         const response = DashboardDiscountByIdSchema.safeParse(data)
+        console.log(response)
         if(response.success){
             return response.data
         }

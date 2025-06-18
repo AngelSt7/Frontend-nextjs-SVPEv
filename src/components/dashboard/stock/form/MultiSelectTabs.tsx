@@ -1,6 +1,6 @@
 // components/form/MultiSelectTabs.tsx
+import { useMultiSelect } from '@/src/hooks/dashboard/useMultiSelect'
 import { FieldError, FieldValues, Path, UseFormRegisterReturn, UseFormSetValue, UseFormWatch } from 'react-hook-form'
-import { useEffect, useMemo, useState } from 'react'
 
 type ItemOption = {
   label: string
@@ -19,28 +19,15 @@ type MultiSelectTabsProps<T extends FieldValues> = {
 }
 
 export default function MultiSelectTabs<T extends FieldValues>({
-  data,
-  name,
-  setValue,
-  watch,
-  register,
-  errorMessage,
-  label
+  data, name, setValue, watch, register, errorMessage, label
 }: MultiSelectTabsProps<T>) {
-  const selected = watch(name)?.split(',').map((id: string) => Number(id)) || []
-  const [selectedIds, setSelectedIds] = useState<number[]>(selected)
-
-  useEffect(() => {
-    setValue(name, selectedIds.join(',') as any, { shouldValidate: true })
-  }, [selectedIds, name, setValue])
-
-  const toggleSelect = (id: number) => {
-    setSelectedIds(prev =>
-      prev.includes(id) ? prev.filter(item => item !== id) : [...prev, id]
-    )
-  }
-
-  const isSelected = (id: number) => selectedIds.includes(id)
+  
+  const { toggleSelect, isSelected } = useMultiSelect({
+    data,
+    name,
+    setValue,
+    watch
+  })
 
   return (
     <div className="flex flex-col gap-4">
@@ -49,9 +36,7 @@ export default function MultiSelectTabs<T extends FieldValues>({
           {label}
         </label>
       )}
-
       <input type="hidden" {...register} />
-
       <div className="flex flex-wrap gap-2">
         {data.map((item) => (
           <button
@@ -68,7 +53,6 @@ export default function MultiSelectTabs<T extends FieldValues>({
           </button>
         ))}
       </div>
-
       {errorMessage && (
         <span className="text-xs text-[#d10b30] font-medium">{errorMessage.message}</span>
       )}

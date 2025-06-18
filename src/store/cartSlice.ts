@@ -5,6 +5,7 @@ import { puedeDecrementar, puedeIncrementar } from "../utils/resolves/sales";
 export type CartSlice = {
   discounts: Discount[],
   cart: ProductCart[],
+  clearCart: () => void,
   addProduct: (product: Product) => void,
   deleteProduct: (id: Product['id']) => void,
   increaseQuantity: (id: Product['id']) => void,
@@ -16,26 +17,24 @@ export type CartSlice = {
 export const cartSlice: StateCreator<CartSlice> = (set, get) => ({
   discounts: [],
   cart: [],
-
   addProduct: (product) => {
     const productInCart = get().cart.find(p => p.id === product.id);
     let updateCart: ProductCart[] = [];
-
-    const precioVentaSinIGV = product.precio_venta * 0.82;
-    const igvUnitario = product.precio_venta * 0.18;
 
     if (productInCart) {
       if (!puedeIncrementar(productInCart)) return;
 
       const newQuantity = productInCart.cantidad + 1;
-      const descuento = productInCart.descuento / 100;
+      const newSubtotal = productInCart.precio_descuento * newQuantity;
+      const newIgv = productInCart.igv_unitario * newQuantity;
+
       updateCart = get().cart.map(p =>
         p.id === product.id
           ? {
             ...p,
             cantidad: newQuantity,
-            subtotal: precioVentaSinIGV * newQuantity * (1 - descuento),
-            igv: igvUnitario * newQuantity
+            subtotal: newSubtotal,
+            igv: newIgv,
           }
           : p
       );
@@ -55,35 +54,28 @@ export const cartSlice: StateCreator<CartSlice> = (set, get) => ({
     const updateCart = get().cart.map(product => {
       if (product.id === id && puedeIncrementar(product)) {
         const newQuantity = product.cantidad + 1;
-        const descuento = product.descuento / 100;
-        const igvUnitario = (product.precio_venta / 0.82) * 0.18;
-
         return {
           ...product,
           cantidad: newQuantity,
-          subtotal: product.precio_venta * newQuantity * (1 - descuento),
-          igv: igvUnitario * newQuantity // ✅ ahora sí correcto
+          subtotal: product.precio_descuento * newQuantity,
+          igv: product.igv_unitario * newQuantity,
         };
       }
       return product;
     });
 
     set(() => ({ cart: updateCart }));
-  }
-  ,
+  },
 
   decreaseQuantity: (id) => {
     const updateCart = get().cart.map(product => {
       if (product.id === id && puedeDecrementar(product)) {
         const newQuantity = product.cantidad - 1;
-        const descuento = product.descuento / 100;
-        const igvUnitario = (product.precio_venta / 0.82) * 0.18;
-
         return {
           ...product,
           cantidad: newQuantity,
-          subtotal: product.precio_venta * newQuantity * (1 - descuento),
-          igv: igvUnitario * newQuantity
+          subtotal: product.precio_descuento * newQuantity,
+          igv: product.igv_unitario * newQuantity,
         };
       }
       return product;
@@ -91,26 +83,33 @@ export const cartSlice: StateCreator<CartSlice> = (set, get) => ({
 
     set(() => ({ cart: updateCart }));
   },
-  formatProduct: (product: Product): ProductCart => {
-    const discount = get().discounts.find(discount =>
-      discount.nombreCategoria === product.nombre_categoria
-    );
 
+  formatProduct: (product: Product): ProductCart => {
+    const discount = get().discounts.find(
+      d => d.nombreCategoria === product.nombre_categoria
+    );
     const porcentaje = discount ? discount.porcentaje / 100 : 0;
-    const precioVentaSinIGV = product.precio_venta * 0.82;
-    const igvUnitario = product.precio_venta * 0.18;
+
+    const precio_base = product.precio_venta / 1.18;
+    const precio_descuento = precio_base * (1 - porcentaje);
+    const igv_unitario = precio_descuento * 0.18;
 
     return {
       ...product,
       cantidad: 1,
-      precio_venta: precioVentaSinIGV,
+      precio_venta: product.precio_venta,
+      precio_base,
+      precio_descuento,
+      igv_unitario,
+      subtotal: precio_descuento,
+      igv: igv_unitario,
       descuento: discount?.porcentaje ?? 0,
-      subtotal: precioVentaSinIGV * (1 - porcentaje),
-      igv: igvUnitario
     };
   },
-
   setDiscounts: (arrayDiscounts) => {
     set(() => ({ discounts: arrayDiscounts }));
+  },
+  clearCart: () => {
+    set(() => ({ cart: [] }));
   }
 });

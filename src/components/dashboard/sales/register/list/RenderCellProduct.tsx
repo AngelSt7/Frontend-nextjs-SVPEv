@@ -11,7 +11,7 @@ export const renderCellCart = (
   addProduct: (product: Product) => void
 ) => {
   const cellValue = item[columnKey as keyof typeof item]
-  if (item.activo !== 1) return null;
+
   switch (columnKey) {
     case "nombre":
       return (

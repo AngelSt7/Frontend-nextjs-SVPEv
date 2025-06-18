@@ -25,7 +25,7 @@ export const DashboardCategoryByIdSchema = z.object({
 export const DashboardLevelCategorySchema = z.object({
     id: z.number().positive(),
     nombre: z.string(),
-    id_padre: z.number().min(-1),
+    id_padre: z.number().min(-1).nullable(),
     activo: z.number()
 });
 
