@@ -90,7 +90,7 @@ export default function FacturaPDF({ sale, products }: FacturaPDFProps) {
                             return (
                                 <View key={index} style={index % 2 === 0 ? styles.tableRow : styles.tableRowAlt}>
                                     <Text style={[styles.tableCellBold, styles.colProduct]}>{producto.nombre}</Text>
-                                    <Text style={[styles.tableCell, styles.colQty]}>{producto.descuento}%</Text>
+                                    <Text style={[styles.tableCell, styles.colQty]}>{producto.descuento ? producto.descuento : "no aplica"}%</Text>
                                     <Text style={[styles.tableCell, styles.colQty]}>{producto.cantidad}</Text>
                                     <Text style={[styles.tableCell, styles.colPrice]}>{formatCurrency(producto.precio_venta)}</Text>
                                     <Text style={[styles.tableCell, styles.colSubtotal]}>{formatCurrency(subtotalBase)}</Text>

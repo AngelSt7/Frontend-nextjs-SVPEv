@@ -11,7 +11,7 @@ export type ChangeStatusCategoryService = {
 export async function dashboardChangeStatusCategoryService(formdata: ChangeStatusCategoryService) {
     try {
         const selected = actions[formdata.activo];
-        const url = `/descuento/${selected.action}/${formdata.id}`;
+        const url = `/categoria/${selected.action}/${formdata.id}`;
         const { data } = await api.put(url);
         return data.mensaje
     } catch (error) {
