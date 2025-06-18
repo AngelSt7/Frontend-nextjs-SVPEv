@@ -17,7 +17,7 @@ export const RenderCellWarrantyClaim = (
   mutate: mutateProps,
   item: DashboardWarrantyClaim,
   columnKey: React.Key,
-  openModalEdit: (id: number) => void
+  openModalEdit?: (id: number) => void
 ) => {
   const cellValue = item[columnKey as keyof typeof item];
 
@@ -51,7 +51,7 @@ export const RenderCellWarrantyClaim = (
               </Button>
             </DropdownTrigger>
             <DropdownMenu disabledKeys={item.activo === 0 ? ["edit", "delete"] : []}>
-              <DropdownItem key="edit" onPress={() => openModalEdit(item.id_reclamo_garantia)}>
+              <DropdownItem key="edit" onPress={() => openModalEdit?.(item.id_reclamo_garantia)}>
                 Editar
               </DropdownItem>
               <DropdownItem
@@ -60,6 +60,7 @@ export const RenderCellWarrantyClaim = (
                 color="danger"
                 onPress={() => {
                   ToastDelete({
+                    message: "¿Desea eliminar el reclamo de garantia",
                     name: item.descripcion,
                     onConfirm: () => mutate({ id: item.id, activo: 1 }),
                   });

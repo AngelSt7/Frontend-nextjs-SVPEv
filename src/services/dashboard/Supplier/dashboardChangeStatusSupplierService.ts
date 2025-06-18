@@ -1,16 +1,12 @@
 import api from "@/src/axios/axios";
 import { DashboardSupplier, SupplierFormData } from "@/src/types/DashboardTypes";
+import { actions } from "@/src/utils/constants/constans";
 
 import { isAxiosError } from "axios";
 
 export type ChangeStatusSupplierService = {
     id: DashboardSupplier["id"];
     activo: SupplierFormData["activo"];
-};
-
-const actions: { [key: number]: { action: string } } = {
-    1: { action: "desactivar"},
-    0: { action: "activar"},
 };
 
 export async function dashboardChangeStatusSupplierService(formdata: ChangeStatusSupplierService) {

@@ -1,21 +1,56 @@
-import Input from '@/src/components/ui/Input';
 import { FieldErrors, UseFormRegister, UseFormSetValue, UseFormWatch } from 'react-hook-form';
-import { MdPermIdentity } from 'react-icons/md';
-
-import SelectItem from '../../ui/SelectItem';
 import { CategoryFormData } from '@/src/types/dashboard/CategoryTypes';
-// import { CategoryFormData } from '@/src/types/dashboard/CategoryTypes';
+import { MdPermIdentity } from 'react-icons/md';
+import Input from '@/src/components/ui/Input';
+import SelectItem from '../../ui/SelectItem';
+
 type CategoryFormProps = {
     register: UseFormRegister<CategoryFormData>;
     errors: FieldErrors<CategoryFormData>;
     watch: UseFormWatch<CategoryFormData>;
     setValue: UseFormSetValue<CategoryFormData>;
-    formatCategory: { label: string; activo: number; id: number; }[]
+    formatCategoryTwo: { label: string; activo: number; id: number; }[]
+    formatCategoryThree: { label: string; activo: number; id: number; }[]
 };
 
-export default function CategoryForm({ register, errors, watch, setValue, formatCategory }: CategoryFormProps) {
+export default function CategoryForm({ register, errors, watch, setValue, formatCategoryTwo, formatCategoryThree }: CategoryFormProps) {
+    const showField = watch('nivel')
+
     return (
         <div className="flex flex-col gap-3">
+            {showField ? <p> Según el nivel que seleccionaste, la categoria será de nivel {showField}</p> : null}
+
+            <SelectItem
+                name="nivel"
+                label="Nivel de categoria"
+                data={[
+                    { id: 1, label: 'Nivel 1', activo: 1 },
+                    { id: 2, label: 'Nivel 2', activo: 1 },
+                    { id: 3, label: 'Nivel 3', activo: 1 },
+                ]}
+                register={register('nivel', {
+                    required: 'Este campo es obligatorio',
+                    valueAsNumber: true,
+                })}
+                watch={watch}
+                setValue={setValue}
+                errorMessage={errors.nivel}
+            />
+
+            {(showField === 2 || showField === 3) && (
+                <SelectItem
+                    name="id_categoria_padre"
+                    label="Categoria Padre"
+                    data={showField === 2 ? formatCategoryTwo : formatCategoryThree}
+                    register={register('id_categoria_padre', {
+                        required: 'Este campo es obligatorio',
+                        valueAsNumber: true,
+                    })}
+                    watch={watch}
+                    setValue={setValue}
+                    errorMessage={errors.id_categoria_padre}
+                />
+            )}
 
             <Input
                 type="text"
@@ -38,38 +73,7 @@ export default function CategoryForm({ register, errors, watch, setValue, format
                 errorMessage={errors.nombre}
             />
 
-            <div className="grid grid-cols-2 gap-5">
-
-                <SelectItem
-                    name="id_categoria_padre"
-                    label="Categoria Padre"
-                    data={formatCategory}
-                    register={register('id_categoria_padre', {
-                        required: 'Este campo es obligatorio',
-                        valueAsNumber: true,
-                    })}
-                    watch={watch}
-                    setValue={setValue}
-                    errorMessage={errors.id_categoria_padre}
-                />
-
-                <SelectItem
-                    name="nivel"
-                    label="Nivel de categoria"
-                    data={[
-                        { id: 1, label: 'Nivel 1', activo: 1 },
-                        { id: 2, label: 'Nivel 2', activo: 1 },
-                        { id: 3, label: 'Nivel 3', activo: 1 },
-                    ]}
-                    register={register('nivel', {
-                        required: 'Este campo es obligatorio',
-                        valueAsNumber: true,
-                    })}
-                    watch={watch}
-                    setValue={setValue}
-                    errorMessage={errors.nivel}
-                />
-            </div>
         </div>
     );
 }
+

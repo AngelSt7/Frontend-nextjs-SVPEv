@@ -8,9 +8,9 @@ export async function dashboardCreateReturnProductService(formData: ReturnProduc
 
     const payload = {
       ...formData,
-      tipo_serie: formData.tipo_serie === "SERIE" ? "CON_SERIE" : "SIN_SERIE",
-      ...(formData.series && formData.series.length > 0 ? { series: formData.series } : {}),
-      reposicionAplicada: formData.reposicionAplicada ? 1 : 0,
+      tipo_serie: formData.series.length > 0 ? "CON_SERIE" : "SIN_SERIE",
+      ...(formData.series && formData.series.length > 0 ? { series: formData.series.split(',').filter(s => Number(s) !== 0).map(s => Number(s)) } : {}),
+      reposicionAplicada: formData.reposicion_aplicada ? 1 : 0,
     };
 
     const { data } = await api.post(url, payload);

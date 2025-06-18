@@ -1,6 +1,6 @@
 import Errors from "@/src/components/ui/Errors";
 import { Select, SelectItem as HeroSelectItem } from "@heroui/react";
-import { FieldError, FieldErrorsImpl, FieldValues, Merge, Path, PathValue, UseFormRegisterReturn, UseFormSetValue, UseFormWatch} from "react-hook-form";
+import { FieldError, FieldErrorsImpl, FieldValues, Merge, Path, PathValue, UseFormRegisterReturn, UseFormSetValue, UseFormWatch } from "react-hook-form";
 
 type SelectItemProps<T extends FieldValues> = {
     data: { id: string | number; label?: string; nombre?: string; activo: boolean | number; }[];
@@ -26,9 +26,10 @@ export default function SelectItem<T extends FieldValues>({ data, register, erro
             <input type="hidden" {...register} />
 
             <div
-                className={`border dark:border-[#3f3f46] mt-[8px] rounded-md  ${errorMessage ? "ring-1 ring-[#d10b30]" : "border-[#afaeae]"
+                className={`mt-[8px] rounded-md border ${errorMessage ? "border-[#d10b30]" : "border-[#afaeae] dark:border-[#3f3f46]"
                     }`}
             >
+
                 <Select
                     className="w-full"
                     items={data}

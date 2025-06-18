@@ -11,6 +11,7 @@ import { DashboardClient } from '@/src/types/dashboard/ClientType'
 import { dashboardChangeStatusClientService } from '@/src/services/dashboard/client/dashboardChangeStatusClientService'
 import GenericEditWrapper from '../../ui/generics/GenericEditWrapper'
 import { dashboardFindByIdClientService } from '@/src/services/dashboard/client/dashboardFindByIdClientService'
+import { getRenderCell } from '../../ui/getRenderCell'
 
 
 export default function ContentPage({ id }: { id: string | undefined }) {
@@ -25,14 +26,12 @@ export default function ContentPage({ id }: { id: string | undefined }) {
         <div>
             <TableComponent<DashboardClient>
                 openModalCreate={openModalCreate}
-                openModalEdit={openModalEdit}
                 columns={Columns}
                 queryKey="clients"
                 functionService={dashboardListClientService}
                 defaultVisibleColumns={["nombre", "dni", "correo", "celular", "activo", "actions"]}
                 searchableField="nombre"
-                mutate={mutate}
-                renderCells={RenderCellClient}
+                renderCells={getRenderCell(RenderCellClient, mutate, openModalEdit)}
             />
 
             {id && (

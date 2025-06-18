@@ -16,11 +16,11 @@ export const Tittles: Record<string, string> = {
     '/dashboard/garantia': 'Administrar Garantías',
     '/dashboard/clientes': 'Administrar Clientes',
     '/dashboard/devoluciones-productos': 'Administrar Devoluciones de Productos',
-
+    '/dashboard/ayuda': 'Bienvenido al sistema de ayuda de NEON',
 };
 
 // Mapear entidades
-type Entity = 'proveedor' | 'producto' | 'usuario' | 'categoria' | 'descuento' | 'cupón' | 'devolución_producto' | 'devolución_venta' | 'garantia' | 'reclamo_garantia' | 'stock' | 'cliente';
+type Entity = 'proveedor' | 'producto' | 'usuario' | 'categoria' | 'descuento' | 'cupón' | 'devolución_producto' | 'devolución_venta' | 'garantia' | 'reclamo_garantia' | 'stock' | 'cliente' | 'venta';
 
 // ruta => singular
 export const pluralToSingular: Record<string, Entity> = {
@@ -36,4 +36,35 @@ export const pluralToSingular: Record<string, Entity> = {
     reclamos_garantia: "reclamo_garantia",
     garantia: "garantia",
     clientes: "cliente",
+    ventas: "venta",
+};
+
+
+export const labelMap: Record<string, string> = {
+  suppliers: "Proveedor",
+  users: "Usuario",
+  products: "Producto",
+  categories: "Categoria",
+  discounts: "Descuento",
+  coupons: "Cupón",
+  returns: "Devolución",
+  stocks: "Stock",
+  returnsProducts: "Devolución Producto",
+  sales: "Venta",
+  warrantyClaims: "Reclamo de Garantía",
+  warranties: "Garantía",
+  clients: "Cliente",
+};
+
+export const entityLabelMap: Record<string, string> = {
+  suppliers: "proveedores",
+  users: "usuarios",
+  products: "productos",
+  categories: "categorías",
+  discounts: "descuentos",
+  coupons: "cupones",
+  returnsProducts: "devoluciones de producto",
+  stocks: "stocks",
+  warrantyClaims: "reclamos de garantía",
+  warranties: "garantías",
 };

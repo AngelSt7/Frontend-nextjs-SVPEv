@@ -6,6 +6,7 @@ import Switcher from '../darkmode/SwitchMode';
 import { IoMdLogOut } from 'react-icons/io';
 import { User } from "@heroui/react";
 import { useGetUserInfo } from '@/src/hooks/dashboard/useGetUser';
+import Link from 'next/link';
 
 export default function Menu() {
     const { data: user } = useGetUserInfo()
@@ -23,12 +24,13 @@ export default function Menu() {
                 leaveFrom="opacity-100 translate-y-0"
                 leaveTo="opacity-0 translate-y-1"
             >
+
                 <Popover.Panel className="absolute left-1/2 z-10 mt-5 flex max-w-min -translate-x-48">
                     <div className="w-56 shrink rounded-xl bg-white dark:bg-[#181818] p-4 text-sm font-semibold leading-6 text-gray-900 shadow-lg ring-1 ring-gray-900/5">
                         <>
                             <User
                                 avatarProps={{
-                                    src: "https://pbs.twimg.com/media/Fyxa8k_WIAYeOLD.jpg",
+                                    src: "/images/dance-goku.gif",
                                 }}
                                 description="Admin superpoderoso"
                                 name={
@@ -44,6 +46,9 @@ export default function Menu() {
                                 <IoMdLogOut size={18} />
                                 Cerrar Sesión
                             </button>
+                            <div className='mt-2 flex justify-between'>
+                                <Link className=' dark:text-zinc-100' href="/dashboard/ayuda">Ver ayuda</Link>
+                            </div>
                             <div className='mt-2 flex justify-between'>
                                 <p className=' dark:text-zinc-100'>Modo Oscuro</p>
                                 <Switcher />

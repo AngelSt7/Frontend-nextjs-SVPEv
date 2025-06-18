@@ -4,8 +4,8 @@ import { useForm } from 'react-hook-form';
 import { AuthUserInfo } from '@/src/types/AuthTypes';
 import CategoryForm from '../form/CategoryForm';
 import { dashboardUpdateCategoryService } from '@/src/services/dashboard/category/dashboardUpdateCategoryService';
-import { useGetCategories } from '@/src/hooks/dashboard/useGetCategories';
 import { CategoryFormData, DashboardCategoryById } from '@/src/types/dashboard/CategoryTypes';
+import useResolveCategories from '@/src/hooks/dashboard/useResolveCategories';
 
 type EditCategoryForm = {
   user?: AuthUserInfo;
@@ -14,8 +14,8 @@ type EditCategoryForm = {
 };
 
 export default function EditCategoryForm({ user, closeModal, defaultValues }: EditCategoryForm) {
-  const { data: categoryData = [] } = useGetCategories();
-  const formatCategory = categoryData.map((category) => ({ label: category.nombre, id: category.id, activo: category.activo }));
+  const { formatCategoryTwo, formatCategoryThree } = useResolveCategories();
+  
   const { register, handleSubmit, formState: { errors }, watch, setValue } = useForm<CategoryFormData>({
     defaultValues: {
       ...defaultValues,
@@ -41,7 +41,15 @@ export default function EditCategoryForm({ user, closeModal, defaultValues }: Ed
       className="flex flex-col justify-between gap-3 flex-1 mt-2"
       onSubmit={handleSubmit(onSubmit)}
     >
-      <CategoryForm formatCategory={formatCategory} register={register} errors={errors} watch={watch} setValue={setValue} />
+      <CategoryForm
+        formatCategoryTwo={formatCategoryTwo}
+        formatCategoryThree={formatCategoryThree}
+        register={register}
+        errors={errors}
+        watch={watch}
+        setValue={setValue}
+      />
+      
       <div className="w-full flex gap-4 justify-end mt-3">
         <Button color='danger' variant='flat' onPress={() => closeModal()}>Cancelar</Button>
         <Button color='success' type='submit'>Actualizar Categoria</Button>

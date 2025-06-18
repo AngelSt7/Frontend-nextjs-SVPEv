@@ -1,5 +1,5 @@
-import { useQuery, keepPreviousData } from '@tanstack/react-query';
-import { dashboardListCategoryService } from '@/src/services/dashboard/category/dashboardListCategoryService';
+import { dashboardListCategoryService } from "@/src/services/dashboard/category/dashboardListCategoryService";
+import { useQuery, keepPreviousData } from "@tanstack/react-query";
 
 export const useGetCategories = () => {
   return useQuery({

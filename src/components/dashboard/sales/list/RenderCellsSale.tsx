@@ -7,12 +7,19 @@ import { DashboardSale } from "@/src/types/dashboard/SaleTypes";
 import { formatDate } from "@/src/utils/format/formatDate";
 import { formatCurrency } from "@/src/utils/format/formatCurrency";
 
-export const RenderCellSale = (mutate: mutateProps, item: DashboardSale, columnKey: React.Key) => {
+export const RenderCellSale = (
+  mutate: mutateProps,
+  item: DashboardSale,
+  columnKey: React.Key,
+  _openModalEdit?: (id: number) => void,
+  openDetailsModal?: () => void,
+  setDetails?: (detail: DashboardSale["detallesVenta"]) => void
+) => {
   const cellValue = item[columnKey as keyof typeof item];
 
   switch (columnKey) {
 
-    case "total" : return (
+    case "total": return (
       <p>{formatCurrency(item.total)}</p>
     )
 
@@ -62,8 +69,11 @@ export const RenderCellSale = (mutate: mutateProps, item: DashboardSale, columnK
                 <VerticalDotsIcon className="text-default-300" />
               </Button>
             </DropdownTrigger>
-            <DropdownMenu disabledKeys={item.activo === 0 ? ["edit", "delete"] : []}>
-              <DropdownItem key="edit" onPress={() => console.log(item.id)}>Editar</DropdownItem>
+            <DropdownMenu disabledKeys={item.activo === 0 ? ["details", "delete"] : []}>
+              <DropdownItem key="details" onPress={() => {
+                openDetailsModal?.();
+                setDetails?.(item.detallesVenta);
+              }}>Ver detalle</DropdownItem>
               <DropdownItem key="delete" className="text-danger" color="danger"
                 onPress={() => {
                   ToastDelete({
@@ -80,6 +90,12 @@ export const RenderCellSale = (mutate: mutateProps, item: DashboardSale, columnK
         </div>
       );
     default:
-      return cellValue;
+      if (cellValue instanceof Date) {
+        return cellValue.toLocaleDateString();
+      }
+      if (typeof cellValue === "object" && cellValue !== null) {
+        return JSON.stringify(cellValue);
+      }
+      return String(cellValue);
   }
 };

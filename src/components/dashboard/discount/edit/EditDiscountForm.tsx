@@ -16,8 +16,8 @@ export default function EditDiscountForm({ user, closeModal, defaultValues }: Ed
   const { register, handleSubmit, formState: { errors }, watch, setValue } = useForm<DiscountFormData>({
     defaultValues: {
       ...defaultValues,
-      fecha_inicio: defaultValues.fechaInicio,
-      fecha_fin: defaultValues.fechaFinal
+      fecha_inicio: defaultValues.fecha_inicio,
+      fecha_fin: defaultValues.fecha_fin
     }
   });
 

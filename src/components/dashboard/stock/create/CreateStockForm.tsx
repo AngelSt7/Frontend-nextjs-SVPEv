@@ -7,7 +7,7 @@ import { AuthUserInfo } from '@/src/types/AuthTypes';
 import { dashboardCreateStockService } from '@/src/services/dashboard/stock/dashboardCreateStockService';
 import { useGetProducts } from '@/src/hooks/dashboard/useGetProducts';
 import { useGetSuppliers } from '@/src/hooks/dashboard/useGetSuppliers';
-import { useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 
 type CreateStockFormProps = {
   closeModal: () => void;
@@ -46,7 +46,7 @@ export default function CreateStockForm({ closeModal, user }: CreateStockFormPro
 
       <div className="w-full flex gap-4 justify-end mt-3">
         <Button color='danger' variant='flat' onPress={closeModal}>Cancelar</Button>
-        <Button color='success' type='submit'>Registrar Stock</Button>
+        <Button color='success'  className='dark:bg-green-700' type='submit'>Registrar Stock</Button>
       </div>
     </form>
   );

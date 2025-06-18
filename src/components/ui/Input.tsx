@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { FieldError, FieldValues, UseFormRegister} from 'react-hook-form';
+import { FieldError, FieldValues, UseFormRegister } from 'react-hook-form';
 import { IconType } from 'react-icons';
 import Errors from './Errors';
 
@@ -14,8 +14,8 @@ type InputProps<T extends FieldValues> = {
   variant?: 'default' | 'floating';
   maxLength?: number;
   disabled?: boolean;
-  inputMode?: 'text' | 'numeric' | 'decimal' | 'tel' | 'email' | 'url'; 
-  pattern?: string; 
+  inputMode?: 'text' | 'numeric' | 'decimal' | 'tel' | 'email' | 'url';
+  pattern?: string;
 };
 
 export default function Input<T extends FieldValues>({
@@ -30,13 +30,15 @@ export default function Input<T extends FieldValues>({
   disabled = false,
   variant = 'default',
   inputMode,
-  pattern,  
+  pattern,
 }: InputProps<T>) {
   const isTextArea = type === 'textarea';
 
   const inputClasses = useMemo(() => {
-    const base = `text-sm block w-full p-2 border border-[#afaeae] dark:border-[#3f3f46] bg-[#f4f4f5] hover:bg-[#e4e4e7] dark:bg-[#242428] dark:hover:bg-[#3f3f46] rounded-md outline-none focus:ring-1 focus:ring-white/10 ${errorMessage ? 'ring-1 ring-[#d10b30]' : ''
+    const base = `text-sm block w-full p-2 border ${errorMessage ? 'border-[#d10b30]' : 'border-[#afaeae] dark:border-[#3f3f46]'
+      } bg-[#f4f4f5] hover:bg-[#e4e4e7] dark:bg-[#242428] dark:hover:bg-[#3f3f46] rounded-md outline-none focus:ring-1 ${errorMessage ? 'ring-[#d10b30]' : 'focus:ring-white/10'
       }`;
+
 
     return variant === 'floating'
       ? `${base} peer px-3 pt-6 pb-2`

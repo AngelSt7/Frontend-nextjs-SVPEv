@@ -18,7 +18,7 @@ export default function CreateDiscountForm({ closeModal }: CreateDiscountFormPro
     onSuccessCallback: closeModal,
     message: 'Descuento registrado exitosamente'
   })
-// mutate(data);
+
   const onSubmit = (data: DiscountFormData) => mutate(data);
 
   return (

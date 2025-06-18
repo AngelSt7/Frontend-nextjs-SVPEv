@@ -1,9 +1,10 @@
 import Input from '@/src/components/ui/Input';
-import { FieldError, FieldErrors, UseFormRegister, UseFormSetValue, UseFormWatch } from 'react-hook-form';
-import SelectTabs, { ItemOption } from './SelectTabs';
+import { Control, FieldError, FieldErrors, UseControllerProps, UseFormRegister, UseFormSetValue, UseFormWatch } from 'react-hook-form';
+import SelectTabs from './SelectTabs';
 import SelectItem from '../../ui/SelectItem';
 import { StockFormData } from '@/src/types/dashboard/StockTypes';
 import SerieControl from './SerieControl';
+import { ItemOption } from '@/src/types/commonTypes/commonTypes';
 
 type StockFormProps = {
     register: UseFormRegister<StockFormData>;
@@ -15,7 +16,7 @@ type StockFormProps = {
 };
 
 export default function StockForm({ register, errors, watch, setValue, productOptions, suppliersOptions }: StockFormProps) {
-  console.log("reenderizando stock form");
+
     return (
         <div className="flex flex-col gap-4">
             <SelectTabs

@@ -11,6 +11,7 @@ import { dashboardListDiscountService } from '@/src/services/dashboard/discount/
 import { dashboardChangeStatusCategoryService } from '@/src/services/dashboard/category/dashboardChangeStatusCategoryService'
 import GenericEditWrapper from '../../ui/generics/GenericEditWrapper'
 import { dashboardFindByIdDiscountService } from '@/src/services/dashboard/discount/dashboardFindByIdDiscountService'
+import { getRenderCell } from '../../ui/getRenderCell'
 
 export default function ContentPage({ id }: { id: string | undefined }) {
     const { openModalCreate, openModalEdit, closeModal } = useModalUtils()
@@ -24,14 +25,12 @@ export default function ContentPage({ id }: { id: string | undefined }) {
         <div>
             <TableComponent<DashboardDiscount>
                 openModalCreate={openModalCreate}
-                openModalEdit={openModalEdit}
                 columns={Columns}
                 queryKey="discounts"
                 functionService={dashboardListDiscountService}
                 defaultVisibleColumns={["nombreCategoria", "porcentaje", "fecha_inicio", "fecha_final", "activo", "actions"]}
                 searchableField="nombreCategoria"
-                mutate={mutate}
-                renderCells={RenderCellDiscount}
+                renderCells={getRenderCell(RenderCellDiscount, mutate, openModalEdit)}
             />
 
             {id && (
