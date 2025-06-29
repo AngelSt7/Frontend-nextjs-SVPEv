@@ -121,7 +121,6 @@ export const TableComponent = <T extends { id: number }>({
         )}
       </TableHeader>
 
-      {/* Una sola comprobacion en ves de cada fila */}
       {!isSales ? (
         <TableBody
           emptyContent="No se encontraron registros"

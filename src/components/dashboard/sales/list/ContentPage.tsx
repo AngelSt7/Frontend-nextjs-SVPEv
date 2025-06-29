@@ -28,7 +28,7 @@ export default function ContentPage() {
                 columns={Columns}
                 queryKey="sales"
                 functionService={dashboardListSaleService}
-                defaultVisibleColumns={[  "fecha",  "nombreCliente",  "nombreMetodoPago",  "total",  "cancelado",  "activo",  "actions"]}
+                defaultVisibleColumns={["fecha",  "nombreCliente",  "nombreMetodoPago",  "total",  "cancelado",  "activo",  "actions"]}
                 searchableField="nombreCliente"
                 renderCells={getRenderCell(RenderCellSale, mutate, undefined, openDetailsModal, setDetails)}
                 isSales={false}

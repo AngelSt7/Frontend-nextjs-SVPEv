@@ -19,6 +19,7 @@ export const DetailSaleSchema = z.object({
 // Schema principal de venta
 export const DashboardSaleSchema = z.object({
   id: z.number().int(),
+  uuui: z.string().optional().nullish(),
   fecha: z.coerce.date(),
   subtotal: z.number(),
   igv_total: z.number(),

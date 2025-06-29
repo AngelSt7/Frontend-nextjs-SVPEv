@@ -14,7 +14,6 @@ import { dashboardChangeStatusReturnSaleService } from '@/src/services/dashboard
 import { getRenderCell } from '../../ui/getRenderCell'
 
 export default function ContentPage({ id }: { id: string | undefined }) {
-    const idReturnSaleDetail = useAppStore(state => state.idReturnSaleDetail)
     const { openModalCreate, openModalEdit, closeModal } = useModalUtils()
 
     const { mutate } = useSubmitMutation({
@@ -29,12 +28,12 @@ export default function ContentPage({ id }: { id: string | undefined }) {
                 columns={Columns}
                 queryKey="returns-sales"
                 functionService={dashboardListReturnSaleService}
-                defaultVisibleColumns={["correoUsuario", "motivo", "cantidad", "fecha", "actions"]}
+                defaultVisibleColumns={["correo", "producto", "cantidad", "fecha", "actions"]}
                 searchableField="motivo"
                 renderCells={getRenderCell(RenderCellReturnSale, mutate, openModalEdit)}
             />
 
-            {idReturnSaleDetail !== null && <GenericModal closeModal={closeModal} idReturnSaleDetail={idReturnSaleDetail} />}
+            <GenericModal closeModal={closeModal}  />
             {id && <EditReturnSaleWrapper closeModal={closeModal} id={id} />} 
         </div>
     )

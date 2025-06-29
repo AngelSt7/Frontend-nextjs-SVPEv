@@ -6,7 +6,9 @@ export async function dashboardListReturnSaleService() {
     try {
         const url = '/devolucion-venta/listar'
         const { data } = await api(url)
+        console.log(data)
         const response = DashboardReturnsSalesSchema.safeParse(data)
+        console.log(response)
         if(response.success){
             return response.data
         }

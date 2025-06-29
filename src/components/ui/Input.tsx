@@ -13,6 +13,7 @@ type InputProps<T extends FieldValues> = {
   Icon?: IconType;
   variant?: 'default' | 'floating';
   maxLength?: number;
+  max?: number;
   disabled?: boolean;
   inputMode?: 'text' | 'numeric' | 'decimal' | 'tel' | 'email' | 'url';
   pattern?: string;
@@ -27,6 +28,7 @@ export default function Input<T extends FieldValues>({
   placeholder,
   Icon,
   maxLength,
+  max,
   disabled = false,
   variant = 'default',
   inputMode,
@@ -78,6 +80,7 @@ export default function Input<T extends FieldValues>({
             inputMode={inputMode}
             pattern={pattern}
             min={type === 'number' ? 0 : undefined}
+            max={type === 'number' ? max : undefined}
             placeholder={variant === 'floating' ? ' ' : placeholder}
             autoComplete={autoCompleteValue}
             className={inputClasses}
