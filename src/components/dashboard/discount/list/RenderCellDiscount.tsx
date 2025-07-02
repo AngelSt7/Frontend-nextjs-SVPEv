@@ -32,7 +32,7 @@ export const RenderCellDiscount = (mutate: mutateProps, item: DashboardDiscount,
                     color={statusColorMap[statusText]}
                     size="sm"
                     variant="flat"
-                    onDoubleClick={() => mutate({ id: item.id, activo: item.activo ? 1 : 0 })}
+                    onDoubleClick={() => mutate({ id: item.id, status: item.activo ? 1 : 0 })}
                     role="button"
                     tabIndex={0}
                 >
@@ -56,7 +56,7 @@ export const RenderCellDiscount = (mutate: mutateProps, item: DashboardDiscount,
                                     ToastDelete({
                                         message: "¿Desea eliminar el descuento de la categoría",
                                         name: item.nombreCategoria!,
-                                        onConfirm: () => mutate({ id: item.id, activo: 1 }),
+                                        onConfirm: () => mutate({ id: item.id, status: 1 }),
                                     })
                                 }}
                             >

@@ -1,53 +1,42 @@
 import { z } from "zod";
 
-export const DashboardReturnSaleSchema = z
-  .object({
-    id: z.number(),
-    fecha: z.string(),
-    cantidad: z.number(),
-    motivo: z.string(),
-    usuarios: z
-      .array(
-        z.object({
-          correo: z.string(),
-        })
-      )
-      .transform((arr) => arr[0]?.correo ?? null),
-    detallesVenta: z
-      .array(
-        z.object({
-          id: z.number(),
-          nombreProducto: z.string(),
-        })
-      )
-      .transform((arr) => arr[0]?.nombreProducto ?? null),
-  })
-  .transform(({ usuarios, detallesVenta, ...rest }) => ({
-    ...rest,
-    correo: usuarios,
-    producto: detallesVenta,
-  }));
+export const DetalleDevolucionSchema = z.object({
+  id_producto: z.number(),
+  nombreProducto: z.string(),
+  cantidad: z.number(),
+});
 
+export const DashboardReturnSaleSchema = z.object({
+    id: z.number(),
+    id_venta: z.number(),
+    fecha: z.string(),
+    motivo: z.string(),
+    estado: z.string(),
+    usuario: z.object({
+      correo: z.string(),
+      nombre_rol: z.string(),
+      nombre_empleado: z.string(),
+    }),
+    detalles: z.array(DetalleDevolucionSchema),
+})
 
 export const ReturnSaleFormDataSchema = z.object({
-  id_detalle_venta: z.number(),
-  productos: z.array(
-    z.object({
-      cantidad: z.number().min(0),
-    })
-  ),
+  id_registro_venta: z.number(),
+  devolucion: z.array(z.object({
+    id_producto: z.number(),
+    cantidad: z.number(),
+  })),
   motivo: z.string(),
   id_usuario: z.number(),
 });
 
 
 export const DashboardReturnSaleByIdSchema = z.object({
-  id: z.number(),
-  totalVenta: z.number(),
-  fecha: z.string(),
-  cantidad: z.number(),
-  motivo: z.string().optional(),
-  correoUsuario: z.string()
+    id: z.number(),
+    id_venta: z.number(),
+    motivo: z.string(),
+    estado: z.string(),
+    detalles: z.array(DetalleDevolucionSchema),
 });
 
 export const DashboardReturnsSalesSchema = z.array(DashboardReturnSaleSchema);

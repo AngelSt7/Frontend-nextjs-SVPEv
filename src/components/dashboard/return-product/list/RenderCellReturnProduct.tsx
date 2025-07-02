@@ -88,7 +88,7 @@ export const RenderCellReturn = (
                   ToastDelete({
                     message: "Desea elminar la devolucción ligada al lote",
                     name: item.codigo_lote,
-                    onConfirm: () => mutate({ id: item.id, activo: 1 }),
+                    onConfirm: () => mutate({ id: item.id, status: 1 }),
                   })
                 }}
               >

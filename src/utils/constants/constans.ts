@@ -15,5 +15,12 @@ export const statusColorMap: Record<string, ChipProps["color"]> = {
     inactivo: "danger",
 };
 
+export const status = [
+    { id: 1, label: 'Pendiente', activo: 1 },
+    { id: 2, label: 'Aprobado', activo: 1 },
+    { id: 3, label: 'Resuelto', activo: 1 },
+    { id: 4, label: 'Rechazado', activo: 1 }
+]
+
 export const MIN_QUANTITY = 1
 export const MAX_QUANTITY = 5

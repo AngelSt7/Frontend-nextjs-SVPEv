@@ -36,7 +36,7 @@ export const RenderCellCoupons = (mutate: mutateProps, item: DashboardCoupon, co
                     color={statusColorMap[statusText]}
                     size="sm"
                     variant="flat"
-                    onDoubleClick={() => mutate({ id: item.id, activo: item.activo })}
+                    onDoubleClick={() => mutate({ id: item.id, status: item.activo })}
                     role="button"
                     tabIndex={0}
                 >
@@ -60,7 +60,7 @@ export const RenderCellCoupons = (mutate: mutateProps, item: DashboardCoupon, co
                                     ToastDelete({
                                         message: "¿Desea eliminar el cupon cuyo codigo es",
                                         name: item.codigo,
-                                        onConfirm: () => mutate({ id: item.id, activo: 1 }),
+                                        onConfirm: () => mutate({ id: item.id, status: 1 }),
                                     })
                                 }}
                             >

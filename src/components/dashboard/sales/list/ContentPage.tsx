@@ -13,20 +13,21 @@ import GenericModal from '../../ui/generics/GenericModal'
 import { useAppStore } from '@/src/store/useAppStore'
 
 export default function ContentPage() {
+    const queryKey ="sales"
 
     const { openDetailsModal, closeModal } = useModalUtils();
     const setDetails = useAppStore(state => state.setDetails)
 
     const { mutate } = useSubmitMutation({
         serviceFunction: dashboardChangeStatusSalesService,
-        invalidateQuery: ["sales"]
+        invalidateQuery: [queryKey]
     })
 
     return (
         <div>
             <TableComponent<DashboardSale>
                 columns={Columns}
-                queryKey="sales"
+                queryKey={queryKey}
                 functionService={dashboardListSaleService}
                 defaultVisibleColumns={["fecha",  "nombreCliente",  "nombreMetodoPago",  "total",  "cancelado",  "activo",  "actions"]}
                 searchableField="nombreCliente"

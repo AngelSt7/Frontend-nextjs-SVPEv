@@ -2,9 +2,9 @@ import { Button } from '@heroui/react';
 import { useForm } from 'react-hook-form';
 import useSubmitMutation from '@/src/hooks/dashboard/useSubmitMutation';
 import CategoryForm from '../form/CategoryForm';
-import { dashboardCreateCategoryService } from '@/src/services/dashboard/category/dashboardCreateCategoryService';
 import { CategoryFormData } from '@/src/types/dashboard/CategoryTypes';
 import useResolveCategories from '@/src/hooks/dashboard/useResolveCategories';
+import { Category } from '@/src/services/dashboard/category/Category';
 
 type CreateCategoryFormProps = {
   closeModal: () => void;
@@ -16,7 +16,7 @@ export default function CreateCategoryForm({ closeModal }: CreateCategoryFormPro
   const { register, handleSubmit, formState: { errors }, setValue, watch } = useForm<CategoryFormData>();
 
   const { mutate } = useSubmitMutation({
-    serviceFunction: dashboardCreateCategoryService,
+    serviceFunction: Category.create,
     invalidateQuery: ['categories'],
     onSuccessCallback: closeModal,
     message: 'Categoria registrado exitosamente'

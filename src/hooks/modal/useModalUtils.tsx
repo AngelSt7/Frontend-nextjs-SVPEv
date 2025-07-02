@@ -24,10 +24,17 @@ export function useModalUtils() {
         router.replace(`?${params.toString()}`);
     };
 
+    const openModalStatus = (id : number) => {
+        const params = new URLSearchParams(searchParams.toString());
+        params.set("action", "changeStatus");
+        params.set("id", Number(id).toString());
+        router.replace(`?${params.toString()}`);
+    };
+
     const closeModal = () => {
         const params = new URLSearchParams();
         router.replace(`?${params.toString()}`);
     };
 
-    return { openModalCreate, openDetailsModal, openModalEdit, closeModal };
+    return { openModalCreate, openDetailsModal, openModalEdit, closeModal, openModalStatus };
 };

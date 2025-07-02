@@ -37,7 +37,7 @@ export const RenderCellUser = (
                     color={statusColorMap[statusText]}
                     size="sm"
                     variant="flat"
-                    onDoubleClick={() => mutate({ id: item.id, activo: item.activo })}
+                    onDoubleClick={() => mutate({ id: item.id, status: item.activo })}
                     role="button"
                     tabIndex={0}
                 >
@@ -66,7 +66,7 @@ export const RenderCellUser = (
                                     ToastDelete({
                                         message: `¿Desea eliminar el usuario`,
                                         name: `${item.nombre} ${item.apellido}`,
-                                        onConfirm: () => mutate({ id: item.id, activo: 1 }),
+                                        onConfirm: () => mutate({ id: item.id, status: 1 }),
                                     });
                                 }}
                             >

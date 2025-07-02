@@ -31,7 +31,7 @@ export const RenderCellSupplier = (mutate: mutateProps, item: DashboardSupplier,
           color={statusColorMap[statusText]}
           size="sm"
           variant="flat"
-          onDoubleClick={() => mutate({ id: item.id, activo: item.activo })}
+          onDoubleClick={() => mutate({ id: item.id, status: item.activo })}
           role="button"
           tabIndex={0}
         >
@@ -55,7 +55,7 @@ export const RenderCellSupplier = (mutate: mutateProps, item: DashboardSupplier,
                   ToastDelete({
                     message: "¿Desea eliminar el proveedor cuya razón social es",
                     name: item.razon_social,
-                    onConfirm: () => mutate({ id: item.id, activo: 1 }),
+                    onConfirm: () => mutate({ id: item.id, status: 1 }),
                   })
                 }}
               >

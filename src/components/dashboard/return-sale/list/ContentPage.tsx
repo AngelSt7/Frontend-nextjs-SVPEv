@@ -3,22 +3,23 @@
 import { TableComponent } from '@/src/components/dashboard/ui/table/TableContent'
 import { useModalUtils } from '@/src/hooks/modal/useModalUtils'
 import GenericModal from '../../ui/generics/GenericModal'
-import useSubmitMutation from '@/src/hooks/dashboard/useSubmitMutation'
 import { Columns } from './Columns'
 import { DashboardReturnSale } from '@/src/types/dashboard/ReturnSaleTypes'
-import { dashboardListReturnSaleService } from '@/src/services/dashboard/return-sale/dashboardListReturnSaleService'
 import { RenderCellReturnSale } from './RenderCellReturnSale'
-import { useAppStore } from '@/src/store/useAppStore'
-import EditReturnSaleWrapper from '../edit/EditReturnSaleWrapper'
-import { dashboardChangeStatusReturnSaleService } from '@/src/services/dashboard/return-sale/dashboardChangeStatusReturnSaleService'
 import { getRenderCell } from '../../ui/getRenderCell'
+import { useAppStore } from '@/src/store/useAppStore'
+import { ReturnSale } from '@/src/services/dashboard/return-sale/ReturnSale'
+import GenericEditWrapper from '../../ui/generics/GenericEditWrapper'
+import useSubmitMutation from '@/src/hooks/dashboard/useSubmitMutation'
 
 export default function ContentPage({ id }: { id: string | undefined }) {
-    const { openModalCreate, openModalEdit, closeModal } = useModalUtils()
+    const queryKey = "returns-sales"
+    const {openModalCreate, openModalEdit, openDetailsModal, closeModal, openModalStatus } = useModalUtils();
+    const setReturnDetails = useAppStore(state => state.setReturnDetails)
 
     const { mutate } = useSubmitMutation({
-        serviceFunction: dashboardChangeStatusReturnSaleService,
-        invalidateQuery: ["returns-sales"]
+        serviceFunction: ReturnSale.changeStatus,
+        invalidateQuery: [queryKey]
     })
 
     return (
@@ -26,15 +27,23 @@ export default function ContentPage({ id }: { id: string | undefined }) {
             <TableComponent<DashboardReturnSale>
                 openModalCreate={openModalCreate}
                 columns={Columns}
-                queryKey="returns-sales"
-                functionService={dashboardListReturnSaleService}
-                defaultVisibleColumns={["correo", "producto", "cantidad", "fecha", "actions"]}
+                queryKey={queryKey}
+                functionService={ReturnSale.list}
+                defaultVisibleColumns={["correo", "nombre_rol", "nombre_empleado", "estado", "fecha", "actions"]}
                 searchableField="motivo"
-                renderCells={getRenderCell(RenderCellReturnSale, mutate, openModalEdit)}
+                renderCells={getRenderCell(RenderCellReturnSale, mutate, openModalEdit, openDetailsModal, setReturnDetails, openModalStatus)}
             />
 
-            <GenericModal closeModal={closeModal}  />
-            {id && <EditReturnSaleWrapper closeModal={closeModal} id={id} />} 
+            {id && (
+                <GenericEditWrapper
+                    id={id}
+                    closeModal={closeModal}
+                    serviceFunction={ReturnSale.find}
+                    queryKey={queryKey}
+                />
+            )}
+
+            <GenericModal closeModal={closeModal} />
         </div>
     )
 }

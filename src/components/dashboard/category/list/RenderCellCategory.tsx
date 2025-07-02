@@ -31,7 +31,7 @@ export const RenderCellCategory = (mutate: mutateProps, item: DashboardCategory,
           color={statusColorMap[statusText]}
           size="sm"
           variant="flat"
-          onDoubleClick={() => mutate({ id: item.id, activo: item.activo })}
+          onDoubleClick={() => mutate({ id: item.id, status: item.activo })}
           role="button"
           tabIndex={0}
         >

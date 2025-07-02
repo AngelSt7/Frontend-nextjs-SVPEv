@@ -75,7 +75,7 @@ export const RenderCellProduct = (mutate: mutateProps, item: DashboardProduct, c
           color={statusColorMap[statusText]}
           size="sm"
           variant="flat"
-          onDoubleClick={() => mutate({ id: item.id, activo: item.activo })}
+          onDoubleClick={() => mutate({ id: item.id, status: item.activo })}
           role="button"
           tabIndex={0}
         >
@@ -99,7 +99,7 @@ export const RenderCellProduct = (mutate: mutateProps, item: DashboardProduct, c
                   ToastDelete({
                     message: `¿Desea eliminar el producto`,
                     name: item.nombre,
-                    onConfirm: () => mutate({ id: item.id, activo: 1 }),
+                    onConfirm: () => mutate({ id: item.id, status: 1 }),
                   })
                 }}
               >

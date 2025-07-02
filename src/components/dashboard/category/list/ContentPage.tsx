@@ -5,19 +5,17 @@ import { useModalUtils } from '@/src/hooks/modal/useModalUtils'
 import GenericModal from '../../ui/generics/GenericModal'
 import useSubmitMutation from '@/src/hooks/dashboard/useSubmitMutation'
 import { DashboardCategory } from '@/src/types/dashboard/CategoryTypes'
-import { dashboardListCategoryService } from '@/src/services/dashboard/category/dashboardListCategoryService'
 import { RenderCellCategory } from './RenderCellCategory'
-import { dashboardChangeStatusCategoryService } from '@/src/services/dashboard/category/dashboardChangeStatusCategoryService'
 import { Columns } from './Columns'
 import GenericEditWrapper from '../../ui/generics/GenericEditWrapper'
-import { dashboardFindByIdCategoryService } from '@/src/services/dashboard/category/dashboardFindByIdCategoryService'
 import { getRenderCell } from '../../ui/getRenderCell'
+import { Category } from '@/src/services/dashboard/category/Category'
 
 export default function ContentPage({ id }: { id: string | undefined }) {
     const { openModalCreate, openModalEdit, closeModal } = useModalUtils()
 
     const { mutate } = useSubmitMutation({
-        serviceFunction: dashboardChangeStatusCategoryService,
+        serviceFunction: Category.changeStatus,
         invalidateQuery: ["categories"]
     })
 
@@ -27,7 +25,7 @@ export default function ContentPage({ id }: { id: string | undefined }) {
                 openModalCreate={openModalCreate}
                 columns={Columns}
                 queryKey="categories"
-                functionService={dashboardListCategoryService}
+                functionService={Category.list}
                 defaultVisibleColumns={["nombre", "activo", "actions"]}
                 searchableField="nombre"
                 renderCells={getRenderCell(RenderCellCategory, mutate, openModalEdit)}
@@ -37,7 +35,7 @@ export default function ContentPage({ id }: { id: string | undefined }) {
                 <GenericEditWrapper
                     id={id}
                     closeModal={closeModal}
-                    serviceFunction={dashboardFindByIdCategoryService}
+                    serviceFunction={Category.find}
                     queryKey="category"
                 />
             )}
