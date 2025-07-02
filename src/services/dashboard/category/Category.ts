@@ -61,7 +61,7 @@ export class Category {
 
     static async changeStatus(formdata: ChangeStatus) {
         try {
-            const selected = actions[formdata.activo];
+            const selected = actions[formdata.status];
             const url = `${ROUTES.CHANGE_STATUS}/${selected.action}/${formdata.id}`;
             const { data } = await api.put(url);
             return data.mensaje

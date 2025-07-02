@@ -10,9 +10,10 @@ type ReturnSaleFormProps = {
     errors: FieldErrors<ReturnSaleFormData>;
     watch: UseFormWatch<ReturnSaleFormData>;
     setValue: UseFormSetValue<ReturnSaleFormData>;
+    productsReturn?: { id_producto: number; cantidad: number; nombreProducto: string; }[]
 };
 
-export default function ReturnSaleForm({ register, errors, watch, setValue }: ReturnSaleFormProps) {
+export default function ReturnSaleForm({ register, errors, watch, setValue, productsReturn }: ReturnSaleFormProps) {
     const { data: Sales = [] } = useGetAllSales()
     const salesFormated = Sales.map((sale) => ({ value: sale.id, label: sale.id.toString() }))
     const dataFormated = Sales.map(item => ({ id: item.id, detalleVentas: item.detallesVenta.map(detalle => ({ id: detalle.id, producto: detalle.nombreProducto, cantidad: detalle.cantidad })) }))
@@ -41,6 +42,7 @@ export default function ReturnSaleForm({ register, errors, watch, setValue }: Re
                             register={register}
                             errors={errors}
                             products={dataFormated.filter(item => item.id === idFilter).flatMap(item => item.detalleVentas.map(item => ({id_producto: item.id, cantidad: item.cantidad, nombre: item.producto})))}
+                            productsReturn={productsReturn}
                             setValue={setValue}
                             idFilter={idFilter}
                         />

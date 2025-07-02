@@ -32,12 +32,11 @@ export const ReturnSaleFormDataSchema = z.object({
 
 
 export const DashboardReturnSaleByIdSchema = z.object({
-  id: z.number(),
-  totalVenta: z.number(),
-  fecha: z.string(),
-  cantidad: z.number(),
-  motivo: z.string().optional(),
-  correoUsuario: z.string()
+    id: z.number(),
+    id_venta: z.number(),
+    motivo: z.string(),
+    estado: z.string(),
+    detalles: z.array(DetalleDevolucionSchema),
 });
 
 export const DashboardReturnsSalesSchema = z.array(DashboardReturnSaleSchema);

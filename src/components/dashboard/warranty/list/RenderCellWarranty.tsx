@@ -36,7 +36,7 @@ export const RenderCellWarranty = (
           color={statusColorMap[statusText]}
           size="sm"
           variant="flat"
-          onDoubleClick={() => mutate({ id: item.id, activo: item.activo })}
+          onDoubleClick={() => mutate({ id: item.id, status: item.activo })}
           role="button"
           tabIndex={0}
         >
@@ -65,7 +65,7 @@ export const RenderCellWarranty = (
                   ToastDelete({
                     message: `¿Desea eliminar la garantia del producto`,
                     name: item.producto,
-                    onConfirm: () => mutate({ id: item.id, activo: 1 }),
+                    onConfirm: () => mutate({ id: item.id, status: 1 }),
                   });
                 }}
               >

@@ -1,20 +1,32 @@
 import { mutateProps } from "@/src/types/commonTypes/commonTypes";
 import { formatDate } from "@/src/utils/format/formatDate";
 import { DashboardReturnSale } from "@/src/types/dashboard/ReturnSaleTypes";
-import { Button, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger, User } from "@heroui/react";
+import { Button, Chip, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger, User } from "@heroui/react";
 import Clipboard from "../../ui/Clipboard";
 import { VerticalDotsIcon } from "../../ui/icons/VerticalDotsIcon";
-import { ToastDelete } from "../../ui/ToastDelete";
 
 export const RenderCellReturnSale = (
-  mutate: mutateProps,
+  _mutate: undefined | mutateProps,
   item: DashboardReturnSale,
   columnKey: React.Key,
-  _openModalEdit?: (id: number) => void,
+  openModalEdit?: (id: number) => void,
   openDetailsModal?: () => void,
-  setReturnDetails?: (detail: DashboardReturnSale["detalles"]) => void
+  setReturnDetails?: (detail: DashboardReturnSale["detalles"]) => void,
+  openModalStatus?: (id: number) => void
 ) => {
 
+  const styleChip = () => {
+    switch (item.estado) {
+      case "PENDIENTE":
+        return "warning"
+      case "APROBADO":
+        return "success"
+      case "RECHAZADO":
+        return "danger"
+      case "RESUELTO":
+        return "secondary"
+    }
+  }
   const cellValue = item[columnKey as keyof typeof item];
 
   switch (columnKey) {
@@ -35,6 +47,17 @@ export const RenderCellReturnSale = (
         >
           {item.usuario.correo}
         </User>
+      )
+
+    case "estado":
+      return (
+        <Chip
+          size="sm"
+          className="capitalize cursor-pointer select-none"
+          color={styleChip()}
+          onDoubleClick={() => openModalStatus?.(item.id)}
+        >{item.estado.toLowerCase()}
+        </Chip>
       )
 
     case "nombre_rol":
@@ -66,6 +89,8 @@ export const RenderCellReturnSale = (
               </Button>
             </DropdownTrigger>
             <DropdownMenu>
+              <DropdownItem key="status" onPress={() => openModalStatus?.(item.id)}>Cambiar estado</DropdownItem>
+              <DropdownItem key="edit" onPress={() => openModalEdit?.(item.id)}>Editar</DropdownItem>
               <DropdownItem key="details" onPress={() => {
                 openDetailsModal?.();
                 setReturnDetails?.(item.detalles);
@@ -74,13 +99,7 @@ export const RenderCellReturnSale = (
                 key="delete"
                 className="text-danger"
                 color="danger"
-                onPress={() => {
-                  ToastDelete({
-                    message: `¿Desea eliminar el usuario`,
-                    name: `${item.usuario.nombre_empleado}`,
-                    onConfirm: () => mutate({ id: item.id, activo: 1 }),
-                  });
-                }}
+
               >
                 Eliminar
               </DropdownItem>

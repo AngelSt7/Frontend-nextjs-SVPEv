@@ -11,20 +11,25 @@ export type InitialState = {
 }[]
 
 type ShowProductsProps = {
-    products: {
-        id_producto: number;
-        cantidad: number;
-        nombre: string;
-    }[]
+    products: InitialState;
+    productsReturn?: { nombreProducto: string; cantidad: number; id_producto: number; }[];
     register: UseFormRegister<ReturnSaleFormData>;
     errors: FieldErrors<ReturnSaleFormData>;
     idFilter: DashboardSale['id'];
     setValue: UseFormSetValue<ReturnSaleFormData>;
 };
 
-export default function ShowProductsReturns({ products, setValue }: ShowProductsProps) {
-
-    const [productReturn, setProductReturn] = useState<InitialState>(products.map(item => ({ ...item, cantidad: 0 })));
+export default function ShowProductsReturns({ products, setValue, productsReturn }: ShowProductsProps) {
+    const resolveProducts = products.map((item) => {
+        const match = productsReturn?.find((p) => p.id_producto === item.id_producto);
+        return {
+            id_producto: item.id_producto,
+            nombre: item.nombre,
+            cantidad: match ? match.cantidad : 0,
+        };
+    });
+    const [productReturn, setProductReturn] = useState<InitialState>(resolveProducts);
+    
     useEffect(() => {
         setValue('devolucion', productReturn.map(item => ({ id_producto: item.id_producto, cantidad: item.cantidad })));
     }, [productReturn])

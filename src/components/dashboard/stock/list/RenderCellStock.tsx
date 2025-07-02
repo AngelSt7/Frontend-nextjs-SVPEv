@@ -72,7 +72,7 @@ export const RenderCellStock = (mutate: mutateProps, item: DashboardStock, colum
           color={statusColorMap[statusText]}
           size="sm"
           variant="flat"
-          onDoubleClick={() => mutate({ id: item.id, activo: item.activo })}
+          onDoubleClick={() => mutate({ id: item.id, status: item.activo })}
           role="button"
           tabIndex={0}
         >
@@ -96,7 +96,7 @@ export const RenderCellStock = (mutate: mutateProps, item: DashboardStock, colum
                   ToastDelete({
                     message: "¿Desea eliminar el stock cuyo lote es",
                     name: item.lote,
-                    onConfirm: () => mutate({ id: item.id, activo: 1 }),
+                    onConfirm: () => mutate({ id: item.id, status: 1 }),
                   })
                 }}
               >

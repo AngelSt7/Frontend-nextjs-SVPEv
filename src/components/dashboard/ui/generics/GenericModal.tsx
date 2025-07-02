@@ -3,6 +3,7 @@ import { usePathname, useSearchParams } from "next/navigation";
 import { pluralToSingular } from "@/src/utils/resolves/resolveTittle";
 import { AuthUserInfo } from "@/src/types/AuthTypes";
 import { CreateCategoryForm, EditCategoryForm, CreateClientForm, EditClientForm, CreateCouponForm, EditCouponForm, CreateDiscountForm, EditDiscountForm, CreateProductForm, EditProductForm, CreateReturnProductForm, EditReturnForm, CreateReturnSaleForm, EditReturnSaleForm, CreateStockForm, EditStockForm, CreateSupplierForm, EditSupplierForm, CreateUserForm, EditUserForm, CreateWarrantyClaimForm, EditWarrantyClaimForm, CreateWarrantyForm, EditWarrantyForm, DetailsReturnProducts, DetailsProduct } from ".";
+import ChangeStatusForm from "../../return-sale/edit/ChangeStatus";
 
 type GenericModalProps = {
   user?: AuthUserInfo;
@@ -23,7 +24,8 @@ export default function GenericModal({ user, id, closeModal, defaultValues }: Ge
   const isDetails = action === "details" && !!entity
   const isCreate = action === "create" && !!entity;
   const isEdit = action === "edit" && !!entity && !!defaultValues;
-  const showModal = isCreate || isEdit || isDetails;
+  const isChangeStatus = action === "changeStatus" && !!entity && !!defaultValues;
+  const showModal = isCreate || isEdit || isDetails || isChangeStatus;
 
   const getTitle = () => {
     let base = "";
@@ -38,6 +40,8 @@ export default function GenericModal({ user, id, closeModal, defaultValues }: Ge
       case "details":
         base = "Detalle de";
         break;
+      case "changeStatus":
+        base = "Cambiar estado de";
       default:
         base = "";
     }
@@ -86,6 +90,12 @@ export default function GenericModal({ user, id, closeModal, defaultValues }: Ge
       switch (entity) {
         case "venta": return <DetailsProduct />
         case "devolución_venta": return <DetailsReturnProducts />
+      }
+    }
+
+    if(isChangeStatus){
+      switch(entity){
+        case "devolución_venta": return <ChangeStatusForm defaultValues={defaultValues} />
       }
     }
     return null;
