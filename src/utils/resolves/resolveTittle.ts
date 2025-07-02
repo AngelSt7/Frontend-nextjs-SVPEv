@@ -17,6 +17,7 @@ export const Tittles: Record<string, string> = {
     '/dashboard/clientes': 'Administrar Clientes',
     '/dashboard/devoluciones-productos': 'Administrar Devoluciones de Productos',
     '/dashboard/ayuda': 'Bienvenido al sistema de ayuda de NEON',
+    '/dashboard/devoluciones-ventas': 'Administrar Devoluciones de Ventas'
 };
 
 // Mapear entidades

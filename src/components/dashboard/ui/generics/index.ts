@@ -22,3 +22,5 @@ export { default as CreateWarrantyClaimForm } from "../../warranty-claim/create/
 export { default as EditWarrantyClaimForm } from "../../warranty-claim/edit/EditWarrantyClaimForm";
 export { default as CreateWarrantyForm } from "../../warranty/create/CreateWarrantyForm";
 export { default as EditWarrantyForm } from "../../warranty/edit/EditWarrantyForm";
+export { default as DetailsReturnProducts } from "../../return-sale/list/DetailsProducts";
+export { default as DetailsProduct} from "../../sales/list/DetailsProduct";

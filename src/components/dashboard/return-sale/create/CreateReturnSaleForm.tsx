@@ -3,8 +3,8 @@ import { useForm } from 'react-hook-form';
 import useSubmitMutation from '@/src/hooks/dashboard/useSubmitMutation';
 import ReturnSaleForm from '../form/ReturnSaleForm';
 import { ReturnSaleFormData } from '@/src/types/dashboard/ReturnSaleTypes';
-import { dashboardCreateReturnSaleService } from '@/src/services/dashboard/return-sale/dashboardCreateReturnSaleService';
 import toast from 'react-hot-toast';
+import { ReturnSale } from '@/src/services/dashboard/return-sale/ReturnSale';
 
 type CreateReturnSaleFormProps = {
   closeModal: () => void;
@@ -14,16 +14,16 @@ export default function CreateReturnSaleForm({ closeModal }: CreateReturnSaleFor
   const { register, handleSubmit, formState: { errors }, setValue, watch } = useForm<ReturnSaleFormData>();
 
   const { mutate } = useSubmitMutation({
-    serviceFunction: dashboardCreateReturnSaleService,
+    serviceFunction: ReturnSale.create,
     invalidateQuery: ['returns-sales'],
     onSuccessCallback: closeModal,
     message: 'Devolucion registrada exitosamente'
   })
 
   const onSubmit = (data: ReturnSaleFormData) => {
-    const cantidad = data.productos.find(p => !isNaN(p.cantidad))?.cantidad ?? 0;
-    if (!cantidad) return toast.error('Debe seleccionar almenos una cantidad para registrar la devolucion');
-    mutate(data)
+    const noneSelected = data.devolucion.every(p => p.cantidad === 0);
+    if (noneSelected) return toast.error('Debe seleccionar al menos un producto para devolver');
+    mutate({...data, id_usuario: 1, devolucion: [...data.devolucion.filter(p => p.cantidad > 0).map(p =>({id_producto: 40, cantidad: p.cantidad}))]});
   }
 
   return (

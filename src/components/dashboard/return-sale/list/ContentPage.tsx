@@ -8,13 +8,14 @@ import { Columns } from './Columns'
 import { DashboardReturnSale } from '@/src/types/dashboard/ReturnSaleTypes'
 import { dashboardListReturnSaleService } from '@/src/services/dashboard/return-sale/dashboardListReturnSaleService'
 import { RenderCellReturnSale } from './RenderCellReturnSale'
-import { useAppStore } from '@/src/store/useAppStore'
 import EditReturnSaleWrapper from '../edit/EditReturnSaleWrapper'
 import { dashboardChangeStatusReturnSaleService } from '@/src/services/dashboard/return-sale/dashboardChangeStatusReturnSaleService'
 import { getRenderCell } from '../../ui/getRenderCell'
+import { useAppStore } from '@/src/store/useAppStore'
 
 export default function ContentPage({ id }: { id: string | undefined }) {
-    const { openModalCreate, openModalEdit, closeModal } = useModalUtils()
+    const {openModalCreate, openModalEdit, openDetailsModal, closeModal } = useModalUtils();
+    const setReturnDetails = useAppStore(state => state.setReturnDetails)
 
     const { mutate } = useSubmitMutation({
         serviceFunction: dashboardChangeStatusReturnSaleService,
@@ -28,13 +29,13 @@ export default function ContentPage({ id }: { id: string | undefined }) {
                 columns={Columns}
                 queryKey="returns-sales"
                 functionService={dashboardListReturnSaleService}
-                defaultVisibleColumns={["correo", "producto", "cantidad", "fecha", "actions"]}
+                defaultVisibleColumns={["correo", "nombre_rol", "nombre_empleado", "fecha", "actions"]}
                 searchableField="motivo"
-                renderCells={getRenderCell(RenderCellReturnSale, mutate, openModalEdit)}
+                renderCells={getRenderCell(RenderCellReturnSale, mutate, openModalEdit, openDetailsModal, setReturnDetails)}
             />
 
-            <GenericModal closeModal={closeModal}  />
-            {id && <EditReturnSaleWrapper closeModal={closeModal} id={id} />} 
+            <GenericModal closeModal={closeModal} />
+            {id && <EditReturnSaleWrapper closeModal={closeModal} id={id} />}
         </div>
     )
 }

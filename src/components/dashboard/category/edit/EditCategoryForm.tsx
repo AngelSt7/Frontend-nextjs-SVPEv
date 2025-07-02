@@ -3,9 +3,9 @@ import { Button } from '@heroui/react';
 import { useForm } from 'react-hook-form';
 import { AuthUserInfo } from '@/src/types/AuthTypes';
 import CategoryForm from '../form/CategoryForm';
-import { dashboardUpdateCategoryService } from '@/src/services/dashboard/category/dashboardUpdateCategoryService';
 import { CategoryFormData, DashboardCategoryById } from '@/src/types/dashboard/CategoryTypes';
 import useResolveCategories from '@/src/hooks/dashboard/useResolveCategories';
+import { Category } from '@/src/services/dashboard/category/Category';
 
 type EditCategoryForm = {
   user?: AuthUserInfo;
@@ -24,7 +24,7 @@ export default function EditCategoryForm({ user, closeModal, defaultValues }: Ed
   });
 
   const { mutate } = useSubmitMutation({
-    serviceFunction: dashboardUpdateCategoryService,
+    serviceFunction: Category.update,
     invalidateQuery: [
       ["categories"],
       ["category", defaultValues.id.toString()]

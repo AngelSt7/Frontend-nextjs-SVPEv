@@ -2,8 +2,8 @@ import { Button } from '@heroui/react';
 import { useForm } from 'react-hook-form';
 import useSubmitMutation from '@/src/hooks/dashboard/useSubmitMutation';
 import ClientForm from '../form/ClientForm';
-import { dashboardCreateClientService } from '@/src/services/dashboard/client/dashboardCreateClientService';
 import { ClientFormData } from '@/src/types/dashboard/ClientType';
+import { Client } from '@/src/services/dashboard/client/Client';
 
 type CreateClientFormProps = {
     closeModal: () => void;
@@ -14,7 +14,7 @@ export default function CreateClientForm({ closeModal }: CreateClientFormProps) 
     const { register, handleSubmit, formState: { errors }, watch, setValue } = useForm<ClientFormData>();
 
     const { mutate } = useSubmitMutation({
-        serviceFunction: dashboardCreateClientService,
+        serviceFunction: Client.create,
         invalidateQuery: ['clients'],
         onSuccessCallback: closeModal,
         message: 'Cliente registrado exitosamente'

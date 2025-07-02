@@ -2,24 +2,23 @@
 
 import { TableComponent } from '@/src/components/dashboard/ui/table/TableContent'
 import { useModalUtils } from '@/src/hooks/modal/useModalUtils'
-import GenericModal from '../../ui/generics/GenericModal'
 import useSubmitMutation from '@/src/hooks/dashboard/useSubmitMutation'
+import { DashboardClient } from '@/src/types/dashboard/ClientType'
+import { Client } from '@/src/services/dashboard/client/Client'
 import { Columns } from './Columns'
 import { RenderCellClient } from './RenderCellClient'
-import { dashboardListClientService } from '@/src/services/dashboard/client/dashboardListClientService'
-import { DashboardClient } from '@/src/types/dashboard/ClientType'
-import { dashboardChangeStatusClientService } from '@/src/services/dashboard/client/dashboardChangeStatusClientService'
+import GenericModal from '../../ui/generics/GenericModal'
 import GenericEditWrapper from '../../ui/generics/GenericEditWrapper'
-import { dashboardFindByIdClientService } from '@/src/services/dashboard/client/dashboardFindByIdClientService'
 import { getRenderCell } from '../../ui/getRenderCell'
 
 
 export default function ContentPage({ id }: { id: string | undefined }) {
+    const queryKey = "clients"
     const { openModalCreate, openModalEdit, closeModal } = useModalUtils()
 
     const { mutate } = useSubmitMutation({
-        serviceFunction: dashboardChangeStatusClientService,
-        invalidateQuery: ["clients"]
+        serviceFunction: Client.changeStatus,
+        invalidateQuery: [queryKey]
     })
 
     return (
@@ -27,8 +26,8 @@ export default function ContentPage({ id }: { id: string | undefined }) {
             <TableComponent<DashboardClient>
                 openModalCreate={openModalCreate}
                 columns={Columns}
-                queryKey="clients"
-                functionService={dashboardListClientService}
+                queryKey={queryKey}
+                functionService={Client.list}
                 defaultVisibleColumns={["nombre", "dni", "correo", "celular", "activo", "actions"]}
                 searchableField="nombre"
                 renderCells={getRenderCell(RenderCellClient, mutate, openModalEdit)}
@@ -38,8 +37,8 @@ export default function ContentPage({ id }: { id: string | undefined }) {
                 <GenericEditWrapper
                     id={id}
                     closeModal={closeModal}
-                    serviceFunction={dashboardFindByIdClientService}
-                    queryKey="client"
+                    serviceFunction={Client.find}
+                    queryKey={queryKey}
                 />
             )}
 

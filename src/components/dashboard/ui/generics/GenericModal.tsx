@@ -2,21 +2,16 @@ import { Modal, ModalContent, ModalHeader, ModalBody } from "@heroui/react";
 import { usePathname, useSearchParams } from "next/navigation";
 import { pluralToSingular } from "@/src/utils/resolves/resolveTittle";
 import { AuthUserInfo } from "@/src/types/AuthTypes";
-import { CreateCategoryForm, EditCategoryForm, CreateClientForm, EditClientForm, CreateCouponForm, EditCouponForm, CreateDiscountForm, EditDiscountForm, CreateProductForm, EditProductForm, CreateReturnProductForm, EditReturnForm, CreateReturnSaleForm, EditReturnSaleForm, CreateStockForm, EditStockForm, CreateSupplierForm, EditSupplierForm, CreateUserForm, EditUserForm, CreateWarrantyClaimForm, EditWarrantyClaimForm, CreateWarrantyForm, EditWarrantyForm } from ".";
-import { DashboardSale } from "@/src/types/dashboard/SaleTypes";
-import DetailsProduct from "../../sales/list/DetailsProduct";
+import { CreateCategoryForm, EditCategoryForm, CreateClientForm, EditClientForm, CreateCouponForm, EditCouponForm, CreateDiscountForm, EditDiscountForm, CreateProductForm, EditProductForm, CreateReturnProductForm, EditReturnForm, CreateReturnSaleForm, EditReturnSaleForm, CreateStockForm, EditStockForm, CreateSupplierForm, EditSupplierForm, CreateUserForm, EditUserForm, CreateWarrantyClaimForm, EditWarrantyClaimForm, CreateWarrantyForm, EditWarrantyForm, DetailsReturnProducts, DetailsProduct } from ".";
 
 type GenericModalProps = {
   user?: AuthUserInfo;
   id?: string;
   closeModal: () => void;
   defaultValues?: any;
-  idReturnSaleDetail?: number;
-  clearIdReturnSaleDetail?: () => void;
-  detailsSale?: DashboardSale['detallesVenta']
 };
 
-export default function GenericModal({ user, id, closeModal, defaultValues, idReturnSaleDetail, detailsSale, clearIdReturnSaleDetail }: GenericModalProps) {
+export default function GenericModal({ user, id, closeModal, defaultValues }: GenericModalProps) {
 
   const path = usePathname();
   const searchParams = useSearchParams();
@@ -64,7 +59,6 @@ export default function GenericModal({ user, id, closeModal, defaultValues, idRe
         case "cupón": return <CreateCouponForm closeModal={closeModal} />;
         case "devolución_producto": return <CreateReturnProductForm user={user} closeModal={closeModal} />
         case "stock": return <CreateStockForm user={user} closeModal={closeModal} />
-        case "devolución_venta": return <CreateReturnSaleForm closeModal={closeModal} idReturnSaleDetail={idReturnSaleDetail!} />
         case "reclamo_garantia": return <CreateWarrantyClaimForm closeModal={closeModal} />
         case "garantia": return <CreateWarrantyForm closeModal={closeModal} />;
         case "cliente": return <CreateClientForm closeModal={closeModal} />
@@ -91,6 +85,7 @@ export default function GenericModal({ user, id, closeModal, defaultValues, idRe
     if (isDetails) {
       switch (entity) {
         case "venta": return <DetailsProduct />
+        case "devolución_venta": return <DetailsReturnProducts />
       }
     }
     return null;
