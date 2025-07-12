@@ -28,7 +28,10 @@ export default function CreateStockForm({ closeModal, user }: CreateStockFormPro
     message: 'Stock registrado exitosamente'
   })
 
-  const onSubmit = (data: StockFormData) => mutate({ ...data, id_usuario: user!.id });
+  const onSubmit = (data: StockFormData) => {
+    console.log("ENVIANDO: ",  data)
+    // mutate({ ...data, id_usuario: user!.id });
+  }
 
   return (
     <form
@@ -43,7 +46,6 @@ export default function CreateStockForm({ closeModal, user }: CreateStockFormPro
         register={register}
         errors={errors}
       />
-
       <div className="w-full flex gap-4 justify-end mt-3">
         <Button color='danger' variant='flat' onPress={closeModal}>Cancelar</Button>
         <Button color='success'  className='dark:bg-green-700' type='submit'>Registrar Stock</Button>

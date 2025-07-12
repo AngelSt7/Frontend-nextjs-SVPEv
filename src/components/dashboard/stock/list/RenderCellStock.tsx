@@ -28,28 +28,11 @@ export const RenderCellStock = (mutate: mutateProps, item: DashboardStock, colum
         </div>
       );
 
-    case "producto":
-      return (
-        <div className="group flex items-center gap-2 ">
-          <User
-            avatarProps={{
-              radius: "lg",
-              src: "/images/product-provisional.jpeg",
-            }}
-            name={<Clipboard
-              text={`${item.producto}`}
-              context="Producto"
-              opacity={false}
-            />}
-          />
-        </div>
-      );
-
-    case "lote": {
+      case "codigo_ingreso": {
       return (
         <Clipboard
-          text={`${item.lote}`}
-          context="Lote"
+          text={`${item.codigo_ingreso}`}
+          context="Codigo ingreso"
           opacity={true}
         />
       );
@@ -94,8 +77,8 @@ export const RenderCellStock = (mutate: mutateProps, item: DashboardStock, colum
               <DropdownItem key="delete" className="text-danger" color="danger"
                 onPress={() => {
                   ToastDelete({
-                    message: "¿Desea eliminar el stock cuyo lote es",
-                    name: item.lote,
+                    message: "¿Desea eliminar el stock cuyo codigo de ingreso es",
+                    name: item.codigo_ingreso,
                     onConfirm: () => mutate({ id: item.id, status: 1 }),
                   })
                 }}

@@ -2,7 +2,7 @@ import { mutateProps } from "@/src/types/commonTypes/commonTypes";
 
 export const getRenderCell = <T,>(
   renderFn: (
-    mutate: mutateProps,
+    mutate: any,
     item: T,
     columnKey: React.Key,
     openModalEdit?: (id: number) => void,
@@ -10,7 +10,7 @@ export const getRenderCell = <T,>(
     setDetails?: (detail: any) => void,
     openModalStatus?: (id: number) => void,
   ) => React.ReactNode,
-  mutate: mutateProps ,
+  mutate: any ,
   openModalEdit?: (id: number) => void,
   openDetailsModal?: () => void,
   setDetails?: (detail: any) => void,

@@ -29,7 +29,7 @@ export default function ContentPage({ id, user }: { id: string | undefined, user
                 columns={Columns}
                 queryKey="stocks"
                 functionService={dashboardListStockService}
-                defaultVisibleColumns={["producto", "proveedor", "lote", "tipo_documento", "numero_documento", "activo", "actions"]}
+                defaultVisibleColumns={["proveedor", "codigo_ingreso", "lote", "tipo_documento", "numero_documento", "activo", "actions"]}
                 searchableField="numero_documento"
                 renderCells={getRenderCell(RenderCellStock, mutate, openModalEdit)}
             />
