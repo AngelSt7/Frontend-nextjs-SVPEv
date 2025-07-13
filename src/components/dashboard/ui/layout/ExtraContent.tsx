@@ -1,5 +1,5 @@
-import ShowCarrito from '../sales/register/cart/ShowCarrito';
-import Navigation from './navigations/Navigation';
+import ShowCarrito from '../../sales/register/cart/ShowCarrito';
+import Navigation from '../navigations/Navigation';
 
 export default function ExtraContent({ path }: { path: string }) {
 

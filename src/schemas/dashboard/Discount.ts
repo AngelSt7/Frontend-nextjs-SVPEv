@@ -9,15 +9,9 @@ export const DashboardDiscountSchema = z.object({
   nombreCategoria: z.string().nullish(),
   activo: z.number().min(0).max(1),
 });
-        // "id": 1,
-        // "id_categoria": 17,
-        // "nombreCategoria": "Categoria1 ",
-        // "porcentaje": 50.0,
-        // "fecha_inicio": "2025-06-17",
-        // "fecha_fin": "2025-06-25",
-        // "activo": 1
 
 export const DiscountFormDataSchema = z.object({
+  id: z.number().nullish(),
   id_categoria: z.number(),
   porcentaje: z.number(),
   fecha_inicio: z.string(),

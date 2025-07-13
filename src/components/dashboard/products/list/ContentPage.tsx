@@ -5,21 +5,20 @@ import { useModalUtils } from '@/src/hooks/modal/useModalUtils'
 import GenericModal from '../../ui/generics/GenericModal'
 import { DashboardProduct } from '@/src/types/dashboard/ProductTypes'
 import { Columns } from './Columns'
-import { dashboardListProductService } from '@/src/services/dashboard/product/dashboardListProductService'
-import useSubmitMutation from '@/src/hooks/dashboard/useSubmitMutation'
-import { dashboardChangeStatusProductService } from '@/src/services/dashboard/product/dashboardChangeStatusProductService'
+import useSubmitMutation from '@/src/hooks/dashboard/mutations/useSubmitMutation'
 import { RenderCellProduct } from './RenderCellProduct'
 import { AuthUserInfo } from '@/src/types/AuthTypes'
 import GenericEditWrapper from '../../ui/generics/GenericEditWrapper'
-import { dashboardFindByIdProductService } from '@/src/services/dashboard/product/dashboardFindByIdProductService'
-import { getRenderCell } from '../../ui/getRenderCell'
+import { getRenderCell } from '../../ui/table/getRenderCell'
+import { Product } from '@/src/services/dashboard/product/Product'
 
 export default function ContentPage({ id, user }: { id: string | undefined, user?: AuthUserInfo }) {
+    const queryKey = "products"
     const { openModalCreate, openModalEdit, closeModal } = useModalUtils()
 
     const { mutate } = useSubmitMutation({
-        serviceFunction: dashboardChangeStatusProductService,
-        invalidateQuery: ["products"]
+        serviceFunction: Product.changeStatus,
+        invalidateQuery: [queryKey]
     })
 
     return (
@@ -27,8 +26,8 @@ export default function ContentPage({ id, user }: { id: string | undefined, user
             <TableComponent<DashboardProduct>
                 openModalCreate={openModalCreate}
                 columns={Columns}
-                queryKey="products"
-                functionService={dashboardListProductService}
+                queryKey={queryKey}
+                functionService={Product.list}
                 defaultVisibleColumns={["nombre", "precio_venta", "nombre_marca", "nombre_categoria", "sku", "min_stock", "activo", "actions"]}
                 searchableField="nombre"
                 renderCells={getRenderCell(RenderCellProduct, mutate, openModalEdit)}
@@ -39,7 +38,7 @@ export default function ContentPage({ id, user }: { id: string | undefined, user
                     id={id}
                     user={user}
                     closeModal={closeModal}
-                    serviceFunction={dashboardFindByIdProductService}
+                    serviceFunction={Product.find}
                     queryKey="product"
                 />
             )}

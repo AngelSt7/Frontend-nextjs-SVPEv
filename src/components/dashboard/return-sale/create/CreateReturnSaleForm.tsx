@@ -1,6 +1,6 @@
 import { Button } from '@heroui/react';
 import { useForm } from 'react-hook-form';
-import useSubmitMutation from '@/src/hooks/dashboard/useSubmitMutation';
+import useSubmitMutation from '@/src/hooks/dashboard/mutations/useSubmitMutation';
 import ReturnSaleForm from '../form/ReturnSaleForm';
 import { ReturnSaleFormData } from '@/src/types/dashboard/ReturnSaleTypes';
 import toast from 'react-hot-toast';

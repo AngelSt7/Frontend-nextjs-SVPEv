@@ -89,7 +89,7 @@ export default function SerieTabs<T extends FieldValues>({
               <button
                 type="button"
                 onClick={() => removeTag(tag)}
-                className="ml-1 text-xs hover:text-red-600 hover:text-zinc-300"
+                className="ml-1 text-xs hover:text-red-600 "
               >
                 ✕
               </button>

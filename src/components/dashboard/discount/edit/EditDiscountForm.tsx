@@ -1,28 +1,22 @@
-import useSubmitMutation from '@/src/hooks/dashboard/useSubmitMutation';
+import useSubmitMutation from '@/src/hooks/dashboard/mutations/useSubmitMutation';
 import { Button } from '@heroui/react';
 import { useForm } from 'react-hook-form';
-import { AuthUserInfo } from '@/src/types/AuthTypes';
 import { DashboardDiscountById, DiscountFormData } from '@/src/types/dashboard/DiscountTypes';
 import DiscountForm from '../form/DiscountForm';
-import { dashboardUpdateDiscountService } from '@/src/services/dashboard/discount/dashboardUpdateDiscountService';
+import { Discount } from '@/src/services/dashboard/discount/Discount';
+import { normalizeDiscount } from '@/src/utils/normalize/nromalizeDiscount';
 
 type EditDiscountForm = {
-  user?: AuthUserInfo;
   closeModal: () => void;
   defaultValues: DashboardDiscountById
 };
 
-export default function EditDiscountForm({ user, closeModal, defaultValues }: EditDiscountForm) {
+export default function EditDiscountForm({ closeModal, defaultValues }: EditDiscountForm) {
   const { register, handleSubmit, formState: { errors }, watch, setValue } = useForm<DiscountFormData>({
-    defaultValues: {
-      ...defaultValues,
-      fecha_inicio: defaultValues.fecha_inicio,
-      fecha_fin: defaultValues.fecha_fin
-    }
-  });
+    defaultValues: normalizeDiscount(defaultValues)});
 
   const { mutate } = useSubmitMutation({
-    serviceFunction: dashboardUpdateDiscountService,
+    serviceFunction: Discount.update,
     invalidateQuery: [
       ["discounts"],
       ["discount", defaultValues.id.toString()]

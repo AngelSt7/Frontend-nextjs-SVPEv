@@ -1,8 +1,8 @@
 import { FieldErrors, UseFormRegister, UseFormSetValue, UseFormWatch } from 'react-hook-form';
 import { ReturnProductFormData } from '@/src/types/dashboard/ReturnProductTypes';
-import { useGetStock } from '@/src/hooks/dashboard/useGetStock';
+import { useGetStock } from '@/src/hooks/dashboard/data/useGetStock';
 import { useMemo } from 'react';
-import SelectTabs from '../../stock/form/SelectTabs';
+import SelectTabs from '../../ui/form/SelectTabs';
 import Input from '@/src/components/ui/Input';
 import { MdPermIdentity } from 'react-icons/md';
 import ActiveReposition from '../create/ActiveReposition';

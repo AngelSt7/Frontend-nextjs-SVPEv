@@ -4,7 +4,7 @@ import { VerticalDotsIcon } from "../../ui/icons/VerticalDotsIcon";
 import { statusColorMap } from "@/src/utils/constants/constans";
 import { mutateProps } from "@/src/types/commonTypes/commonTypes";
 import { DashboardSupplier } from "@/src/types/DashboardTypes";
-import { ToastDelete } from "../../ui/ToastDelete";
+import { ToastDelete } from "../../ui/feedback/ToastDelete";
 
 export const RenderCellSupplier = (mutate: mutateProps, item: DashboardSupplier, columnKey: React.Key, openModalEdit?: (id: number) => void) => {
   const cellValue = item[columnKey as keyof typeof item];

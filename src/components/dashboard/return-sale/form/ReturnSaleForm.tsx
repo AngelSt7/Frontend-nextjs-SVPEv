@@ -1,8 +1,8 @@
 import Input from '@/src/components/ui/Input';
 import { FieldErrors, UseFormRegister, UseFormSetValue, UseFormWatch } from 'react-hook-form';
 import { ReturnSaleFormData } from '@/src/types/dashboard/ReturnSaleTypes';
-import SelectTabs from '../../stock/form/SelectTabs';
-import { useGetAllSales } from '@/src/hooks/dashboard/useGetAllSales';
+import SelectTabs from '../../ui/form/SelectTabs';
+import { useGetAllSales } from '@/src/hooks/dashboard/data/useGetAllSales';
 import ShowProductsReturns from './ShowProductsReturns';
 
 type ReturnSaleFormProps = {

@@ -1,9 +1,10 @@
 import { Button } from '@heroui/react';
 import { useForm } from 'react-hook-form';
-import useSubmitMutation from '@/src/hooks/dashboard/useSubmitMutation';
+import useSubmitMutation from '@/src/hooks/dashboard/mutations/useSubmitMutation';
 import { DiscountFormData } from '@/src/types/dashboard/DiscountTypes';
 import DiscountForm from '../form/DiscountForm';
 import { dashboardCreateDiscountService } from '@/src/services/dashboard/discount/dashboardCreateDiscountService';
+import { Discount } from '@/src/services/dashboard/discount/Discount';
 
 type CreateDiscountFormProps = {
   closeModal: () => void;
@@ -13,7 +14,7 @@ export default function CreateDiscountForm({ closeModal }: CreateDiscountFormPro
   const { register, handleSubmit, formState: { errors }, setValue, watch } = useForm<DiscountFormData>();
   
   const { mutate } = useSubmitMutation({
-    serviceFunction: dashboardCreateDiscountService,
+    serviceFunction: Discount.create,
     invalidateQuery: ['discounts'],
     onSuccessCallback: closeModal,
     message: 'Descuento registrado exitosamente'

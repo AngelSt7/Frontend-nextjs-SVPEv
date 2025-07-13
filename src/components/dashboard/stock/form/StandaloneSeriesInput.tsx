@@ -1,3 +1,4 @@
+import { useStandaloneSeriesInput } from '@/src/hooks/dashboard/ui/useStandaloneSeriesInput';
 import React from 'react';
 
 type StandaloneSeriesInputProps = {
@@ -13,22 +14,16 @@ export default function StandaloneSeriesInput({
   onSeriesChange,
   errorMessage,
 }: StandaloneSeriesInputProps) {
-  const [inputValue, setInputValue] = React.useState('');
 
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if ((e.key === 'Enter' || e.key === ',') && inputValue.trim()) {
-      e.preventDefault();
-      const newTag = inputValue.trim();
-      if (!series.includes(newTag)) {
-        onSeriesChange([...series, newTag]);
-      }
-      setInputValue('');
-    }
-  };
-
-  const removeTag = (tagToRemove: string) => {
-    onSeriesChange(series.filter(tag => tag !== tagToRemove));
-  };
+  const {
+      inputValue,
+      setInputValue,
+      handleKeyDown,
+      removeTag } =
+  useStandaloneSeriesInput(
+    { series,
+      onSeriesChange }
+  );
 
   if (!isEnabled) return null;
 
@@ -55,7 +50,7 @@ export default function StandaloneSeriesInput({
               <button
                 type="button"
                 onClick={() => removeTag(tag)}
-                className="ml-1 text-xs hover:text-red-600 hover:text-zinc-300"
+                className="ml-1 text-xs hover:text-red-600"
               >
                 ✕
               </button>

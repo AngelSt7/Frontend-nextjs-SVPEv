@@ -1,6 +1,6 @@
 'use client'
 
-import useSubmitMutation from "@/src/hooks/dashboard/useSubmitMutation";
+import useSubmitMutation from "@/src/hooks/dashboard/mutations/useSubmitMutation";
 import { useModalUtils } from "@/src/hooks/modal/useModalUtils";
 import { dashboardChangeStatusWarrantyService } from "@/src/services/dashboard/warranty/dashboardChangeStatusWarrantyService";
 import { dashboardListWarrantiesService } from "@/src/services/dashboard/warranty/dashboardListWarrantyService";
@@ -11,7 +11,7 @@ import GenericModal from "../../ui/generics/GenericModal";
 import { TableComponent } from "../../ui/table/TableContent";
 import { DashboardWarranty } from "@/src/types/dashboard/WarrantyTypes";
 import { AuthUserInfo } from "@/src/types/AuthTypes";
-import { getRenderCell } from "../../ui/getRenderCell";
+import { getRenderCell } from "../../ui/table/getRenderCell";
 
 export default function ContentPage({ id, user }: { id: string | undefined, user?: AuthUserInfo }) {
   const { openModalCreate, openModalEdit, closeModal } = useModalUtils();

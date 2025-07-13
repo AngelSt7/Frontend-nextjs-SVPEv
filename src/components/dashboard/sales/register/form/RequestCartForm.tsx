@@ -1,8 +1,8 @@
 import { FieldErrors, UseFormRegister, UseFormSetValue, UseFormWatch } from 'react-hook-form';
 import { SalesFormData } from '@/src/types/dashboard/SaleTypes';
-import SelectTabs from '../../../stock/form/SelectTabs';
-import { useGetClients } from '@/src/hooks/dashboard/useGetClients';
-import SelectItem from '../../../ui/SelectItem';
+import SelectTabs from '../../../ui/form/SelectTabs';
+import { useGetClients } from '@/src/hooks/dashboard/data/useGetClients';
+import SelectItem from '../../../ui/form/SelectItem';
 
 type RequesteCartFormProps = {
     register: UseFormRegister<SalesFormData>;

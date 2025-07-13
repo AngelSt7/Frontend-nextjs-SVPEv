@@ -1,6 +1,6 @@
-import Header from '@/src/components/dashboard/ui/Header';
-import NavBar from '@/src/components/dashboard/ui/NavBar';
-import ShowTittle from '@/src/components/dashboard/ui/ShowTittle';
+import Header from '@/src/components/dashboard/ui/layout/Header';
+import ShowTittle from '@/src/components/dashboard/ui/layout/ShowTittle';
+import NavBar from '@/src/components/dashboard/ui/navigations/NavBar';
 
 export default async function layout({ children }: { children: React.ReactNode }) {
 

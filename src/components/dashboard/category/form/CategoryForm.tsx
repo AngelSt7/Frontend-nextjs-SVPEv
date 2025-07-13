@@ -2,7 +2,7 @@ import { FieldErrors, UseFormRegister, UseFormSetValue, UseFormWatch } from 'rea
 import { CategoryFormData } from '@/src/types/dashboard/CategoryTypes';
 import { MdPermIdentity } from 'react-icons/md';
 import Input from '@/src/components/ui/Input';
-import SelectItem from '../../ui/SelectItem';
+import SelectItem from '../../ui/form/SelectItem';
 
 type CategoryFormProps = {
     register: UseFormRegister<CategoryFormData>;

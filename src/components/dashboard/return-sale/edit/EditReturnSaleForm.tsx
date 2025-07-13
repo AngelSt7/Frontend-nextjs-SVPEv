@@ -1,4 +1,4 @@
-import useSubmitMutation from '@/src/hooks/dashboard/useSubmitMutation';
+import useSubmitMutation from '@/src/hooks/dashboard/mutations/useSubmitMutation';
 import { Button } from '@heroui/react';
 import { useForm } from 'react-hook-form';
 import { AuthUserInfo } from '@/src/types/AuthTypes';

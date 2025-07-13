@@ -1,11 +1,11 @@
-import useSubmitMutation from '@/src/hooks/dashboard/useSubmitMutation';
+import useSubmitMutation from '@/src/hooks/dashboard/mutations/useSubmitMutation';
 import { Button } from '@heroui/react';
 import { useForm } from 'react-hook-form';
 import { AuthUserInfo } from '@/src/types/AuthTypes';
 import CategoryForm from '../form/CategoryForm';
 import { CategoryFormData, DashboardCategoryById } from '@/src/types/dashboard/CategoryTypes';
-import useResolveCategories from '@/src/hooks/dashboard/useResolveCategories';
 import { Category } from '@/src/services/dashboard/category/Category';
+import useResolveCategories from '@/src/hooks/dashboard/ui/useResolveCategories';
 
 type EditCategoryForm = {
   user?: AuthUserInfo;

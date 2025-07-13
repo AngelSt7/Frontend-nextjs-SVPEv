@@ -1,13 +1,14 @@
-import useSubmitMutation from '@/src/hooks/dashboard/useSubmitMutation';
+import useSubmitMutation from '@/src/hooks/dashboard/mutations/useSubmitMutation';
 import { Button } from '@heroui/react';
 import { useForm } from 'react-hook-form';
 import { AuthUserInfo } from '@/src/types/AuthTypes';
 import StockForm from '../form/StockForm';
 import { DashboardStockById, StockFormData } from '@/src/types/dashboard/StockTypes';
-import { useGetProducts } from '@/src/hooks/dashboard/useGetProducts';
-import { useGetSuppliers } from '@/src/hooks/dashboard/useGetSuppliers';
-import { useEffect, useMemo } from 'react';
+import { useGetProducts } from '@/src/hooks/dashboard/data/useGetProducts';
+import { useGetSuppliers } from '@/src/hooks/dashboard/data/useGetSuppliers';
 import { dashboardUpdateStockService } from '@/src/services/dashboard/stock/dashboardUpdateStockService';
+import { useMemo } from 'react';
+import { normalizeStockData } from '@/src/utils/normalize/normalizeStockData';
 
 type EditCouponFormProps = {
   user?: AuthUserInfo;
@@ -18,19 +19,11 @@ type EditCouponFormProps = {
 export default function EditStockForm({ user, closeModal, defaultValues }: EditCouponFormProps) {
   const { data: products = [] } = useGetProducts();
   const { data: suppliers = [] } = useGetSuppliers();
-  const productOptions = useMemo(() => products.map((p) => ({ label: p.nombre, value: p.id })), [products])
+  const productOptions = useMemo(() => products.filter(p => p.activo === 1).map(p => ({ label: p.nombre, value: p.id })), [products]);
   const suppliersOptions = useMemo(() => suppliers.map((p) => ({ label: p.razon_social, value: p.id })), [suppliers])
 
-  const { register, handleSubmit, formState: { errors }, watch, setValue, control } = useForm<StockFormData>({
-    defaultValues: {
-      ...defaultValues,
-      tipo_documento: defaultValues.tipo_documento === 'FACTURA' ? 1 : 2,
-      cantidad_producto: defaultValues.cantidad_producto,
-      precio_unitario: defaultValues.precio_unitario,
-      observaciones: defaultValues.observaciones,
-      id_producto: defaultValues.id_producto,
-      id_proveedor: defaultValues.id_proveedor
-    }
+  const { register, handleSubmit, formState: { errors }, watch, setValue } = useForm<StockFormData>({
+    defaultValues: normalizeStockData(defaultValues)
   })
 
   const { mutate } = useSubmitMutation({
@@ -42,15 +35,8 @@ export default function EditStockForm({ user, closeModal, defaultValues }: EditC
     onSuccessCallback: closeModal,
     message: 'Stock actualizado exitosamente'
   })
-  
-  const onSubmit = (data: StockFormData) => {
-    console.log("ENVIANDO: ",  data)
-    console.log("ID ANTERIOR DE PRODUCTO: ",  defaultValues.id_producto)
-    console.log("ID ACTUAL DE PRODUCTO: ",  data.id_producto)
-    console.log("SENDING", { ...data, id_usuario: user!.id, id_ingreso: defaultValues.id })
-    return
-    mutate({ ...data, id_usuario: user!.id, id_ingreso: defaultValues.id });
-  }
+
+  const onSubmit = (data: StockFormData) =>  mutate({ ...data, id_usuario: user!.id, id_ingreso: defaultValues.id });
 
   if (defaultValues && productOptions && suppliersOptions) return (
     <form

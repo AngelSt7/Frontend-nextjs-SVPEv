@@ -1,5 +1,5 @@
 import { FieldError, FieldValues, Path, UseFormSetValue, UseFormWatch, UseFormRegisterReturn } from 'react-hook-form'
-import { useSelectTabs } from '@/src/hooks/dashboard/useSelectTabs';
+import { useSelectTabs } from '@/src/hooks/dashboard/ui/useSelectTabs';
 import { ItemOption } from '@/src/types/commonTypes/commonTypes';
 import Link from 'next/link';
 import { FaRegEye } from 'react-icons/fa';

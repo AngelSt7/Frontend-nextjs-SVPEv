@@ -1,5 +1,4 @@
-// components/form/MultiSelectTabs.tsx
-import { useMultiSelect } from '@/src/hooks/dashboard/useMultiSelect'
+import { useMultiSelect } from '@/src/hooks/dashboard/ui/useMultiSelect'
 import { FieldError, FieldValues, Path, UseFormRegisterReturn, UseFormSetValue, UseFormWatch } from 'react-hook-form'
 
 type ItemOption = {

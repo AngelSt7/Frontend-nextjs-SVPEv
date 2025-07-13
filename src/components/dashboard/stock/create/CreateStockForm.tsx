@@ -1,13 +1,13 @@
 import { Button } from '@heroui/react';
 import { useForm } from 'react-hook-form';
-import useSubmitMutation from '@/src/hooks/dashboard/useSubmitMutation';
+import useSubmitMutation from '@/src/hooks/dashboard/mutations/useSubmitMutation';
 import StockForm from '../form/StockForm';
 import { StockFormData } from '@/src/types/dashboard/StockTypes';
 import { AuthUserInfo } from '@/src/types/AuthTypes';
 import { dashboardCreateStockService } from '@/src/services/dashboard/stock/dashboardCreateStockService';
-import { useGetProducts } from '@/src/hooks/dashboard/useGetProducts';
-import { useGetSuppliers } from '@/src/hooks/dashboard/useGetSuppliers';
-import { useEffect, useMemo } from 'react';
+import { useGetProducts } from '@/src/hooks/dashboard/data/useGetProducts';
+import { useGetSuppliers } from '@/src/hooks/dashboard/data/useGetSuppliers';
+import { useMemo } from 'react';
 
 type CreateStockFormProps = {
   closeModal: () => void;
@@ -29,8 +29,7 @@ export default function CreateStockForm({ closeModal, user }: CreateStockFormPro
   })
 
   const onSubmit = (data: StockFormData) => {
-    console.log("ENVIANDO: ",  data)
-    // mutate({ ...data, id_usuario: user!.id });
+    mutate({ ...data, id_usuario: user!.id });
   }
 
   return (

@@ -3,7 +3,7 @@ import { UserFormData } from '@/src/types/dashboard/UserTypes';
 import { FieldErrors, UseFormRegister, UseFormSetValue, UseFormWatch } from 'react-hook-form';
 import { FaRegIdCard } from 'react-icons/fa';
 import { MdOutlineMail, MdPermIdentity, MdPhoneIphone } from 'react-icons/md';
-import SelectItem from '../../ui/SelectItem';
+import SelectItem from '../../ui/form/SelectItem';
 import { Roles } from '@/src/utils/constants/provisionalData';
 
 type UserFormProps = {

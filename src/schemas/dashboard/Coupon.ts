@@ -14,6 +14,7 @@ export const DashboardCouponSchema = z.object({
 
 
 export const CouponFormDataSchema = z.object({
+  id: z.number().nullish(),
   codigo: z.string(),
   descuento_monto: z.number().nullish(),
   descuento_porcentaje: z.number().nullish(),

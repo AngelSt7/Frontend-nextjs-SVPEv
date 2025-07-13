@@ -6,9 +6,7 @@ export async function dashboardListStockService() {
     try {
         const url = '/ingresoStock/listar'
         const { data } = await api(url)
-        console.log(data[0])
         const response = DashboardStocksSchema.safeParse(data)
-        console.log(response)
         if(response.success){
             return response.data
         }

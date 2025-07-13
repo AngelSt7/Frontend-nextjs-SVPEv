@@ -1,4 +1,3 @@
-import { mutateProps } from "@/src/types/commonTypes/commonTypes";
 
 export const getRenderCell = <T,>(
   renderFn: (

@@ -3,22 +3,21 @@
 import { TableComponent } from '@/src/components/dashboard/ui/table/TableContent'
 import { useModalUtils } from '@/src/hooks/modal/useModalUtils'
 import GenericModal from '../../ui/generics/GenericModal'
-import useSubmitMutation from '@/src/hooks/dashboard/useSubmitMutation'
+import useSubmitMutation from '@/src/hooks/dashboard/mutations/useSubmitMutation'
 import { Columns } from './Columns'
 import { RenderCellDiscount } from './RenderCellDiscount'
 import { DashboardDiscount } from '@/src/types/dashboard/DiscountTypes'
-import { dashboardListDiscountService } from '@/src/services/dashboard/discount/dashboardListDiscountService'
-import { dashboardChangeStatusCategoryService } from '@/src/services/dashboard/category/dashboardChangeStatusCategoryService'
 import GenericEditWrapper from '../../ui/generics/GenericEditWrapper'
-import { dashboardFindByIdDiscountService } from '@/src/services/dashboard/discount/dashboardFindByIdDiscountService'
-import { getRenderCell } from '../../ui/getRenderCell'
+import { getRenderCell } from '../../ui/table/getRenderCell'
+import { Discount } from '@/src/services/dashboard/discount/Discount'
 
 export default function ContentPage({ id }: { id: string | undefined }) {
+    const queryKey = "discounts"
     const { openModalCreate, openModalEdit, closeModal } = useModalUtils()
 
     const { mutate } = useSubmitMutation({
-        serviceFunction: dashboardChangeStatusCategoryService,
-        invalidateQuery: ["discounts"]
+        serviceFunction: Discount.changeStatus,
+        invalidateQuery: [queryKey]
     })
 
     return (
@@ -26,8 +25,8 @@ export default function ContentPage({ id }: { id: string | undefined }) {
             <TableComponent<DashboardDiscount>
                 openModalCreate={openModalCreate}
                 columns={Columns}
-                queryKey="discounts"
-                functionService={dashboardListDiscountService}
+                queryKey={queryKey}
+                functionService={Discount.list}
                 defaultVisibleColumns={["nombreCategoria", "porcentaje", "fecha_inicio", "fecha_final", "activo", "actions"]}
                 searchableField="nombreCategoria"
                 renderCells={getRenderCell(RenderCellDiscount, mutate, openModalEdit)}
@@ -37,7 +36,7 @@ export default function ContentPage({ id }: { id: string | undefined }) {
                 <GenericEditWrapper
                     id={id}
                     closeModal={closeModal}
-                    serviceFunction={dashboardFindByIdDiscountService}
+                    serviceFunction={Discount.find}
                     queryKey="discount"
                 />
             )}

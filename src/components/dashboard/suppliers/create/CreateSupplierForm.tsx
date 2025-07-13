@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { dashboardCreateSupplierService } from '@/src/services/dashboard/supplier/dashboardCreateSupplierService';
 import SupplierForm from '../form/SupplierForm';
 import { SupplierFormData } from '@/src/types/dashboard/DashboardTypes';
-import useSubmitMutation from '@/src/hooks/dashboard/useSubmitMutation';
+import useSubmitMutation from '@/src/hooks/dashboard/mutations/useSubmitMutation';
 
 type CreateSupplierFormProps = {
   closeModal: () => void;

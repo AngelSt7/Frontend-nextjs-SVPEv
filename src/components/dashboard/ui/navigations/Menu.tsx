@@ -5,7 +5,7 @@ import { RxHamburgerMenu } from "react-icons/rx";
 import Switcher from '../darkmode/SwitchMode';
 import { IoMdLogOut } from 'react-icons/io';
 import { User } from "@heroui/react";
-import { useGetUserInfo } from '@/src/hooks/dashboard/useGetUser';
+import { useGetUserInfo } from '@/src/hooks/dashboard/data/useGetUser';
 import Link from 'next/link';
 
 export default function Menu() {

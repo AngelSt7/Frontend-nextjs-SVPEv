@@ -9,9 +9,12 @@ export async function dashboardUpdateStockService(formData: StockUpdateFormData)
         const url = '/ingresoStock/actualizar'
         const { data } = await api.put(url, {
             ...formData,
-            id_producto: formData.id_producto,
-            id_ingreso: formData.id_ingreso, 
-            tipo_documento: formData.tipo_documento === 1 ? 'FACTURA' : 'BOLETA'
+            detalles: formData.productos.map(p => ({
+                ...p,
+                id_detalle: p.id_producto,
+                series: p.series_individuales
+            }))
+            
         })
         return data
     } catch (error) {

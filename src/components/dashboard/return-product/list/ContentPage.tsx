@@ -1,6 +1,6 @@
 'use client'
 
-import useSubmitMutation from "@/src/hooks/dashboard/useSubmitMutation"
+import useSubmitMutation from "@/src/hooks/dashboard/mutations/useSubmitMutation"
 import { useModalUtils } from "@/src/hooks/modal/useModalUtils"
 import { dashboardChangeStatusReturnService } from "@/src/services/dashboard/return/dashboardChangeStatusReturnService"
 import { dashboardListReturnProductService } from "@/src/services/dashboard/return/dashboardListReturnService"
@@ -12,7 +12,7 @@ import { AuthUserInfo } from "@/src/types/AuthTypes"
 import { Columns } from "./Columns"
 import GenericEditWrapper from "../../ui/generics/GenericEditWrapper"
 import { dashboardFindByIdReturnService } from "@/src/services/dashboard/return/dashboardFindByIdReturnService"
-import { getRenderCell } from "../../ui/getRenderCell"
+import { getRenderCell } from "../../ui/table/getRenderCell"
 
 
 export default function ContentPage({ id, user }: { id: string | undefined, user?: AuthUserInfo }) {

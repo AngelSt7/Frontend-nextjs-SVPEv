@@ -1,7 +1,7 @@
 import { dashboardUpdateUserService } from '@/src/services/dashboard/users/dashboardUpdateUserService';
 import { DashboardUserById, UserFormData } from '@/src/types/dashboard/UserTypes';
 import { AuthUserInfo } from '@/src/types/AuthTypes';
-import useSubmitMutation from '@/src/hooks/dashboard/useSubmitMutation';
+import useSubmitMutation from '@/src/hooks/dashboard/mutations/useSubmitMutation';
 import { Button } from '@heroui/react';
 import { useForm } from 'react-hook-form';
 import UserForm from '../form/UserForm';

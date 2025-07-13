@@ -7,7 +7,7 @@ import {
   Button
 } from "@heroui/react";
 import { VerticalDotsIcon } from "../../ui/icons/VerticalDotsIcon";
-import { ToastDelete } from "../../ui/ToastDelete";
+import { ToastDelete } from "../../ui/feedback/ToastDelete";
 import { statusColorMap } from "@/src/utils/constants/constans";
 import { formatDate } from "@/src/utils/format/formatDate";
 import { mutateProps } from "@/src/types/commonTypes/commonTypes";

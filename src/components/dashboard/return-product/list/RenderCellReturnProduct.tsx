@@ -1,11 +1,11 @@
 import { Chip, Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, Button } from "@heroui/react";
 import { VerticalDotsIcon } from "../../ui/icons/VerticalDotsIcon";
-import { ToastDelete } from "../../ui/ToastDelete";
+import { ToastDelete } from "../../ui/feedback/ToastDelete";
 import { statusColorMap } from "@/src/utils/constants/constans";
 import { formatDate } from "@/src/utils/format/formatDate";
 import { mutateProps } from "@/src/types/commonTypes/commonTypes";
 import { DashboardReturnProduct } from "@/src/types/dashboard/ReturnProductTypes";
-import Clipboard from "../../ui/Clipboard";
+import Clipboard from "../../ui/feedback/Clipboard";
 
 export const RenderCellReturn = (
   mutate: mutateProps,

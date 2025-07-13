@@ -1,9 +1,9 @@
 import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, Spinner } from "@heroui/react";
 import { BottomContent } from "./BottomContent";
-import { useTableLogic } from "../../../../hooks/dashboard/useTableLogic";
+import { useTableLogic } from "../../../../hooks/dashboard/table/useTableLogic";
 import { useQuery, keepPreviousData } from "@tanstack/react-query";
 import { TopContent } from "./TopContent";
-import { useTableHandlers } from "@/src/hooks/dashboard/useTableHandlers";
+import { useTableHandlers } from "@/src/hooks/dashboard/table/useTableHandlers";
 import { ColumnsType } from "@/src/types/commonTypes/commonTypes";
 import { entityLabelMap, labelMap } from "@/src/utils/resolves/resolveTittle";
 

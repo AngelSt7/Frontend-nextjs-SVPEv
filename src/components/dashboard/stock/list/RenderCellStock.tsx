@@ -1,10 +1,10 @@
 import { Chip, User, Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, Button } from "@heroui/react";
 import { VerticalDotsIcon } from "../../ui/icons/VerticalDotsIcon";
-import { ToastDelete } from "../../ui/ToastDelete";
+import { ToastDelete } from "../../ui/feedback/ToastDelete";
 import { statusColorMap } from "@/src/utils/constants/constans";
 import { DashboardStock } from "@/src/types/dashboard/StockTypes";
 import { mutateProps } from "@/src/types/commonTypes/commonTypes";
-import Clipboard from "../../ui/Clipboard";
+import Clipboard from "../../ui/feedback/Clipboard";
 
 export const RenderCellStock = (mutate: mutateProps, item: DashboardStock, columnKey: React.Key, openModalEdit?: (id: number) => void) => {
   const cellValue = item[columnKey as keyof typeof item];
