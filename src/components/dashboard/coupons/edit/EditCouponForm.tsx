@@ -1,30 +1,21 @@
-import useSubmitMutation from '@/src/hooks/dashboard/useSubmitMutation';
+import useSubmitMutation from '@/src/hooks/dashboard/mutations/useSubmitMutation';
 import { Button } from '@heroui/react';
 import { useForm } from 'react-hook-form';
-import { AuthUserInfo } from '@/src/types/AuthTypes';
 import CouponForm from '../form/CouponForm';
 import { CouponFormData, DashboardCuponById } from '@/src/types/dashboard/CouponTypes';
-import { dashboardUpdateCouponService } from '@/src/services/dashboard/coupon/dashboardUpdateCouponService';
+import { Coupon } from '@/src/services/dashboard/coupon/Coupon';
+import { normalizeCoupon } from '@/src/utils/normalize/normalizeCouponForm';
 
 type EditCouponFormProps = {
-  user?: AuthUserInfo;
   closeModal: () => void;
   defaultValues: DashboardCuponById
 };
 
-export default function EditCouponForm({ user,closeModal, defaultValues }: EditCouponFormProps) {
-  const { register, handleSubmit, formState: { errors }, watch, setValue } = useForm<CouponFormData>({defaultValues: {
-    ...defaultValues,
-    fecha_inicio: defaultValues.fechaInicio,
-    fecha_fin: defaultValues.fechaFin,
-    tipo_descuento: defaultValues.tipoDescuento === 'PORCENTAJE' ? 1 : 2,
-    descuento_monto: defaultValues.descuentoMonto,
-    descuento_porcentaje: defaultValues.descuentoPorcentaje,
-    max_usos: defaultValues.maxUsos
-  }});
+export default function EditCouponForm({ closeModal, defaultValues }: EditCouponFormProps) {
+  const { register, handleSubmit, formState: { errors }, watch, setValue } = useForm<CouponFormData>({defaultValues: normalizeCoupon(defaultValues)});
 
   const { mutate } = useSubmitMutation({
-    serviceFunction: dashboardUpdateCouponService,
+    serviceFunction: Coupon.update,
     invalidateQuery: [
       ["coupons"],
       ["coupon", defaultValues.id.toString()]

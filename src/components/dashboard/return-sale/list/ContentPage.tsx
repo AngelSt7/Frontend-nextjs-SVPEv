@@ -6,11 +6,11 @@ import GenericModal from '../../ui/generics/GenericModal'
 import { Columns } from './Columns'
 import { DashboardReturnSale } from '@/src/types/dashboard/ReturnSaleTypes'
 import { RenderCellReturnSale } from './RenderCellReturnSale'
-import { getRenderCell } from '../../ui/getRenderCell'
+import { getRenderCell } from '../../ui/table/getRenderCell'
 import { useAppStore } from '@/src/store/useAppStore'
 import { ReturnSale } from '@/src/services/dashboard/return-sale/ReturnSale'
 import GenericEditWrapper from '../../ui/generics/GenericEditWrapper'
-import useSubmitMutation from '@/src/hooks/dashboard/useSubmitMutation'
+import useSubmitMutation from '@/src/hooks/dashboard/mutations/useSubmitMutation'
 
 export default function ContentPage({ id }: { id: string | undefined }) {
     const queryKey = "returns-sales"

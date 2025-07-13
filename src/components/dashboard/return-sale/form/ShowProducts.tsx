@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction } from 'react';
 import { InitialState } from './ShowProductsReturns';
-import { useControlReturns } from '@/src/hooks/dashboard/useControlReturns';
+import { useControlReturns } from '@/src/hooks/dashboard/ui/useControlReturns';
 import { resolveStylesReturns } from '@/src/utils/resolves/resolveStylesReturns';
 
 type ShowProductsProps = {

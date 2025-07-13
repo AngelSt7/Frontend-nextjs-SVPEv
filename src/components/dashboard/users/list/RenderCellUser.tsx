@@ -3,7 +3,7 @@ import { Chip, User, Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, Butt
 import { VerticalDotsIcon } from "../../ui/icons/VerticalDotsIcon";
 import { statusColorMap } from "@/src/utils/constants/constans";
 import { DashboardUser } from "@/src/types/dashboard/UserTypes";
-import { ToastDelete } from "../../ui/ToastDelete";
+import { ToastDelete } from "../../ui/feedback/ToastDelete";
 import { mutateProps } from "@/src/types/commonTypes/commonTypes";
 
 export const RenderCellUser = (

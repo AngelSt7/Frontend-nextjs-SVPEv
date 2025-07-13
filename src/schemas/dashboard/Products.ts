@@ -1,6 +1,5 @@
 import { z } from 'zod';
 
-// Crear un producto
 export const ProductFormDataSchema = z.object({
   nombre: z.string(),
   descripcion: z.string(),
@@ -16,7 +15,6 @@ export const ProductFormDataSchema = z.object({
   color: z.string().nullish()
 });
 
-// Un elemento del dashboard
 export const DashboardProductSchema = z.object({
   id: z.number(),
   nombre: z.string(),

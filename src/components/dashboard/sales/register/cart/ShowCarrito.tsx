@@ -1,7 +1,7 @@
 import { useAppStore } from '@/src/store/useAppStore'
 import { useMemo, useEffect, useState } from 'react'
 import ShowSumary from './ShowSumary'
-import { useDiscountInitializer } from '@/src/hooks/dashboard/useDiscountInitializer'
+import { useDiscountInitializer } from '@/src/hooks/dashboard/ui/useDiscountInitializer'
 
 export default function ShowCarrito() {
   // llenar descuentos al store

@@ -1,6 +1,6 @@
 import { Button } from '@heroui/react';
 import { useForm } from 'react-hook-form';
-import useSubmitMutation from '@/src/hooks/dashboard/useSubmitMutation';
+import useSubmitMutation from '@/src/hooks/dashboard/mutations/useSubmitMutation';
 import ClientForm from '../form/ClientForm';
 import { ClientFormData } from '@/src/types/dashboard/ClientType';
 import { Client } from '@/src/services/dashboard/client/Client';

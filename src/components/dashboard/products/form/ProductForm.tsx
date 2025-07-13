@@ -2,9 +2,9 @@ import Input from '@/src/components/ui/Input';
 import { FieldErrors, UseFormRegister, UseFormSetValue, UseFormWatch } from 'react-hook-form';
 import { MdDriveFileRenameOutline, MdOutlineAttachMoney, MdStorage, MdSecurity } from 'react-icons/md';
 import { ProductFormData } from '@/src/types/dashboard/ProductTypes';
-import SelectItem from '../../ui/SelectItem';
+import SelectItem from '../../ui/form/SelectItem';
 import { Brands } from '@/src/utils/constants/provisionalData';
-import { useGetCategories } from '@/src/hooks/dashboard/useGetCategories';
+import { useGetCategories } from '@/src/hooks/dashboard/data/useGetCategories';
 
 type ProductFormProps = {
   register: UseFormRegister<ProductFormData>;

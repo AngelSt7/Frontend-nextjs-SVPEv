@@ -2,7 +2,7 @@
 
 import { Tittles } from "@/src/utils/resolves/resolveTittle";
 import { usePathname } from "next/navigation";
-import ExtraContent from './ExtraContent';
+import ExtraContent from './layout/ExtraContent';
 
 export default function ShowTittle() {
     const path = usePathname()

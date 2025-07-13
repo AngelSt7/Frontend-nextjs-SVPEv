@@ -1,10 +1,10 @@
 import { Button } from '@heroui/react';
 import { useForm } from 'react-hook-form';
-import useSubmitMutation from '@/src/hooks/dashboard/useSubmitMutation';
+import useSubmitMutation from '@/src/hooks/dashboard/mutations/useSubmitMutation';
 import CategoryForm from '../form/CategoryForm';
 import { CategoryFormData } from '@/src/types/dashboard/CategoryTypes';
-import useResolveCategories from '@/src/hooks/dashboard/useResolveCategories';
 import { Category } from '@/src/services/dashboard/category/Category';
+import useResolveCategories from '@/src/hooks/dashboard/ui/useResolveCategories';
 
 type CreateCategoryFormProps = {
   closeModal: () => void;

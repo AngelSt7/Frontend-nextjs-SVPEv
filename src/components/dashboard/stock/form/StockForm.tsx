@@ -1,7 +1,7 @@
 import Input from '@/src/components/ui/Input';
 import { FieldError, FieldErrors, UseFormRegister, UseFormSetValue, UseFormWatch } from 'react-hook-form';
-import SelectTabs from './SelectTabs';
-import SelectItem from '../../ui/SelectItem';
+import SelectTabs from '../../ui/form/SelectTabs';
+import SelectItem from '../../ui/form/SelectItem';
 import ProductSearchSelector from './ProductSearchSelector';
 import { StockFormData } from '@/src/types/dashboard/StockTypes';
 import { ItemOption } from '@/src/types/commonTypes/commonTypes';
@@ -49,11 +49,12 @@ export default function StockForm({ register, errors, watch, setValue, productOp
                     name="tipo_documento"
                     label="Tipo de documento"
                     data={[
-                        { id: 'FACTURA', label: 'Factura', activo: 1 },
-                        { id: 'BOLETA', label: 'Boleta', activo: 1 },
+                        { id: '1', label: 'Factura', activo: true },
+                        { id: '2', label: 'Boleta', activo: true },
                     ]}
                     register={register('tipo_documento', {
                         required: 'Este campo es obligatorio',
+                        valueAsNumber: true
                     })}
                     watch={watch}
                     setValue={setValue}

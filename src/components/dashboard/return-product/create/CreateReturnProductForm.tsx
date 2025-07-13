@@ -1,11 +1,11 @@
 import { Button } from '@heroui/react';
 import { useForm } from 'react-hook-form';
-import useSubmitMutation from '@/src/hooks/dashboard/useSubmitMutation';
+import useSubmitMutation from '@/src/hooks/dashboard/mutations/useSubmitMutation';
 import ReturnForm from '../form/ReturnProductForm';
 import { dashboardCreateReturnProductService } from '@/src/services/dashboard/return/dashboardCreateReturnService';
 import { ReturnProductFormData } from '@/src/types/dashboard/ReturnProductTypes';
 import { AuthUserInfo } from '@/src/types/AuthTypes';
-import { useGetSeriesProducts } from '@/src/hooks/dashboard/useGetSeriesProducts';
+import { useGetSeriesProducts } from '@/src/hooks/dashboard/data/useGetSeriesProducts';
 
 type CreateReturnFormProps = {
   closeModal: () => void;

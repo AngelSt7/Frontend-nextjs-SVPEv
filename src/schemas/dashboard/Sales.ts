@@ -24,7 +24,7 @@ export const DashboardSaleSchema = z.object({
   subtotal: z.number(),
   igv_total: z.number(),
   descuento: z.number(),
-  total: z.number(),
+  total: z.number().nullish(),
   cancelado: z.boolean(),
   activo: z.number().int().min(0).max(1),
   nombreUsuario: z.string().email(),

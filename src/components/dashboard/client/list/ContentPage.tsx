@@ -2,14 +2,14 @@
 
 import { TableComponent } from '@/src/components/dashboard/ui/table/TableContent'
 import { useModalUtils } from '@/src/hooks/modal/useModalUtils'
-import useSubmitMutation from '@/src/hooks/dashboard/useSubmitMutation'
+import useSubmitMutation from '@/src/hooks/dashboard/mutations/useSubmitMutation'
 import { DashboardClient } from '@/src/types/dashboard/ClientType'
 import { Client } from '@/src/services/dashboard/client/Client'
 import { Columns } from './Columns'
 import { RenderCellClient } from './RenderCellClient'
 import GenericModal from '../../ui/generics/GenericModal'
 import GenericEditWrapper from '../../ui/generics/GenericEditWrapper'
-import { getRenderCell } from '../../ui/getRenderCell'
+import { getRenderCell } from '../../ui/table/getRenderCell'
 
 
 export default function ContentPage({ id }: { id: string | undefined }) {

@@ -1,4 +1,4 @@
-import SelectItem from '../../ui/SelectItem';
+import SelectItem from '../../ui/form/SelectItem';
 import { useForm } from 'react-hook-form';
 import { DashboardReturnSaleById } from '@/src/types/dashboard/ReturnSaleTypes';
 import { status } from '@/src/utils/constants/constans';

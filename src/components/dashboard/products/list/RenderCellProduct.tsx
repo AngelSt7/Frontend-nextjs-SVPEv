@@ -2,11 +2,11 @@ import { Chip, User, Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, Butt
 import { VerticalDotsIcon } from "../../ui/icons/VerticalDotsIcon";
 import { DashboardProduct } from "@/src/types/dashboard/ProductTypes";
 import { formatDate } from "@/src/utils/format/formatDate";
-import { ToastDelete } from "../../ui/ToastDelete";
+import { ToastDelete } from "../../ui/feedback/ToastDelete";
 import { statusColorMap } from "@/src/utils/constants/constans";
 import { formatCurrency } from "@/src/utils/format/formatCurrency";
 import { mutateProps } from "@/src/types/commonTypes/commonTypes";
-import Clipboard from "../../ui/Clipboard";
+import Clipboard from "../../ui/feedback/Clipboard";
 
 export const RenderCellProduct = (mutate: mutateProps, item: DashboardProduct, columnKey: React.Key, openModalEdit?: (id: number) => void) => {
   const cellValue = item[columnKey as keyof typeof item];

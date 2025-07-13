@@ -1,6 +1,6 @@
 import { Button } from '@heroui/react';
 import { useForm } from 'react-hook-form';
-import useSubmitMutation from '@/src/hooks/dashboard/useSubmitMutation';
+import useSubmitMutation from '@/src/hooks/dashboard/mutations/useSubmitMutation';
 import WarrantyForm from '../form/WarrantyForm';
 import { dashboardCreateWarrantyService } from '@/src/services/dashboard/warranty/dashboardCreateWarrantyService';
 import { WarrantyFormData } from '@/src/types/dashboard/WarrantyTypes';

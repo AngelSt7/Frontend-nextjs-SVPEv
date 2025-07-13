@@ -1,6 +1,6 @@
 // src/hooks/useDiscountInitializer.ts
 import { useEffect } from 'react'
-import { useGetDiscounts } from './useGetDiscounts'
+import { useGetDiscounts } from '../data/useGetDiscounts'
 import { useAppStore } from '@/src/store/useAppStore'
 import { Discount } from '@/src/types/dashboard/SaleTypes'
 

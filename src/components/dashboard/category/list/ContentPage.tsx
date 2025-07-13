@@ -3,12 +3,12 @@
 import { TableComponent } from '@/src/components/dashboard/ui/table/TableContent'
 import { useModalUtils } from '@/src/hooks/modal/useModalUtils'
 import GenericModal from '../../ui/generics/GenericModal'
-import useSubmitMutation from '@/src/hooks/dashboard/useSubmitMutation'
+import useSubmitMutation from '@/src/hooks/dashboard/mutations/useSubmitMutation'
 import { DashboardCategory } from '@/src/types/dashboard/CategoryTypes'
 import { RenderCellCategory } from './RenderCellCategory'
 import { Columns } from './Columns'
 import GenericEditWrapper from '../../ui/generics/GenericEditWrapper'
-import { getRenderCell } from '../../ui/getRenderCell'
+import { getRenderCell } from '../../ui/table/getRenderCell'
 import { Category } from '@/src/services/dashboard/category/Category'
 
 export default function ContentPage({ id }: { id: string | undefined }) {

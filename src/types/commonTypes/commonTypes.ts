@@ -1,10 +1,8 @@
 
-import { ChangeStatusSupplierService } from "@/src/services/dashboard/Supplier/dashboardChangeStatusSupplierService";
 import { ChangeStatus } from "@/src/utils/constants/changeStatus";
 import { UseMutateFunction } from "@tanstack/react-query";
 import { SVGProps } from "react";
 
-// Muestra una modal
 export type ModalCreateBaseProps = { showModal: boolean }
 
 export type ColumnsType = ({

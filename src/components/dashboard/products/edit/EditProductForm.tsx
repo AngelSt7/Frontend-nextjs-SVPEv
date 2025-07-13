@@ -1,10 +1,10 @@
-import useSubmitMutation from '@/src/hooks/dashboard/useSubmitMutation';
-import { dashboardUpdatProductService } from '@/src/services/dashboard/product/dashboardUpdatProductService';
+import useSubmitMutation from '@/src/hooks/dashboard/mutations/useSubmitMutation';
 import { DashboardProductById, ProductFormData } from '@/src/types/dashboard/ProductTypes';
 import { Button } from '@heroui/react';
 import { useForm } from 'react-hook-form';
 import ProductForm from '../form/ProductForm';
 import { AuthUserInfo } from '@/src/types/AuthTypes';
+import { Product } from '@/src/services/dashboard/product/Product';
 
 type EditProductForm = {
   user?: AuthUserInfo;
@@ -17,7 +17,7 @@ export default function EditProductForm({ user,closeModal, defaultValues }: Edit
   const { register, handleSubmit, formState: { errors }, watch, setValue } = useForm<ProductFormData>({defaultValues: defaultValues});
 
   const { mutate } = useSubmitMutation({
-    serviceFunction: dashboardUpdatProductService,
+    serviceFunction: Product.update,
     invalidateQuery: [
       ["products"],
       ["product", defaultValues.id.toString()]

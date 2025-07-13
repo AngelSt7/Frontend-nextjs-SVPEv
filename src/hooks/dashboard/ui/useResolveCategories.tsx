@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { useGetLevelCategories } from './useGetLevelCategories';
+import { useGetLevelCategories } from '../data/useGetLevelCategories';
 
 export default function useResolveCategories() {
   const { data: categoryLevelTwo = [] } = useGetLevelCategories({ level: 1 });

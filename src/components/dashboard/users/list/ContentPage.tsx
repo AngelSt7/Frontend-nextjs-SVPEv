@@ -3,7 +3,7 @@
 import { TableComponent } from '@/src/components/dashboard/ui/table/TableContent'
 import { useModalUtils } from '@/src/hooks/modal/useModalUtils'
 import GenericModal from '../../ui/generics/GenericModal'
-import useSubmitMutation from '@/src/hooks/dashboard/useSubmitMutation'
+import useSubmitMutation from '@/src/hooks/dashboard/mutations/useSubmitMutation'
 import { AuthUserInfo } from '@/src/types/AuthTypes'
 import { Columns } from './Columns'
 import { dashboardListUserService } from '@/src/services/dashboard/users/dashboardListUserService'
@@ -12,7 +12,7 @@ import { dashboardChangeStatusUserService } from '@/src/services/dashboard/users
 import { RenderCellUser } from './RenderCellUser'
 import { dashboardFindByIdUserService } from '@/src/services/dashboard/users/dashboardFindByIdUserService'
 import GenericEditWrapper from '../../ui/generics/GenericEditWrapper'
-import { getRenderCell } from '../../ui/getRenderCell'
+import { getRenderCell } from '../../ui/table/getRenderCell'
 
 export default function ContentPage({ id, user }: { id: string | undefined, user?: AuthUserInfo }) {
     const { openModalCreate, openModalEdit, closeModal } = useModalUtils()

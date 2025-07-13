@@ -2,7 +2,7 @@ import { mutateProps } from "@/src/types/commonTypes/commonTypes";
 import { formatDate } from "@/src/utils/format/formatDate";
 import { DashboardReturnSale } from "@/src/types/dashboard/ReturnSaleTypes";
 import { Button, Chip, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger, User } from "@heroui/react";
-import Clipboard from "../../ui/Clipboard";
+import Clipboard from "../../ui/feedback/Clipboard";
 import { VerticalDotsIcon } from "../../ui/icons/VerticalDotsIcon";
 
 export const RenderCellReturnSale = (

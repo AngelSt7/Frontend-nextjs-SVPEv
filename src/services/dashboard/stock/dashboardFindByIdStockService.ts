@@ -8,6 +8,7 @@ export async function dashboardFindByIdStockService(id : number) {
         const { data } = await api.get(url)
         const response = DashboardStockByIdSchema.safeParse(data)
         if(response.success){
+
             return response.data
         }
     } catch (error) {

@@ -1,7 +1,7 @@
 import { Button } from '@heroui/react';
 import { useForm } from 'react-hook-form';
 import SupplierForm from '../form/SupplierForm';
-import useSubmitMutation from '@/src/hooks/dashboard/useSubmitMutation';
+import useSubmitMutation from '@/src/hooks/dashboard/mutations/useSubmitMutation';
 import { dashboardUpdateSupplierService } from '@/src/services/dashboard/Supplier/dashboardUpdateSupplierService';
 import { SupplierById, SupplierFormData } from '@/src/types/DashboardTypes';
 

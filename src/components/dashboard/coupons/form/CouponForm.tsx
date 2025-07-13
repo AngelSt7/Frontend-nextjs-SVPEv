@@ -3,7 +3,7 @@ import { CouponFormData } from '@/src/types/dashboard/CouponTypes';
 import { FieldErrors, UseFormRegister, UseFormSetValue, UseFormWatch } from 'react-hook-form';
 import { MdDiscount, MdPermIdentity } from 'react-icons/md';
 import SelectDate from '../../category/create/SelectDate';
-import SelectItem from '../../ui/SelectItem';
+import SelectItem from '../../ui/form/SelectItem';
 
 type CouponFormProps = {
     register: UseFormRegister<CouponFormData>;
