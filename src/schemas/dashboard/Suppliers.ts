@@ -6,18 +6,19 @@ export const DashboardSupplierSchema = z.object({
     ruc: z.string(),
     direccion: z.string(),
     correo: z.string().email(),
-    celular: z.string(), 
+    celular: z.string(),
     telefono: z.string().nullish(),
     activo: z.number().int().min(0).max(1)
 });
 
 export const SupplierFormDataSchema = z.object({
+    id: z.number().nullish(),
     razon_social: z.string(),
     ruc: z.string(),
     direccion: z.string(),
     correo: z.string().email(),
     celular: z.string(),
-    telefono: z.string(),
+    telefono: z.string().nullish(),
     activo: z.number()
 })
 

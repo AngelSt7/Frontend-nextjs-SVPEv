@@ -1,9 +1,9 @@
 import { Button } from '@heroui/react';
 import { useForm } from 'react-hook-form';
-import { dashboardCreateSupplierService } from '@/src/services/dashboard/supplier/dashboardCreateSupplierService';
 import SupplierForm from '../form/SupplierForm';
-import { SupplierFormData } from '@/src/types/dashboard/DashboardTypes';
 import useSubmitMutation from '@/src/hooks/dashboard/mutations/useSubmitMutation';
+import { Supplier } from '@/src/services/dashboard/supplier/Supplier';
+import { SupplierFormData } from '@/src/types/DashboardTypes';
 
 type CreateSupplierFormProps = {
   closeModal: () => void;
@@ -13,7 +13,7 @@ export default function CreateSupplierForm({ closeModal }: CreateSupplierFormPro
   const { register, handleSubmit, formState: { errors } } = useForm<SupplierFormData>();
   
   const { mutate } = useSubmitMutation({
-    serviceFunction: dashboardCreateSupplierService,
+    serviceFunction: Supplier.create,
     invalidateQuery: ['suppliers'],
     onSuccessCallback: closeModal,
     message: 'Proveedor registrado exitosamente'

@@ -4,10 +4,8 @@ import useSubmitMutation from '@/src/hooks/dashboard/mutations/useSubmitMutation
 import StockForm from '../form/StockForm';
 import { StockFormData } from '@/src/types/dashboard/StockTypes';
 import { AuthUserInfo } from '@/src/types/AuthTypes';
-import { dashboardCreateStockService } from '@/src/services/dashboard/stock/dashboardCreateStockService';
-import { useGetProducts } from '@/src/hooks/dashboard/data/useGetProducts';
-import { useGetSuppliers } from '@/src/hooks/dashboard/data/useGetSuppliers';
-import { useMemo } from 'react';
+import { Stock } from '@/src/services/dashboard/stock/Stock';
+import { useDataStockForm } from '@/src/hooks/dashboard/ui/useDataStockForm';
 
 type CreateStockFormProps = {
   closeModal: () => void;
@@ -15,14 +13,11 @@ type CreateStockFormProps = {
 };
 
 export default function CreateStockForm({ closeModal, user }: CreateStockFormProps) {
-  const { data: products = [] } = useGetProducts();
-  const { data: suppliers = [] } = useGetSuppliers();
-  const productOptions = useMemo(() => products.filter(p => p.activo === 1).map(p => ({ label: p.nombre, value: p.id })), [products]);
-  const suppliersOptions = useMemo(() => suppliers.filter(p => p.activo === 1).map((p) => ({ label: p.razon_social, value: p.id })), [suppliers])
+  const { productOptions, suppliersOptions } = useDataStockForm()
   const { register, handleSubmit, formState: { errors }, setValue, watch } = useForm<StockFormData>();
 
   const { mutate } = useSubmitMutation({
-    serviceFunction: dashboardCreateStockService,
+    serviceFunction: Stock.create,
     invalidateQuery: ['stocks'],
     onSuccessCallback: closeModal,
     message: 'Stock registrado exitosamente'

@@ -2,8 +2,9 @@ import { Button } from '@heroui/react';
 import { useForm } from 'react-hook-form';
 import SupplierForm from '../form/SupplierForm';
 import useSubmitMutation from '@/src/hooks/dashboard/mutations/useSubmitMutation';
-import { dashboardUpdateSupplierService } from '@/src/services/dashboard/Supplier/dashboardUpdateSupplierService';
+import { dashboardUpdateSupplierService } from '@/src/services/dashboard/supplier/dashboardUpdateSupplierService';
 import { SupplierById, SupplierFormData } from '@/src/types/DashboardTypes';
+import { Supplier } from '@/src/services/dashboard/supplier/Supplier';
 
 type EditSupplierFormProps = {
   id: string | undefined;
@@ -13,10 +14,10 @@ type EditSupplierFormProps = {
 
 export default function EditSupplierForm({ id, closeModal, defaultValues }: EditSupplierFormProps) {
 
-  const { register, handleSubmit, formState: { errors } } = useForm<SupplierFormData>({defaultValues: defaultValues});
+  const { register, handleSubmit, formState: { errors } } = useForm<SupplierFormData>({defaultValues});
 
   const { mutate } = useSubmitMutation({
-    serviceFunction: dashboardUpdateSupplierService,
+    serviceFunction: Supplier.update,
     invalidateQuery: [
       ["supplier", id],,
       ['suppliers']

@@ -22,7 +22,7 @@ const ProductStockSchema = z.object({
 });
 
 export const StockFormDataSchema = z.object({
-  id: z.number(),
+  id: z.number().nullish(),
   id_proveedor: z.number(),
   tipo_documento: z.number(),
   numero_documento: z.string(),

@@ -2,23 +2,23 @@
 
 import useSubmitMutation from "@/src/hooks/dashboard/mutations/useSubmitMutation";
 import { useModalUtils } from "@/src/hooks/modal/useModalUtils";
-import { dashboardChangeStatusWarrantyService } from "@/src/services/dashboard/warranty/dashboardChangeStatusWarrantyService";
-import { dashboardListWarrantiesService } from "@/src/services/dashboard/warranty/dashboardListWarrantyService";
 import { Columns } from "../../warranty/list/Columns";
-import EditWarrantyWrapper from "../../warranty/edit/EditWarrantyWrapper";
 import { RenderCellWarranty } from "../../warranty/list/RenderCellWarranty";
 import GenericModal from "../../ui/generics/GenericModal";
 import { TableComponent } from "../../ui/table/TableContent";
 import { DashboardWarranty } from "@/src/types/dashboard/WarrantyTypes";
 import { AuthUserInfo } from "@/src/types/AuthTypes";
 import { getRenderCell } from "../../ui/table/getRenderCell";
+import { Warranty } from "@/src/services/dashboard/warranty/Warranty";
+import GenericEditWrapper from "../../ui/generics/GenericEditWrapper";
 
 export default function ContentPage({ id, user }: { id: string | undefined, user?: AuthUserInfo }) {
+  const queryKey = "warranties"
   const { openModalCreate, openModalEdit, closeModal } = useModalUtils();
 
   const { mutate } = useSubmitMutation({
-    serviceFunction: dashboardChangeStatusWarrantyService,
-    invalidateQuery: ["warranties"],
+    serviceFunction: Warranty.update,
+    invalidateQuery: [queryKey],
   });
 
   return (
@@ -26,8 +26,8 @@ export default function ContentPage({ id, user }: { id: string | undefined, user
       <TableComponent<DashboardWarranty>
         openModalCreate={openModalCreate}
         columns={Columns}
-        queryKey="warranties"
-        functionService={dashboardListWarrantiesService}
+        queryKey={queryKey}
+        functionService={Warranty.list}
         defaultVisibleColumns={[
           "id",
           "producto",
@@ -41,8 +41,17 @@ export default function ContentPage({ id, user }: { id: string | undefined, user
         renderCells={getRenderCell(RenderCellWarranty, mutate, openModalEdit)}
       />
 
+
+      {id && (
+        <GenericEditWrapper
+          id={id}
+          closeModal={closeModal}
+          serviceFunction={Warranty.find}
+          queryKey="Warranty"
+        />
+      )}
+
       <GenericModal user={user} closeModal={closeModal} />
-      {id && <EditWarrantyWrapper user={user} closeModal={closeModal} id={id} />}
     </div>
   );
 }

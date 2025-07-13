@@ -1,10 +1,10 @@
+import { Discount } from '@/src/services/dashboard/discount/Discount';
 import { useQuery, keepPreviousData } from '@tanstack/react-query';
-import { dashboardListDiscountService } from '@/src/services/dashboard/discount/dashboardListDiscountService';
 
 export const useGetDiscounts = () => {
-    const { data, isLoading } = useQuery({
+    const { data } = useQuery({
     queryKey: ['discounts'],
-    queryFn: dashboardListDiscountService,
+    queryFn: Discount.list,
     refetchOnWindowFocus: false,
     retry: false,
     placeholderData: keepPreviousData,

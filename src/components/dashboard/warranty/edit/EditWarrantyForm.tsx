@@ -1,18 +1,16 @@
 import useSubmitMutation from '@/src/hooks/dashboard/mutations/useSubmitMutation';
 import { Button } from '@heroui/react';
 import { useForm } from 'react-hook-form';
-import { AuthUserInfo } from '@/src/types/AuthTypes';
 import { WarrantyFormData } from '@/src/types/dashboard/WarrantyTypes';
 import WarrantyForm from '../form/WarrantyForm';
-import { dashboardUpdateWarrantyService } from '@/src/services/dashboard/warranty/dashboardUpdateWarrantyService';
+import { Warranty } from '@/src/services/dashboard/warranty/Warranty';
 
 type EditWarrantyFormProps = {
-  user?: AuthUserInfo;
   closeModal: () => void;
   defaultValues: WarrantyFormData & { id: number };
 };
 
-export default function EditWarrantyForm({ user, closeModal, defaultValues }: EditWarrantyFormProps) {
+export default function EditWarrantyForm({ closeModal, defaultValues }: EditWarrantyFormProps) {
   const {
     register,
     handleSubmit,
@@ -27,7 +25,7 @@ export default function EditWarrantyForm({ user, closeModal, defaultValues }: Ed
   });
 
   const { mutate } = useSubmitMutation({
-    serviceFunction: dashboardUpdateWarrantyService,
+    serviceFunction: Warranty.update,
     invalidateQuery: [
       ['warranties'],
       ['warranty', defaultValues.id.toString()]
@@ -37,7 +35,7 @@ export default function EditWarrantyForm({ user, closeModal, defaultValues }: Ed
   });
 
   const onSubmit = (data: WarrantyFormData) => {
-    mutate({ ...data, id_garantia: defaultValues.id }); // aseguramos incluir el id para la actualización
+    mutate({ ...data, id_garantia: defaultValues.id });
   };
 
   return (

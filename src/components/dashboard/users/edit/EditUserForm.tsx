@@ -1,10 +1,11 @@
-import { dashboardUpdateUserService } from '@/src/services/dashboard/users/dashboardUpdateUserService';
 import { DashboardUserById, UserFormData } from '@/src/types/dashboard/UserTypes';
 import { AuthUserInfo } from '@/src/types/AuthTypes';
 import useSubmitMutation from '@/src/hooks/dashboard/mutations/useSubmitMutation';
 import { Button } from '@heroui/react';
 import { useForm } from 'react-hook-form';
 import UserForm from '../form/UserForm';
+import { User } from '@/src/services/dashboard/users/User';
+import { normalizeUser } from '@/src/utils/normalize/normalizeUser';
 
 type EditUserForm = {
     user?: AuthUserInfo;
@@ -15,14 +16,11 @@ type EditUserForm = {
 export default function EditUserForm({ user, closeModal, defaultValues }: EditUserForm) {
 
     const { register, handleSubmit, formState: { errors }, watch, setValue } = useForm<UserFormData>({
-        defaultValues: { ...defaultValues,
-            activo: defaultValues.activo === 1, dni: defaultValues.dni, celular: defaultValues.celular,
-            id_rol: 1, estado: 1
-        }
+        defaultValues: normalizeUser(defaultValues)
     });
 
     const { mutate } = useSubmitMutation({
-        serviceFunction: dashboardUpdateUserService,
+        serviceFunction: User.update,
         invalidateQuery: [
             ["users"],
             ["user", defaultValues.id.toString()]

@@ -19,8 +19,9 @@ export { default as EditSupplierForm } from "../../suppliers/edit/EditSupplierFo
 export { default as CreateUserForm } from "../../users/create/CreateUserForm";
 export { default as EditUserForm } from "../../users/edit/EditUserForm";
 export { default as CreateWarrantyClaimForm } from "../../warranty-claim/create/CreateWarrantyClaimForm";
-export { default as EditWarrantyClaimForm } from "../../warranty-claim/edit/EditWarrantyClaimForm";
 export { default as CreateWarrantyForm } from "../../warranty/create/CreateWarrantyForm";
 export { default as EditWarrantyForm } from "../../warranty/edit/EditWarrantyForm";
 export { default as DetailsReturnProducts } from "../../return-sale/list/DetailsProducts";
 export { default as DetailsProduct} from "../../sales/list/DetailsProduct";
+export { default as ChangeStatusForm} from "../../return-sale/edit/ChangeStatus";
+export { default as EditWarrantyClaimForm} from "../../warranty-claim/edit/EditWarrantyClaimForm";

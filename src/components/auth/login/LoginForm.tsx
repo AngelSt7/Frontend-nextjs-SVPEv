@@ -22,6 +22,7 @@ export default function LoginForm() {
                 onSubmit={handleSubmit(onSubmit)}>
                 <div className='flex flex-col gap-3'>
                     <Input
+                        isLogin={true}
                         type='email' placeholder='Tu email' htmlFor='email' label='Correo electrónico'
                         Icon={MdOutlineMail}
                         register={register('correo', {
@@ -34,6 +35,7 @@ export default function LoginForm() {
                         errorMessage={errors.correo}
                     />
                     <Input
+                        isLogin={true}
                         type='password' placeholder='Tu contraseña' htmlFor='password' label='Contraseña'
                         Icon={RiLockPasswordFill}
                         register={register('clave', {

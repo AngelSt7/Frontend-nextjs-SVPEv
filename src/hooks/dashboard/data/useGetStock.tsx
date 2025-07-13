@@ -1,10 +1,10 @@
-import { dashboardListStockService } from '@/src/services/dashboard/stock/dashboardListStockService';
+import { Stock } from '@/src/services/dashboard/stock/Stock';
 import { useQuery, keepPreviousData } from '@tanstack/react-query';
 
 export const useGetStock = () => {
   return useQuery({
     queryKey: ['stocks'],
-    queryFn: dashboardListStockService,
+    queryFn: Stock.list,
     refetchOnWindowFocus: false,
     retry: false,
     placeholderData: keepPreviousData,

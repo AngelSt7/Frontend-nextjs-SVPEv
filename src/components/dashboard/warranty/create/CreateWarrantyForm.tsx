@@ -2,16 +2,15 @@ import { Button } from '@heroui/react';
 import { useForm } from 'react-hook-form';
 import useSubmitMutation from '@/src/hooks/dashboard/mutations/useSubmitMutation';
 import WarrantyForm from '../form/WarrantyForm';
-import { dashboardCreateWarrantyService } from '@/src/services/dashboard/warranty/dashboardCreateWarrantyService';
 import { WarrantyFormData } from '@/src/types/dashboard/WarrantyTypes';
 import { AuthUserInfo } from '@/src/types/AuthTypes';
+import { Warranty } from '@/src/services/dashboard/warranty/Warranty';
 
 type CreateWarrantyFormProps = {
   closeModal: () => void;
-  user?: AuthUserInfo;
 };
 
-export default function CreateWarrantyForm({ closeModal, user }: CreateWarrantyFormProps) {
+export default function CreateWarrantyForm({ closeModal }: CreateWarrantyFormProps) {
   const {
     register,
     handleSubmit,
@@ -21,7 +20,7 @@ export default function CreateWarrantyForm({ closeModal, user }: CreateWarrantyF
   } = useForm<WarrantyFormData>();
 
   const { mutate } = useSubmitMutation({
-    serviceFunction: dashboardCreateWarrantyService,
+    serviceFunction: Warranty.create,
     invalidateQuery: ['warranties'],
     onSuccessCallback: closeModal,
     message: 'Garantía registrada exitosamente'

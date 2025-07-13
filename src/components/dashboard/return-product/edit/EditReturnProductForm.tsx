@@ -4,7 +4,8 @@ import { useForm } from 'react-hook-form';
 import { AuthUserInfo } from '@/src/types/AuthTypes';
 import { ReturnProductFormData } from '@/src/types/dashboard/ReturnProductTypes';
 import ReturnForm from '../form/ReturnProductForm';
-import { dashboardUpdateReturnService } from '@/src/services/dashboard/return/dashboardUpdateReturnService';
+import { ReturnProduct } from '@/src/services/dashboard/return/ReturnProduct';
+import { normalizeReturnProduct } from '@/src/utils/normalize/normalizeReturnProduct';
 
 type EditReturnFormProps = {
   user?: AuthUserInfo;
@@ -15,15 +16,11 @@ type EditReturnFormProps = {
 export default function EditReturnForm({ user, closeModal, defaultValues }: EditReturnFormProps) {
 
   const { register, handleSubmit, formState: { errors }, watch, setValue } = useForm<ReturnProductFormData>({
-    defaultValues: {
-      ...defaultValues,
-      id_detalle_ingreso: defaultValues.id_detalle_ingreso,
-      reposicion_aplicada: defaultValues.reposicion_aplicada
-    }
+    defaultValues: normalizeReturnProduct(defaultValues)
   });
 
   const { mutate } = useSubmitMutation({
-    serviceFunction: dashboardUpdateReturnService,
+    serviceFunction: ReturnProduct.update,
     invalidateQuery: [
       ["returnsProducts"],
       ["returnProduct", defaultValues.id.toString()]
