@@ -17,9 +17,11 @@ type InputProps<T extends FieldValues> = {
   disabled?: boolean;
   inputMode?: 'text' | 'numeric' | 'decimal' | 'tel' | 'email' | 'url';
   pattern?: string;
+  isLogin?: boolean;
 };
 
 export default function Input<T extends FieldValues>({
+  isLogin,
   type,
   label,
   register,
@@ -35,17 +37,22 @@ export default function Input<T extends FieldValues>({
   pattern,
 }: InputProps<T>) {
   const isTextArea = type === 'textarea';
+  const isDark = !isLogin;
 
   const inputClasses = useMemo(() => {
-    const base = `text-sm block w-full p-2 border ${errorMessage ? 'border-[#d10b30]' : 'border-[#afaeae] dark:border-[#3f3f46]'
-      } bg-[#f4f4f5] hover:bg-[#e4e4e7] dark:bg-[#242428] dark:hover:bg-[#3f3f46] rounded-md outline-none focus:ring-1 ${errorMessage ? 'ring-[#d10b30]' : 'focus:ring-white/10'
-      }`;
-
+    const base = [
+      'text-sm block w-full p-2 border rounded-md outline-none focus:ring-1',
+      errorMessage ? 'border-[#d10b30]' : isDark ? 'border-[#3f3f46]' : 'border-[#afaeae]',
+      errorMessage ? 'ring-[#d10b30]' : 'focus:ring-white/10',
+      isDark
+        ? 'bg-[#242428] hover:bg-[#3f3f46] text-[#e5e5e5]'
+        : 'bg-[#f4f4f5] hover:bg-[#e4e4e7] text-[#202021]',
+    ].join(' ');
 
     return variant === 'floating'
       ? `${base} peer px-3 pt-6 pb-2`
       : `${base} px-3 py-2.5 pr-10 ${isTextArea ? 'min-h-[120px]' : 'h-[50px]'}`;
-  }, [errorMessage, variant, isTextArea]);
+  }, [errorMessage, variant, isTextArea, isDark]);
 
   const autoCompleteValue = useMemo(
     () => (type === 'password' ? 'new-password' : 'off'),
@@ -57,7 +64,12 @@ export default function Input<T extends FieldValues>({
   return (
     <div className="flex flex-col w-full gap-2">
       {variant === 'default' && label && (
-        <label htmlFor={inputId} className="overflow-hidden whitespace-nowrap text-ellipsis text-base font-semibold text-[#202021] dark:text-[#c5c5c7]">
+        <label
+          htmlFor={inputId}
+          className={`overflow-hidden whitespace-nowrap text-ellipsis text-base font-semibold ${
+            isDark ? 'text-[#c5c5c7]' : 'text-[#202021]'
+          }`}
+        >
           {label}
         </label>
       )}
@@ -69,6 +81,7 @@ export default function Input<T extends FieldValues>({
             maxLength={maxLength}
             placeholder={variant === 'floating' ? ' ' : placeholder}
             className={inputClasses}
+            disabled={disabled}
             {...register}
           />
         ) : (
@@ -86,7 +99,7 @@ export default function Input<T extends FieldValues>({
             className={inputClasses}
             onKeyDown={(e) => {
               if (type === 'number' && (e.key === '-' || e.key === 'e')) {
-                e.preventDefault()
+                e.preventDefault();
               }
             }}
             {...register}
@@ -95,7 +108,9 @@ export default function Input<T extends FieldValues>({
 
         {Icon && !isTextArea && (
           <Icon
-            className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 dark:text-gray-400"
+            className={`absolute right-3 top-1/2 transform -translate-y-1/2 ${
+              isDark ? 'text-gray-400' : 'text-gray-500'
+            }`}
             size={20}
           />
         )}

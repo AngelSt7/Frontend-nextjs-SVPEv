@@ -1,6 +1,7 @@
 import { z } from "zod";
 
 export const UserFormDataSchema = z.object({
+  id: z.number().nullish(),
   nombre: z.string(),
   apellido: z.string(),
   dni: z.string(),

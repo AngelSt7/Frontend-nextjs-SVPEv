@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import { AuthUserInfo } from '@/src/types/AuthTypes';
 import { WarrantyClaimFormData } from '@/src/types/dashboard/WarrantyClaimTypes';
 import WarrantyClaimForm from '../form/WarrantyClaimForm';
-import { dashboardUpdateWarrantyClaimService } from '@/src/services/dashboard/warranty-claim/dashboardUpdateWarrantyClaimService';
+import { WarrantyClaim } from '@/src/services/dashboard/warranty-claim/WarrantyClaim';
 
 type EditWarrantyClaimFormProps = {
   user?: AuthUserInfo;
@@ -21,7 +21,7 @@ export default function EditWarrantyClaimForm({ user, closeModal, defaultValues 
   });
 
   const { mutate } = useSubmitMutation({
-    serviceFunction: dashboardUpdateWarrantyClaimService,
+    serviceFunction: WarrantyClaim.update,
     invalidateQuery: [
       ['warrantyClaims'],
       ['warrantyClaim', defaultValues.id.toString()]
@@ -31,7 +31,7 @@ export default function EditWarrantyClaimForm({ user, closeModal, defaultValues 
   });
 
   const onSubmit = (data: WarrantyClaimFormData) => {
-    mutate({ ...data }); // No necesitas agregar id_usuario si no se usa en el backend
+    mutate({ ...data })
   };
 
   return (

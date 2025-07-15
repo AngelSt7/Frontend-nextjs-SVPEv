@@ -1,5 +1,5 @@
+import { dashboardListProductService } from '@/src/services/dashboard/sales/register/dashboardListProductSaleService';
 import { useQuery, keepPreviousData } from '@tanstack/react-query';
-import { dashboardListProductService } from '@/src/services/dashboard/product/dashboardListProductService';
 
 export const useGetProducts = () => {
   return useQuery({

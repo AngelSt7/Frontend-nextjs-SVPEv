@@ -7,19 +7,18 @@ import { Columns } from './Columns'
 import useSubmitMutation from '@/src/hooks/dashboard/mutations/useSubmitMutation'
 import { AuthUserInfo } from '@/src/types/AuthTypes'
 import { RenderCellStock } from './RenderCellStock'
-import { dashboardListStockService } from '@/src/services/dashboard/stock/dashboardListStockService'
-import { DashboardStock } from '@/src/types/dashboard/StockTypes'
-import { dashboardChangeStatusStockService } from '@/src/services/dashboard/stock/dashboardChangeStatusStockService'
-import { dashboardFindByIdStockService } from '@/src/services/dashboard/stock/dashboardFindByIdStockService'
 import GenericEditWrapper from '../../ui/generics/GenericEditWrapper'
 import { getRenderCell } from '../../ui/table/getRenderCell'
+import { Stock } from '@/src/services/dashboard/stock/Stock'
+import { DashboardStock } from '@/src/types/dashboard/StockTypes';
 
 export default function ContentPage({ id, user }: { id: string | undefined, user?: AuthUserInfo }) {
+    const queryKey = "stocks"
     const { openModalCreate, openModalEdit, closeModal } = useModalUtils()
 
     const { mutate } = useSubmitMutation({
-        serviceFunction: dashboardChangeStatusStockService,
-        invalidateQuery: ["stocks"]
+        serviceFunction: Stock.changeStatus,
+        invalidateQuery: [queryKey]
     })
 
     return (
@@ -27,8 +26,8 @@ export default function ContentPage({ id, user }: { id: string | undefined, user
             <TableComponent<DashboardStock>
                 openModalCreate={openModalCreate}
                 columns={Columns}
-                queryKey="stocks"
-                functionService={dashboardListStockService}
+                queryKey={queryKey}
+                functionService={Stock.list}
                 defaultVisibleColumns={["proveedor", "codigo_ingreso", "lote", "tipo_documento", "numero_documento", "activo", "actions"]}
                 searchableField="numero_documento"
                 renderCells={getRenderCell(RenderCellStock, mutate, openModalEdit)}
@@ -39,7 +38,7 @@ export default function ContentPage({ id, user }: { id: string | undefined, user
                     id={id}
                     user={user}
                     closeModal={closeModal}
-                    serviceFunction={dashboardFindByIdStockService}
+                    serviceFunction={Stock.find}
                     queryKey="stock"
                 />
             )}

@@ -16,7 +16,7 @@ type ProductSearchSelectorProps<T extends Record<string, any>> = {
   errorMessage?: FieldError
 }
 
-export default function ProductSearchSelector<T extends Record<string, any>>({ 
+export default function ProductSearchSelector<T extends Record<string, any>>({
   data,
   label,
   view,

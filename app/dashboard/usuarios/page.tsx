@@ -15,7 +15,6 @@ export default async function page({ searchParams }: { searchParams: { id?: stri
   return (
     <div className="custom-container">
       <ContentPage user={user} id={id} />
-      {/* <ContentPage id={id} /> */}
     </div>
   )
 }

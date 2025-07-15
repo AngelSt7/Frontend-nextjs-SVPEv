@@ -6,20 +6,19 @@ import GenericModal from '../../ui/generics/GenericModal'
 import useSubmitMutation from '@/src/hooks/dashboard/mutations/useSubmitMutation'
 import { AuthUserInfo } from '@/src/types/AuthTypes'
 import { Columns } from './Columns'
-import { dashboardListUserService } from '@/src/services/dashboard/users/dashboardListUserService'
 import { DashboardUser } from '@/src/types/dashboard/UserTypes'
-import { dashboardChangeStatusUserService } from '@/src/services/dashboard/users/dashboardChangeStatusUserService'
 import { RenderCellUser } from './RenderCellUser'
-import { dashboardFindByIdUserService } from '@/src/services/dashboard/users/dashboardFindByIdUserService'
 import GenericEditWrapper from '../../ui/generics/GenericEditWrapper'
 import { getRenderCell } from '../../ui/table/getRenderCell'
+import { User } from '@/src/services/dashboard/users/User'
 
 export default function ContentPage({ id, user }: { id: string | undefined, user?: AuthUserInfo }) {
+    const queryKey = "users"
     const { openModalCreate, openModalEdit, closeModal } = useModalUtils()
 
     const { mutate } = useSubmitMutation({
-        serviceFunction: dashboardChangeStatusUserService,
-        invalidateQuery: ["users"]
+        serviceFunction: User.changeStatus,
+        invalidateQuery: [queryKey]
     })
 
     return (
@@ -27,8 +26,8 @@ export default function ContentPage({ id, user }: { id: string | undefined, user
             <TableComponent<DashboardUser>
                 openModalCreate={openModalCreate}
                 columns={Columns}
-                queryKey="users"
-                functionService={dashboardListUserService}
+                queryKey={queryKey}
+                functionService={User.list}
                 defaultVisibleColumns={["nombre", "dni", "correo", "celular", "activo", "actions"]}
                 searchableField="nombre"
                 renderCells={getRenderCell(RenderCellUser, mutate, openModalEdit)}
@@ -38,7 +37,7 @@ export default function ContentPage({ id, user }: { id: string | undefined, user
                 <GenericEditWrapper
                     id={id}
                     closeModal={closeModal}
-                    serviceFunction={dashboardFindByIdUserService}
+                    serviceFunction={User.find}
                     queryKey="user"
                 />
             )}

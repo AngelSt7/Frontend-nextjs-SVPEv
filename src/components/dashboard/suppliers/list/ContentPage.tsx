@@ -5,19 +5,19 @@ import { useModalUtils } from '@/src/hooks/modal/useModalUtils'
 import GenericModal from '../../ui/generics/GenericModal'
 import useSubmitMutation from '@/src/hooks/dashboard/mutations/useSubmitMutation'
 import { RenderCellSupplier } from './RenderCellSupplier'
-import { dashboardListSupplierService } from '@/src/services/dashboard/Supplier/dashboardListSupplierService'
 import { DashboardSupplier } from '@/src/types/DashboardTypes'
-import { dashboardChangeStatusSupplierService } from '@/src/services/dashboard/Supplier/dashboardChangeStatusSupplierService'
 import { Columns } from './Columns'
-import { dashboardFindByIdSupplierService } from '@/src/services/dashboard/Supplier/dashboardFindByIdSupplierService'
 import GenericEditWrapper from '../../ui/generics/GenericEditWrapper'
 import { getRenderCell } from '../../ui/table/getRenderCell'
+import { Supplier } from '@/src/services/dashboard/supplier/Supplier'
 
 export default function ContentPage({ id }: { id: string | undefined }) {
+  const queryKey = "suppliers"
+  
   const { openModalCreate, openModalEdit, closeModal } = useModalUtils()
   const { mutate } = useSubmitMutation({
-    serviceFunction: dashboardChangeStatusSupplierService,
-    invalidateQuery: ["suppliers"]
+    serviceFunction: Supplier.changeStatus,
+    invalidateQuery: [queryKey]
   })
 
   return (
@@ -25,8 +25,8 @@ export default function ContentPage({ id }: { id: string | undefined }) {
       <TableComponent<DashboardSupplier>
         openModalCreate={openModalCreate}
         columns={Columns}
-        queryKey="suppliers"
-        functionService={dashboardListSupplierService}
+        queryKey={queryKey}
+        functionService={Supplier.list}
         defaultVisibleColumns={["razon_social", "ruc", "correo", "activo", "actions"]}
         searchableField="razon_social"
         renderCells={getRenderCell(RenderCellSupplier, mutate, openModalEdit)}
@@ -37,7 +37,7 @@ export default function ContentPage({ id }: { id: string | undefined }) {
         <GenericEditWrapper
           id={id}
           closeModal={closeModal}
-          serviceFunction={dashboardFindByIdSupplierService}
+          serviceFunction={Supplier.find}
           queryKey="supplier"
         />
       )}

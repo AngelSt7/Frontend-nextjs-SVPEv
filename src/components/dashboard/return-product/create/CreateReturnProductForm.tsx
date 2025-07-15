@@ -2,10 +2,10 @@ import { Button } from '@heroui/react';
 import { useForm } from 'react-hook-form';
 import useSubmitMutation from '@/src/hooks/dashboard/mutations/useSubmitMutation';
 import ReturnForm from '../form/ReturnProductForm';
-import { dashboardCreateReturnProductService } from '@/src/services/dashboard/return/dashboardCreateReturnService';
 import { ReturnProductFormData } from '@/src/types/dashboard/ReturnProductTypes';
 import { AuthUserInfo } from '@/src/types/AuthTypes';
 import { useGetSeriesProducts } from '@/src/hooks/dashboard/data/useGetSeriesProducts';
+import { ReturnProduct } from '@/src/services/dashboard/return/ReturnProduct';
 
 type CreateReturnFormProps = {
   closeModal: () => void;
@@ -21,7 +21,7 @@ export default function CreateReturnProductForm({ closeModal, user }: CreateRetu
   });
 
   const { mutate } = useSubmitMutation({
-    serviceFunction: dashboardCreateReturnProductService,
+    serviceFunction: ReturnProduct.create,
     invalidateQuery: ['returnsProducts'],
     onSuccessCallback: closeModal,
     message: 'Devolución registrada exitosamente'

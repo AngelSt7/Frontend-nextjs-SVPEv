@@ -4,11 +4,9 @@ import { useForm } from 'react-hook-form';
 import { AuthUserInfo } from '@/src/types/AuthTypes';
 import StockForm from '../form/StockForm';
 import { DashboardStockById, StockFormData } from '@/src/types/dashboard/StockTypes';
-import { useGetProducts } from '@/src/hooks/dashboard/data/useGetProducts';
-import { useGetSuppliers } from '@/src/hooks/dashboard/data/useGetSuppliers';
-import { dashboardUpdateStockService } from '@/src/services/dashboard/stock/dashboardUpdateStockService';
-import { useMemo } from 'react';
 import { normalizeStockData } from '@/src/utils/normalize/normalizeStockData';
+import { Stock } from '@/src/services/dashboard/stock/Stock';
+import { useDataStockForm } from '@/src/hooks/dashboard/ui/useDataStockForm';
 
 type EditCouponFormProps = {
   user?: AuthUserInfo;
@@ -17,17 +15,14 @@ type EditCouponFormProps = {
 };
 
 export default function EditStockForm({ user, closeModal, defaultValues }: EditCouponFormProps) {
-  const { data: products = [] } = useGetProducts();
-  const { data: suppliers = [] } = useGetSuppliers();
-  const productOptions = useMemo(() => products.filter(p => p.activo === 1).map(p => ({ label: p.nombre, value: p.id })), [products]);
-  const suppliersOptions = useMemo(() => suppliers.map((p) => ({ label: p.razon_social, value: p.id })), [suppliers])
+  const { productOptions, suppliersOptions } = useDataStockForm()
 
   const { register, handleSubmit, formState: { errors }, watch, setValue } = useForm<StockFormData>({
     defaultValues: normalizeStockData(defaultValues)
   })
 
   const { mutate } = useSubmitMutation({
-    serviceFunction: dashboardUpdateStockService,
+    serviceFunction: Stock.update,
     invalidateQuery: [
       ["stocks"],
       ["stock", defaultValues.id.toString()]
