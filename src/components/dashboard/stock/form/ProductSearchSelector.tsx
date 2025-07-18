@@ -91,6 +91,7 @@ export default function ProductSearchSelector<T extends Record<string, any>>({
           <div className="space-y-4">
             {selectedProducts.map((product) => (
               <SelectedProduct
+                key={product.id_producto}
                 product={product}
                 handleRemoveProduct={handleRemoveProduct}
                 handleUpdateProduct={handleUpdateProduct}
