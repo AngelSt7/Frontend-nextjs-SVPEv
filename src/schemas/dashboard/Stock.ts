@@ -48,7 +48,7 @@ export const DashboardStockByIdSchema = z.object({
   id_proveedor: z.number(),
   proveedor: z.string(),
   codigo_ingreso: z.string(),
-  fecha_ingreso: z.coerce.date(),
+  fecha_ingreso: z.string(),
   tipo_documento: z.string(),
   numero_documento: z.string(),
   observaciones: z.string(),
