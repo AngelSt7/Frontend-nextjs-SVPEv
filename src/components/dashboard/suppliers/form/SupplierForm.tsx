@@ -18,7 +18,7 @@ export default function SupplierForm({ register, errors }: SupplierFormProps) {
         htmlFor="razon_social"
         label="Razón Social"
         Icon={MdPermIdentity}
-        maxLength={100}
+        maxLength={30}
         register={register('razon_social', {
           required: 'Este campo es obligatorio',
           minLength: {
@@ -26,8 +26,8 @@ export default function SupplierForm({ register, errors }: SupplierFormProps) {
             message: 'Debe tener al menos 8 caracteres',
           },
           maxLength: {
-            value: 100,
-            message: 'No debe superar los 100 caracteres',
+            value: 30,
+            message: 'No debe superar los 30 caracteres',
           },
         })}
         errorMessage={errors.razon_social}
@@ -39,12 +39,17 @@ export default function SupplierForm({ register, errors }: SupplierFormProps) {
         htmlFor="correo"
         label="Correo electrónico"
         Icon={MdOutlineMail}
+        maxLength={50}
         register={register('correo', {
           required: 'Este campo es obligatorio',
+          maxLength: {
+            value: 50,
+            message: 'No debe superar los 50 caracteres',
+          },
           pattern: {
             value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
             message: 'El formato del correo electrónico no es válido',
-          },
+          }
         })}
         errorMessage={errors.correo}
       />
@@ -55,6 +60,7 @@ export default function SupplierForm({ register, errors }: SupplierFormProps) {
           placeholder="Celular del proveedor"
           htmlFor="celular"
           label="Celular"
+          maxLength={9}
           Icon={MdPhoneIphone}
           register={register('celular', {
             required: 'Este campo es obligatorio',
@@ -72,6 +78,7 @@ export default function SupplierForm({ register, errors }: SupplierFormProps) {
           htmlFor="ruc"
           label="RUC"
           Icon={FaRegIdCard}
+          maxLength={11}
           register={register('ruc', {
             required: 'Este campo es obligatorio',
             pattern: {
@@ -107,12 +114,17 @@ export default function SupplierForm({ register, errors }: SupplierFormProps) {
 
         <Input
           type="text"
-          placeholder="Teléfono fijo (opcional)"
+          placeholder="Teléfono fijo"
           htmlFor="telefono"
           label="Teléfono"
           Icon={MdPhone}
+          maxLength={7}
           register={register('telefono', {
             required: 'Este campo es obligatorio',
+            minLength: {
+              value: 7,
+              message: 'Debe contener 7 dígitos',
+            },
             pattern: {
               value: /^[1-9][0-9]{6}$/,
               message: 'Debe contener 7 dígitos y no debe iniciar con 0',

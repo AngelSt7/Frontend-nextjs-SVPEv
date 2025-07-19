@@ -22,12 +22,17 @@ export default function UserForm({ register, errors, watch, setValue }: UserForm
                     placeholder="Nombre"
                     htmlFor="nombre"
                     label="Nombre"
+                    maxLength={20}
                     Icon={MdPermIdentity}
                     register={register('nombre', {
                         required: 'Este campo es obligatorio',
                         minLength: {
-                            value: 8,
+                            value: 3,
                             message: 'Debe tener al menos 8 caracteres',
+                        },
+                        maxLength: {
+                            value: 20,
+                            message: 'No debe superar los 20 caracteres',
                         },
                     })}
                     errorMessage={errors.nombre}
@@ -38,12 +43,17 @@ export default function UserForm({ register, errors, watch, setValue }: UserForm
                     placeholder="Apellido"
                     htmlFor="apellido"
                     label="Apellido"
+                    maxLength={20}
                     Icon={MdPermIdentity}
                     register={register('apellido', {
                         required: 'Este campo es obligatorio',
                         minLength: {
-                            value: 8,
+                            value: 3,
                             message: 'Debe tener al menos 8 caracteres',
+                        },
+                        maxLength: {
+                            value: 20,
+                            message: 'No debe superar los 20 caracteres',
                         },
                     })}
                     errorMessage={errors.apellido}
@@ -56,6 +66,7 @@ export default function UserForm({ register, errors, watch, setValue }: UserForm
                     placeholder="DNI"
                     htmlFor="dni"
                     label="DNI"
+                    maxLength={8}
                     Icon={FaRegIdCard}
                     register={register('dni', {
                         required: 'Este campo es obligatorio',

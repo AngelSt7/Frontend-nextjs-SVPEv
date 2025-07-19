@@ -20,7 +20,7 @@ export class Stock {
             const url = ROUTES.CREATE;
             const { data } = await api.post(url, {
                 ...formData,
-                tipo_documento: formData.tipo_documento === 1 ? 'FACTURA' : 'BOLETA'
+                tipo_documento: Stock.resolveDocumentType(formData.tipo_documento),
             })
             return data;
         } catch (error) { resolveError(error) }
@@ -49,6 +49,7 @@ export class Stock {
             const url = ROUTES.UPDATE;
             const { data } = await api.put(url, {
                 ...formData,
+                tipo_documento: Stock.resolveDocumentType(formData.tipo_documento),
                 detalles: formData.productos.map(p => ({
                     ...p,
                     id_detalle: p.id_producto,
@@ -68,4 +69,13 @@ export class Stock {
             return data.mensaje;
         } catch (error) { resolveError(error) }
     }
+
+    static resolveDocumentType(documentType: number) {
+        switch (documentType) {
+            case 1: return 'FACTURA';
+            case 2: return 'BOLETA';
+            case 3: return 'GUIA';
+        }
+    }
+
 }

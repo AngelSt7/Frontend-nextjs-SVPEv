@@ -51,6 +51,7 @@ export default function StockForm({ register, errors, watch, setValue, productOp
                     data={[
                         { id: '1', label: 'Factura', activo: true },
                         { id: '2', label: 'Boleta', activo: true },
+                        { id: '3', label: 'Guia', activo: true },
                     ]}
                     register={register('tipo_documento', {
                         required: 'Este campo es obligatorio',

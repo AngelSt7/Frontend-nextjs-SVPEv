@@ -24,6 +24,8 @@ export const DashboardUserSchema = z.object({
 });
 
 
-export const DashboardUserByIdSchema = DashboardUserSchema.extend({})
+export const DashboardUserByIdSchema = DashboardUserSchema.extend({
+  id_rol: z.union([z.literal(1), z.literal(2), z.literal(3)]),
+})
 
 export const DashboardUsersSchema = z.array(DashboardUserSchema)
