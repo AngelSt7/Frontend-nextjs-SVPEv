@@ -9,7 +9,7 @@ export function normalizeUser(raw: DashboardUserById): UserFormData {
         activo: raw.activo === 1 ? true : false,
         dni: raw.dni,
         celular: raw.celular,
-        id_rol: 1,
+        id_rol: raw.id_rol,
         estado: 1
     }
 }

@@ -25,6 +25,7 @@ export default function CreateUserForm({ closeModal }: CreateUserFormProps) {
     <form
       className="flex flex-col justify-between gap-3 flex-1 mt-2"
       onSubmit={handleSubmit(onSubmit)}
+      noValidate
     >
       <UserForm setValue={setValue} watch={watch} register={register} errors={errors} />
 
