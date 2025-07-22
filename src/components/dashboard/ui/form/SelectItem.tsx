@@ -3,13 +3,13 @@ import { Select, SelectItem as HeroSelectItem } from "@heroui/react";
 import { FieldError, FieldErrorsImpl, FieldValues, Merge, Path, PathValue, UseFormRegisterReturn, UseFormSetValue, UseFormWatch } from "react-hook-form";
 
 type SelectItemProps<T extends FieldValues> = {
-    data: { id: string | number; label?: string; nombre?: string; activo: boolean | number; }[];
-    register: UseFormRegisterReturn;
-    errorMessage?: FieldError | Merge<FieldError, FieldErrorsImpl<any>>;
-    name: Path<T>;
-    label?: string;
-    watch: UseFormWatch<T>;
-    setValue: UseFormSetValue<T>;
+  data: { id: string | number; label?: string; nombre?: string; activo: boolean | number; }[];
+  register: UseFormRegisterReturn;
+  errorMessage?: FieldError | Merge<FieldError, FieldErrorsImpl<any>>;
+  name: Path<T>;
+  label?: string;
+  watch: UseFormWatch<T>;
+  setValue: UseFormSetValue<T>;
 };
 
 export default function SelectItem<T extends FieldValues>({
@@ -33,17 +33,19 @@ export default function SelectItem<T extends FieldValues>({
       <label
         id={labelId}
         htmlFor={name}
-        className="text-base font-semibold text-[#202021] dark:text-[#c5c5c7]"
+        className="text-base font-semibold text-[#202021] dark:text-[#c5c5c7] flex justify-between items-center w-full"
       >
-        {label}
+        <span>{label}</span>
+        <span className="text-sm font-normal text-gray-500 dark:text-gray-400">
+          {`(${data.length})`}
+        </span>
       </label>
 
       <input type="hidden" {...register} />
 
       <div
-        className={`mt-[8px] rounded-md border ${
-          errorMessage ? "border-[#d10b30]" : "border-[#afaeae] dark:border-[#3f3f46]"
-        }`}
+        className={`mt-[8px] rounded-md border ${errorMessage ? "border-[#d10b30]" : "border-[#afaeae] dark:border-[#3f3f46]"
+          }`}
       >
         <Select
           className="w-full"
