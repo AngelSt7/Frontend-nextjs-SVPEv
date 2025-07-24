@@ -23,7 +23,7 @@ export default function CreateReturnSaleForm({ closeModal }: CreateReturnSaleFor
   const onSubmit = (data: ReturnSaleFormData) => {
     const noneSelected = data.devolucion.every(p => p.cantidad === 0);
     if (noneSelected) return toast.error('Debe seleccionar al menos un producto para devolver');
-    mutate({...data, id_usuario: 1, devolucion: [...data.devolucion.filter(p => p.cantidad > 0).map(p =>({id_producto: 40, cantidad: p.cantidad}))]});
+    mutate({...data, id_usuario: 1, devolucion: [...data.devolucion.filter(p => p.cantidad > 0).map(p =>({id_producto: p.id_producto, cantidad: p.cantidad}))]});
   }
 
   return (

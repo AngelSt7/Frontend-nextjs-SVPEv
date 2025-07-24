@@ -58,16 +58,16 @@ export default function CategoryForm({ register, errors, watch, setValue, format
                 htmlFor="nombre"
                 label="Nombre"
                 Icon={MdPermIdentity}
-                maxLength={20}
+                maxLength={40}
                 register={register('nombre', {
                     required: 'Este campo es obligatorio',
                     minLength: {
-                        value: 8,
+                        value: 3,
                         message: 'Debe tener al menos 8 caracteres',
                     },
                     maxLength: {
-                        value: 20,
-                        message: 'No debe superar los 20 caracteres',
+                        value: 40,
+                        message: 'No debe superar los 40 caracteres',
                     },
                 })}
                 errorMessage={errors.nombre}

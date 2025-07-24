@@ -17,6 +17,7 @@ export default function EditReturnForm({ closeModal, defaultValues }: EditReturn
 
   const { register, handleSubmit, formState: { errors }, watch, setValue } = useForm<ReturnSaleFormData>({
     defaultValues: {
+      id: defaultValues.id,
       id_registro_venta: defaultValues.id_venta,
       motivo: defaultValues.motivo,
     }
@@ -32,7 +33,9 @@ export default function EditReturnForm({ closeModal, defaultValues }: EditReturn
     message: 'Devolución de venta actualizada exitosamente'
   })
 
-  const onSubmit = (data: ReturnSaleFormData) => mutate({ ...data });
+  const onSubmit = (data: ReturnSaleFormData) => {
+    mutate(data);
+  }
 
   return (
     <form

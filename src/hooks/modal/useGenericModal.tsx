@@ -1,7 +1,7 @@
 import { AuthUserInfo } from "@/src/types/AuthTypes";
 import { pluralToSingular } from "@/src/utils/resolves/resolveTittle";
 import { usePathname, useSearchParams } from "next/navigation";
-import { CreateCategoryForm, CreateClientForm, CreateCouponForm, CreateDiscountForm, CreateProductForm, CreateReturnProductForm, CreateStockForm, CreateSupplierForm, CreateUserForm, CreateWarrantyClaimForm, CreateWarrantyForm, DetailsProduct, DetailsReturnProducts, EditCategoryForm, EditClientForm, EditCouponForm, EditDiscountForm, EditProductForm, EditReturnForm, EditReturnSaleForm, EditStockForm, EditSupplierForm, EditUserForm, EditWarrantyClaimForm, EditWarrantyForm, ChangeStatusForm } from "@/src/components/dashboard/ui/generics";
+import { CreateCategoryForm, CreateClientForm, CreateCouponForm, CreateDiscountForm, CreateProductForm, CreateReturnProductForm, CreateStockForm, CreateSupplierForm, CreateUserForm, CreateWarrantyClaimForm, CreateWarrantyForm, DetailsProduct, DetailsReturnProducts, EditCategoryForm, EditClientForm, EditCouponForm, EditDiscountForm, EditProductForm, EditReturnForm, EditReturnSaleForm, EditStockForm, EditSupplierForm, EditUserForm, EditWarrantyClaimForm, EditWarrantyForm, ChangeStatusForm, CreateReturnSaleForm } from "@/src/components/dashboard/ui/generics";
 
 interface GenericModalProps {
     user?: AuthUserInfo;
@@ -65,6 +65,7 @@ export function useGenericModal({
                 case "categoria": return <CreateCategoryForm closeModal={closeModal} />;
                 case "cupón": return <CreateCouponForm closeModal={closeModal} />;
                 case "devolución_producto": return <CreateReturnProductForm user={user} closeModal={closeModal} />
+                case "devolución_venta": return <CreateReturnSaleForm closeModal={closeModal} />
                 case "stock": return <CreateStockForm user={user} closeModal={closeModal} />
                 case "reclamo_garantia": return <CreateWarrantyClaimForm closeModal={closeModal} />
                 case "garantia": return <CreateWarrantyForm closeModal={closeModal} />;

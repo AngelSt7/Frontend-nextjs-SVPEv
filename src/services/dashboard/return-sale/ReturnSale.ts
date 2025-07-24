@@ -36,8 +36,6 @@ export class ReturnSale {
             const url = `${ROUTES.FIND}/${id}`
             const { data } = await api.get(url)
             const response = DashboardReturnSaleByIdSchema.safeParse(data)
-            console.log(data)
-            console.log(response)
             if (response.success) return response.data
         } catch (error) { resolveError(error) }
     }
@@ -46,7 +44,6 @@ export class ReturnSale {
         try {
             const url = ROUTES.UPDATE
             const { data } = await api.put(url, formData)
-            console.log(data)
             return data
         } catch (error) { resolveError(error) }
     }

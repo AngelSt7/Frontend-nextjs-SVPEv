@@ -21,16 +21,16 @@ export default function CouponForm({ register, errors, watch, setValue }: Coupon
                     placeholder="Codigo de cupon"
                     htmlFor="nombre"
                     label="Nombre"
-                    maxLength={8}
+                    maxLength={20}
                     Icon={MdPermIdentity}
                     register={register('codigo', {
                         required: 'Este campo es obligatorio',
                         minLength: {
-                            value: 8,
-                            message: 'Debe tener al menos 8 caracteres',
+                            value: 3,
+                            message: 'Debe tener al menos 3 caracteres',
                         }, maxLength: {
-                            value: 8,
-                            message: 'No debe superar los 8 caracteres',
+                            value: 20,
+                            message: 'No debe superar los 20 caracteres',
                         }
                     })}
                     errorMessage={errors.codigo}

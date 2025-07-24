@@ -4,6 +4,7 @@ import { ReturnSaleFormData } from '@/src/types/dashboard/ReturnSaleTypes';
 import SelectTabs from '../../ui/form/SelectTabs';
 import { useGetAllSales } from '@/src/hooks/dashboard/data/useGetAllSales';
 import ShowProductsReturns from './ShowProductsReturns';
+import { useGetProducts } from '@/src/hooks/dashboard/data/useGetProducts';
 
 type ReturnSaleFormProps = {
     register: UseFormRegister<ReturnSaleFormData>;
@@ -15,9 +16,14 @@ type ReturnSaleFormProps = {
 
 export default function ReturnSaleForm({ register, errors, watch, setValue, productsReturn }: ReturnSaleFormProps) {
     const { data: Sales = [] } = useGetAllSales()
+    const { data: products = [] } = useGetProducts()
     const salesFormated = Sales.map((sale) => ({ value: sale.id, label: sale.id.toString() }))
-    const dataFormated = Sales.map(item => ({ id: item.id, detalleVentas: item.detallesVenta.map(detalle => ({ id: detalle.id, producto: detalle.nombreProducto, cantidad: detalle.cantidad })) }))
+    const dataFormated = Sales.map(item => ({ id: item.id, detalleVentas: item.detallesVenta.map(detalle => ({ 
+        id: products.find(product => product.nombre === detalle.nombreProducto)?.id || 0, 
+        producto: detalle.nombreProducto, cantidad: detalle.cantidad 
+    })) }))
     const idFilter = watch('id_registro_venta')
+
 
     return (
         <div className="flex flex-col gap-3">

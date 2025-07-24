@@ -18,7 +18,8 @@ export default function ContentPage({ id, user }: { id: string | undefined, user
 
     const { mutate } = useSubmitMutation({
         serviceFunction: User.changeStatus,
-        invalidateQuery: [queryKey]
+        invalidateQuery: [queryKey],
+        message: 'Usuario actualizado exitosamente'
     })
 
     return (

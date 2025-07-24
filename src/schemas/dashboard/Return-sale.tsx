@@ -21,6 +21,7 @@ export const DashboardReturnSaleSchema = z.object({
 })
 
 export const ReturnSaleFormDataSchema = z.object({
+  id: z.number().nullish(),
   id_registro_venta: z.number(),
   devolucion: z.array(z.object({
     id_producto: z.number(),

@@ -17,22 +17,32 @@ export const Categories = [
 ];
 
 export const Brands = [
-    { id: "1", label: "Samsung", activo: true },
-    { id: "2", label: "LG", activo: true },
-    { id: "3", label: "Sony", activo: true },
-    { id: "4", label: "HP", activo: true },
-    { id: "5", label: "Lenovo", activo: true },
-    { id: "6", label: "Dell", activo: true },
-    { id: "7", label: "Apple", activo: true },
-    { id: "8", label: "Xiaomi", activo: true },
-    { id: "9", label: "Asus", activo: true },
-    { id: "10", label: "Acer", activo: true },
-    { id: "11", label: "Huawei", activo: true },
-    { id: "12", label: "Philips", activo: true },
-    { id: "13", label: "Panasonic", activo: true },
-    { id: "14", label: "Motorola", activo: true },
-    { id: "15", label: "Toshiba", activo: true }
+  { id: "1", label: "HP", activo: true },
+  { id: "2", label: "Lenovo", activo: true },
+  { id: "3", label: "Dell", activo: true },
+  { id: "4", label: "Asus", activo: true },
+  { id: "5", label: "Acer", activo: true },
+  { id: "6", label: "Intel", activo: true },
+  { id: "7", label: "AMD", activo: true },
+  { id: "8", label: "NVIDIA", activo: true },
+  { id: "9", label: "Gigabyte", activo: true },
+  { id: "10", label: "MSI", activo: true },
+  { id: "11", label: "Logitech", activo: true },
+  { id: "12", label: "Razer", activo: true },
+  { id: "13", label: "Microsoft", activo: true },
+  { id: "14", label: "Genius", activo: true },
+  { id: "15", label: "Redragon", activo: true },
+  { id: "16", label: "Apple", activo: true },
+  { id: "17", label: "Samsung", activo: true },
+  { id: "18", label: "Xiaomi", activo: true },
+  { id: "19", label: "Huawei", activo: true },
+  { id: "20", label: "Kingston", activo: true },
+  { id: "21", label: "Western Digital", activo: true },
+  { id: "22", label: "TP-Link", activo: true },
+  { id: "23", label: "Epson", activo: true },
+  { id: "24", label: "Brother", activo: true }
 ];
+
 
 
 export const Roles = [

@@ -28,11 +28,12 @@ export default function ShowProductsReturns({ products, setValue, productsReturn
             cantidad: match ? match.cantidad : 0,
         };
     });
+
     const [productReturn, setProductReturn] = useState<InitialState>(resolveProducts);
     
     useEffect(() => {
         setValue('devolucion', productReturn.map(item => ({ id_producto: item.id_producto, cantidad: item.cantidad })));
-    }, [productReturn])
+    }, [productReturn, setProductReturn])
 
     return (
         <div className=' flex flex-row gap-2'>

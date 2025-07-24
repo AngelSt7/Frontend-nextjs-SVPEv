@@ -19,7 +19,7 @@ export default function CreateUserForm({ closeModal }: CreateUserFormProps) {
     message: 'Usuario registrado exitosamente'
   })
 
-  const onSubmit = (data: UserFormData) => mutate({...data, activo: true});
+  const onSubmit = (data: UserFormData) => mutate({...data, activo: true, estado: 1});
 
   return (
     <form

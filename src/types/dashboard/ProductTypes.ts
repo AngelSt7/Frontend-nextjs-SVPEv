@@ -11,6 +11,7 @@ export type ProductWithDetails = {
   label: string;
   cantidad: number;
   precio_unitario: number;
+  nombre_producto?: string;
   tipo_serie: 'CON_SERIE' | 'SIN_SERIE';
   series_individuales: string[];
 }
